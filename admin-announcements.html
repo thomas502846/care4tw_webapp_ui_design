@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 公告管理</title>
+    <meta name="description" content="CFT照顧學校公告管理，新增編輯公告、管理發布狀態與顯示位置。">
+    <meta name="keywords" content="公告管理,公告發布,系統公告,公佈欄">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-inquiries.html" class="header__menu-item" role="menuitem">詢問</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>公告管理</h1>
+                <p class="meta">管理系統公告、彈窗訊息與首頁公佈欄</p>
+            </div>
+            
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                    <h3>公告列表</h3>
+                    <button type="button" class="btn btn--primary" onclick="openAnnouncementModal()">新增公告</button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>標題</th>
+                                <th>類型</th>
+                                <th>顯示期間</th>
+                                <th>狀態</th>
+                                <th>建立時間</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="announcement-title">
+                                        <span class="title-text">系統維護通知</span>
+                                        <div class="title-preview">系統將於1月25日進行維護，預計停機2小時...</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="type-badge type-badge--popup">登入彈窗</span>
+                                </td>
+                                <td>
+                                    <div class="period-info">
+                                        <span class="period-date">2025/01/20 - 2025/01/26</span>
+                                        <span class="period-remaining">剩餘 5 天</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--published">已發佈</span>
+                                </td>
+                                <td>
+                                    <div class="created-info">
+                                        <span class="created-date">2025/01/20</span>
+                                        <span class="created-user">管理員</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editAnnouncement('1')">編輯</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="unpublishAnnouncement('1')">下架</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="announcement-title">
+                                        <span class="title-text">新課程「安寧緩和」上線</span>
+                                        <div class="title-preview">安寧緩和醫療溝通技巧課程正式開放報名...</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="type-badge type-badge--homepage">首頁公佈欄</span>
+                                </td>
+                                <td>
+                                    <div class="period-info">
+                                        <span class="period-date">2025/01/15 - 2025/03/15</span>
+                                        <span class="period-remaining">剩餘 54 天</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--draft">草稿</span>
+                                </td>
+                                <td>
+                                    <div class="created-info">
+                                        <span class="created-date">2025/01/15</span>
+                                        <span class="created-user">陳課務</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editAnnouncement('2')">編輯</button>
+                                        <button type="button" class="btn btn--small btn--primary" onclick="publishAnnouncement('2')">發佈</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="announcement-title">
+                                        <span class="title-text">春節假期營業時間調整</span>
+                                        <div class="title-preview">2025年春節期間（2/8-2/14）客服時間調整...</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="type-badge type-badge--both">彈窗+公佈欄</span>
+                                </td>
+                                <td>
+                                    <div class="period-info">
+                                        <span class="period-date">2025/02/01 - 2025/02/20</span>
+                                        <span class="period-future">未來 11 天開始</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--scheduled">排程中</span>
+                                </td>
+                                <td>
+                                    <div class="created-info">
+                                        <span class="created-date">2025/01/18</span>
+                                        <span class="created-user">管理員</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editAnnouncement('3')">編輯</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="cancelAnnouncement('3')">取消排程</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="announcement-title">
+                                        <span class="title-text">課程滿意度調查</span>
+                                        <div class="title-preview">邀請您參與課程滿意度調查，協助我們改進...</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="type-badge type-badge--email">電子郵件</span>
+                                </td>
+                                <td>
+                                    <div class="period-info">
+                                        <span class="period-date">2025/01/01 - 2025/01/15</span>
+                                        <span class="period-expired">已過期</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--expired">已過期</span>
+                                </td>
+                                <td>
+                                    <div class="created-info">
+                                        <span class="created-date">2024/12/28</span>
+                                        <span class="created-user">陳課務</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editAnnouncement('4')">檢視</button>
+                                        <button type="button" class="btn btn--small btn--danger" onclick="deleteAnnouncement('4')">刪除</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Announcement Modal -->
+    <div id="announcement-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal modal--large">
+            <div class="modal__header">
+                <h3 id="modal-title">新增公告</h3>
+                <button type="button" class="modal__close" onclick="closeAnnouncementModal()">&times;</button>
+            </div>
+            <div class="modal__body">
+                <form class="announcement-form">
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="announcement-title">公告標題</label>
+                            <input type="text" id="announcement-title" placeholder="請輸入公告標題" required>
+                        </div>
+                        <div class="field">
+                            <label for="announcement-type">顯示類型</label>
+                            <select id="announcement-type" required>
+                                <option value="">請選擇顯示方式</option>
+                                <option value="popup">登入彈窗</option>
+                                <option value="homepage">首頁公佈欄</option>
+                                <option value="both">彈窗+公佈欄</option>
+                                <option value="email">電子郵件</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="announcement-content">公告內容</label>
+                        <textarea id="announcement-content" rows="6" placeholder="請輸入公告內容..." required></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="start-date">開始時間</label>
+                            <input type="datetime-local" id="start-date" required>
+                        </div>
+                        <div class="field">
+                            <label for="end-date">結束時間</label>
+                            <input type="datetime-local" id="end-date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="announcement-priority">優先等級</label>
+                        <select id="announcement-priority">
+                            <option value="low">低</option>
+                            <option value="normal" selected>一般</option>
+                            <option value="high">高</option>
+                            <option value="urgent">緊急</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="auto-publish">
+                            <span class="checkbox-text">立即發佈</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="send-notification">
+                            <span class="checkbox-text">發送通知給管理員</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn btn--ghost" onclick="closeAnnouncementModal()">取消</button>
+                <button type="button" class="btn" onclick="saveDraft()">儲存草稿</button>
+                <button type="button" class="btn btn--primary" onclick="saveAnnouncement()">儲存並發佈</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .announcement-title {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .title-text {
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .title-preview {
+            font-size: 12px;
+            color: var(--c-muted);
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .type-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .type-badge--popup {
+            background: #E3F2FD;
+            color: var(--c-info);
+        }
+        
+        .type-badge--homepage {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .type-badge--both {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .type-badge--email {
+            background: #F3E5F5;
+            color: #7B1FA2;
+        }
+        
+        .period-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .period-date {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .period-remaining {
+            font-size: 11px;
+            color: var(--c-success);
+        }
+        
+        .period-future {
+            font-size: 11px;
+            color: var(--c-info);
+        }
+        
+        .period-expired {
+            font-size: 11px;
+            color: var(--c-danger);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-badge--published {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .status-badge--draft {
+            background: #F5F5F5;
+            color: #616161;
+        }
+        
+        .status-badge--scheduled {
+            background: #E3F2FD;
+            color: var(--c-info);
+        }
+        
+        .status-badge--expired {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .created-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .created-date {
+            font-size: 13px;
+        }
+        
+        .created-user {
+            font-size: 11px;
+            color: var(--c-muted);
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .modal--large {
+            max-width: 700px;
+        }
+        
+        .announcement-form {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input,
+        .field select,
+        .field textarea {
+            padding: 10px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            color: var(--c-text);
+            font-size: 14px;
+            resize: vertical;
+        }
+        
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .form-options {
+            display: flex;
+            gap: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .checkbox-text {
+            user-select: none;
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+        
+        .modal {
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+        }
+        
+        .modal__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .modal__header h3 {
+            margin: 0;
+        }
+        
+        .modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--c-muted);
+        }
+        
+        .modal__body {
+            padding: var(--space-lg);
+        }
+        
+        .modal__footer {
+            padding: var(--space-lg);
+            border-top: 1px solid #E8ECEF;
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+        }
+        
+        @media (max-width: 992px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-options {
+                flex-direction: column;
+            }
+            
+            .modal--large {
+                max-width: 95vw;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .table-actions {
+                flex-direction: column;
+            }
+            
+            .title-preview {
+                max-width: 150px;
+            }
+            
+            .period-info,
+            .created-info {
+                align-items: flex-start;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        function openAnnouncementModal(id = null) {
+            const modal = document.getElementById('announcement-modal');
+            const title = document.getElementById('modal-title');
+            
+            if (id) {
+                title.textContent = '編輯公告';
+                // In real app, would load announcement data
+            } else {
+                title.textContent = '新增公告';
+                resetAnnouncementForm();
+            }
+            
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeAnnouncementModal() {
+            document.getElementById('announcement-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function resetAnnouncementForm() {
+            document.querySelector('.announcement-form').reset();
+        }
+        
+        function editAnnouncement(id) {
+            openAnnouncementModal(id);
+        }
+        
+        function publishAnnouncement(id) {
+            if (confirm('確定要發佈這則公告嗎？')) {
+                alert('公告已發佈！');
+                // In real app, would update status and refresh table
+            }
+        }
+        
+        function unpublishAnnouncement(id) {
+            if (confirm('確定要下架這則公告嗎？')) {
+                alert('公告已下架');
+                // In real app, would update status and refresh table
+            }
+        }
+        
+        function cancelAnnouncement(id) {
+            if (confirm('確定要取消這則排程公告嗎？')) {
+                alert('排程已取消');
+                // In real app, would update status and refresh table
+            }
+        }
+        
+        function deleteAnnouncement(id) {
+            if (confirm('確定要刪除這則公告嗎？此操作無法復原。')) {
+                alert('公告已刪除');
+                // In real app, would delete record and refresh table
+            }
+        }
+        
+        function saveAnnouncement() {
+            const title = document.getElementById('announcement-title').value;
+            const type = document.getElementById('announcement-type').value;
+            const content = document.getElementById('announcement-content').value;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            
+            if (!title.trim()) {
+                alert('請輸入公告標題');
+                document.getElementById('announcement-title').focus();
+                return;
+            }
+            
+            if (!type) {
+                alert('請選擇顯示類型');
+                document.getElementById('announcement-type').focus();
+                return;
+            }
+            
+            if (!content.trim()) {
+                alert('請輸入公告內容');
+                document.getElementById('announcement-content').focus();
+                return;
+            }
+            
+            if (!startDate || !endDate) {
+                alert('請設定顯示期間');
+                return;
+            }
+            
+            alert('公告已儲存並發佈！');
+            closeAnnouncementModal();
+        }
+        
+        function saveDraft() {
+            const title = document.getElementById('announcement-title').value;
+            
+            if (!title.trim()) {
+                alert('請至少輸入公告標題');
+                document.getElementById('announcement-title').focus();
+                return;
+            }
+            
+            alert('草稿已儲存！');
+            closeAnnouncementModal();
+        }
+        
+        // Close modal when clicking backdrop
+        document.getElementById('announcement-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAnnouncementModal();
+            }
+        });
+        
+        // Set default dates
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const nextWeek = new Date(now);
+            nextWeek.setDate(nextWeek.getDate() + 7);
+            
+            const formatDateTime = (date) => {
+                return date.toISOString().slice(0, 16);
+            };
+            
+            document.getElementById('start-date').value = formatDateTime(tomorrow);
+            document.getElementById('end-date').value = formatDateTime(nextWeek);
+        });
+    </script>
+</body>
+</html>

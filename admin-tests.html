@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 測驗/問卷管理</title>
+    <meta name="description" content="CFT照顧學校測驗問卷管理，題庫編輯、前後測與滿意度調查。">
+    <meta name="keywords" content="測驗管理,問卷調查,題庫管理,前後測">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>測驗/問卷管理</h1>
+                <p class="meta">管理課前後測、滿意度調查與題庫內容</p>
+            </div>
+            
+            <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px;">
+                <!-- Left Column - Test/Survey Management -->
+                <div class="card">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                        <h3>題庫與問卷</h3>
+                        <div class="test-actions">
+                            <button type="button" class="btn btn--small" onclick="createTest('pretest')">新增前測</button>
+                            <button type="button" class="btn btn--small" onclick="createTest('posttest')">新增後測</button>
+                            <button type="button" class="btn btn--small" onclick="createTest('survey')">新增問卷</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Test/Survey List -->
+                    <div class="test-list">
+                        <div class="test-item">
+                            <div class="test-header">
+                                <div class="test-info">
+                                    <span class="test-type pretest">前測</span>
+                                    <span class="test-title">失智溝通 v2</span>
+                                </div>
+                                <div class="test-actions">
+                                    <button type="button" class="btn btn--small">編輯</button>
+                                    <button type="button" class="btn btn--small btn--ghost">複製</button>
+                                    <button type="button" class="btn btn--small btn--danger">刪除</button>
+                                </div>
+                            </div>
+                            <div class="test-meta">
+                                <span>10 題</span>
+                                <span>單選/多選</span>
+                                <span>最後修改：2025/08/15</span>
+                            </div>
+                        </div>
+                        
+                        <div class="test-item">
+                            <div class="test-header">
+                                <div class="test-info">
+                                    <span class="test-type posttest">後測</span>
+                                    <span class="test-title">整合照護 v1</span>
+                                </div>
+                                <div class="test-actions">
+                                    <button type="button" class="btn btn--small">編輯</button>
+                                    <button type="button" class="btn btn--small btn--ghost">複製</button>
+                                    <button type="button" class="btn btn--small btn--danger">刪除</button>
+                                </div>
+                            </div>
+                            <div class="test-meta">
+                                <span>8 題</span>
+                                <span>單選</span>
+                                <span>最後修改：2025/08/10</span>
+                            </div>
+                        </div>
+                        
+                        <div class="test-item">
+                            <div class="test-header">
+                                <div class="test-info">
+                                    <span class="test-type survey">問卷</span>
+                                    <span class="test-title">滿意度：安寧 2024Q4</span>
+                                </div>
+                                <div class="test-actions">
+                                    <button type="button" class="btn btn--small">編輯</button>
+                                    <button type="button" class="btn btn--small btn--ghost">複製</button>
+                                    <button type="button" class="btn btn--small btn--danger">刪除</button>
+                                </div>
+                            </div>
+                            <div class="test-meta">
+                                <span>15 題</span>
+                                <span>滿意度量表</span>
+                                <span>最後修改：2025/07/20</span>
+                            </div>
+                        </div>
+                        
+                        <div class="test-item">
+                            <div class="test-header">
+                                <div class="test-info">
+                                    <span class="test-type survey">問卷</span>
+                                    <span class="test-title">課程需求調查</span>
+                                </div>
+                                <div class="test-actions">
+                                    <button type="button" class="btn btn--small">編輯</button>
+                                    <button type="button" class="btn btn--small btn--ghost">複製</button>
+                                    <button type="button" class="btn btn--small btn--danger">刪除</button>
+                                </div>
+                            </div>
+                            <div class="test-meta">
+                                <span>12 題</span>
+                                <span>混合題型</span>
+                                <span>最後修改：2025/08/01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Results Analysis -->
+                <div class="card">
+                    <h3>結果彙整</h3>
+                    
+                    <div class="results-filters">
+                        <div class="filter-group">
+                            <label for="course-filter">選擇課程</label>
+                            <select id="course-filter">
+                                <option value="">所有課程</option>
+                                <option value="dementia">失智友善溝通</option>
+                                <option value="integrated">整合照護直播</option>
+                                <option value="community">社區共生設計</option>
+                                <option value="hospice">安寧緩和醫療</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="cert-filter">選擇證照</label>
+                            <select id="cert-filter">
+                                <option value="">所有證照</option>
+                                <option value="care-worker">照顧服務員</option>
+                                <option value="care-designer">照顧設計師</option>
+                                <option value="home-doctor">在宅醫師</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="results-summary">
+                        <div class="summary-card">
+                            <div class="summary-number">156</div>
+                            <div class="summary-label">總回應數</div>
+                            <div class="summary-trend">本月新增 24</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-number">4.2</div>
+                            <div class="summary-label">平均滿意度</div>
+                            <div class="summary-trend">5分量表</div>
+                        </div>
+                    </div>
+                    
+                    <div class="results-actions">
+                        <h4>查看整體與個別結果</h4>
+                        <div class="export-options">
+                            <button type="button" class="btn btn--ghost">📊 統計圖表</button>
+                            <button type="button" class="btn btn--ghost">📋 詳細報告</button>
+                            <button type="button" class="btn">下載 CSV</button>
+                            <button type="button" class="btn">下載 PDF</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Test Results -->
+                    <div class="recent-results">
+                        <h4>最近測驗結果</h4>
+                        <div class="result-list">
+                            <div class="result-item">
+                                <div class="result-info">
+                                    <span class="result-course">失智友善溝通</span>
+                                    <span class="result-type">前測</span>
+                                </div>
+                                <div class="result-stats">
+                                    <span class="result-count">24 人完成</span>
+                                    <span class="result-avg">平均 7.2/10</span>
+                                </div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-info">
+                                    <span class="result-course">整合照護直播</span>
+                                    <span class="result-type">滿意度</span>
+                                </div>
+                                <div class="result-stats">
+                                    <span class="result-count">40 人完成</span>
+                                    <span class="result-avg">平均 4.5/5</span>
+                                </div>
+                            </div>
+                            
+                            <div class="result-item">
+                                <div class="result-info">
+                                    <span class="result-course">社區共生設計</span>
+                                    <span class="result-type">後測</span>
+                                </div>
+                                <div class="result-stats">
+                                    <span class="result-count">15 人完成</span>
+                                    <span class="result-avg">平均 8.1/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .test-actions {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+        
+        .test-list {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .test-item {
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            border-left: 4px solid var(--c-primary);
+        }
+        
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .test-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .test-type {
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .test-type.pretest {
+            background: #E3F2FD;
+            color: var(--c-info);
+        }
+        
+        .test-type.posttest {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .test-type.survey {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .test-title {
+            font-weight: 500;
+            color: var(--c-text);
+        }
+        
+        .test-meta {
+            display: flex;
+            gap: var(--space-md);
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .test-meta > span::after {
+            content: "•";
+            margin-left: var(--space-md);
+            color: #CFD8DC;
+        }
+        
+        .test-meta > span:last-child::after {
+            display: none;
+        }
+        
+        .results-filters {
+            display: grid;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .filter-group label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 14px;
+        }
+        
+        .results-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .summary-card {
+            text-align: center;
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .summary-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--c-primary);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .summary-label {
+            font-size: 14px;
+            color: var(--c-text);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .summary-trend {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .results-actions {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .results-actions h4 {
+            margin-bottom: var(--space-sm);
+            color: var(--c-primary);
+        }
+        
+        .export-options {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+        
+        .recent-results h4 {
+            margin-bottom: var(--space-sm);
+            color: var(--c-primary);
+        }
+        
+        .result-list {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .result-item {
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .result-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .result-course {
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .result-type {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .result-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: right;
+        }
+        
+        .result-count {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .result-avg {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--c-primary);
+        }
+        
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .test-actions {
+                flex-direction: column;
+            }
+            
+            .export-options {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .test-header {
+                flex-direction: column;
+                gap: var(--space-sm);
+                align-items: stretch;
+            }
+            
+            .test-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .test-actions {
+                justify-content: flex-end;
+            }
+            
+            .results-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .result-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-xs);
+            }
+            
+            .result-stats {
+                text-align: left;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        function createTest(type) {
+            const typeNames = {
+                'pretest': '前測',
+                'posttest': '後測', 
+                'survey': '問卷'
+            };
+            
+            const testName = prompt(`請輸入${typeNames[type]}名稱：`);
+            if (testName) {
+                alert(`${typeNames[type]}「${testName}」已建立，將導向編輯頁面`);
+                // In a real application, would redirect to test editor
+            }
+        }
+        
+        // Filter change handlers
+        document.getElementById('course-filter').addEventListener('change', function() {
+            console.log('Course filter changed:', this.value);
+            // In real application, would filter results
+        });
+        
+        document.getElementById('cert-filter').addEventListener('change', function() {
+            console.log('Certificate filter changed:', this.value);
+            // In real application, would filter results
+        });
+        
+        // Export button handlers
+        document.querySelectorAll('.export-options .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.textContent.trim();
+                alert(`${action} 功能執行中...`);
+            });
+        });
+        
+        // Test item action handlers
+        document.querySelectorAll('.test-item .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const action = this.textContent.trim();
+                const testTitle = this.closest('.test-item').querySelector('.test-title').textContent;
+                
+                if (action === '刪除') {
+                    if (confirm(`確定要刪除「${testTitle}」嗎？`)) {
+                        alert('測驗已刪除');
+                        this.closest('.test-item').remove();
+                    }
+                } else {
+                    alert(`${action}「${testTitle}」功能執行中...`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

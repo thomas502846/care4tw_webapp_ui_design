@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 金流設定</title>
+    <meta name="description" content="CFT照顧學校金流設定，管理付款方式與電子發票。">
+    <meta name="keywords" content="金流設定,付款方式,電子發票,藍新金流">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>金流與發票設定</h1>
+                <p class="meta">配置付款方式與電子發票系統</p>
+            </div>
+            
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 12px;">
+                <!-- Payment Gateway Settings -->
+                <div class="card">
+                    <h3>金流設定 (藍新金流)</h3>
+                    <form class="payment-form">
+                        <div class="field">
+                            <label for="merchant-id">商店代號 (Merchant ID)</label>
+                            <input type="text" id="merchant-id" value="MS123456789" placeholder="請輸入商店代號">
+                            <div class="meta">藍新金流提供的商店識別碼</div>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="hash-key">金鑰 (Hash Key)</label>
+                            <div class="password-field">
+                                <input type="password" id="hash-key" value="abcdef123456" placeholder="請輸入Hash Key">
+                                <button type="button" class="toggle-password" onclick="togglePassword('hash-key')">👁️</button>
+                            </div>
+                            <div class="meta">用於数据加密的金鑰</div>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="hash-iv">IV (Hash IV)</label>
+                            <div class="password-field">
+                                <input type="password" id="hash-iv" value="abcdef123456" placeholder="請輸入Hash IV">
+                                <button type="button" class="toggle-password" onclick="togglePassword('hash-iv')">👁️</button>
+                            </div>
+                            <div class="meta">初始化向量，用於加密</div>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="payment-methods">啟用付款方式</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-text">信用卡</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-text">ATM 轉帳</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox">
+                                    <span class="checkbox-text">超商代繳</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox">
+                                    <span class="checkbox-text">電子錢包</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="test-mode">測試模式</label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="test-mode" checked>
+                                <span class="checkbox-text">啟用測試模式</span>
+                            </label>
+                            <div class="meta">測試模式下不會實際扣款</div>
+                        </div>
+                    </form>
+                    
+                    <div style="margin-top: var(--space-lg);">
+                        <button type="button" class="btn btn--ghost" onclick="testConnection()">測試連接</button>
+                        <button type="button" class="btn btn--primary" onclick="savePaymentSettings()">儲存設定</button>
+                    </div>
+                </div>
+                
+                <!-- E-Invoice Settings (Disabled) -->
+                <div class="card card--disabled">
+                    <h3>電子發票平台設定 <span class="status-label status-label--disabled">已停用</span></h3>
+                    
+                    <div class="disabled-notice">
+                        <div class="notice-icon">📋</div>
+                        <div class="notice-content">
+                            <h4>電子發票功能已取消</h4>
+                            <p>校方決議暫時取消電子發票功能，日後如有需要可再重新啟用。</p>
+                            <p class="meta">如有相關問題，請聯繫系統管理員。</p>
+                        </div>
+                    </div>
+                    
+                    <form class="invoice-form invoice-form--disabled">
+                        <div class="field">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="enable-invoice" disabled>
+                                <span class="checkbox-text">啟用電子發票</span>
+                            </label>
+                            <div class="meta">功能已停用，無法修改設定</div>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="invoice-platform">發票平台</label>
+                            <select id="invoice-platform" disabled>
+                                <option value="ezpay" selected>藍新發票</option>
+                                <option value="ecpay">ECPay 綠界科技</option>
+                                <option value="custom">自定義</option>
+                            </select>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="invoice-api-key">平台 API Key</label>
+                            <div class="password-field">
+                                <input type="password" id="invoice-api-key" value="***************" disabled>
+                                <button type="button" class="toggle-password" disabled>👁️</button>
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="company-tax-id">公司統一編號</label>
+                            <input type="text" id="company-tax-id" value="12345678" disabled>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="company-name">發票公司名稱</label>
+                            <input type="text" id="company-name" value="創照服務設計有限公司" disabled>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="invoice-template">發票樣板</label>
+                            <select id="invoice-template" disabled>
+                                <option value="standard" selected>標準樣板</option>
+                                <option value="simple">簡化樣板</option>
+                                <option value="detailed">詳細樣板</option>
+                            </select>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="auto-send">自動寄送設定</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" disabled>
+                                    <span class="checkbox-text">付款完成後自動開立</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" disabled>
+                                    <span class="checkbox-text">自動寄送至學員信箱</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" disabled>
+                                    <span class="checkbox-text">同時寄送給管理員</span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div style="margin-top: var(--space-lg);">
+                        <button type="button" class="btn btn--ghost" disabled>測試開立</button>
+                        <button type="button" class="btn btn--ghost" disabled>儲存設定</button>
+                        <button type="button" class="btn btn--primary" onclick="requestReactivation()">申請重新啟用</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Transaction History -->
+            <div class="card" style="margin-top: var(--space-lg);">
+                <h3>最近交易記錄</h3>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>交易時間</th>
+                                <th>學員</th>
+                                <th>交易項目</th>
+                                <th>金額</th>
+                                <th>付款方式</th>
+                                <th>狀態</th>
+                                <th>發票</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2025/01/20 14:30</td>
+                                <td>王××</td>
+                                <td>課程點數 (100點)</td>
+                                <td>NT$ 2,000</td>
+                                <td>信用卡</td>
+                                <td><span class="status-badge status-badge--success">成功</span></td>
+                                <td><span class="invoice-status invoice-status--sent">已寄送</span></td>
+                            </tr>
+                            <tr>
+                                <td>2025/01/20 10:15</td>
+                                <td>陳××</td>
+                                <td>失智友善溝通</td>
+                                <td>NT$ 10</td>
+                                <td>點數扣抵</td>
+                                <td><span class="status-badge status-badge--success">成功</span></td>
+                                <td><span class="invoice-status invoice-status--na">無需發票</span></td>
+                            </tr>
+                            <tr>
+                                <td>2025/01/19 16:45</td>
+                                <td>林××</td>
+                                <td>課程點數 (50點)</td>
+                                <td>NT$ 1,000</td>
+                                <td>ATM 轉帳</td>
+                                <td><span class="status-badge status-badge--pending">處理中</span></td>
+                                <td><span class="invoice-status invoice-status--pending">待開立</span></td>
+                            </tr>
+                            <tr>
+                                <td>2025/01/19 09:20</td>
+                                <td>黃××</td>
+                                <td>課程點數 (200點)</td>
+                                <td>NT$ 4,000</td>
+                                <td>信用卡</td>
+                                <td><span class="status-badge status-badge--failed">失敗</span></td>
+                                <td><span class="invoice-status invoice-status--na">-</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .payment-form,
+        .invoice-form {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input,
+        .field select {
+            padding: 10px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input:focus,
+        .field select:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .password-field {
+            position: relative;
+        }
+        
+        .password-field input {
+            padding-right: 40px;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .checkbox-text {
+            user-select: none;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-badge--success {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .status-badge--pending {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .status-badge--failed {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .invoice-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .invoice-status--sent {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .invoice-status--pending {
+            background: #E3F2FD;
+            color: var(--c-info);
+        }
+        
+        .invoice-status--na {
+            background: #F5F5F5;
+            color: #616161;
+        }
+        
+        .card--disabled {
+            opacity: 0.8;
+            position: relative;
+        }
+        
+        .status-label {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: var(--radius-pill);
+        }
+        
+        .status-label--disabled {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .disabled-notice {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: var(--radius-card);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .notice-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .notice-content h4 {
+            margin-bottom: var(--space-xs);
+            color: var(--c-text);
+        }
+        
+        .notice-content p {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .invoice-form--disabled {
+            opacity: 0.6;
+        }
+        
+        .invoice-form--disabled input:disabled,
+        .invoice-form--disabled select:disabled,
+        .invoice-form--disabled button:disabled {
+            cursor: not-allowed;
+            background: #F5F5F5 !important;
+            color: #9E9E9E !important;
+        }
+        
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .password-field {
+                position: static;
+            }
+            
+            .password-field input {
+                padding-right: 12px;
+            }
+            
+            .toggle-password {
+                position: static;
+                transform: none;
+                margin-top: var(--space-xs);
+                align-self: flex-start;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const button = field.nextElementSibling;
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                button.textContent = '🙈';
+            } else {
+                field.type = 'password';
+                button.textContent = '👁️';
+            }
+        }
+        
+        function testConnection() {
+            const merchantId = document.getElementById('merchant-id').value;
+            
+            if (!merchantId.trim()) {
+                alert('請先輸入商店代號');
+                return;
+            }
+            
+            alert('正在測試連接中...');
+            
+            // Simulate API test
+            setTimeout(() => {
+                if (Math.random() > 0.3) {
+                    alert('連接測試成功！');
+                } else {
+                    alert('連接測試失敗，請檢查設定');
+                }
+            }, 2000);
+        }
+        
+        function savePaymentSettings() {
+            const merchantId = document.getElementById('merchant-id').value;
+            const hashKey = document.getElementById('hash-key').value;
+            const hashIv = document.getElementById('hash-iv').value;
+            
+            if (!merchantId.trim() || !hashKey.trim() || !hashIv.trim()) {
+                alert('請先填寫所有必要欄位');
+                return;
+            }
+            
+            alert('金流設定已儲存！');
+        }
+        
+        function testInvoice() {
+            const enableInvoice = document.getElementById('enable-invoice').checked;
+            
+            if (!enableInvoice) {
+                alert('請先啟用電子發票功能');
+                return;
+            }
+            
+            alert('正在測試開立發票...');
+            
+            // Simulate invoice test
+            setTimeout(() => {
+                alert('測試發票開立成功！\n發票號碼：TEST12345678');
+            }, 2000);
+        }
+        
+        function saveInvoiceSettings() {
+            const enableInvoice = document.getElementById('enable-invoice').checked;
+            const companyTaxId = document.getElementById('company-tax-id').value;
+            const companyName = document.getElementById('company-name').value;
+            
+            if (enableInvoice && (!companyTaxId.trim() || !companyName.trim())) {
+                alert('啟用電子發票時，請填寫公司統一編號與名稱');
+                return;
+            }
+            
+            alert('電子發票設定已儲存！');
+        }
+        
+        function requestReactivation() {
+            if (confirm('確定要申請重新啟用電子發票功能嗎？\n\n系統將向管理員發送申請通知，審核通過後將重新開放此功能。')) {
+                alert('申請已送出！\n\n您的申請已發送給系統管理員，我們會在 1-2 個工作日內回覆審核結果。\n如有急件請直接聯繫技術支援。');
+            }
+        }
+        
+        // Toggle invoice fields based on enable checkbox (disabled for now)
+        // document.getElementById('enable-invoice').addEventListener('change', function() {
+        //     const invoiceFields = document.querySelectorAll('.invoice-form .field:not(:first-child) input, .invoice-form .field:not(:first-child) select');
+        //     
+        //     invoiceFields.forEach(field => {
+        //         field.disabled = !this.checked;
+        //         if (!this.checked) {
+        //             field.style.opacity = '0.5';
+        //         } else {
+        //             field.style.opacity = '1';
+        //         }
+        //     });
+        // });
+    </script>
+</body>
+</html>

@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 課程名單管理</title>
+    <meta name="description" content="CFT照顧學校課程名單管理，簽到簽退、完成註記與課務行政。">
+    <meta name="keywords" content="課程名單,簽到管理,出席追蹤,課務行政">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>失智友善溝通｜課務管理</h1>
+                <p class="meta">
+                    <a href="admin-courses.html">← 返回課程管理</a>
+                </p>
+            </div>
+            
+            <!-- Course Info and Quick Actions -->
+            <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px; margin-bottom: var(--space-lg);">
+                <div class="card">
+                    <h3>課程資訊</h3>
+                    <div class="course-info">
+                        <div class="info-item">
+                            <span class="info-label">地點：</span>
+                            <span class="info-value">台中</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">日期：</span>
+                            <span class="info-value">2025/09/28</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">時數：</span>
+                            <span class="info-value">6小時</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">積分：</span>
+                            <span class="info-value">有</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">講師：</span>
+                            <span class="info-value">王美華 老師</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">報名狀態：</span>
+                            <span class="info-value">24/30 人</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>快速操作</h3>
+                    <div class="quick-actions">
+                        <button type="button" class="btn" onclick="openNotificationModal()">📧 課前通知</button>
+                        <button type="button" class="btn">📎 上傳材料</button>
+                        <button type="button" class="btn">📋 簽到表 (Word)</button>
+                        <button type="button" class="btn btn--primary">✅ 一鍵完成</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Roster Management -->
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                    <h3>名單與完成</h3>
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="select-all">
+                            <span class="checkbox-text">全選</span>
+                        </label>
+                        <button type="button" class="btn btn--small" onclick="batchComplete()">批次完成</button>
+                        <button type="button" class="btn btn--small btn--ghost">匯出名單</button>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table roster-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox"></th>
+                                <th>姓名</th>
+                                <th>手機</th>
+                                <th>付款</th>
+                                <th>簽到(上/下)</th>
+                                <th>簽退(上/下)</th>
+                                <th>完成</th>
+                                <th>備註</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" class="row-select"></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👨</div>
+                                        <div class="user-info">
+                                            <div class="user-name">王○○</div>
+                                            <div class="user-id">照顧服務員</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>09xx-xxx-123</td>
+                                <td>
+                                    <select class="payment-status">
+                                        <option value="paid" selected>已繳</option>
+                                        <option value="unpaid">未繳</option>
+                                        <option value="partial">部分</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="attendance-checkboxes">
+                                        <label><input type="checkbox" checked> 上</label>
+                                        <label><input type="checkbox" checked> 下</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="attendance-checkboxes">
+                                        <label><input type="checkbox" checked> 上</label>
+                                        <label><input type="checkbox" checked> 下</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="completion-checkbox">
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type="text" class="notes-input" placeholder="備註" value="準時出席">
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td><input type="checkbox" class="row-select"></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👩</div>
+                                        <div class="user-info">
+                                            <div class="user-name">陳○○</div>
+                                            <div class="user-id">照顧設計師</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>09xx-xxx-456</td>
+                                <td>
+                                    <select class="payment-status">
+                                        <option value="paid" selected>已繳</option>
+                                        <option value="unpaid">未繳</option>
+                                        <option value="partial">部分</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="attendance-checkboxes">
+                                        <label><input type="checkbox" checked> 上</label>
+                                        <label><input type="checkbox"> 下</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="attendance-checkboxes">
+                                        <label><input type="checkbox"> 上</label>
+                                        <label><input type="checkbox"> 下</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="completion-checkbox">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type="text" class="notes-input" placeholder="備註" value="早退">
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td><input type="checkbox" class="row-select"></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👨</div>
+                                        <div class="user-info">
+                                            <div class="user-name">林○○</div>
+                                            <div class="user-id">在宅醫師</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>09xx-xxx-789</td>
+                                <td>
+                                    <select class="payment-status">
+                                        <option value="paid">已繳</option>
+                                        <option value="unpaid" selected>未繳</option>
+                                        <option value="partial">部分</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="attendance-checkboxes">
+                                        <label><input type="checkbox"> 上</label>
+                                        <label><input type="checkbox"> 下</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="attendance-checkboxes">
+                                        <label><input type="checkbox"> 上</label>
+                                        <label><input type="checkbox"> 下</label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <label class="completion-checkbox">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    <input type="text" class="notes-input" placeholder="備註" value="未出席">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: 1px solid #E8ECEF; text-align: center;">
+                    <button type="button" class="btn btn--primary">儲存所有變更</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Modal -->
+    <div id="notification-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal">
+            <div class="modal__header">
+                <h3>課前通知</h3>
+                <button type="button" class="modal__close" onclick="closeNotificationModal()">&times;</button>
+            </div>
+            <div class="modal__body">
+                <div class="field">
+                    <label>通知主旨</label>
+                    <input type="text" value="失智友善溝通課程提醒" style="width: 100%;">
+                </div>
+                <div class="field">
+                    <label>通知內容</label>
+                    <textarea rows="6" style="width: 100%;">親愛的學員您好，
+
+「失智友善溝通與行為支持」課程將於明天(9/28)上午9:00準時開始。
+
+上課地點：台中市
+請攜帶：筆記本、文具用品
+
+如有任何問題，請聯繫我們。
+
+CFT 照顧學校 敬上</textarea>
+                </div>
+                <div style="display: flex; gap: var(--space-sm); align-items: center;">
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked>
+                        <span class="checkbox-text">發送給學員</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox">
+                        <span class="checkbox-text">發送給講師</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn btn--ghost" onclick="closeNotificationModal()">取消</button>
+                <button type="button" class="btn btn--primary" onclick="sendNotification()">發送通知</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .course-info {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .info-label {
+            font-weight: 500;
+            color: var(--c-muted);
+            min-width: 60px;
+        }
+        
+        .info-value {
+            color: var(--c-text);
+            font-weight: 500;
+        }
+        
+        .quick-actions {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+        
+        .roster-table {
+            min-width: 900px;
+        }
+        
+        .user-cell {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--c-sub);
+        }
+        
+        .user-name {
+            font-weight: 500;
+        }
+        
+        .user-id {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .payment-status {
+            padding: 4px 8px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 12px;
+        }
+        
+        .payment-status option[value="paid"] {
+            color: var(--c-success);
+        }
+        
+        .payment-status option[value="unpaid"] {
+            color: var(--c-danger);
+        }
+        
+        .attendance-checkboxes {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+        }
+        
+        .attendance-checkboxes label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .completion-checkbox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .completion-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+        }
+        
+        .notes-input {
+            padding: 4px 8px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 12px;
+            width: 100px;
+        }
+        
+        .notes-input:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .checkbox-text {
+            user-select: none;
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+        
+        .modal {
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+        }
+        
+        .modal__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .modal__header h3 {
+            margin: 0;
+        }
+        
+        .modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--c-muted);
+        }
+        
+        .modal__body {
+            padding: var(--space-lg);
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .modal__footer {
+            padding: var(--space-lg);
+            border-top: 1px solid #E8ECEF;
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input,
+        .field textarea {
+            padding: 10px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            color: var(--c-text);
+            font-size: 14px;
+            resize: vertical;
+        }
+        
+        .field input:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .quick-actions {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .table-responsive {
+                overflow-x: auto;
+            }
+            
+            .attendance-checkboxes {
+                flex-direction: column;
+                gap: 4px;
+            }
+            
+            .notes-input {
+                width: 80px;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        // Select all functionality
+        document.getElementById('select-all').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.row-select');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+        });
+        
+        // Individual row selection
+        document.querySelectorAll('.row-select').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const allCheckboxes = document.querySelectorAll('.row-select');
+                const checkedCheckboxes = document.querySelectorAll('.row-select:checked');
+                const selectAll = document.getElementById('select-all');
+                
+                selectAll.checked = allCheckboxes.length === checkedCheckboxes.length;
+                selectAll.indeterminate = checkedCheckboxes.length > 0 && checkedCheckboxes.length < allCheckboxes.length;
+            });
+        });
+        
+        // Modal functions
+        function openNotificationModal() {
+            document.getElementById('notification-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeNotificationModal() {
+            document.getElementById('notification-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function sendNotification() {
+            alert('課前通知已發送給所有學員！');
+            closeNotificationModal();
+        }
+        
+        function batchComplete() {
+            const selected = document.querySelectorAll('.row-select:checked');
+            if (selected.length === 0) {
+                alert('請先選擇要標記完成的學員');
+                return;
+            }
+            
+            if (confirm(`確定要將 ${selected.length} 位學員標記為完成嗎？`)) {
+                selected.forEach(checkbox => {
+                    const row = checkbox.closest('tr');
+                    const completionCheckbox = row.querySelector('.completion-checkbox input');
+                    completionCheckbox.checked = true;
+                });
+                alert('已批次標記為完成！');
+            }
+        }
+        
+        // Save functionality
+        document.querySelector('.btn--primary:last-child').addEventListener('click', function() {
+            alert('所有變更已儲存！');
+        });
+        
+        // Close modal when clicking backdrop
+        document.getElementById('notification-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeNotificationModal();
+            }
+        });
+    </script>
+</body>
+</html>

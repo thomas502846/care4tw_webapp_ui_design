@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | FAQ管理</title>
+    <meta name="description" content="CFT照顧學校FAQ管理，維護常見問題與解答。">
+    <meta name="keywords" content="FAQ管理,常見問題,問答管理,客服">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>常見問題管理</h1>
+                <p class="meta">維護網站常見問題與解答內容</p>
+            </div>
+            
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                    <h3>FAQ列表</h3>
+                    <button type="button" class="btn btn--primary" onclick="addFaqItem()">新增問答</button>
+                </div>
+                
+                <div class="faq-list">
+                    <div class="faq-admin-item">
+                        <div class="faq-question">
+                            <input type="text" value="如何購買課程點數？" class="question-input">
+                        </div>
+                        <div class="faq-answer">
+                            <textarea rows="3" class="answer-input">您可以在登入後，前往「學員中心」的「點數管理」頁面進行線上購買。我們提供多種付款方式，包括信用卡、ATM轉帳等。</textarea>
+                        </div>
+                        <div class="faq-actions">
+                            <button type="button" class="btn btn--small btn--ghost">預覽</button>
+                            <button type="button" class="btn btn--small btn--danger">刪除</button>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-admin-item">
+                        <div class="faq-question">
+                            <input type="text" value="課程可以取消報名嗎？" class="question-input">
+                        </div>
+                        <div class="faq-answer">
+                            <textarea rows="3" class="answer-input">可以的。您可以在課程開始前3天取消報名，系統會自動退回點數。如需協助，請聯繫客服。</textarea>
+                        </div>
+                        <div class="faq-actions">
+                            <button type="button" class="btn btn--small btn--ghost">預覽</button>
+                            <button type="button" class="btn btn--small btn--danger">刪除</button>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-admin-item">
+                        <div class="faq-question">
+                            <input type="text" value="如何取得課程證書？" class="question-input">
+                        </div>
+                        <div class="faq-answer">
+                            <textarea rows="3" class="answer-input">完成課程並通過測驗後，證書將會自動產生並寄送到您的註冊信箱。紙本證書可另外申請，需酌收工本費。</textarea>
+                        </div>
+                        <div class="faq-actions">
+                            <button type="button" class="btn btn--small btn--ghost">預覽</button>
+                            <button type="button" class="btn btn--small btn--danger">刪除</button>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-admin-item">
+                        <div class="faq-question">
+                            <input type="text" value="忘記密碼怎麼辦？" class="question-input">
+                        </div>
+                        <div class="faq-answer">
+                            <textarea rows="3" class="answer-input">請點擊登入頁面的「忘記密碼」連結，輸入您的註冊信箱，系統會寄送重設密碼的連結給您。</textarea>
+                        </div>
+                        <div class="faq-actions">
+                            <button type="button" class="btn btn--small btn--ghost">預覽</button>
+                            <button type="button" class="btn btn--small btn--danger">刪除</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: var(--space-lg); text-align: center;">
+                    <button type="button" class="btn btn--primary">儲存所有變更</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .faq-list {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .faq-admin-item {
+            padding: var(--space-lg);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            border-left: 4px solid var(--c-primary);
+        }
+        
+        .faq-question {
+            margin-bottom: var(--space-md);
+        }
+        
+        .question-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .question-input:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .faq-answer {
+            margin-bottom: var(--space-md);
+        }
+        
+        .answer-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+        }
+        
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .faq-actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: flex-end;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        function addFaqItem() {
+            const faqList = document.querySelector('.faq-list');
+            const newItem = document.createElement('div');
+            newItem.className = 'faq-admin-item';
+            newItem.innerHTML = `
+                <div class="faq-question">
+                    <input type="text" placeholder="請輸入問題..." class="question-input">
+                </div>
+                <div class="faq-answer">
+                    <textarea rows="3" placeholder="請輸入解答..." class="answer-input"></textarea>
+                </div>
+                <div class="faq-actions">
+                    <button type="button" class="btn btn--small btn--ghost">預覽</button>
+                    <button type="button" class="btn btn--small btn--danger" onclick="this.closest('.faq-admin-item').remove()">刪除</button>
+                </div>
+            `;
+            
+            faqList.appendChild(newItem);
+            newItem.querySelector('.question-input').focus();
+        }
+        
+        // Delete FAQ item
+        document.querySelectorAll('.faq-actions .btn--danger').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('確定要刪除這個問答嗎？')) {
+                    this.closest('.faq-admin-item').remove();
+                }
+            });
+        });
+        
+        // Preview FAQ item
+        document.querySelectorAll('.faq-actions .btn--ghost').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const item = this.closest('.faq-admin-item');
+                const question = item.querySelector('.question-input').value;
+                const answer = item.querySelector('.answer-input').value;
+                
+                if (question.trim() && answer.trim()) {
+                    alert(`問題：${question}\n\n解答：${answer}`);
+                } else {
+                    alert('請先填寫問題和解答內容');
+                }
+            });
+        });
+        
+        // Save all changes
+        document.querySelector('.btn--primary:last-child').addEventListener('click', function() {
+            alert('所有變更已儲存！');
+        });
+    </script>
+</body>
+</html>

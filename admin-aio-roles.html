@@ -1,0 +1,1549 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | AIO職種管理</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校 - 管理後台</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表分析</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <a href="admin-dashboard.html">管理後台</a>
+                    <span>›</span>
+                    <a href="admin-reports.html">系統設定</a>
+                    <span>›</span>
+                    <span class="breadcrumb__current">AIO職種管理</span>
+                </div>
+                <h1>AIO職種管理</h1>
+                <p class="page-subtitle">管理All-in-One八大職種分類、學習路徑、與證照對應關係</p>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="action-bar">
+                <div class="action-bar__left">
+                    <div class="tabs">
+                        <button class="tab tab--active" data-tab="roles">職種管理</button>
+                        <button class="tab" data-tab="pathways">學習路徑</button>
+                        <button class="tab" data-tab="progression">進階設定</button>
+                        <button class="tab" data-tab="analytics">職種分析</button>
+                    </div>
+                </div>
+                <div class="action-bar__right">
+                    <button class="btn btn--ghost" onclick="exportAIOData()">
+                        <span>📥</span> 匯出資料
+                    </button>
+                    <button class="btn btn--primary" onclick="openAddRoleModal()">
+                        <span>➕</span> 新增職種
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Content: Roles Management -->
+            <div id="roles-tab" class="tab-content tab-content--active">
+                <!-- Stats Overview -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">總職種數</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-content">
+                            <div class="stat-value">456</div>
+                            <div class="stat-label">選擇學員數</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-content">
+                            <div class="stat-value">67</div>
+                            <div class="stat-label">關聯課程數</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-content">
+                            <div class="stat-value">23</div>
+                            <div class="stat-label">對應證照數</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AIO Roles Grid -->
+                <div class="aio-roles-grid">
+                    <!-- Care Worker Role -->
+                    <div class="role-card role-card--featured">
+                        <div class="role-header">
+                            <div class="role-icon">👩‍⚕️</div>
+                            <div class="role-priority">核心職種</div>
+                        </div>
+                        <div class="role-content">
+                            <h3 class="role-title">照顧服務員</h3>
+                            <p class="role-description">提供基礎照顧服務，包含日常生活協助、身體照護等</p>
+                            <div class="role-stats">
+                                <div class="role-stat">
+                                    <span class="stat-number">156</span>
+                                    <span class="stat-text">位學員</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">18</span>
+                                    <span class="stat-text">門課程</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">3</span>
+                                    <span class="stat-text">項證照</span>
+                                </div>
+                            </div>
+                            <div class="role-progression">
+                                <div class="progression-bar">
+                                    <div class="progression-fill" style="width: 85%"></div>
+                                </div>
+                                <span class="progression-text">平均完成度 85%</span>
+                            </div>
+                        </div>
+                        <div class="role-actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editRole('care-worker')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewRoleAnalytics('care-worker')">分析</button>
+                            <button class="btn btn--ghost btn--sm" onclick="manageRoleCourses('care-worker')">課程</button>
+                        </div>
+                    </div>
+
+                    <!-- Home Nurse Role -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">🏠</div>
+                            <div class="role-priority">專業職種</div>
+                        </div>
+                        <div class="role-content">
+                            <h3 class="role-title">居家護理師</h3>
+                            <p class="role-description">提供居家醫療照護服務，包含傷口護理、用藥指導等</p>
+                            <div class="role-stats">
+                                <div class="role-stat">
+                                    <span class="stat-number">89</span>
+                                    <span class="stat-text">位學員</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">12</span>
+                                    <span class="stat-text">門課程</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">5</span>
+                                    <span class="stat-text">項證照</span>
+                                </div>
+                            </div>
+                            <div class="role-progression">
+                                <div class="progression-bar">
+                                    <div class="progression-fill" style="width: 72%"></div>
+                                </div>
+                                <span class="progression-text">平均完成度 72%</span>
+                            </div>
+                        </div>
+                        <div class="role-actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editRole('home-nurse')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewRoleAnalytics('home-nurse')">分析</button>
+                            <button class="btn btn--ghost btn--sm" onclick="manageRoleCourses('home-nurse')">課程</button>
+                        </div>
+                    </div>
+
+                    <!-- Case Manager Role -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">👨‍💼</div>
+                            <div class="role-priority">管理職種</div>
+                        </div>
+                        <div class="role-content">
+                            <h3 class="role-title">個管師</h3>
+                            <p class="role-description">負責個案管理、服務協調、資源連結等工作</p>
+                            <div class="role-stats">
+                                <div class="role-stat">
+                                    <span class="stat-number">67</span>
+                                    <span class="stat-text">位學員</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">9</span>
+                                    <span class="stat-text">門課程</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">4</span>
+                                    <span class="stat-text">項證照</span>
+                                </div>
+                            </div>
+                            <div class="role-progression">
+                                <div class="progression-bar">
+                                    <div class="progression-fill" style="width: 61%"></div>
+                                </div>
+                                <span class="progression-text">平均完成度 61%</span>
+                            </div>
+                        </div>
+                        <div class="role-actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editRole('case-manager')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewRoleAnalytics('case-manager')">分析</button>
+                            <button class="btn btn--ghost btn--sm" onclick="manageRoleCourses('case-manager')">課程</button>
+                        </div>
+                    </div>
+
+                    <!-- Care Manager Role -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">📋</div>
+                            <div class="role-priority">管理職種</div>
+                        </div>
+                        <div class="role-content">
+                            <h3 class="role-title">照管專員</h3>
+                            <p class="role-description">執行長照需求評估、擬定照顧計畫、督導服務品質</p>
+                            <div class="role-stats">
+                                <div class="role-stat">
+                                    <span class="stat-number">45</span>
+                                    <span class="stat-text">位學員</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">8</span>
+                                    <span class="stat-text">門課程</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">3</span>
+                                    <span class="stat-text">項證照</span>
+                                </div>
+                            </div>
+                            <div class="role-progression">
+                                <div class="progression-bar">
+                                    <div class="progression-fill" style="width: 58%"></div>
+                                </div>
+                                <span class="progression-text">平均完成度 58%</span>
+                            </div>
+                        </div>
+                        <div class="role-actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editRole('care-manager')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewRoleAnalytics('care-manager')">分析</button>
+                            <button class="btn btn--ghost btn--sm" onclick="manageRoleCourses('care-manager')">課程</button>
+                        </div>
+                    </div>
+
+                    <!-- Institution Manager Role -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">🏢</div>
+                            <div class="role-priority">領導職種</div>
+                        </div>
+                        <div class="role-content">
+                            <h3 class="role-title">機構主管</h3>
+                            <p class="role-description">負責機構營運管理、品質監督、法規遵循等工作</p>
+                            <div class="role-stats">
+                                <div class="role-stat">
+                                    <span class="stat-number">32</span>
+                                    <span class="stat-text">位學員</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">7</span>
+                                    <span class="stat-text">門課程</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">2</span>
+                                    <span class="stat-text">項證照</span>
+                                </div>
+                            </div>
+                            <div class="role-progression">
+                                <div class="progression-bar">
+                                    <div class="progression-fill" style="width: 43%"></div>
+                                </div>
+                                <span class="progression-text">平均完成度 43%</span>
+                            </div>
+                        </div>
+                        <div class="role-actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editRole('institution-manager')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewRoleAnalytics('institution-manager')">分析</button>
+                            <button class="btn btn--ghost btn--sm" onclick="manageRoleCourses('institution-manager')">課程</button>
+                        </div>
+                    </div>
+
+                    <!-- Professional Therapist Role -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">🏃‍♀️</div>
+                            <div class="role-priority">專業職種</div>
+                        </div>
+                        <div class="role-content">
+                            <h3 class="role-title">專業治療師</h3>
+                            <p class="role-description">提供物理治療、職能治療、語言治療等復健服務</p>
+                            <div class="role-stats">
+                                <div class="role-stat">
+                                    <span class="stat-number">38</span>
+                                    <span class="stat-text">位學員</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">6</span>
+                                    <span class="stat-text">門課程</span>
+                                </div>
+                                <div class="role-stat">
+                                    <span class="stat-number">4</span>
+                                    <span class="stat-text">項證照</span>
+                                </div>
+                            </div>
+                            <div class="role-progression">
+                                <div class="progression-bar">
+                                    <div class="progression-fill" style="width: 67%"></div>
+                                </div>
+                                <span class="progression-text">平均完成度 67%</span>
+                            </div>
+                        </div>
+                        <div class="role-actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editRole('therapist')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewRoleAnalytics('therapist')">分析</button>
+                            <button class="btn btn--ghost btn--sm" onclick="manageRoleCourses('therapist')">課程</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Learning Pathways -->
+            <div id="pathways-tab" class="tab-content">
+                <div class="pathway-management">
+                    <h3>學習路徑設計</h3>
+                    <p class="text--muted">設計各職種的標準學習路徑，包含必修課程、選修課程、實習要求等</p>
+
+                    <!-- Pathway Designer -->
+                    <div class="pathway-designer">
+                        <div class="pathway-selector">
+                            <label>選擇職種</label>
+                            <select id="pathway-role-selector" onchange="loadPathway()">
+                                <option value="care-worker">照顧服務員</option>
+                                <option value="home-nurse">居家護理師</option>
+                                <option value="case-manager">個管師</option>
+                                <option value="care-manager">照管專員</option>
+                                <option value="institution-manager">機構主管</option>
+                                <option value="therapist">專業治療師</option>
+                            </select>
+                        </div>
+
+                        <!-- Pathway Visualization -->
+                        <div class="pathway-flow">
+                            <!-- Level 1: Foundation -->
+                            <div class="pathway-level">
+                                <h4 class="level-title">🏁 基礎階段 (0-6個月)</h4>
+                                <div class="course-blocks">
+                                    <div class="course-block course-block--required">
+                                        <div class="course-title">照顧服務概論</div>
+                                        <div class="course-meta">必修 • 18小時</div>
+                                    </div>
+                                    <div class="course-block course-block--required">
+                                        <div class="course-title">基本生活照護</div>
+                                        <div class="course-meta">必修 • 24小時</div>
+                                    </div>
+                                    <div class="course-block course-block--optional">
+                                        <div class="course-title">溝通技巧</div>
+                                        <div class="course-meta">選修 • 12小時</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Arrow -->
+                            <div class="pathway-arrow">↓</div>
+
+                            <!-- Level 2: Intermediate -->
+                            <div class="pathway-level">
+                                <h4 class="level-title">📈 進階階段 (6-12個月)</h4>
+                                <div class="course-blocks">
+                                    <div class="course-block course-block--required">
+                                        <div class="course-title">身心障礙照護</div>
+                                        <div class="course-meta">必修 • 30小時</div>
+                                    </div>
+                                    <div class="course-block course-block--required">
+                                        <div class="course-title">失智症照護</div>
+                                        <div class="course-meta">必修 • 36小時</div>
+                                    </div>
+                                    <div class="course-block course-block--practical">
+                                        <div class="course-title">實習訓練</div>
+                                        <div class="course-meta">實習 • 40小時</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Arrow -->
+                            <div class="pathway-arrow">↓</div>
+
+                            <!-- Level 3: Advanced -->
+                            <div class="pathway-level">
+                                <h4 class="level-title">🎯 專精階段 (12-18個月)</h4>
+                                <div class="course-blocks">
+                                    <div class="course-block course-block--specialization">
+                                        <div class="course-title">複雜照護實務</div>
+                                        <div class="course-meta">專精 • 24小時</div>
+                                    </div>
+                                    <div class="course-block course-block--specialization">
+                                        <div class="course-title">照護品質管理</div>
+                                        <div class="course-meta">專精 • 18小時</div>
+                                    </div>
+                                    <div class="course-block course-block--certification">
+                                        <div class="course-title">證照考試準備</div>
+                                        <div class="course-meta">證照 • 12小時</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pathway Actions -->
+                        <div class="pathway-actions">
+                            <button class="btn btn--ghost" onclick="resetPathway()">重設路徑</button>
+                            <button class="btn btn--ghost" onclick="previewPathway()">預覽</button>
+                            <button class="btn btn--primary" onclick="savePathway()">儲存路徑</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Progression Settings -->
+            <div id="progression-tab" class="tab-content">
+                <div class="progression-settings">
+                    <h3>進階設定</h3>
+                    <p class="text--muted">設定職種間的轉換規則、前置條件、與進階路徑</p>
+
+                    <!-- Role Transitions -->
+                    <div class="settings-section">
+                        <h4>🔄 職種轉換設定</h4>
+                        <div class="transition-matrix">
+                            <div class="transition-row">
+                                <div class="from-role">照顧服務員</div>
+                                <div class="transition-arrow">→</div>
+                                <div class="to-roles">
+                                    <div class="role-option">
+                                        <input type="checkbox" id="care-to-home" checked>
+                                        <label for="care-to-home">居家護理師</label>
+                                        <span class="requirement">需護理執照</span>
+                                    </div>
+                                    <div class="role-option">
+                                        <input type="checkbox" id="care-to-case" checked>
+                                        <label for="care-to-case">個管師</label>
+                                        <span class="requirement">需2年經驗</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="transition-row">
+                                <div class="from-role">個管師</div>
+                                <div class="transition-arrow">→</div>
+                                <div class="to-roles">
+                                    <div class="role-option">
+                                        <input type="checkbox" id="case-to-mgr" checked>
+                                        <label for="case-to-mgr">照管專員</label>
+                                        <span class="requirement">需政府認證</span>
+                                    </div>
+                                    <div class="role-option">
+                                        <input type="checkbox" id="case-to-inst" checked>
+                                        <label for="case-to-inst">機構主管</label>
+                                        <span class="requirement">需管理經驗</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prerequisites -->
+                    <div class="settings-section">
+                        <h4>📋 前置條件設定</h4>
+                        <div class="prerequisite-settings">
+                            <div class="prereq-item">
+                                <h5>居家護理師</h5>
+                                <div class="requirements">
+                                    <div class="requirement-item">
+                                        <input type="checkbox" checked>
+                                        <span>護理師執業執照</span>
+                                    </div>
+                                    <div class="requirement-item">
+                                        <input type="checkbox" checked>
+                                        <span>至少1年臨床經驗</span>
+                                    </div>
+                                    <div class="requirement-item">
+                                        <input type="checkbox">
+                                        <span>居家護理訓練證書</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="prereq-item">
+                                <h5>機構主管</h5>
+                                <div class="requirements">
+                                    <div class="requirement-item">
+                                        <input type="checkbox" checked>
+                                        <span>相關科系學士學位</span>
+                                    </div>
+                                    <div class="requirement-item">
+                                        <input type="checkbox" checked>
+                                        <span>3年以上管理經驗</span>
+                                    </div>
+                                    <div class="requirement-item">
+                                        <input type="checkbox" checked>
+                                        <span>機構管理人員訓練</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Competency Framework -->
+                    <div class="settings-section">
+                        <h4>🎯 能力架構設定</h4>
+                        <div class="competency-framework">
+                            <div class="competency-category">
+                                <h5>核心能力</h5>
+                                <div class="competency-list">
+                                    <div class="competency-item">
+                                        <input type="text" value="同理心與關懷" class="form-control">
+                                        <input type="range" min="1" max="5" value="5" class="importance-slider">
+                                        <span class="importance-label">必要</span>
+                                    </div>
+                                    <div class="competency-item">
+                                        <input type="text" value="溝通技巧" class="form-control">
+                                        <input type="range" min="1" max="5" value="4" class="importance-slider">
+                                        <span class="importance-label">重要</span>
+                                    </div>
+                                    <div class="competency-item">
+                                        <input type="text" value="問題解決" class="form-control">
+                                        <input type="range" min="1" max="5" value="4" class="importance-slider">
+                                        <span class="importance-label">重要</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="competency-category">
+                                <h5>專業技能</h5>
+                                <div class="competency-list">
+                                    <div class="competency-item">
+                                        <input type="text" value="基本照護技術" class="form-control">
+                                        <input type="range" min="1" max="5" value="5" class="importance-slider">
+                                        <span class="importance-label">必要</span>
+                                    </div>
+                                    <div class="competency-item">
+                                        <input type="text" value="健康評估" class="form-control">
+                                        <input type="range" min="1" max="5" value="3" class="importance-slider">
+                                        <span class="importance-label">中等</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Save Settings -->
+                    <div class="settings-actions">
+                        <button class="btn btn--ghost" onclick="resetProgressionSettings()">重設為預設值</button>
+                        <button class="btn btn--primary" onclick="saveProgressionSettings()">儲存設定</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Analytics -->
+            <div id="analytics-tab" class="tab-content">
+                <div class="role-analytics">
+                    <h3>職種分析報表</h3>
+                    <p class="text--muted">分析各職種的學習狀況、完成度、與就業趨勢</p>
+
+                    <!-- Analytics Filters -->
+                    <div class="analytics-filters">
+                        <div class="filter-group">
+                            <label>時間範圍</label>
+                            <select>
+                                <option>近3個月</option>
+                                <option>近6個月</option>
+                                <option>近1年</option>
+                                <option>全部時間</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>職種篩選</label>
+                            <select>
+                                <option>全部職種</option>
+                                <option>照顧服務員</option>
+                                <option>居家護理師</option>
+                                <option>個管師</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Charts Grid -->
+                    <div class="charts-grid">
+                        <!-- Popular Roles Chart -->
+                        <div class="chart-card">
+                            <h4>職種選擇分佈</h4>
+                            <div class="chart-container">
+                                <div class="chart-placeholder">
+                                    <div class="bar-chart">
+                                        <div class="bar" style="height: 85%">
+                                            <span class="bar-label">照顧服務員</span>
+                                            <span class="bar-value">156</span>
+                                        </div>
+                                        <div class="bar" style="height: 60%">
+                                            <span class="bar-label">居家護理師</span>
+                                            <span class="bar-value">89</span>
+                                        </div>
+                                        <div class="bar" style="height: 45%">
+                                            <span class="bar-label">個管師</span>
+                                            <span class="bar-value">67</span>
+                                        </div>
+                                        <div class="bar" style="height: 30%">
+                                            <span class="bar-label">照管專員</span>
+                                            <span class="bar-value">45</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Completion Rate Chart -->
+                        <div class="chart-card">
+                            <h4>職種完成率</h4>
+                            <div class="chart-container">
+                                <div class="completion-chart">
+                                    <div class="completion-item">
+                                        <span class="role-name">照顧服務員</span>
+                                        <div class="completion-bar">
+                                            <div class="completion-fill" style="width: 85%"></div>
+                                        </div>
+                                        <span class="completion-percent">85%</span>
+                                    </div>
+                                    <div class="completion-item">
+                                        <span class="role-name">居家護理師</span>
+                                        <div class="completion-bar">
+                                            <div class="completion-fill" style="width: 72%"></div>
+                                        </div>
+                                        <span class="completion-percent">72%</span>
+                                    </div>
+                                    <div class="completion-item">
+                                        <span class="role-name">個管師</span>
+                                        <div class="completion-bar">
+                                            <div class="completion-fill" style="width: 61%"></div>
+                                        </div>
+                                        <span class="completion-percent">61%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Learning Time Chart -->
+                        <div class="chart-card">
+                            <h4>平均學習時間</h4>
+                            <div class="chart-container">
+                                <div class="time-chart">
+                                    <div class="time-item">
+                                        <div class="time-icon">👩‍⚕️</div>
+                                        <div class="time-info">
+                                            <span class="role-name">照顧服務員</span>
+                                            <span class="time-value">6.2個月</span>
+                                        </div>
+                                    </div>
+                                    <div class="time-item">
+                                        <div class="time-icon">🏠</div>
+                                        <div class="time-info">
+                                            <span class="role-name">居家護理師</span>
+                                            <span class="time-value">8.7個月</span>
+                                        </div>
+                                    </div>
+                                    <div class="time-item">
+                                        <div class="time-icon">👨‍💼</div>
+                                        <div class="time-info">
+                                            <span class="role-name">個管師</span>
+                                            <span class="time-value">10.3個月</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Career Progression Chart -->
+                        <div class="chart-card">
+                            <h4>職業發展路徑</h4>
+                            <div class="chart-container">
+                                <div class="progression-flow">
+                                    <div class="flow-step">
+                                        <div class="step-title">入門</div>
+                                        <div class="step-roles">照顧服務員</div>
+                                        <div class="step-count">156人</div>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-step">
+                                        <div class="step-title">進階</div>
+                                        <div class="step-roles">護理師/個管師</div>
+                                        <div class="step-count">89人</div>
+                                    </div>
+                                    <div class="flow-arrow">→</div>
+                                    <div class="flow-step">
+                                        <div class="step-title">管理</div>
+                                        <div class="step-roles">照管專員/主管</div>
+                                        <div class="step-count">32人</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Export Actions -->
+                    <div class="analytics-actions">
+                        <button class="btn btn--ghost" onclick="exportAnalytics('pdf')">
+                            <span>📄</span> 匯出PDF
+                        </button>
+                        <button class="btn btn--ghost" onclick="exportAnalytics('excel')">
+                            <span>📊</span> 匯出Excel
+                        </button>
+                        <button class="btn btn--primary" onclick="scheduleReport()">
+                            <span>📅</span> 定期報表
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Role Modal -->
+    <div id="add-role-modal" class="modal" style="display: none;">
+        <div class="modal-content modal-content--large">
+            <div class="modal-header">
+                <h3>新增AIO職種</h3>
+                <button class="modal-close" onclick="closeAddRoleModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-role-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>職種名稱 *</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>職種圖示 *</label>
+                            <select class="form-control" required>
+                                <option value="">選擇圖示</option>
+                                <option value="👩‍⚕️">👩‍⚕️ 醫療人員</option>
+                                <option value="🏠">🏠 居家服務</option>
+                                <option value="👨‍💼">👨‍💼 管理職</option>
+                                <option value="🏃‍♀️">🏃‍♀️ 治療師</option>
+                                <option value="📋">📋 行政職</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>職種描述</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>職種優先級</label>
+                            <select class="form-control">
+                                <option>核心職種</option>
+                                <option>專業職種</option>
+                                <option>管理職種</option>
+                                <option>領導職種</option>
+                                <option>支援職種</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>預估學習時間</label>
+                            <select class="form-control">
+                                <option>3-6個月</option>
+                                <option>6-9個月</option>
+                                <option>9-12個月</option>
+                                <option>12-18個月</option>
+                                <option>18個月以上</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>必備證照</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox"> 照顧服務員技術士證</label>
+                            <label><input type="checkbox"> 護理師執業執照</label>
+                            <label><input type="checkbox"> 社會工作師證書</label>
+                            <label><input type="checkbox"> 機構管理人員訓練結業</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>核心能力要求</label>
+                        <div class="competency-inputs">
+                            <input type="text" class="form-control" placeholder="例：同理心與關懷">
+                            <input type="text" class="form-control" placeholder="例：專業技能應用">
+                            <input type="text" class="form-control" placeholder="例：溝通協調能力">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn--ghost" onclick="closeAddRoleModal()">取消</button>
+                <button class="btn btn--primary" onclick="saveRole()">儲存職種</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab--active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('tab-content--active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('tab--active');
+                
+                // Show corresponding content
+                const targetTab = tab.getAttribute('data-tab');
+                document.getElementById(targetTab + '-tab').classList.add('tab-content--active');
+            });
+        });
+
+        // Role management functions
+        function exportAIOData() {
+            console.log('Exporting AIO role data...');
+        }
+
+        function openAddRoleModal() {
+            document.getElementById('add-role-modal').style.display = 'flex';
+        }
+
+        function closeAddRoleModal() {
+            document.getElementById('add-role-modal').style.display = 'none';
+        }
+
+        function saveRole() {
+            // Save logic would go here
+            console.log('Saving new role...');
+            closeAddRoleModal();
+        }
+
+        function editRole(roleId) {
+            console.log('Editing role:', roleId);
+        }
+
+        function viewRoleAnalytics(roleId) {
+            console.log('Viewing analytics for role:', roleId);
+        }
+
+        function manageRoleCourses(roleId) {
+            console.log('Managing courses for role:', roleId);
+        }
+
+        // Pathway management
+        function loadPathway() {
+            const selectedRole = document.getElementById('pathway-role-selector').value;
+            console.log('Loading pathway for role:', selectedRole);
+        }
+
+        function resetPathway() {
+            if (confirm('確定要重設學習路徑嗎？')) {
+                console.log('Resetting pathway...');
+            }
+        }
+
+        function previewPathway() {
+            console.log('Previewing pathway...');
+        }
+
+        function savePathway() {
+            console.log('Saving pathway...');
+            alert('學習路徑已儲存');
+        }
+
+        // Progression settings
+        function resetProgressionSettings() {
+            if (confirm('確定要重設為預設值嗎？')) {
+                console.log('Resetting progression settings...');
+            }
+        }
+
+        function saveProgressionSettings() {
+            console.log('Saving progression settings...');
+            alert('進階設定已儲存');
+        }
+
+        // Analytics functions
+        function exportAnalytics(format) {
+            console.log('Exporting analytics in format:', format);
+        }
+
+        function scheduleReport() {
+            console.log('Setting up scheduled report...');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load default pathway
+            loadPathway();
+        });
+    </script>
+
+    <style>
+        /* AIO Role Management Specific Styles */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--c-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-label {
+            color: var(--c-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Role Cards Grid */
+        .aio-roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .role-card {
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            transition: all 0.2s ease;
+        }
+
+        .role-card:hover {
+            border-color: var(--c-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .role-card--featured {
+            border-color: var(--c-primary);
+            background: linear-gradient(135deg, #f8fff8, #f0fff0);
+        }
+
+        .role-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .role-icon {
+            font-size: 2.5rem;
+        }
+
+        .role-priority {
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--c-primary-light);
+            color: var(--c-primary);
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .role-title {
+            margin: 0 0 var(--space-sm) 0;
+            font-size: 1.25rem;
+            color: var(--c-text);
+        }
+
+        .role-description {
+            color: var(--c-muted);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-lg);
+            line-height: 1.5;
+        }
+
+        .role-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+        }
+
+        .role-stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--c-primary);
+        }
+
+        .stat-text {
+            font-size: 0.75rem;
+            color: var(--c-muted);
+        }
+
+        .role-progression {
+            margin-bottom: var(--space-lg);
+        }
+
+        .progression-bar {
+            height: 8px;
+            background: var(--c-border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: var(--space-xs);
+        }
+
+        .progression-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--c-primary), var(--c-accent));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progression-text {
+            font-size: 0.875rem;
+            color: var(--c-muted);
+        }
+
+        .role-actions {
+            display: flex;
+            gap: var(--space-sm);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--c-border-light);
+        }
+
+        /* Pathway Designer */
+        .pathway-designer {
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            padding: var(--space-xl);
+            margin-top: var(--space-lg);
+        }
+
+        .pathway-selector {
+            margin-bottom: var(--space-xl);
+        }
+
+        .pathway-selector select {
+            width: 200px;
+            padding: var(--space-sm);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-sm);
+        }
+
+        .pathway-flow {
+            margin-bottom: var(--space-xl);
+        }
+
+        .pathway-level {
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .level-title {
+            margin: 0 0 var(--space-lg) 0;
+            color: var(--c-text);
+            font-size: 1.125rem;
+        }
+
+        .course-blocks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .course-block {
+            background: white;
+            border: 2px solid var(--c-border);
+            border-radius: var(--radius-sm);
+            padding: var(--space-md);
+            min-width: 180px;
+            cursor: move;
+        }
+
+        .course-block--required {
+            border-color: var(--c-primary);
+            background: var(--c-primary-light);
+        }
+
+        .course-block--optional {
+            border-color: var(--c-accent);
+            background: var(--c-accent-light);
+        }
+
+        .course-block--practical {
+            border-color: #9c27b0;
+            background: #f3e5f5;
+        }
+
+        .course-block--specialization {
+            border-color: #ff5722;
+            background: #fff3e0;
+        }
+
+        .course-block--certification {
+            border-color: #607d8b;
+            background: #f5f5f5;
+        }
+
+        .course-title {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .course-meta {
+            font-size: 0.75rem;
+            color: var(--c-muted);
+        }
+
+        .pathway-arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--c-primary);
+            margin: var(--space-md) 0;
+        }
+
+        .pathway-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-md);
+        }
+
+        /* Progression Settings */
+        .settings-section {
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .transition-matrix {
+            margin-top: var(--space-lg);
+        }
+
+        .transition-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--c-surface);
+            border-radius: var(--radius-sm);
+        }
+
+        .from-role {
+            min-width: 120px;
+            font-weight: 600;
+        }
+
+        .transition-arrow {
+            margin: 0 var(--space-lg);
+            font-size: 1.2rem;
+            color: var(--c-primary);
+        }
+
+        .to-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .role-option {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .requirement {
+            font-size: 0.75rem;
+            color: var(--c-muted);
+            margin-left: var(--space-sm);
+        }
+
+        .prerequisite-settings {
+            margin-top: var(--space-lg);
+        }
+
+        .prereq-item {
+            margin-bottom: var(--space-lg);
+        }
+
+        .prereq-item h5 {
+            margin: 0 0 var(--space-md) 0;
+            color: var(--c-text);
+        }
+
+        .requirements {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .requirement-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        /* Competency Framework */
+        .competency-framework {
+            margin-top: var(--space-lg);
+        }
+
+        .competency-category {
+            margin-bottom: var(--space-xl);
+        }
+
+        .competency-category h5 {
+            margin: 0 0 var(--space-lg) 0;
+            color: var(--c-text);
+        }
+
+        .competency-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .competency-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .competency-item input[type="text"] {
+            flex: 1;
+            padding: var(--space-sm);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-sm);
+        }
+
+        .importance-slider {
+            width: 100px;
+        }
+
+        .importance-label {
+            min-width: 60px;
+            font-size: 0.875rem;
+        }
+
+        .settings-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        /* Analytics */
+        .analytics-filters {
+            display: flex;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            padding: var(--space-md);
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .filter-group label {
+            font-size: 0.875rem;
+            color: var(--c-muted);
+        }
+
+        .filter-group select {
+            padding: var(--space-sm);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-sm);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .chart-card {
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+        }
+
+        .chart-card h4 {
+            margin: 0 0 var(--space-lg) 0;
+            color: var(--c-text);
+        }
+
+        .chart-container {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            width: 100%;
+            height: 100%;
+            gap: var(--space-sm);
+        }
+
+        .bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60px;
+            background: var(--c-primary);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            position: relative;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -30px;
+            font-size: 0.75rem;
+            text-align: center;
+            width: 80px;
+            left: -10px;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -20px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* Completion Chart */
+        .completion-chart {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            width: 100%;
+        }
+
+        .completion-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .role-name {
+            min-width: 100px;
+            font-size: 0.875rem;
+        }
+
+        .completion-bar {
+            flex: 1;
+            height: 20px;
+            background: var(--c-border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .completion-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--c-primary), var(--c-accent));
+            border-radius: 10px;
+        }
+
+        .completion-percent {
+            min-width: 40px;
+            text-align: right;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        /* Time Chart */
+        .time-chart {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .time-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--c-surface);
+            border-radius: var(--radius-sm);
+        }
+
+        .time-icon {
+            font-size: 1.5rem;
+        }
+
+        .time-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .time-value {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+
+        /* Progression Flow */
+        .progression-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .flow-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .step-roles {
+            font-size: 0.875rem;
+            color: var(--c-muted);
+            margin-bottom: var(--space-xs);
+        }
+
+        .step-count {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--c-primary);
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: var(--c-primary);
+            margin: 0 var(--space-md);
+        }
+
+        .analytics-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-md);
+        }
+
+        /* Modal Enhancements */
+        .modal-content--large {
+            max-width: 600px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+        }
+
+        .competency-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .aio-roles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .role-stats {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+            .course-blocks {
+                flex-direction: column;
+            }
+
+            .transition-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-md);
+            }
+
+            .transition-arrow {
+                transform: rotate(90deg);
+                margin: var(--space-sm) 0;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .progression-flow {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,1337 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 學員記錄中心</title>
+    <meta name="description" content="CFT照顧學校學員記錄中心，管理個人資料、長照小卡、證照目標和學習歷程。">
+    <meta name="keywords" content="學員記錄,個人資料,長照小卡,學習歷程,證照管理">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <img src="assets/images/logo.png" alt="CFT 照顧學校" class="header__logo">
+                <div class="header__name">CFT 照顧學校</div>
+            </div>
+            <ul class="header__menu" role="menubar">
+                
+                <li role="none">
+                    <a href="courses.html" class="header__menu-item" role="menuitem">課程資訊</a>
+                </li>
+                <li role="none">
+                    <a href="teachers.html" class="header__menu-item" role="menuitem">師資群</a>
+                </li>
+                <li role="none">
+                    <a href="faq.html" class="header__menu-item" role="menuitem">常見問題</a>
+                </li>
+                <li role="none">
+                    <a href="student-dashboard.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">學員中心</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <a href="student-dashboard.html">學員中心</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span>學員記錄中心</span>
+                </div>
+                <h1>學員記錄中心</h1>
+                <p class="meta">管理您的個人資料、證照目標和學習歷程</p>
+            </div>
+
+            <!-- Profile Form Grid -->
+            <div class="profile-grid">
+                <!-- Basic Information -->
+                <div class="card profile-section">
+                    <div class="card__header">
+                        <h2>👤 基本資料</h2>
+                        <div class="profile-status">
+                            <span class="badge badge--success">資料完整</span>
+                        </div>
+                    </div>
+                    
+                    <form class="profile-form">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="id-card">身分證字號 <span class="required">*</span></label>
+                                <input type="text" id="id-card" value="A123456789" maxlength="10" required>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="name">姓名 <span class="required">*</span></label>
+                                <input type="text" id="name" value="王小明" required>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="birthdate">生日 <span class="required">*</span></label>
+                                <input type="date" id="birthdate" value="1985-03-15" required>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="gender">性別 <span class="required">*</span></label>
+                                <select id="gender" required>
+                                    <option value="male" selected>男</option>
+                                    <option value="female">女</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="occupation">職業</label>
+                                <input type="text" id="occupation" value="照顧服務員" placeholder="請輸入職業">
+                            </div>
+                            
+                            <div class="field">
+                                <label for="phone">聯絡電話 <span class="required">*</span></label>
+                                <input type="tel" id="phone" value="0912345678" required>
+                            </div>
+                            
+                            <div class="field field--full-width">
+                                <label for="address">通訊地址 <span class="required">*</span></label>
+                                <input type="text" id="address" value="台中市烏日區學田路123號" required>
+                            </div>
+                            
+                            <div class="field field--full-width">
+                                <label for="email">E-mail <span class="required">*</span></label>
+                                <input type="email" id="email" value="wang@example.com" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section">
+                            <h3>📅 長照積分年度設定</h3>
+                            <div class="form-grid form-grid--two-col">
+                                <div class="field">
+                                    <label for="ltc-year-start">長照積分年度起</label>
+                                    <input type="date" id="ltc-year-start" value="2025-01-01">
+                                    <div class="field__help">長期照顧專業人員繼續教育年度起始日</div>
+                                </div>
+                                
+                                <div class="field">
+                                    <label for="ltc-year-end">長照積分年度迄</label>
+                                    <input type="date" id="ltc-year-end" value="2025-12-31">
+                                    <div class="field__help">長期照顧專業人員繼續教育年度結束日</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn--primary">💾 儲存變更</button>
+                            <button type="button" class="btn">↶ 取消</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Long-term Care Card and Certification -->
+                <div class="card profile-section">
+                    <div class="card__header">
+                        <h2>📋 長照小卡與證照</h2>
+                        <div class="upload-status">
+                            <span class="badge badge--success">✓ 小卡已上傳</span>
+                        </div>
+                    </div>
+                    
+                    <form class="certification-form">
+                        <div class="form-section">
+                            <h3>長照小卡資訊</h3>
+                            <div class="form-grid form-grid--two-col">
+                                <div class="field">
+                                    <label for="ltc-card-type">長照小卡類別</label>
+                                    <select id="ltc-card-type">
+                                        <option value="caregiver" selected>照顧服務員</option>
+                                        <option value="supervisor">居服督導</option>
+                                        <option value="nurse">護理師</option>
+                                        <option value="social-worker">社工師</option>
+                                        <option value="other">其他</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="field">
+                                    <label for="ltc-card-upload">上傳長照小卡</label>
+                                    <div class="file-upload-area">
+                                        <input type="file" id="ltc-card-upload" accept="image/*,.pdf" hidden>
+                                        <label for="ltc-card-upload" class="file-upload-label">
+                                            📎 選擇檔案或拖曳至此
+                                        </label>
+                                        <div class="uploaded-file">
+                                            <span class="file-icon">✅</span>
+                                            <span class="file-name">長照小卡_王小明.jpg</span>
+                                            <button type="button" class="file-remove" aria-label="移除檔案">×</button>
+                                        </div>
+                                    </div>
+                                    <div class="field__help">支援 JPG、PNG、PDF 格式，檔案大小限制 5MB</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section aio-role-section">
+                            <h3>🎯 AIO職種設定與學習路徑</h3>
+                            
+                            <div class="aio-role-selection">
+                                <div class="field">
+                                    <label for="aio-profession">主要AIO職種 <span class="required">*</span></label>
+                                    <select id="aio-profession" required>
+                                        <option value="">請選擇您的主要專業領域</option>
+                                        <option value="care-worker" selected>👩‍⚕️ 照顧服務員</option>
+                                        <option value="home-nurse">👩‍⚕️ 居家護理師</option>
+                                        <option value="social-worker">👨‍💼 社工師</option>
+                                        <option value="occupational-therapist">🧑‍⚕️ 職能治療師</option>
+                                        <option value="physical-therapist">🧑‍⚕️ 物理治療師</option>
+                                        <option value="nutrition-specialist">🍎 營養師</option>
+                                    </select>
+                                    <div class="field__help">選擇主要職種將影響您的學習地圖、課程推薦和認證路徑</div>
+                                </div>
+                                
+                                <div class="aio-role-preview" id="aio-role-preview">
+                                    <div class="role-preview-card">
+                                        <div class="role-preview-header">
+                                            <div class="role-icon">👩‍⚕️</div>
+                                            <div class="role-info">
+                                                <h4>照顧服務員 AIO 認證路徑</h4>
+                                                <div class="role-description">提供全人照顧服務，整合身心靈社會層面的照顧需求</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="role-requirements">
+                                            <div class="requirement-item">
+                                                <span class="req-icon">📚</span>
+                                                <span class="req-text">需完成 23 門必修課程</span>
+                                            </div>
+                                            <div class="requirement-item">
+                                                <span class="req-icon">⏰</span>
+                                                <span class="req-text">120 小時實習經驗</span>
+                                            </div>
+                                            <div class="requirement-item">
+                                                <span class="req-icon">📋</span>
+                                                <span class="req-text">筆試 + 實作評量</span>
+                                            </div>
+                                            <div class="requirement-item">
+                                                <span class="req-icon">💰</span>
+                                                <span class="req-text">預計費用: NT$ 28,000</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="role-progress-mini">
+                                            <div class="progress-header">
+                                                <span>目前進度</span>
+                                                <span class="progress-percentage">40%</span>
+                                            </div>
+                                            <div class="progress-bar-mini">
+                                                <span class="progress-fill-mini" style="width: 40%"></span>
+                                            </div>
+                                            <div class="progress-detail">已完成 9/23 門課程</div>
+                                        </div>
+                                        
+                                        <div class="role-actions">
+                                            <button type="button" class="btn btn--small btn--primary" data-open="modal-learning-plan">🗺️ 查看學習計畫</button>
+                                            <button type="button" class="btn btn--small" data-open="modal-compare-roles">🔄 比較其他職種</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="secondary-roles">
+                                    <h4>次要興趣領域 （可多選）</h4>
+                                    <div class="secondary-role-options">
+                                        <label class="secondary-role-checkbox">
+                                            <input type="checkbox" name="secondary-roles" value="home-nurse">
+                                            <span class="role-tag">👩‍⚕️ 居家護理師</span>
+                                        </label>
+                                        <label class="secondary-role-checkbox">
+                                            <input type="checkbox" name="secondary-roles" value="social-worker">
+                                            <span class="role-tag">👨‍💼 社工師</span>
+                                        </label>
+                                        <label class="secondary-role-checkbox">
+                                            <input type="checkbox" name="secondary-roles" value="nutrition-specialist">
+                                            <span class="role-tag">🍎 營養師</span>
+                                        </label>
+                                    </div>
+                                    <div class="field__help">選擇次要興趣領域可獲得相關課程推薦</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-section certificate-goals-section">
+                            <h3>🎓 目標證照管理與設定</h3>
+                            
+                            <div class="certificate-management">
+                                <div class="cert-goals-tabs">
+                                    <button type="button" class="cert-goal-tab cert-goal-tab--active" data-tab="aio-certs">📜 AIO認證</button>
+                                    <button type="button" class="cert-goal-tab" data-tab="gov-certs">🏛️ 政府認證</button>
+                                    <button type="button" class="cert-goal-tab" data-tab="professional-certs">🎯 專業認證</button>
+                                    <button type="button" class="cert-goal-tab" data-tab="obtained-certs">✅ 已獲得</button>
+                                </div>
+                                
+                                <div class="cert-goal-content" data-content="aio-certs">
+                                    <div class="cert-goal-header">
+                                        <h4>AIO認證證照目標</h4>
+                                        <div class="goal-summary">
+                                            <span class="summary-badge summary-badge--primary">主要目標: 1張</span>
+                                            <span class="summary-badge">次要目標: 0張</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="cert-goal-list">
+                                        <div class="cert-goal-item cert-goal-item--primary">
+                                            <label class="cert-goal-checkbox">
+                                                <input type="checkbox" name="aio-certs" value="care-worker-aio" checked>
+                                                <span class="cert-checkmark"></span>
+                                                <div class="cert-goal-info">
+                                                    <div class="cert-name">照顧服務員 AIO 認證</div>
+                                                    <div class="cert-desc">需完成23門課程 + 120小時實習</div>
+                                                    <div class="cert-progress">
+                                                        <div class="cert-progress-bar">
+                                                            <span class="cert-progress-fill" style="width: 40%"></span>
+                                                        </div>
+                                                        <span class="cert-progress-text">40% 進度 (9/23)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="cert-goal-actions">
+                                                    <span class="cert-goal-badge cert-goal-badge--primary">主要目標</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="cert-goal-item">
+                                            <label class="cert-goal-checkbox">
+                                                <input type="checkbox" name="aio-certs" value="home-nurse-aio">
+                                                <span class="cert-checkmark"></span>
+                                                <div class="cert-goal-info">
+                                                    <div class="cert-name">居家護理師 AIO 認證</div>
+                                                    <div class="cert-desc">需完成18門課程 + 護理師執照</div>
+                                                    <div class="cert-prereq">⚙️ 需先具備護理師資格</div>
+                                                </div>
+                                                <div class="cert-goal-actions">
+                                                    <button type="button" class="btn btn--tiny" data-set-goal="home-nurse-aio">設為目標</button>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="cert-goal-item">
+                                            <label class="cert-goal-checkbox">
+                                                <input type="checkbox" name="aio-certs" value="social-worker-aio">
+                                                <span class="cert-checkmark"></span>
+                                                <div class="cert-goal-info">
+                                                    <div class="cert-name">社工師 AIO 認證</div>
+                                                    <div class="cert-desc">需完成20門課程 + 社工師執照</div>
+                                                    <div class="cert-prereq">⚙️ 需先具備社工師資格</div>
+                                                </div>
+                                                <div class="cert-goal-actions">
+                                                    <button type="button" class="btn btn--tiny" data-set-goal="social-worker-aio">設為目標</button>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="cert-goal-content" data-content="gov-certs" style="display: none;">
+                                    <div class="cert-goal-header">
+                                        <h4>政府認證證照目標</h4>
+                                        <div class="goal-summary">
+                                            <span class="summary-badge summary-badge--primary">主要目標: 1張</span>
+                                            <span class="summary-badge">次要目標: 0張</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="cert-goal-list">
+                                        <div class="cert-goal-item cert-goal-item--primary">
+                                            <label class="cert-goal-checkbox">
+                                                <input type="checkbox" name="gov-certs" value="care-technician" checked>
+                                                <span class="cert-checkmark"></span>
+                                                <div class="cert-goal-info">
+                                                    <div class="cert-name">照顧服務員技術士證照</div>
+                                                    <div class="cert-desc">需先取得 AIO 認證 + 1年工作經驗</div>
+                                                    <div class="cert-timeline">預計 2026/01 可報考</div>
+                                                </div>
+                                                <div class="cert-goal-actions">
+                                                    <span class="cert-goal-badge cert-goal-badge--primary">主要目標</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="cert-goal-item">
+                                            <label class="cert-goal-checkbox">
+                                                <input type="checkbox" name="gov-certs" value="ltc-specialist">
+                                                <span class="cert-checkmark"></span>
+                                                <div class="cert-goal-info">
+                                                    <div class="cert-name">長期照顧管理專員</div>
+                                                    <div class="cert-desc">需有長照相關經驗 + 參訓結業</div>
+                                                    <div class="cert-prereq">⚙️ 需積累更多實務經驗</div>
+                                                </div>
+                                                <div class="cert-goal-actions">
+                                                    <button type="button" class="btn btn--tiny" data-set-goal="ltc-specialist">設為目標</button>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="cert-goal-item">
+                                            <label class="cert-goal-checkbox">
+                                                <input type="checkbox" name="gov-certs" value="dementia-specialist">
+                                                <span class="cert-checkmark"></span>
+                                                <div class="cert-goal-info">
+                                                    <div class="cert-name">失智症照顧服務員</div>
+                                                    <div class="cert-desc">需先取得照服員資格 + 專業訓練</div>
+                                                    <div class="cert-timeline">可立即報名訓練</div>
+                                                </div>
+                                                <div class="cert-goal-actions">
+                                                    <button type="button" class="btn btn--tiny" data-set-goal="dementia-specialist">設為目標</button>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="cert-goal-content" data-content="professional-certs" style="display: none;">
+                                    <div class="cert-goal-header">
+                                        <h4>專業認證證照目標</h4>
+                                        <div class="goal-summary">
+                                            <span class="summary-badge">主要目標: 0張</span>
+                                            <span class="summary-badge">次要目標: 2張</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="cert-goal-list">
+                                        <div class="cert-goal-item">
+                                            <label class="cert-goal-checkbox">
+                                                <input type="checkbox" name="professional-certs" value="dementia-care">
+                                                <span class="cert-checkmark"></span>
+                                                <div class="cert-goal-info">
+                                                    <div class="cert-name">失智照顧專業認證</div>
+                                                    <div class="cert-desc">失智友善照顧相關課程認證</div>
+                                                    <div class="cert-progress">
+                                                        <div class="cert-progress-bar">
+                                                            <span class="cert-progress-fill" style="width: 80%"></span>
+                                                        </div>
+                                                        <span class="cert-progress-text">80% 進度 (4/5)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="cert-goal-actions">
+                                                    <button type="button" class="btn btn--tiny" data-set-goal="dementia-care">設為目標</button>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="cert-goal-item">
+                                            <label class="cert-goal-checkbox">
+                                                <input type="checkbox" name="professional-certs" value="hospice-care" checked>
+                                                <span class="cert-checkmark"></span>
+                                                <div class="cert-goal-info">
+                                                    <div class="cert-name">安寧照顧專業認證</div>
+                                                    <div class="cert-desc">安寧陪伴相關課程認證</div>
+                                                    <div class="cert-progress">
+                                                        <div class="cert-progress-bar">
+                                                            <span class="cert-progress-fill" style="width: 20%"></span>
+                                                        </div>
+                                                        <span class="cert-progress-text">20% 進度 (1/4)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="cert-goal-actions">
+                                                    <span class="cert-goal-badge cert-goal-badge--secondary">次要目標</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="cert-goal-item">
+                                            <label class="cert-goal-checkbox">
+                                                <input type="checkbox" name="professional-certs" value="community-care" checked>
+                                                <span class="cert-checkmark"></span>
+                                                <div class="cert-goal-info">
+                                                    <div class="cert-name">社區共生照顧認證</div>
+                                                    <div class="cert-desc">社區共生與日常生活設計認證</div>
+                                                    <div class="cert-progress">
+                                                        <div class="cert-progress-bar">
+                                                            <span class="cert-progress-fill" style="width: 30%"></span>
+                                                        </div>
+                                                        <span class="cert-progress-text">30% 進度 (1/3)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="cert-goal-actions">
+                                                    <span class="cert-goal-badge cert-goal-badge--secondary">次要目標</span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="cert-goal-content" data-content="obtained-certs" style="display: none;">
+                                    <div class="cert-goal-header">
+                                        <h4>已獲得證照</h4>
+                                        <div class="goal-summary">
+                                            <span class="summary-badge summary-badge--success">已獲得: 3張</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="cert-goal-list">
+                                        <div class="cert-goal-item cert-goal-item--obtained">
+                                            <div class="cert-goal-info">
+                                                <div class="cert-name">🏆 CPR+AED證照</div>
+                                                <div class="cert-desc">取得日期: 2024.03.15</div>
+                                                <div class="cert-validity">有效期限: 2026.03.15</div>
+                                            </div>
+                                            <div class="cert-goal-actions">
+                                                <button type="button" class="btn btn--tiny btn--ghost">📎 查看證書</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="cert-goal-item cert-goal-item--obtained">
+                                            <div class="cert-goal-info">
+                                                <div class="cert-name">🏆 基本救命術證照</div>
+                                                <div class="cert-desc">取得日期: 2024.05.20</div>
+                                                <div class="cert-validity">有效期限: 2026.05.20</div>
+                                            </div>
+                                            <div class="cert-goal-actions">
+                                                <button type="button" class="btn btn--tiny btn--ghost">📎 查看證書</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="cert-goal-item cert-goal-item--obtained">
+                                            <div class="cert-goal-info">
+                                                <div class="cert-name">🏆 感染控制基礎認證</div>
+                                                <div class="cert-desc">取得日期: 2024.07.10</div>
+                                                <div class="cert-validity">有效期限: 2026.07.10</div>
+                                            </div>
+                                            <div class="cert-goal-actions">
+                                                <button type="button" class="btn btn--tiny btn--ghost">📎 查看證書</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="cert-goal-timeline">
+                                    <h4>📅 學習時程規劃</h4>
+                                    <div class="timeline-settings">
+                                        <div class="field">
+                                            <label for="target-completion-date">目標完成日期</label>
+                                            <input type="date" id="target-completion-date" value="2025-12-31">
+                                        </div>
+                                        
+                                        <div class="timeline-summary">
+                                            <div class="timeline-item">
+                                                <span class="timeline-label">每月學習日:</span>
+                                                <span class="timeline-value">8-10 天</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <span class="timeline-label">每月預計費用:</span>
+                                                <span class="timeline-value">NT$ 2,500</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <span class="timeline-label">每月所需點數:</span>
+                                                <span class="timeline-value">15-18 點</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn--primary">💾 儲存證照目標</button>
+                            <button type="button" class="btn btn--ghost" data-open="modal-goal-plan">📊 生成學習計畫</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- My Files -->
+                <div class="card profile-section">
+                    <div class="card__header">
+                        <h2>📁 我的檔案</h2>
+                        <div class="storage-info">
+                            <span class="storage-used">已使用 2.3MB / 100MB</span>
+                        </div>
+                    </div>
+                    
+                    <div class="file-management">
+                        <div class="upload-section">
+                            <h3>上傳新檔案</h3>
+                            <form class="upload-form">
+                                <div class="form-grid form-grid--two-col">
+                                    <div class="field">
+                                        <label for="file-upload">選擇檔案</label>
+                                        <div class="file-upload-area">
+                                            <input type="file" id="file-upload" multiple accept="image/*,.pdf,.doc,.docx" hidden>
+                                            <label for="file-upload" class="file-upload-label">
+                                                📎 上傳照片/作業/心得
+                                            </label>
+                                        </div>
+                                        <div class="field__help">支援圖片、PDF、Word 文件，單檔最大 10MB</div>
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <label for="file-description">說明</label>
+                                        <textarea id="file-description" rows="4" placeholder="檔案描述...&#10;（作業、心得、課堂照片等）"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn--primary">📤 上傳檔案</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="file-list-section">
+                            <h3>已上傳檔案</h3>
+                            <div class="file-list">
+                                <div class="file-item">
+                                    <div class="file-info">
+                                        <div class="file-icon">📝</div>
+                                        <div class="file-details">
+                                            <div class="file-name">心得_失智照顧.docx</div>
+                                            <div class="file-meta">
+                                                <span>2025/01/10</span>
+                                                <span>234 KB</span>
+                                                <span>失智友善溝通課程心得報告</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="file-actions">
+                                        <button class="btn btn--small" aria-label="下載檔案">📥</button>
+                                        <button class="btn btn--small btn--danger" aria-label="刪除檔案">🗑️</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="file-item">
+                                    <div class="file-info">
+                                        <div class="file-icon">📷</div>
+                                        <div class="file-details">
+                                            <div class="file-name">活動照片1.jpg</div>
+                                            <div class="file-meta">
+                                                <span>2025/01/05</span>
+                                                <span>1.2 MB</span>
+                                                <span>社區共生課程實地參訪</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="file-actions">
+                                        <button class="btn btn--small" aria-label="預覽圖片">👁️</button>
+                                        <button class="btn btn--small" aria-label="下載檔案">📥</button>
+                                        <button class="btn btn--small btn--danger" aria-label="刪除檔案">🗑️</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="file-item">
+                                    <div class="file-info">
+                                        <div class="file-icon">📋</div>
+                                        <div class="file-details">
+                                            <div class="file-name">實習報告.pdf</div>
+                                            <div class="file-meta">
+                                                <span>2024/12/28</span>
+                                                <span>856 KB</span>
+                                                <span>24小時居家照護實習成果</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="file-actions">
+                                        <button class="btn btn--small" aria-label="預覽檔案">👁️</button>
+                                        <button class="btn btn--small" aria-label="下載檔案">📥</button>
+                                        <button class="btn btn--small btn--danger" aria-label="刪除檔案">🗑️</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning History -->
+                <div class="card profile-section learning-history-section">
+                    <div class="card__header">
+                        <h2>📊 學習歷程資料下載</h2>
+                        <div class="history-stats">
+                            <span class="stat-item">總時數：22小時</span>
+                            <span class="stat-item">總積分：10點</span>
+                            <span class="stat-item">完成課程：9門</span>
+                        </div>
+                    </div>
+                    
+                    <div class="learning-history">
+                        <div class="filter-section">
+                            <h3>篩選條件</h3>
+                            <div class="filter-form">
+                                <div class="form-grid form-grid--four-col">
+                                    <div class="field">
+                                        <label for="year-filter">年度</label>
+                                        <select id="year-filter">
+                                            <option value="">全部年度</option>
+                                            <option value="2025" selected>2025年</option>
+                                            <option value="2024">2024年</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <label for="category-filter">課程類別</label>
+                                        <select id="category-filter">
+                                            <option value="">全部類別</option>
+                                            <option value="dementia">失智照顧</option>
+                                            <option value="hospice">安寧照顧</option>
+                                            <option value="community">共生照顧</option>
+                                            <option value="complex">複雜性照顧</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <label for="credit-filter">長照積分</label>
+                                        <select id="credit-filter">
+                                            <option value="">不限</option>
+                                            <option value="yes">有積分</option>
+                                            <option value="no">無積分</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <button type="button" class="btn btn--primary" style="margin-top: 28px;">🔍 篩選</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="history-table-section">
+                            <div class="table-actions">
+                                <div class="select-all-section">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="select-all">
+                                        <span class="checkbox-text">全選</span>
+                                    </label>
+                                </div>
+                                <div class="export-actions">
+                                    <button class="btn" id="export-word">📄 匯出 Word</button>
+                                    <button class="btn" id="export-pdf">📄 匯出 PDF</button>
+                                </div>
+                            </div>
+                            
+                            <div class="table-responsive">
+                                <table class="learning-history-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 40px;">選擇</th>
+                                            <th>課程名稱</th>
+                                            <th style="width: 100px;">日期</th>
+                                            <th style="width: 80px;">時數</th>
+                                            <th style="width: 80px;">積分</th>
+                                            <th style="width: 80px;">成績</th>
+                                            <th style="width: 100px;">證書</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="course-checkbox">
+                                                    <span class="sr-only">選擇此課程</span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="course-cell">
+                                                    <div class="course-name">失智友善溝通與行為支持</div>
+                                                    <div class="course-teacher">講師：王美華</div>
+                                                </div>
+                                            </td>
+                                            <td>2025/01/15</td>
+                                            <td>6 小時</td>
+                                            <td>
+                                                <span class="badge badge--success">有</span>
+                                            </td>
+                                            <td>85分</td>
+                                            <td>
+                                                <a href="#" class="download-link">📄 下載</a>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="course-checkbox">
+                                                    <span class="sr-only">選擇此課程</span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="course-cell">
+                                                    <div class="course-name">社區共生與日常生活設計</div>
+                                                    <div class="course-teacher">講師：林雅婷</div>
+                                                </div>
+                                            </td>
+                                            <td>2025/01/08</td>
+                                            <td>4 小時</td>
+                                            <td>
+                                                <span class="badge">無</span>
+                                            </td>
+                                            <td>92分</td>
+                                            <td>
+                                                <a href="#" class="download-link">📄 下載</a>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="course-checkbox">
+                                                    <span class="sr-only">選擇此課程</span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="course-cell">
+                                                    <div class="course-name">24小時居家照護實務</div>
+                                                    <div class="course-teacher">講師：張建國</div>
+                                                </div>
+                                            </td>
+                                            <td>2024/12/20</td>
+                                            <td>8 小時</td>
+                                            <td>
+                                                <span class="badge badge--success">有</span>
+                                            </td>
+                                            <td>88分</td>
+                                            <td>
+                                                <a href="#" class="download-link">📄 下載</a>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>
+                                                <label class="checkbox-label">
+                                                    <input type="checkbox" class="course-checkbox">
+                                                    <span class="sr-only">選擇此課程</span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <div class="course-cell">
+                                                    <div class="course-name">園藝治療與非藥物介入</div>
+                                                    <div class="course-teacher">講師：李素真</div>
+                                                </div>
+                                            </td>
+                                            <td>2024/12/10</td>
+                                            <td>5 小時</td>
+                                            <td>
+                                                <span class="badge">無</span>
+                                            </td>
+                                            <td>90分</td>
+                                            <td>
+                                                <a href="#" class="download-link">📄 下載</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="table-summary">
+                                <div class="summary-stats">
+                                    <span>顯示 4 筆記錄，共 9 筆</span>
+                                    <span>選擇 0 筆記錄</span>
+                                </div>
+                                <nav class="pagination">
+                                    <button class="btn btn--small" disabled>« 上一頁</button>
+                                    <button class="btn btn--small btn--primary">1</button>
+                                    <button class="btn btn--small">2</button>
+                                    <button class="btn btn--small">3</button>
+                                    <button class="btn btn--small">下一頁 »</button>
+                                </nav>
+                            </div>
+                        </div>
+                        
+                        <div class="export-info">
+                            <div class="notice notice--info">
+                                <h4>📋 學習歷程證明說明</h4>
+                                <ul>
+                                    <li>Word 格式：適用於編輯和補充個人資料</li>
+                                    <li>PDF 格式：適用於正式文件提交和存檔</li>
+                                    <li>證明內容包含：課程名稱、時數、積分、成績、講師資訊</li>
+                                    <li>可用於長照專業人員繼續教育時數認證申請</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 本頁為UI提案Mock，非最終產品</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="faq.html" aria-label="聯絡我們">聯絡我們</a>
+                    <a href="#accessibility" aria-label="無障礙宣告">無障礙宣告</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .page-header {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .breadcrumb {
+            margin-bottom: var(--space-md);
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .breadcrumb a {
+            color: var(--c-primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-separator {
+            margin: 0 var(--space-sm);
+        }
+        
+        .profile-grid {
+            display: grid;
+            gap: var(--space-xl);
+        }
+        
+        .profile-section .card__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .profile-status, .upload-status {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .storage-info, .history-stats {
+            display: flex;
+            gap: var(--space-md);
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .form-grid--two-col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .form-grid--four-col {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .field--full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .required {
+            color: var(--c-danger);
+        }
+        
+        .form-section {
+            margin: var(--space-xl) 0;
+            padding-top: var(--space-lg);
+            border-top: 1px solid #E8ECEF;
+        }
+        
+        .form-section:first-child {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+        
+        .form-section h3 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid #F0F0F0;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+        }
+        
+        .checkbox-text {
+            font-size: 14px;
+        }
+        
+        .file-upload-area {
+            position: relative;
+            border: 2px dashed #CFD8DC;
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: border-color 0.2s ease;
+        }
+        
+        .file-upload-area:hover {
+            border-color: var(--c-primary);
+        }
+        
+        .file-upload-label {
+            cursor: pointer;
+            color: var(--c-muted);
+            display: block;
+        }
+        
+        .uploaded-file {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+            padding: var(--space-sm);
+            background: #E8F5E9;
+            border-radius: var(--radius-card);
+        }
+        
+        .file-icon {
+            font-size: 16px;
+        }
+        
+        .file-name {
+            flex-grow: 1;
+            font-size: 14px;
+        }
+        
+        .file-remove {
+            background: none;
+            border: none;
+            color: var(--c-danger);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+        }
+        
+        .file-list {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+        }
+        
+        .file-info {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+            flex-grow: 1;
+        }
+        
+        .file-details {
+            flex-grow: 1;
+        }
+        
+        .file-name {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .file-meta {
+            display: flex;
+            gap: var(--space-sm);
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .file-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .learning-history-section {
+            grid-column: 1 / -1;
+        }
+        
+        .filter-section {
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .filter-section h3 {
+            margin-bottom: var(--space-md);
+        }
+        
+        .table-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            padding: var(--space-sm) 0;
+        }
+        
+        .export-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .learning-history-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .learning-history-table th,
+        .learning-history-table td {
+            padding: var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .learning-history-table th {
+            background: var(--c-sub);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .course-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .course-name {
+            font-weight: 500;
+        }
+        
+        .course-teacher {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .download-link {
+            color: var(--c-primary);
+            text-decoration: none;
+            font-size: 12px;
+        }
+        
+        .download-link:hover {
+            text-decoration: underline;
+        }
+        
+        .table-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid #E8ECEF;
+        }
+        
+        .summary-stats {
+            display: flex;
+            gap: var(--space-md);
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .pagination {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .export-info {
+            margin-top: var(--space-lg);
+        }
+        
+        .export-info h4 {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .export-info ul {
+            margin: var(--space-sm) 0 0 var(--space-lg);
+        }
+        
+        .export-info li {
+            margin-bottom: var(--space-xs);
+            font-size: 14px;
+        }
+        
+        .stat-item {
+            font-size: 12px;
+            padding: 4px 8px;
+            background: var(--c-sub);
+            border-radius: var(--radius-pill);
+        }
+        
+        @media (max-width: 992px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-grid--two-col {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-grid--four-col {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .table-actions {
+                flex-direction: column;
+                gap: var(--space-md);
+                align-items: stretch;
+            }
+            
+            .export-actions {
+                justify-content: center;
+            }
+            
+            .table-summary {
+                flex-direction: column;
+                gap: var(--space-md);
+                align-items: center;
+            }
+            
+            .history-stats {
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .profile-section .card__header {
+                flex-direction: column;
+                gap: var(--space-sm);
+                align-items: flex-start;
+            }
+            
+            .form-grid--four-col {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .file-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+            
+            .file-actions {
+                flex-direction: column;
+            }
+            
+            .learning-history-table {
+                font-size: 12px;
+            }
+            
+            .learning-history-table th,
+            .learning-history-table td {
+                padding: var(--space-sm);
+            }
+            
+            .pagination {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // File upload preview
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+            fileInputs.forEach(input => {
+                input.addEventListener('change', function(e) {
+                    const files = e.target.files;
+                    if (files.length > 0) {
+                        // Show file preview (simplified)
+                        console.log('Files selected:', Array.from(files).map(f => f.name));
+                    }
+                });
+            });
+            
+            // Select all checkbox functionality
+            const selectAllCheckbox = document.getElementById('select-all');
+            const courseCheckboxes = document.querySelectorAll('.course-checkbox');
+            
+            selectAllCheckbox?.addEventListener('change', function() {
+                courseCheckboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+                updateSelectedCount();
+            });
+            
+            courseCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateSelectedCount);
+            });
+            
+            function updateSelectedCount() {
+                const checkedBoxes = document.querySelectorAll('.course-checkbox:checked');
+                const summaryStats = document.querySelector('.summary-stats');
+                if (summaryStats) {
+                    const spans = summaryStats.querySelectorAll('span');
+                    if (spans.length > 1) {
+                        spans[1].textContent = `選擇 ${checkedBoxes.length} 筆記錄`;
+                    }
+                }
+            }
+            
+            // Export functionality
+            document.getElementById('export-word')?.addEventListener('click', function() {
+                const checkedBoxes = document.querySelectorAll('.course-checkbox:checked');
+                if (checkedBoxes.length === 0) {
+                    alert('請先選擇要匯出的課程記錄');
+                    return;
+                }
+                console.log('Exporting to Word:', checkedBoxes.length, 'items');
+                // Simulate download
+                window.CFT?.NotificationManager.show('學習歷程 Word 文件已開始下載', 'success');
+            });
+            
+            document.getElementById('export-pdf')?.addEventListener('click', function() {
+                const checkedBoxes = document.querySelectorAll('.course-checkbox:checked');
+                if (checkedBoxes.length === 0) {
+                    alert('請先選擇要匯出的課程記錄');
+                    return;
+                }
+                console.log('Exporting to PDF:', checkedBoxes.length, 'items');
+                // Simulate download
+                window.CFT?.NotificationManager.show('學習歷程 PDF 文件已開始下載', 'success');
+            });
+        });
+    </script>
+</body>
+</html>

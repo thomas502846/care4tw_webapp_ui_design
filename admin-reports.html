@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 報表分析</title>
+    <meta name="description" content="CFT照顧學校報表分析，學員數據統計與課程成效分析。">
+    <meta name="keywords" content="報表分析,數據統計,學員分析,課程成效">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>報表分析</h1>
+                <p class="meta">學員數據統計與課程成效分析</p>
+            </div>
+            
+            <!-- Report Filters -->
+            <div class="card" style="margin-bottom: var(--space-lg);">
+                <div class="report-filters">
+                    <div class="filter-row">
+                        <div class="filter-field">
+                            <label for="report-type">報表類型</label>
+                            <select id="report-type">
+                                <option value="student">學員分析</option>
+                                <option value="course" selected>課程成效</option>
+                                <option value="teacher">師資統計</option>
+                                <option value="payment">收入分析</option>
+                                <option value="system">系統使用</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-field">
+                            <label for="date-range">時間範圍</label>
+                            <select id="date-range">
+                                <option value="week">本週</option>
+                                <option value="month" selected>本月</option>
+                                <option value="quarter">本季</option>
+                                <option value="year">本年</option>
+                                <option value="custom">自訂範圍</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-field">
+                            <label for="format">匯出格式</label>
+                            <select id="format">
+                                <option value="excel">Excel (.xlsx)</option>
+                                <option value="csv">CSV (.csv)</option>
+                                <option value="pdf">PDF (.pdf)</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn btn--primary" onclick="generateReport()">生成報表</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Statistics -->
+            <div class="grid" style="grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); margin-bottom: var(--space-lg);">
+                <div class="card">
+                    <div class="stat-item">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <div class="stat-number">245</div>
+                            <div class="stat-label">活躍學員</div>
+                            <div class="stat-change stat-change--up">+15 本月</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="stat-item">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-content">
+                            <div class="stat-number">32</div>
+                            <div class="stat-label">進行中課程</div>
+                            <div class="stat-change stat-change--up">+3 本月</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="stat-item">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <div class="stat-number">$128,500</div>
+                            <div class="stat-label">本月收入</div>
+                            <div class="stat-change stat-change--up">+8.2%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="stat-item">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <div class="stat-number">4.7</div>
+                            <div class="stat-label">平均滿意度</div>
+                            <div class="stat-change stat-change--up">+0.3 本月</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Report Content -->
+            <div class="grid" style="grid-template-columns: 2fr 1fr; gap: var(--space-lg);">
+                <!-- Main Chart Area -->
+                <div class="card">
+                    <h3>課程參與趨勢</h3>
+                    <div class="chart-container">
+                        <div class="chart-placeholder">
+                            <div class="chart-bars">
+                                <div class="chart-bar" style="height: 60%;" data-value="120"></div>
+                                <div class="chart-bar" style="height: 75%;" data-value="150"></div>
+                                <div class="chart-bar" style="height: 45%;" data-value="90"></div>
+                                <div class="chart-bar" style="height: 85%;" data-value="170"></div>
+                                <div class="chart-bar" style="height: 70%;" data-value="140"></div>
+                                <div class="chart-bar" style="height: 90%;" data-value="180"></div>
+                                <div class="chart-bar" style="height: 65%;" data-value="130"></div>
+                            </div>
+                            <div class="chart-labels">
+                                <span>週一</span>
+                                <span>週二</span>
+                                <span>週三</span>
+                                <span>週四</span>
+                                <span>週五</span>
+                                <span>週六</span>
+                                <span>週日</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Top Courses -->
+                <div class="card">
+                    <h3>熱門課程排行</h3>
+                    <div class="ranking-list">
+                        <div class="ranking-item">
+                            <span class="ranking-number">1</span>
+                            <div class="ranking-content">
+                                <div class="ranking-title">失智友善溝通</div>
+                                <div class="ranking-stat">158 人參與</div>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item">
+                            <span class="ranking-number">2</span>
+                            <div class="ranking-content">
+                                <div class="ranking-title">疫情下整合照護</div>
+                                <div class="ranking-stat">142 人參與</div>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item">
+                            <span class="ranking-number">3</span>
+                            <div class="ranking-content">
+                                <div class="ranking-title">社區共生照護</div>
+                                <div class="ranking-stat">128 人參與</div>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item">
+                            <span class="ranking-number">4</span>
+                            <div class="ranking-content">
+                                <div class="ranking-title">安寧緩和照護</div>
+                                <div class="ranking-stat">115 人參與</div>
+                            </div>
+                        </div>
+                        
+                        <div class="ranking-item">
+                            <span class="ranking-number">5</span>
+                            <div class="ranking-content">
+                                <div class="ranking-title">長照資源連結</div>
+                                <div class="ranking-stat">98 人參與</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Detailed Reports -->
+            <div class="card" style="margin-top: var(--space-lg);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                    <h3>詳細分析報表</h3>
+                    <div>
+                        <button type="button" class="btn btn--ghost" onclick="refreshData()">重新整理</button>
+                        <button type="button" class="btn btn--primary" onclick="exportAllData()">匯出所有數據</button>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>課程名稱</th>
+                                <th>開課日期</th>
+                                <th>報名人數</th>
+                                <th>完課率</th>
+                                <th>滿意度</th>
+                                <th>收入</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>失智友善溝通與行為支持</td>
+                                <td>2025/09/28</td>
+                                <td>24 / 30</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                        <span class="progress-text">85%</span>
+                                    </div>
+                                </td>
+                                <td>⭐ 4.8</td>
+                                <td>NT$ 48,000</td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="viewDetailReport('course1')">詳情</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>疫情下整合照護：線上實務</td>
+                                <td>2025/10/12</td>
+                                <td>40 / 100</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                        <span class="progress-text">75%</span>
+                                    </div>
+                                </td>
+                                <td>⭐ 4.6</td>
+                                <td>NT$ 20,000</td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="viewDetailReport('course2')">詳情</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>社區共生與日常生活設計</td>
+                                <td>2025/11/05</td>
+                                <td>15 / 25</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                        <span class="progress-text">90%</span>
+                                    </div>
+                                </td>
+                                <td>⭐ 4.9</td>
+                                <td>NT$ 37,500</td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="viewDetailReport('course3')">詳情</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>安寧緩和照護溝通技巧</td>
+                                <td>2025/11/20</td>
+                                <td>5 / 20</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 60%"></div>
+                                        <span class="progress-text">60%</span>
+                                    </div>
+                                </td>
+                                <td>⭐ 4.5</td>
+                                <td>NT$ 22,500</td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="viewDetailReport('course4')">詳情</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .report-filters {
+            padding: var(--space-md);
+        }
+        
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: var(--space-md);
+            align-items: end;
+        }
+        
+        .filter-field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .filter-field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .filter-field select {
+            padding: 8px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 14px;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+        }
+        
+        .stat-icon {
+            font-size: 32px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--c-sub);
+            border-radius: 50%;
+        }
+        
+        .stat-content {
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--c-text);
+            line-height: 1.2;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--c-muted);
+            margin-bottom: 4px;
+        }
+        
+        .stat-change {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .stat-change--up {
+            color: var(--c-success);
+        }
+        
+        .stat-change--down {
+            color: var(--c-danger);
+        }
+        
+        .chart-container {
+            height: 300px;
+            padding: var(--space-lg);
+        }
+        
+        .chart-placeholder {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .chart-bars {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            height: 200px;
+            gap: 8px;
+        }
+        
+        .chart-bar {
+            flex: 1;
+            background: var(--c-primary);
+            border-radius: 4px 4px 0 0;
+            min-height: 20px;
+            position: relative;
+            opacity: 0.8;
+        }
+        
+        .chart-bar:hover {
+            opacity: 1;
+        }
+        
+        .chart-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--space-sm);
+        }
+        
+        .chart-labels span {
+            font-size: 12px;
+            color: var(--c-muted);
+            text-align: center;
+            flex: 1;
+        }
+        
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .ranking-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--c-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .ranking-content {
+            flex: 1;
+        }
+        
+        .ranking-title {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--c-text);
+        }
+        
+        .ranking-stat {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .progress-bar {
+            width: 100px;
+            height: 20px;
+            background: #E8ECEF;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--c-primary);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--c-text);
+        }
+        
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .filter-row {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+            
+            .filter-row > button {
+                justify-self: stretch;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stat-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .chart-container {
+                height: 250px;
+                padding: var(--space-md);
+            }
+            
+            .chart-bars {
+                height: 150px;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        function generateReport() {
+            const reportType = document.getElementById('report-type').value;
+            const dateRange = document.getElementById('date-range').value;
+            const format = document.getElementById('format').value;
+            
+            alert(`正在生成 ${reportType} 報表\n時間範圍：${dateRange}\n格式：${format}\n\n報表將在完成後自動下載。`);
+            
+            // Simulate report generation
+            setTimeout(() => {
+                alert('報表生成完成！下載已開始。');
+            }, 2000);
+        }
+        
+        function refreshData() {
+            alert('正在重新整理數據...');
+            // In real app, would refresh all charts and tables
+            setTimeout(() => {
+                alert('數據已更新！');
+            }, 1500);
+        }
+        
+        function exportAllData() {
+            if (confirm('確定要匯出所有分析數據嗎？這可能需要一些時間。')) {
+                alert('正在準備完整數據匯出...');
+                setTimeout(() => {
+                    alert('數據匯出完成！檔案已下載到您的裝置。');
+                }, 3000);
+            }
+        }
+        
+        function viewDetailReport(courseId) {
+            alert(`查看課程 ${courseId} 的詳細報表\n(實際應用中會開啟詳細分析頁面)`);
+        }
+        
+        // Update chart on date range change
+        document.getElementById('date-range').addEventListener('change', function() {
+            const range = this.value;
+            console.log('Date range changed to:', range);
+            // In real app, would update charts with new data
+        });
+        
+        // Update report type
+        document.getElementById('report-type').addEventListener('change', function() {
+            const type = this.value;
+            console.log('Report type changed to:', type);
+            // In real app, would update the entire report view
+        });
+        
+        // Chart bar hover effects
+        document.querySelectorAll('.chart-bar').forEach(bar => {
+            bar.addEventListener('mouseenter', function() {
+                const value = this.getAttribute('data-value');
+                this.setAttribute('title', `${value} 人參與`);
+            });
+        });
+    </script>
+</body>
+</html>

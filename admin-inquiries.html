@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 詢問管理</title>
+    <meta name="description" content="CFT照顧學校詢問管理，管理公眾詢問與回覆處理。">
+    <meta name="keywords" content="詢問管理,公眾詢問,客服管理,回覆處理">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-inquiries.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">詢問</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>公眾詢問管理</h1>
+                <p class="meta">管理來自官網詢問表單的問題與回覆</p>
+            </div>
+            
+            <!-- Filter Bar -->
+            <div class="card" style="margin-bottom: var(--space-lg);">
+                <div class="inquiry-filters">
+                    <div class="filter-row">
+                        <div class="filter-field">
+                            <label for="status-filter">狀態篩選</label>
+                            <select id="status-filter">
+                                <option value="">所有狀態</option>
+                                <option value="pending">待回覆</option>
+                                <option value="replied">已回覆</option>
+                                <option value="closed">已關閉</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-field">
+                            <label for="category-filter">類別篩選</label>
+                            <select id="category-filter">
+                                <option value="">所有類別</option>
+                                <option value="course">課程相關</option>
+                                <option value="registration">報名相關</option>
+                                <option value="payment">付款/點數相關</option>
+                                <option value="certificate">證書/積分相關</option>
+                                <option value="technical">網站使用問題</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-field">
+                            <label for="date-filter">時間範圍</label>
+                            <select id="date-filter">
+                                <option value="today">今天</option>
+                                <option value="week">本週</option>
+                                <option value="month" selected>本月</option>
+                                <option value="all">全部</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn btn--primary" onclick="applyFilters()">篩選</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid" style="grid-template-columns: 1fr 400px; gap: var(--space-lg);">
+                <!-- Inquiry List -->
+                <div class="card">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                        <h3>詢問列表</h3>
+                        <div class="inquiry-stats">
+                            <span class="stat-pill stat-pill--pending">待回覆: 3</span>
+                            <span class="stat-pill stat-pill--replied">已回覆: 12</span>
+                        </div>
+                    </div>
+                    
+                    <div class="inquiry-list">
+                        <div class="inquiry-item inquiry-item--pending" onclick="selectInquiry('1')">
+                            <div class="inquiry-header">
+                                <div class="inquiry-sender">
+                                    <div class="sender-avatar">王</div>
+                                    <div class="sender-info">
+                                        <div class="sender-name">王小明</div>
+                                        <div class="sender-email">wang@example.com</div>
+                                    </div>
+                                </div>
+                                <div class="inquiry-meta">
+                                    <div class="inquiry-time">2小時前</div>
+                                    <div class="inquiry-category">課程相關</div>
+                                </div>
+                            </div>
+                            <div class="inquiry-subject">關於失智友善溝通課程的報名問題</div>
+                            <div class="inquiry-preview">請問這門課程是否包含實作練習？我想了解詳細的課程內容安排...</div>
+                            <div class="inquiry-status">
+                                <span class="status-badge status-badge--pending">待回覆</span>
+                            </div>
+                        </div>
+                        
+                        <div class="inquiry-item inquiry-item--replied" onclick="selectInquiry('2')">
+                            <div class="inquiry-header">
+                                <div class="inquiry-sender">
+                                    <div class="sender-avatar">陳</div>
+                                    <div class="sender-info">
+                                        <div class="sender-name">陳美華</div>
+                                        <div class="sender-email">chen@example.com</div>
+                                    </div>
+                                </div>
+                                <div class="inquiry-meta">
+                                    <div class="inquiry-time">昨天</div>
+                                    <div class="inquiry-category">付款相關</div>
+                                </div>
+                            </div>
+                            <div class="inquiry-subject">點數購買後未收到確認信</div>
+                            <div class="inquiry-preview">我昨天購買了100點，但是沒有收到確認信，請幫我確認...</div>
+                            <div class="inquiry-status">
+                                <span class="status-badge status-badge--replied">已回覆</span>
+                            </div>
+                        </div>
+                        
+                        <div class="inquiry-item inquiry-item--pending" onclick="selectInquiry('3')">
+                            <div class="inquiry-header">
+                                <div class="inquiry-sender">
+                                    <div class="sender-avatar">李</div>
+                                    <div class="sender-info">
+                                        <div class="sender-name">李志明</div>
+                                        <div class="sender-email">li@example.com</div>
+                                    </div>
+                                </div>
+                                <div class="inquiry-meta">
+                                    <div class="inquiry-time">2天前</div>
+                                    <div class="inquiry-category">證書相關</div>
+                                </div>
+                            </div>
+                            <div class="inquiry-subject">長照積分認證問題</div>
+                            <div class="inquiry-preview">請問完成課程後多久可以取得長照積分認證？需要什麼文件...</div>
+                            <div class="inquiry-status">
+                                <span class="status-badge status-badge--pending">待回覆</span>
+                            </div>
+                        </div>
+                        
+                        <div class="inquiry-item inquiry-item--replied" onclick="selectInquiry('4')">
+                            <div class="inquiry-header">
+                                <div class="inquiry-sender">
+                                    <div class="sender-avatar">張</div>
+                                    <div class="sender-info">
+                                        <div class="sender-name">張淑芬</div>
+                                        <div class="sender-email">chang@example.com</div>
+                                    </div>
+                                </div>
+                                <div class="inquiry-meta">
+                                    <div class="inquiry-time">3天前</div>
+                                    <div class="inquiry-category">使用問題</div>
+                                </div>
+                            </div>
+                            <div class="inquiry-subject">登入問題</div>
+                            <div class="inquiry-preview">無法登入學員中心，一直顯示密碼錯誤...</div>
+                            <div class="inquiry-status">
+                                <span class="status-badge status-badge--replied">已回覆</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reply Panel -->
+                <div class="card">
+                    <div id="reply-panel-empty" class="reply-panel-empty">
+                        <div style="text-align: center; padding: var(--space-xl); color: var(--c-muted);">
+                            <div style="font-size: 48px; margin-bottom: var(--space-md);">💬</div>
+                            <p>請選擇一個詢問來查看詳情與回覆</p>
+                        </div>
+                    </div>
+                    
+                    <div id="reply-panel-content" class="reply-panel-content" style="display: none;">
+                        <div class="inquiry-detail">
+                            <div class="inquiry-detail-header">
+                                <h4 id="detail-subject">詢問標題</h4>
+                                <div class="detail-actions">
+                                    <button type="button" class="btn btn--small btn--ghost" onclick="markAsResolved()">標記已解決</button>
+                                    <button type="button" class="btn btn--small btn--ghost" onclick="closeInquiry()">關閉</button>
+                                </div>
+                            </div>
+                            
+                            <div class="sender-detail">
+                                <div class="sender-avatar-large" id="detail-avatar">王</div>
+                                <div class="sender-detail-info">
+                                    <div class="sender-name-large" id="detail-name">王小明</div>
+                                    <div class="sender-contact">
+                                        <span id="detail-email">wang@example.com</span>
+                                        <span id="detail-phone">0912345678</span>
+                                    </div>
+                                    <div class="inquiry-detail-meta">
+                                        <span id="detail-category">課程相關</span>
+                                        <span id="detail-time">2025/01/20 14:30</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="inquiry-content">
+                                <h5>詳細內容：</h5>
+                                <div class="inquiry-message" id="detail-message">
+                                    請問「失智友善溝通」這門課程是否包含實作練習？我想了解詳細的課程內容安排，包括：
+                                    
+                                    1. 課程總時數
+                                    2. 是否有實際案例分析
+                                    3. 完成後是否提供證書
+                                    4. 長照積分是多少
+                                    
+                                    另外想確認一下，這門課程適合沒有照護背景的人員參加嗎？謝謝！
+                                </div>
+                            </div>
+                            
+                            <div class="reply-section">
+                                <h5>回覆：</h5>
+                                <div class="reply-form">
+                                    <textarea 
+                                        id="reply-content" 
+                                        placeholder="請輸入回覆內容..." 
+                                        rows="6"
+                                        class="reply-textarea"
+                                    ></textarea>
+                                    
+                                    <div class="reply-actions">
+                                        <div class="reply-options">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="send-email" checked>
+                                                <span>以電子信箱回覆</span>
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="mark-resolved" checked>
+                                                <span>標記為已回覆</span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="reply-buttons">
+                                            <button type="button" class="btn btn--ghost" onclick="saveReplyDraft()">儲存草稿</button>
+                                            <button type="button" class="btn btn--primary" onclick="sendReply()">發送回覆</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .inquiry-filters {
+            padding: var(--space-md);
+        }
+        
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr auto;
+            gap: var(--space-md);
+            align-items: end;
+        }
+        
+        .filter-field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .filter-field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .filter-field select {
+            padding: 8px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 14px;
+        }
+        
+        .inquiry-stats {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .stat-pill {
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .stat-pill--pending {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .stat-pill--replied {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .inquiry-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .inquiry-item {
+            padding: var(--space-md);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .inquiry-item:hover {
+            border-color: var(--c-primary);
+            background: rgba(160, 204, 78, 0.05);
+        }
+        
+        .inquiry-item--pending {
+            border-left: 4px solid #F57F17;
+        }
+        
+        .inquiry-item--replied {
+            border-left: 4px solid var(--c-success);
+        }
+        
+        .inquiry-item.selected {
+            border-color: var(--c-primary);
+            background: rgba(160, 204, 78, 0.1);
+        }
+        
+        .inquiry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .inquiry-sender {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .sender-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--c-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .sender-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .sender-name {
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .sender-email {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .inquiry-meta {
+            text-align: right;
+        }
+        
+        .inquiry-time {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .inquiry-category {
+            font-size: 11px;
+            color: var(--c-text);
+            background: var(--c-sub);
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-top: 2px;
+        }
+        
+        .inquiry-subject {
+            font-weight: 500;
+            margin-bottom: var(--space-xs);
+            color: var(--c-text);
+        }
+        
+        .inquiry-preview {
+            font-size: 13px;
+            color: var(--c-muted);
+            line-height: 1.4;
+            margin-bottom: var(--space-sm);
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .status-badge--pending {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .status-badge--replied {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .reply-panel-empty {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .inquiry-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .detail-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .sender-detail {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .sender-avatar-large {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--c-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .sender-detail-info {
+            flex: 1;
+        }
+        
+        .sender-name-large {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        
+        .sender-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .sender-contact span {
+            font-size: 13px;
+            color: var(--c-muted);
+        }
+        
+        .inquiry-detail-meta {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .inquiry-detail-meta span {
+            font-size: 12px;
+            color: var(--c-text);
+            background: var(--c-surface);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        .inquiry-content {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .inquiry-content h5 {
+            margin-bottom: var(--space-sm);
+            color: var(--c-text);
+        }
+        
+        .inquiry-message {
+            padding: var(--space-md);
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            border-left: 4px solid var(--c-primary);
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+        
+        .reply-section h5 {
+            margin-bottom: var(--space-sm);
+            color: var(--c-text);
+        }
+        
+        .reply-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+            margin-bottom: var(--space-md);
+        }
+        
+        .reply-textarea:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .reply-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .reply-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .reply-buttons {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .filter-row {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+            
+            .filter-row > button {
+                justify-self: stretch;
+            }
+            
+            .reply-actions {
+                flex-direction: column;
+                align-items: stretch;
+                gap: var(--space-md);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .inquiry-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-xs);
+            }
+            
+            .sender-detail {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .detail-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        let selectedInquiry = null;
+        
+        function selectInquiry(inquiryId) {
+            // Remove previous selection
+            document.querySelectorAll('.inquiry-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Select new inquiry
+            event.currentTarget.classList.add('selected');
+            selectedInquiry = inquiryId;
+            
+            // Show reply panel
+            document.getElementById('reply-panel-empty').style.display = 'none';
+            document.getElementById('reply-panel-content').style.display = 'block';
+            
+            // Mock data for demo
+            const inquiryData = {
+                '1': {
+                    subject: '關於失智友善溝通課程的報名問題',
+                    name: '王小明',
+                    email: 'wang@example.com',
+                    phone: '0912345678',
+                    category: '課程相關',
+                    time: '2025/01/20 14:30',
+                    avatar: '王',
+                    message: `請問「失智友善溝通」這門課程是否包含實作練習？我想了解詳細的課程內容安排，包括：
+
+1. 課程總時數
+2. 是否有實際案例分析
+3. 完成後是否提供證書
+4. 長照積分是多少
+
+另外想確認一下，這門課程適合沒有照護背景的人員參加嗎？謝謝！`
+                },
+                '2': {
+                    subject: '點數購買後未收到確認信',
+                    name: '陳美華',
+                    email: 'chen@example.com',
+                    phone: '0987654321',
+                    category: '付款相關',
+                    time: '2025/01/19 16:45',
+                    avatar: '陳',
+                    message: '我昨天購買了100點，但是沒有收到確認信，請幫我確認一下付款狀態。我的信用卡有被扣款，但是帳戶點數沒有增加。'
+                }
+            };
+            
+            const data = inquiryData[inquiryId] || inquiryData['1'];
+            
+            // Update UI
+            document.getElementById('detail-subject').textContent = data.subject;
+            document.getElementById('detail-name').textContent = data.name;
+            document.getElementById('detail-email').textContent = data.email;
+            document.getElementById('detail-phone').textContent = data.phone || '未提供';
+            document.getElementById('detail-category').textContent = data.category;
+            document.getElementById('detail-time').textContent = data.time;
+            document.getElementById('detail-avatar').textContent = data.avatar;
+            document.getElementById('detail-message').textContent = data.message;
+            
+            // Clear reply textarea
+            document.getElementById('reply-content').value = '';
+        }
+        
+        function sendReply() {
+            const replyContent = document.getElementById('reply-content').value;
+            const sendEmail = document.getElementById('send-email').checked;
+            const markResolved = document.getElementById('mark-resolved').checked;
+            
+            if (!replyContent.trim()) {
+                alert('請輸入回覆內容');
+                return;
+            }
+            
+            if (!selectedInquiry) {
+                alert('請先選擇要回覆的詢問');
+                return;
+            }
+            
+            const actions = [];
+            if (sendEmail) actions.push('電子信箱回覆');
+            if (markResolved) actions.push('標記為已回覆');
+            
+            alert(`回覆已送出！\n\n執行動作：${actions.join('、')}\n\n系統將自動發送回覆信件給詢問者。`);
+            
+            // Update inquiry status in the list
+            if (markResolved) {
+                const selectedItem = document.querySelector('.inquiry-item.selected');
+                if (selectedItem) {
+                    const statusBadge = selectedItem.querySelector('.status-badge');
+                    statusBadge.textContent = '已回覆';
+                    statusBadge.className = 'status-badge status-badge--replied';
+                    selectedItem.className = selectedItem.className.replace('inquiry-item--pending', 'inquiry-item--replied');
+                }
+            }
+            
+            // Clear reply
+            document.getElementById('reply-content').value = '';
+        }
+        
+        function saveReplyDraft() {
+            const replyContent = document.getElementById('reply-content').value;
+            
+            if (!replyContent.trim()) {
+                alert('沒有內容可以儲存');
+                return;
+            }
+            
+            alert('草稿已儲存！');
+        }
+        
+        function markAsResolved() {
+            if (!selectedInquiry) {
+                alert('請先選擇一個詢問');
+                return;
+            }
+            
+            if (confirm('確定要標記此詢問為已解決嗎？')) {
+                alert('已標記為已解決');
+                
+                const selectedItem = document.querySelector('.inquiry-item.selected');
+                if (selectedItem) {
+                    const statusBadge = selectedItem.querySelector('.status-badge');
+                    statusBadge.textContent = '已回覆';
+                    statusBadge.className = 'status-badge status-badge--replied';
+                    selectedItem.className = selectedItem.className.replace('inquiry-item--pending', 'inquiry-item--replied');
+                }
+            }
+        }
+        
+        function closeInquiry() {
+            if (!selectedInquiry) {
+                alert('請先選擇一個詢問');
+                return;
+            }
+            
+            if (confirm('確定要關閉此詢問嗎？關閉後將不再顯示在待處理列表中。')) {
+                alert('詢問已關閉');
+                // In real app, would remove from list or update status
+            }
+        }
+        
+        function applyFilters() {
+            const status = document.getElementById('status-filter').value;
+            const category = document.getElementById('category-filter').value;
+            const date = document.getElementById('date-filter').value;
+            
+            console.log('Applied filters:', { status, category, date });
+            alert('篩選已套用！\n(實際應用中會更新詢問列表)');
+        }
+        
+        // Auto-update stats
+        function updateStats() {
+            // In real app, would fetch from API
+            const pendingCount = document.querySelectorAll('.inquiry-item--pending').length;
+            const repliedCount = document.querySelectorAll('.inquiry-item--replied').length;
+            
+            document.querySelector('.stat-pill--pending').textContent = `待回覆: ${pendingCount}`;
+            document.querySelector('.stat-pill--replied').textContent = `已回覆: ${repliedCount}`;
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+        });
+    </script>
+</body>
+</html>

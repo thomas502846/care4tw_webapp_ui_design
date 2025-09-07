@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 課程管理</title>
+    <meta name="description" content="CFT照顧學校課程管理，新增編輯課程、管理報名狀態和課程材料。">
+    <meta name="keywords" content="課程管理,課程編輯,報名管理,教學材料">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                    <div>
+                        <h1>課程管理</h1>
+                        <p class="meta">管理所有課程資訊、報名狀態與課程材料</p>
+                    </div>
+                    <div style="display:flex;gap:8px">
+                        <button class="btn">新增課程</button>
+                        <button class="btn btn--ghost">匯出</button>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>分類</th>
+                                <th>課程</th>
+                                <th>日期</th>
+                                <th>地點</th>
+                                <th>時數/積分</th>
+                                <th>點數</th>
+                                <th>報名</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="badge">失智</span>
+                                </td>
+                                <td>
+                                    <div class="course-cell">
+                                        <div class="course-name">失智友善溝通與行為支持</div>
+                                        <div class="course-meta">王美華 老師</div>
+                                    </div>
+                                </td>
+                                <td>2025/09/28</td>
+                                <td>台中</td>
+                                <td>6小時/有</td>
+                                <td>
+                                    <span class="points-display">10</span>
+                                    <span class="points-label">點</span>
+                                </td>
+                                <td>
+                                    <div class="enrollment-cell">
+                                        <span class="enrollment-ratio">24/30</span>
+                                        <div class="progress">
+                                            <span style="width: 80%" aria-label="報名率 80%"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <a href="admin-course-edit.html" class="btn btn--small">編輯</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge badge--info">線上</span>
+                                </td>
+                                <td>
+                                    <div class="course-cell">
+                                        <div class="course-name">疫情下整合照護：線上實務</div>
+                                        <div class="course-meta">張建國 醫師</div>
+                                    </div>
+                                </td>
+                                <td>2025/10/12</td>
+                                <td>線上直播</td>
+                                <td>3小時/有</td>
+                                <td>
+                                    <span class="points-display">6</span>
+                                    <span class="points-label">點</span>
+                                </td>
+                                <td>
+                                    <div class="enrollment-cell">
+                                        <span class="enrollment-ratio">40/100</span>
+                                        <div class="progress">
+                                            <span style="width: 40%" aria-label="報名率 40%"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <a href="admin-course-edit.html" class="btn btn--small">編輯</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge badge--success">社區</span>
+                                </td>
+                                <td>
+                                    <div class="course-cell">
+                                        <div class="course-name">社區共生與日常生活設計</div>
+                                        <div class="course-meta">陳雅玲 教授</div>
+                                    </div>
+                                </td>
+                                <td>2025/11/05</td>
+                                <td>高雄</td>
+                                <td>8小時/有</td>
+                                <td>
+                                    <span class="points-display">12</span>
+                                    <span class="points-label">點</span>
+                                </td>
+                                <td>
+                                    <div class="enrollment-cell">
+                                        <span class="enrollment-ratio">15/25</span>
+                                        <div class="progress">
+                                            <span style="width: 60%" aria-label="報名率 60%"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <a href="admin-course-edit.html" class="btn btn--small">編輯</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge">安寧</span>
+                                </td>
+                                <td>
+                                    <div class="course-cell">
+                                        <div class="course-name">安寧緩和醫療溝通技巧</div>
+                                        <div class="course-meta">李志明 主任</div>
+                                    </div>
+                                </td>
+                                <td>2025/11/20</td>
+                                <td>台北</td>
+                                <td>4小時/有</td>
+                                <td>
+                                    <span class="points-display">8</span>
+                                    <span class="points-label">點</span>
+                                </td>
+                                <td>
+                                    <div class="enrollment-cell">
+                                        <span class="enrollment-ratio">5/20</span>
+                                        <div class="progress">
+                                            <span style="width: 25%" aria-label="報名率 25%"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <a href="admin-course-edit.html" class="btn btn--small">編輯</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .course-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .course-name {
+            font-weight: 500;
+            color: var(--c-text);
+        }
+        
+        .course-meta {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .enrollment-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .enrollment-ratio {
+            font-weight: 500;
+            min-width: 50px;
+        }
+        
+        .points-display {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        .points-label {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .data-table th {
+            background: var(--c-sub);
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--c-text);
+        }
+        
+        .data-table tr:hover {
+            background: rgba(160, 204, 78, 0.04);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+            background: #E8F5E9;
+            color: var(--c-primary);
+        }
+        
+        .badge--info {
+            background: #E3F2FD;
+            color: var(--c-info);
+        }
+        
+        .badge--success {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .progress {
+            background: #E8ECEF;
+            border-radius: 4px;
+            height: 8px;
+            overflow: hidden;
+            flex: 1;
+            min-width: 60px;
+        }
+        
+        .progress > span {
+            display: block;
+            height: 100%;
+            background: var(--c-primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        @media (max-width: 992px) {
+            .table-responsive {
+                overflow-x: auto;
+            }
+            
+            .data-table {
+                min-width: 800px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .card > div:first-child {
+                flex-direction: column;
+                gap: var(--space-md);
+                align-items: stretch;
+            }
+            
+            .card > div:first-child > div:last-child {
+                display: flex;
+                justify-content: flex-end;
+            }
+            
+            .data-table {
+                font-size: 12px;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: var(--space-sm);
+            }
+        }
+    </style>
+</body>
+</html>

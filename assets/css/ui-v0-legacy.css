@@ -1,0 +1,524 @@
+/* Basic Reset & Typography */
+:root {
+    --primary-color: #a0cc4e; /* Green from CFT logo and border */
+    --secondary-color: #6a8d8e; /* Muted greenish-grey for secondary elements/text */
+    --accent-color: #e67e22; /* Orange accent color from CFT website (for internal use) */
+    --light-bg: #f7f7eb; /* Light beige from CFT hero background */
+    --dark-text: #333333; /* Darker text for better contrast, similar to CFT site */
+    --border-color: #e0e0e0; /* Lighter border color */
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.12);
+    --shadow-strong: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans TC', 'Poppins', sans-serif; /* Prioritize Noto Sans TC for Traditional Chinese */
+    line-height: 1.8; /* Increased line height for readability */
+    color: var(--dark-text);
+    background-color: var(--light-bg);
+}
+
+.container {
+    max-width: 1100px; /* Adjusted to match CFT content width */
+    margin: 0 auto;
+    padding: 0 25px; /* Increased horizontal padding */
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Header */
+.header {
+    background-color: #fff;
+    padding: 30px 0; /* Increased padding for a taller header */
+    border-bottom: 2px solid #e0e0e0; /* Subtle light grey border, similar to CFT */
+    box-shadow: none;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    margin-right: 0;
+    height: 50px; /* Adjusted height of logo to be more prominent */
+    width: auto;
+}
+
+.logo h1 {
+    display: none;
+}
+
+.nav a {
+    color: var(--dark-text);
+    text-decoration: none;
+    margin-left: 60px; /* Increased spacing for nav links */
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 0;
+}
+
+.nav a::after {
+    display: none;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: var(--primary-color);
+}
+
+.auth-buttons {
+    display: none;
+}
+
+/* Buttons (general styles, will be used for other sections) */
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #7bb63a;
+}
+
+.btn-secondary {
+    background-color: #ffffff;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-accent {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+.btn-accent:hover {
+    background-color: #d35400;
+}
+
+.btn-ghost {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-ghost:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-sm {
+    padding: 8px 18px;
+    font-size: 15px;
+    border-radius: 20px;
+}
+
+/* Sections */
+section {
+    padding: 90px 0;
+}
+
+.hero-section {
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    text-align: center;
+    padding: 180px 0; /* Significantly increased padding for a much larger hero section */
+}
+
+.hero-section .container {
+    display: block;
+    text-align: center;
+}
+
+.hero-content {
+    display: none; /* Ensure hero content is completely hidden */
+}
+
+.hero-content h2 {
+    font-size: 52px; /* Larger font size for main heading */
+    margin-bottom: 25px;
+    line-height: 1.1;
+}
+
+.hero-content p {
+    font-size: 22px; /* Larger font size for paragraph */
+    margin-bottom: 40px; /* More space below paragraph */
+}
+
+.hero-actions {
+    display: none;
+}
+
+.hero-image {
+    display: none;
+}
+
+.welcome-section,
+.dashboard-section,
+.community-panel-section {
+    background-color: #fff;
+    text-align: center;
+}
+
+.welcome-section h2,
+.dashboard-section h2,
+.community-panel-section h2 {
+    font-size: 42px;
+    margin-bottom: 60px;
+    color: var(--primary-color);
+}
+
+.welcome-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 45px;
+    margin-top: 55px;
+}
+
+.welcome-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-medium);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.welcome-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow-strong);
+}
+
+.welcome-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 22px;
+}
+
+/* Dashboard */
+.dashboard-stats {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 35px 40px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 250px;
+    margin: 20px;
+    box-shadow: var(--shadow-medium);
+}
+
+.stat-card h3 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 22px;
+}
+
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 60px;
+    text-align: left;
+}
+
+.learning-maps .map-visuals {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 35px;
+}
+
+.learning-maps .map-visuals img {
+    max-width: 95%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+}
+
+.reminders ul {
+    list-style: none;
+    padding: 0;
+}
+
+.reminders li {
+    background-color: #fff;
+    padding: 18px 25px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
+}
+
+.reminders li strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.digital-album .btn {
+    margin-top: 35px;
+}
+
+/* Community Panel */
+.community-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 45px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.community-tabs .tab-btn {
+    background-color: transparent;
+    border: none;
+    padding: 16px 35px;
+    font-size: 19px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--dark-text);
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.community-tabs .tab-btn:hover,
+.community-tabs .tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.channel-content {
+    background-color: #fff;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
+}
+
+.channel-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.pinned-messages {
+    background-color: #fff0d9;
+    border-left: 6px solid var(--accent-color);
+    padding: 22px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+}
+
+.pinned-messages h4 {
+    color: #cc6600;
+    margin-bottom: 12px;
+}
+
+.post-card {
+    background-color: #ffffff;
+    padding: 22px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+}
+
+.post-card p {
+    margin-bottom: 12px;
+}
+
+.post-card .post-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 18px;
+    font-size: 15px;
+}
+
+.post-card .post-actions .likes {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.post-card .post-actions a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.post-card .post-actions a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--dark-text);
+    color: #fff;
+    padding: 35px 0;
+    text-align: center;
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-links {
+    margin-top: 18px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 18px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-section .container {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 45px;
+    }
+
+    .hero-image {
+        text-align: center;
+    }
+
+    .dashboard-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav {
+        margin-top: 20px;
+    }
+
+    .nav a {
+        margin: 0 12px;
+    }
+
+    .hero-content h2 {
+        font-size: 45px;
+    }
+
+    .hero-content p {
+        font-size: 18px;
+    }
+
+    .welcome-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer .container {
+        flex-direction: column;
+    }
+
+    .footer-links {
+        margin-top: 15px;
+    }
+
+    .footer-links a {
+        display: block;
+        margin: 8px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo h1 {
+        font-size: 22px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .hero-section {
+        padding: 90px 0;
+    }
+
+    .hero-content h2 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .stat-card {
+        min-width: 180px;
+        padding: 25px;
+    }
+
+    .learning-maps .map-visuals img {
+        max-width: 90%;
+    }
+
+    .reminders li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .reminders li .btn-sm {
+        margin-top: 12px;
+    }
+
+    .community-tabs .tab-btn {
+        font-size: 17px;
+        padding: 12px 20px;
+    }
+} 

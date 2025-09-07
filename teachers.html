@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 師資群</title>
+    <meta name="description" content="認識CFT照顧學校專業師資群，涵蓋失智照顧、安寧照顧、共生照顧等領域的專家學者。">
+    <meta name="keywords" content="師資群,專業講師,失智照顧,安寧照顧,長照專家">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁"><img src="assets/images/logo.png" alt="CFT" class="header__logo"></a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <!-- 首頁由logo承擔返回功能；手機隱藏此項 -->
+                <li role="none">
+                    <a href="courses.html" class="header__menu-item" role="menuitem">課程資訊</a>
+                </li>
+                <li role="none">
+                    <a href="teachers.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">師資群</a>
+                </li>
+                <li role="none">
+                    <a href="faq.html" class="header__menu-item" role="menuitem">常見問題</a>
+                </li>
+                <li role="none">
+                    <a href="student-dashboard.html" class="header__menu-item" role="menuitem">學員中心</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div class="page-header">
+                <h1>師資群</h1>
+                <p class="meta">匯聚業界頂尖專家，提供最優質的照顧服務教育</p>
+            </div>
+            
+            <!-- Search and Filter Section -->
+            <div class="search-filters" role="search" aria-label="師資搜尋與篩選">
+                <form class="search-filters__form">
+                    <div class="search-filters__row">
+                        <div class="search-filters__field">
+                            <label for="keyword">關鍵字</label>
+                            <input type="text" id="keyword" placeholder="姓名 / 專長" autocomplete="off">
+                        </div>
+                        <div class="search-filters__field">
+                            <label for="specialty">專長領域</label>
+                            <select id="specialty">
+                                <option value="">全部專長</option>
+                                <option value="dementia">失智照顧</option>
+                                <option value="hospice">安寧照顧</option>
+                                <option value="community">共生照顧</option>
+                                <option value="design">生活設計</option>
+                                <option value="complex">複雜性照顧</option>
+                                <option value="natural">自然照顧</option>
+                                <option value="foot">足部照顧</option>
+                            </select>
+                        </div>
+                        <div class="search-filters__field">
+                            <button class="btn btn--primary" type="submit" aria-label="執行搜尋">
+                                🔍 搜尋
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Teachers Grid -->
+            <div class="teachers-grid">
+                <!-- Teacher 1 -->
+                <article class="card teacher-card">
+                    <div class="teacher-card__header">
+                        <div class="teacher-avatar">
+                            <div class="avatar-placeholder" style="background: #E0F2F1; color: var(--c-primary);">👩‍⚕️</div>
+                        </div>
+                        <div class="teacher-info">
+                            <h2 class="teacher-name">王美華</h2>
+                            <div class="teacher-title">失智專科護理師</div>
+                            <div class="teacher-badges">
+                                <span class="badge">失智照顧</span>
+                                <span class="badge">專科護理師</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teacher-card__content">
+                        <p><strong>專長：</strong>失智友善溝通、家庭支持、行為分析與處理</p>
+                        <p><strong>現職：</strong>台中榮民總醫院失智共照中心專科護理師</p>
+                        <p><strong>經歷：</strong>失智照顧經驗12年，曾任某醫學中心神經內科、某大學護理系兼任講師</p>
+                        <p><strong>學歷：</strong>護理研究所碩士、失智症照顧指導員認證</p>
+                    </div>
+                    <div class="teacher-card__courses">
+                        <h4>授課課程</h4>
+                        <ul>
+                            <li><a href="course-detail.html">失智友善溝通與行為支持</a></li>
+                            <li><a href="#">失智症營養照護實務</a></li>
+                            <li><a href="#">失智症家庭照顧者支持</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Teacher 2 -->
+                <article class="card teacher-card">
+                    <div class="teacher-card__header">
+                        <div class="teacher-avatar">
+                            <div class="avatar-placeholder" style="background: #FFF3E0; color: #E65100;">👨‍⚕️</div>
+                        </div>
+                        <div class="teacher-info">
+                            <h2 class="teacher-name">陳志明</h2>
+                            <div class="teacher-title">家醫安寧醫師</div>
+                            <div class="teacher-badges">
+                                <span class="badge">安寧照顧</span>
+                                <span class="badge">家庭醫學</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teacher-card__content">
+                        <p><strong>專長：</strong>臨終關懷對話、家庭照顧者支持、哀傷與敘事治療</p>
+                        <p><strong>現職：</strong>彰化基督教醫院家庭醫學部主治醫師</p>
+                        <p><strong>經歷：</strong>安寧照顧經驗15年，安寧緩和醫療專科醫師、家庭醫學專科醫師</p>
+                        <p><strong>學歷：</strong>醫學系畢業、安寧緩和醫療專科醫師、DNR諮商師認證</p>
+                    </div>
+                    <div class="teacher-card__courses">
+                        <h4>授課課程</h4>
+                        <ul>
+                            <li><a href="#">臨終關懷與家庭支持</a></li>
+                            <li><a href="#">安寧照顧溝通技巧</a></li>
+                            <li><a href="#">哀傷輔導實務</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Teacher 3 -->
+                <article class="card teacher-card">
+                    <div class="teacher-card__header">
+                        <div class="teacher-avatar">
+                            <div class="avatar-placeholder" style="background: #E8EAF6; color: #3F51B5;">👩‍🎨</div>
+                        </div>
+                        <div class="teacher-info">
+                            <h2 class="teacher-name">林雅婷</h2>
+                            <div class="teacher-title">社區設計師</div>
+                            <div class="teacher-badges">
+                                <span class="badge">共生照顧</span>
+                                <span class="badge">社區設計</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teacher-card__content">
+                        <p><strong>專長：</strong>社區共生、活動設計、日常生活空間美學、無障礙環境規劃</p>
+                        <p><strong>現職：</strong>弘道老人福利基金會社區發展部經理</p>
+                        <p><strong>經歷：</strong>社區營造經驗10年，參與多項銀髮友善社區建置計畫</p>
+                        <p><strong>學歷：</strong>建築系畢業、都市計畫碩士、通用設計師認證</p>
+                    </div>
+                    <div class="teacher-card__courses">
+                        <h4>授課課程</h4>
+                        <ul>
+                            <li><a href="#">社區共生與日常生活設計</a></li>
+                            <li><a href="#">銀髮友善環境營造</a></li>
+                            <li><a href="#">社區活動規劃實務</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Teacher 4 -->
+                <article class="card teacher-card">
+                    <div class="teacher-card__header">
+                        <div class="teacher-avatar">
+                            <div class="avatar-placeholder" style="background: #F3E5F5; color: #7B1FA2;">👨‍💼</div>
+                        </div>
+                        <div class="teacher-info">
+                            <h2 class="teacher-name">張建國</h2>
+                            <div class="teacher-title">復健科醫師</div>
+                            <div class="teacher-badges">
+                                <span class="badge">複雜性照顧</span>
+                                <span class="badge">復健醫學</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teacher-card__content">
+                        <p><strong>專長：</strong>重症返家照護、呼吸照護、管路照護、家庭復健指導</p>
+                        <p><strong>現職：</strong>高雄長庚醫院復健科主治醫師</p>
+                        <p><strong>經歷：</strong>復健醫學專科醫師、ICU重症醫學經驗8年</p>
+                        <p><strong>學歷：</strong>醫學系畢業、復健醫學專科醫師、重症專科醫師認證</p>
+                    </div>
+                    <div class="teacher-card__courses">
+                        <h4>授課課程</h4>
+                        <ul>
+                            <li><a href="#">24小時居家照護實務</a></li>
+                            <li><a href="#">呼吸照護與管路維護</a></li>
+                            <li><a href="#">重症返家復健指導</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Teacher 5 -->
+                <article class="card teacher-card">
+                    <div class="teacher-card__header">
+                        <div class="teacher-avatar">
+                            <div class="avatar-placeholder" style="background: #E8F5E9; color: #2E7D32;">👩‍🌾</div>
+                        </div>
+                        <div class="teacher-info">
+                            <h2 class="teacher-name">李素真</h2>
+                            <div class="teacher-title">園藝治療師</div>
+                            <div class="teacher-badges">
+                                <span class="badge">自然照顧</span>
+                                <span class="badge">園藝治療</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teacher-card__content">
+                        <p><strong>專長：</strong>園藝治療、非藥物介入、自然療法、銀髮族活動設計</p>
+                        <p><strong>現職：</strong>台灣園藝治療協會理事長</p>
+                        <p><strong>經歷：</strong>園藝治療經驗13年，曾於多家醫院及機構推動園藝治療計畫</p>
+                        <p><strong>學歷：</strong>園藝系畢業、園藝治療師認證、職能治療師執照</p>
+                    </div>
+                    <div class="teacher-card__courses">
+                        <h4>授課課程</h4>
+                        <ul>
+                            <li><a href="#">園藝治療與非藥物介入</a></li>
+                            <li><a href="#">自然療法在照護的應用</a></li>
+                            <li><a href="#">銀髮族園藝活動設計</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- Teacher 6 -->
+                <article class="card teacher-card">
+                    <div class="teacher-card__header">
+                        <div class="teacher-avatar">
+                            <div class="avatar-placeholder" style="background: #FFF8E1; color: #F57F17;">🦶</div>
+                        </div>
+                        <div class="teacher-info">
+                            <h2 class="teacher-name">黃志偉</h2>
+                            <div class="teacher-title">足科護理師</div>
+                            <div class="teacher-badges">
+                                <span class="badge">足部照顧</span>
+                                <span class="badge">專科護理師</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="teacher-card__content">
+                        <p><strong>專長：</strong>足部照護、壓瘡預防、步態分析、糖尿病足照護</p>
+                        <p><strong>現職：</strong>台大醫院內分泌新陳代謝科專科護理師</p>
+                        <p><strong>經歷：</strong>糖尿病衛教師、傷口造口專科護理師認證</p>
+                        <p><strong>學歷：</strong>護理系畢業、糖尿病衛教師、傷口專科護理師認證</p>
+                    </div>
+                    <div class="teacher-card__courses">
+                        <h4>授課課程</h4>
+                        <ul>
+                            <li><a href="#">足部照顧與壓瘡預防</a></li>
+                            <li><a href="#">糖尿病足照護實務</a></li>
+                            <li><a href="#">步態評估與改善</a></li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 本頁為UI提案Mock，非最終產品</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="faq.html" aria-label="聯絡我們">聯絡我們</a>
+                    <a href="#accessibility" aria-label="無障礙宣告">無障礙宣告</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .teacher-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .teacher-card__header {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+            align-items: flex-start;
+        }
+        
+        .teacher-avatar {
+            flex-shrink: 0;
+        }
+        
+        .avatar-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        
+        .teacher-info {
+            flex-grow: 1;
+        }
+        
+        .teacher-name {
+            margin: 0 0 var(--space-xs) 0;
+            font-size: 24px;
+            color: var(--c-text);
+        }
+        
+        .teacher-title {
+            color: var(--c-muted);
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .teacher-badges {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+        
+        .teacher-card__content {
+            flex-grow: 1;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .teacher-card__content p {
+            margin-bottom: var(--space-sm);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .teacher-card__content strong {
+            color: var(--c-primary);
+        }
+        
+        .teacher-card__courses {
+            border-top: 1px solid #E8ECEF;
+            padding-top: var(--space-md);
+        }
+        
+        .teacher-card__courses h4 {
+            margin: 0 0 var(--space-sm) 0;
+            color: var(--c-primary);
+            font-size: 16px;
+        }
+        
+        .teacher-card__courses ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .teacher-card__courses li {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .teacher-card__courses a {
+            color: var(--c-text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+        
+        .teacher-card__courses a:hover {
+            color: var(--c-primary);
+            text-decoration: underline;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .page-header h1 {
+            margin-bottom: var(--space-sm);
+        }
+        
+        @media (max-width: 768px) {
+            .teachers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .teacher-card__header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .avatar-placeholder {
+                margin: 0 auto var(--space-md) auto;
+            }
+            
+            .teacher-badges {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .teachers-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .teacher-card {
+                padding: var(--space-md);
+            }
+            
+            .avatar-placeholder {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</body>
+</html>

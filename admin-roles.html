@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 角色管理</title>
+    <meta name="description" content="CFT照顧學校角色管理，管理後台使用者權限。">
+    <meta name="keywords" content="角色管理,權限管理,後台帳號,使用者">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>後台帳號管理</h1>
+                <p class="meta">管理管理員帳號、角色與權限</p>
+            </div>
+            
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                    <h3>使用者列表</h3>
+                    <button type="button" class="btn btn--primary" onclick="openAddUserModal()">新增帳號</button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>使用者</th>
+                                <th>Email</th>
+                                <th>角色</th>
+                                <th>最後登入</th>
+                                <th>狀態</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👨‍💼</div>
+                                        <div class="user-info">
+                                            <div class="user-name">王校長</div>
+                                            <div class="user-title">系統管理員</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>principal@carefortw.com</td>
+                                <td>
+                                    <select class="role-select">
+                                        <option value="super-admin" selected>超級管理員</option>
+                                        <option value="admin">課務管理</option>
+                                        <option value="teacher">教師</option>
+                                        <option value="viewer">唯讀</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="login-info">
+                                        <span class="login-time">今天 09:30</span>
+                                        <span class="login-ip">192.168.1.100</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--active">啟用</span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editPermissions('1')">編輯權限</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="resetPassword('1')">重設密碼</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👩‍💼</div>
+                                        <div class="user-info">
+                                            <div class="user-name">陳課務</div>
+                                            <div class="user-title">課務管理員</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>admin@carefortw.com</td>
+                                <td>
+                                    <select class="role-select">
+                                        <option value="super-admin">超級管理員</option>
+                                        <option value="admin" selected>課務管理</option>
+                                        <option value="teacher">教師</option>
+                                        <option value="viewer">唯讀</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="login-info">
+                                        <span class="login-time">昨天 16:45</span>
+                                        <span class="login-ip">192.168.1.101</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--active">啟用</span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editPermissions('2')">編輯權限</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="resetPassword('2')">重設密碼</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👩‍🏫</div>
+                                        <div class="user-info">
+                                            <div class="user-name">王美華</div>
+                                            <div class="user-title">護理師</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>wang@carefortw.com</td>
+                                <td>
+                                    <select class="role-select">
+                                        <option value="super-admin">超級管理員</option>
+                                        <option value="admin">課務管理</option>
+                                        <option value="teacher" selected>教師</option>
+                                        <option value="viewer">唯讀</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="login-info">
+                                        <span class="login-time">3天前 14:20</span>
+                                        <span class="login-ip">192.168.1.102</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--active">啟用</span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editPermissions('3')">編輯權限</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="resetPassword('3')">重設密碼</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👨‍💼</div>
+                                        <div class="user-info">
+                                            <div class="user-name">李助教</div>
+                                            <div class="user-title">助理人員</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>li@carefortw.com</td>
+                                <td>
+                                    <select class="role-select">
+                                        <option value="super-admin">超級管理員</option>
+                                        <option value="admin">課務管理</option>
+                                        <option value="teacher">教師</option>
+                                        <option value="viewer" selected>唯讀</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="login-info">
+                                        <span class="login-time">未登入</span>
+                                        <span class="login-ip">-</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--inactive">停用</span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editPermissions('4')">編輯權限</button>
+                                        <button type="button" class="btn btn--small btn--primary" onclick="activateUser('4')">啟用</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: var(--space-lg);">
+                    <div class="role-permissions">
+                        <h3>角色權限說明</h3>
+                        <div class="permission-list">
+                            <div class="permission-item">
+                                <strong>超級管理員：</strong>
+                                <span>全部權限，包括系統設定、使用者管理、數據備份等</span>
+                            </div>
+                            <div class="permission-item">
+                                <strong>課務管理：</strong>
+                                <span>課程管理、學員管理、師資管理、公告管理、報表查看</span>
+                            </div>
+                            <div class="permission-item">
+                                <strong>教師：</strong>
+                                <span>查看自己的課程、學員名單、簽到管理、成績輸入</span>
+                            </div>
+                            <div class="permission-item">
+                                <strong>唯讀：</strong>
+                                <span>只能查看數據，無法編輯或刪除任何資料</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal">
+            <div class="modal__header">
+                <h3>新增帳號</h3>
+                <button type="button" class="modal__close" onclick="closeModal('add-user-modal')">&times;</button>
+            </div>
+            <div class="modal__body">
+                <form class="user-form">
+                    <div class="field">
+                        <label for="user-name">姓名</label>
+                        <input type="text" id="user-name" placeholder="請輸入姓名" required>
+                    </div>
+                    <div class="field">
+                        <label for="user-email">電子信箱</label>
+                        <input type="email" id="user-email" placeholder="user@example.com" required>
+                    </div>
+                    <div class="field">
+                        <label for="user-role">角色</label>
+                        <select id="user-role" required>
+                            <option value="">請選擇角色</option>
+                            <option value="admin">課務管理</option>
+                            <option value="teacher">教師</option>
+                            <option value="viewer">唯讀</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="user-title">職稱</label>
+                        <input type="text" id="user-title" placeholder="如：課務人員">
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn btn--ghost" onclick="closeModal('add-user-modal')">取消</button>
+                <button type="button" class="btn btn--primary" onclick="saveUser()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .user-cell {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--c-sub);
+            font-size: 18px;
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .user-name {
+            font-weight: 500;
+        }
+        
+        .user-title {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .role-select {
+            padding: 4px 8px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 13px;
+        }
+        
+        .login-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .login-time {
+            font-size: 13px;
+        }
+        
+        .login-ip {
+            font-size: 11px;
+            color: var(--c-muted);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-badge--active {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .status-badge--inactive {
+            background: #F5F5F5;
+            color: #616161;
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .role-permissions {
+            padding: var(--space-lg);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .permission-list {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .permission-item {
+            padding: var(--space-sm);
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            border-left: 4px solid var(--c-primary);
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+        
+        .modal {
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+        }
+        
+        .modal__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .modal__header h3 {
+            margin: 0;
+        }
+        
+        .modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--c-muted);
+        }
+        
+        .modal__body {
+            padding: var(--space-lg);
+        }
+        
+        .modal__footer {
+            padding: var(--space-lg);
+            border-top: 1px solid #E8ECEF;
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+        }
+        
+        .user-form {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input,
+        .field select {
+            padding: 10px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input:focus,
+        .field select:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .table-actions {
+                flex-direction: column;
+            }
+            
+            .user-cell {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .permission-item {
+                font-size: 14px;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        function openAddUserModal() {
+            document.getElementById('add-user-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function editPermissions(userId) {
+            alert(`編輯使用者 ${userId} 的權限功能開發中...`);
+        }
+        
+        function resetPassword(userId) {
+            if (confirm('確定要重設這位使用者的密碼嗎？')) {
+                alert('密碼重設連結已發送至使用者信箱');
+            }
+        }
+        
+        function activateUser(userId) {
+            if (confirm('確定要啟用這位使用者嗎？')) {
+                alert('使用者已啟用');
+                // In real app, would update status and refresh table
+            }
+        }
+        
+        function saveUser() {
+            const name = document.getElementById('user-name').value;
+            const email = document.getElementById('user-email').value;
+            const role = document.getElementById('user-role').value;
+            
+            if (!name.trim()) {
+                alert('請輸入姓名');
+                document.getElementById('user-name').focus();
+                return;
+            }
+            
+            if (!email.trim()) {
+                alert('請輸入電子信箱');
+                document.getElementById('user-email').focus();
+                return;
+            }
+            
+            if (!role) {
+                alert('請選擇角色');
+                document.getElementById('user-role').focus();
+                return;
+            }
+            
+            alert(`使用者「${name}」已新增成功！`);
+            closeModal('add-user-modal');
+            
+            // Reset form
+            document.querySelector('.user-form').reset();
+        }
+        
+        // Role change handler
+        document.querySelectorAll('.role-select').forEach(select => {
+            select.addEventListener('change', function() {
+                const userId = this.closest('tr').dataset.userId || 'unknown';
+                const newRole = this.value;
+                console.log(`User ${userId} role changed to ${newRole}`);
+                // In real app, would update user role immediately
+            });
+        });
+        
+        // Close modal when clicking backdrop
+        document.getElementById('add-user-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal('add-user-modal');
+            }
+        });
+    </script>
+</body>
+</html>

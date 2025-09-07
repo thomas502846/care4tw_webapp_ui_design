@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 證照類別管理</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校 - 管理後台</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表分析</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <a href="admin-dashboard.html">管理後台</a>
+                    <span>›</span>
+                    <a href="admin-reports.html">系統設定</a>
+                    <span>›</span>
+                    <span class="breadcrumb__current">證照類別管理</span>
+                </div>
+                <h1>證照類別管理</h1>
+                <p class="page-subtitle">管理系統中的證照類型、考試規則、與AIO職種對應關係</p>
+            </div>
+
+            <!-- Action Bar -->
+            <div class="action-bar">
+                <div class="action-bar__left">
+                    <div class="tabs">
+                        <button class="tab tab--active" data-tab="licenses">證照管理</button>
+                        <button class="tab" data-tab="categories">類別設定</button>
+                        <button class="tab" data-tab="aio-mapping">AIO對應</button>
+                        <button class="tab" data-tab="exam-rules">考試規則</button>
+                    </div>
+                </div>
+                <div class="action-bar__right">
+                    <button class="btn btn--ghost" onclick="exportLicenseData()">
+                        <span>📥</span> 匯出資料
+                    </button>
+                    <button class="btn btn--primary" onclick="openAddLicenseModal()">
+                        <span>➕</span> 新增證照
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Content: Licenses Management -->
+            <div id="licenses-tab" class="tab-content tab-content--active">
+                <!-- Search and Filter -->
+                <div class="search-filter-bar">
+                    <div class="search-box">
+                        <input type="text" placeholder="搜尋證照名稱..." id="license-search" aria-label="搜尋證照">
+                        <button class="btn btn--ghost btn--sm" onclick="searchLicenses()">🔍</button>
+                    </div>
+                    <div class="filter-group">
+                        <select id="category-filter" aria-label="篩選類別">
+                            <option value="">全部類別</option>
+                            <option value="care">照顧服務類</option>
+                            <option value="medical">醫事類</option>
+                            <option value="social">社工類</option>
+                            <option value="management">管理類</option>
+                        </select>
+                        <select id="status-filter" aria-label="篩選狀態">
+                            <option value="">全部狀態</option>
+                            <option value="active">啟用中</option>
+                            <option value="inactive">停用</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- License List -->
+                <div class="license-grid">
+                    <div class="license-item">
+                        <div class="license-item__header">
+                            <div class="license-badge license-badge--care">照顧服務類</div>
+                            <div class="license-status license-status--active">啟用中</div>
+                        </div>
+                        <h3 class="license-item__title">照顧服務員技術士證</h3>
+                        <div class="license-item__details">
+                            <div class="meta">
+                                <span class="meta__item">🏢 勞動部</span>
+                                <span class="meta__item">⏰ 90天有效</span>
+                            </div>
+                            <div class="meta">
+                                <span class="meta__item">📊 乙級</span>
+                                <span class="meta__item">👥 127位學員持有</span>
+                            </div>
+                        </div>
+                        <div class="license-item__aio">
+                            <p class="license-aio-title">對應AIO職種：</p>
+                            <div class="badge-list">
+                                <span class="badge">照顧服務員</span>
+                                <span class="badge">居家服務員</span>
+                            </div>
+                        </div>
+                        <div class="license-item__actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editLicense('care-worker-cert')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewLicenseStats('care-worker-cert')">統計</button>
+                            <button class="btn btn--ghost btn--sm text--danger" onclick="toggleLicenseStatus('care-worker-cert')">停用</button>
+                        </div>
+                    </div>
+
+                    <div class="license-item">
+                        <div class="license-item__header">
+                            <div class="license-badge license-badge--medical">醫事類</div>
+                            <div class="license-status license-status--active">啟用中</div>
+                        </div>
+                        <h3 class="license-item__title">護理師執業執照</h3>
+                        <div class="license-item__details">
+                            <div class="meta">
+                                <span class="meta__item">🏥 衛福部</span>
+                                <span class="meta__item">⏰ 6年有效</span>
+                            </div>
+                            <div class="meta">
+                                <span class="meta__item">📊 專技高考</span>
+                                <span class="meta__item">👥 45位學員持有</span>
+                            </div>
+                        </div>
+                        <div class="license-item__aio">
+                            <p class="license-aio-title">對應AIO職種：</p>
+                            <div class="badge-list">
+                                <span class="badge">居家護理師</span>
+                                <span class="badge">機構護理師</span>
+                            </div>
+                        </div>
+                        <div class="license-item__actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editLicense('nurse-license')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewLicenseStats('nurse-license')">統計</button>
+                            <button class="btn btn--ghost btn--sm text--danger" onclick="toggleLicenseStatus('nurse-license')">停用</button>
+                        </div>
+                    </div>
+
+                    <div class="license-item">
+                        <div class="license-item__header">
+                            <div class="license-badge license-badge--social">社工類</div>
+                            <div class="license-status license-status--active">啟用中</div>
+                        </div>
+                        <h3 class="license-item__title">社會工作師證書</h3>
+                        <div class="license-item__details">
+                            <div class="meta">
+                                <span class="meta__item">🏛️ 衛福部</span>
+                                <span class="meta__item">⏰ 終身有效</span>
+                            </div>
+                            <div class="meta">
+                                <span class="meta__item">📊 專技高考</span>
+                                <span class="meta__item">👥 28位學員持有</span>
+                            </div>
+                        </div>
+                        <div class="license-item__aio">
+                            <p class="license-aio-title">對應AIO職種：</p>
+                            <div class="badge-list">
+                                <span class="badge">個管師</span>
+                                <span class="badge">照管專員</span>
+                            </div>
+                        </div>
+                        <div class="license-item__actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editLicense('social-worker-cert')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewLicenseStats('social-worker-cert')">統計</button>
+                            <button class="btn btn--ghost btn--sm text--danger" onclick="toggleLicenseStatus('social-worker-cert')">停用</button>
+                        </div>
+                    </div>
+
+                    <div class="license-item">
+                        <div class="license-item__header">
+                            <div class="license-badge license-badge--management">管理類</div>
+                            <div class="license-status license-status--inactive">停用</div>
+                        </div>
+                        <h3 class="license-item__title">機構管理人員訓練結業證書</h3>
+                        <div class="license-item__details">
+                            <div class="meta">
+                                <span class="meta__item">🏢 縣市政府</span>
+                                <span class="meta__item">⏰ 3年有效</span>
+                            </div>
+                            <div class="meta">
+                                <span class="meta__item">📊 訓練結業</span>
+                                <span class="meta__item">👥 12位學員持有</span>
+                            </div>
+                        </div>
+                        <div class="license-item__aio">
+                            <p class="license-aio-title">對應AIO職種：</p>
+                            <div class="badge-list">
+                                <span class="badge">機構主管</span>
+                            </div>
+                        </div>
+                        <div class="license-item__actions">
+                            <button class="btn btn--ghost btn--sm" onclick="editLicense('mgmt-cert')">編輯</button>
+                            <button class="btn btn--ghost btn--sm" onclick="viewLicenseStats('mgmt-cert')">統計</button>
+                            <button class="btn btn--ghost btn--sm text--success" onclick="toggleLicenseStatus('mgmt-cert')">啟用</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Categories -->
+            <div id="categories-tab" class="tab-content">
+                <div class="category-management">
+                    <div class="action-bar">
+                        <h3>證照類別設定</h3>
+                        <button class="btn btn--primary btn--sm" onclick="openAddCategoryModal()">
+                            <span>➕</span> 新增類別
+                        </button>
+                    </div>
+
+                    <div class="category-tree">
+                        <div class="category-node category-node--root">
+                            <div class="category-item">
+                                <div class="category-icon">📋</div>
+                                <h4>照顧服務類</h4>
+                                <div class="category-stats">
+                                    <span class="badge">5個證照</span>
+                                    <span class="badge">234位學員</span>
+                                </div>
+                                <div class="category-actions">
+                                    <button class="btn btn--ghost btn--xs" onclick="editCategory('care')">編輯</button>
+                                    <button class="btn btn--ghost btn--xs" onclick="deleteCategory('care')">刪除</button>
+                                </div>
+                            </div>
+                            <div class="category-children">
+                                <div class="category-item category-item--child">
+                                    <div class="category-icon">📝</div>
+                                    <span>照顧服務員證照</span>
+                                    <div class="category-stats">
+                                        <span class="badge badge--sm">甲乙級</span>
+                                    </div>
+                                </div>
+                                <div class="category-item category-item--child">
+                                    <div class="category-icon">🏠</div>
+                                    <span>居家服務員證照</span>
+                                    <div class="category-stats">
+                                        <span class="badge badge--sm">單一級</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="category-node category-node--root">
+                            <div class="category-item">
+                                <div class="category-icon">🏥</div>
+                                <h4>醫事類</h4>
+                                <div class="category-stats">
+                                    <span class="badge">8個證照</span>
+                                    <span class="badge">156位學員</span>
+                                </div>
+                                <div class="category-actions">
+                                    <button class="btn btn--ghost btn--xs" onclick="editCategory('medical')">編輯</button>
+                                    <button class="btn btn--ghost btn--xs" onclick="deleteCategory('medical')">刪除</button>
+                                </div>
+                            </div>
+                            <div class="category-children">
+                                <div class="category-item category-item--child">
+                                    <div class="category-icon">👩‍⚕️</div>
+                                    <span>護理師執照</span>
+                                    <div class="category-stats">
+                                        <span class="badge badge--sm">專技高考</span>
+                                    </div>
+                                </div>
+                                <div class="category-item category-item--child">
+                                    <div class="category-icon">💊</div>
+                                    <span>藥師執照</span>
+                                    <div class="category-stats">
+                                        <span class="badge badge--sm">專技高考</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="category-node category-node--root">
+                            <div class="category-item">
+                                <div class="category-icon">🤝</div>
+                                <h4>社工類</h4>
+                                <div class="category-stats">
+                                    <span class="badge">3個證照</span>
+                                    <span class="badge">89位學員</span>
+                                </div>
+                                <div class="category-actions">
+                                    <button class="btn btn--ghost btn--xs" onclick="editCategory('social')">編輯</button>
+                                    <button class="btn btn--ghost btn--xs" onclick="deleteCategory('social')">刪除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: AIO Mapping -->
+            <div id="aio-mapping-tab" class="tab-content">
+                <div class="aio-mapping">
+                    <h3>AIO職種與證照對應關係</h3>
+                    <p class="text--muted">設定各AIO職種所需的證照要求與推薦證照</p>
+
+                    <div class="mapping-grid">
+                        <div class="mapping-card">
+                            <div class="mapping-header">
+                                <div class="aio-role-icon">👩‍⚕️</div>
+                                <h4>照顧服務員</h4>
+                                <div class="role-level">入門職種</div>
+                            </div>
+                            <div class="mapping-content">
+                                <div class="requirement-section">
+                                    <h5>必備證照</h5>
+                                    <div class="license-list">
+                                        <div class="license-tag license-tag--required">照顧服務員技術士證</div>
+                                    </div>
+                                </div>
+                                <div class="requirement-section">
+                                    <h5>推薦證照</h5>
+                                    <div class="license-list">
+                                        <div class="license-tag license-tag--recommended">CPR證照</div>
+                                        <div class="license-tag license-tag--recommended">急救證照</div>
+                                    </div>
+                                </div>
+                                <div class="mapping-actions">
+                                    <button class="btn btn--ghost btn--sm" onclick="editAIOMapping('care-worker')">編輯對應</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mapping-card">
+                            <div class="mapping-header">
+                                <div class="aio-role-icon">🏠</div>
+                                <h4>居家護理師</h4>
+                                <div class="role-level">專業職種</div>
+                            </div>
+                            <div class="mapping-content">
+                                <div class="requirement-section">
+                                    <h5>必備證照</h5>
+                                    <div class="license-list">
+                                        <div class="license-tag license-tag--required">護理師執業執照</div>
+                                        <div class="license-tag license-tag--required">居家護理所開業執照</div>
+                                    </div>
+                                </div>
+                                <div class="requirement-section">
+                                    <h5>推薦證照</h5>
+                                    <div class="license-list">
+                                        <div class="license-tag license-tag--recommended">傷口護理證照</div>
+                                    </div>
+                                </div>
+                                <div class="mapping-actions">
+                                    <button class="btn btn--ghost btn--sm" onclick="editAIOMapping('home-nurse')">編輯對應</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mapping-card">
+                            <div class="mapping-header">
+                                <div class="aio-role-icon">👨‍💼</div>
+                                <h4>個管師</h4>
+                                <div class="role-level">管理職種</div>
+                            </div>
+                            <div class="mapping-content">
+                                <div class="requirement-section">
+                                    <h5>必備證照</h5>
+                                    <div class="license-list">
+                                        <div class="license-tag license-tag--required">社會工作師證書</div>
+                                    </div>
+                                </div>
+                                <div class="requirement-section">
+                                    <h5>推薦證照</h5>
+                                    <div class="license-list">
+                                        <div class="license-tag license-tag--recommended">個案管理師認證</div>
+                                        <div class="license-tag license-tag--recommended">專案管理師證照</div>
+                                    </div>
+                                </div>
+                                <div class="mapping-actions">
+                                    <button class="btn btn--ghost btn--sm" onclick="editAIOMapping('case-manager')">編輯對應</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Exam Rules -->
+            <div id="exam-rules-tab" class="tab-content">
+                <div class="exam-rules">
+                    <h3>考試規則設定</h3>
+                    <p class="text--muted">設定證照考試的報名條件、考試形式、有效期限等規則</p>
+
+                    <div class="rules-section">
+                        <h4>🎯 報名資格設定</h4>
+                        <div class="rule-item">
+                            <label class="rule-label">最低學歷要求</label>
+                            <select class="form-control">
+                                <option>不限</option>
+                                <option>國中</option>
+                                <option>高中職</option>
+                                <option>專科</option>
+                                <option>大學</option>
+                                <option>研究所</option>
+                            </select>
+                        </div>
+                        <div class="rule-item">
+                            <label class="rule-label">相關經驗要求</label>
+                            <select class="form-control">
+                                <option>不限</option>
+                                <option>6個月以上</option>
+                                <option>1年以上</option>
+                                <option>2年以上</option>
+                                <option>3年以上</option>
+                            </select>
+                        </div>
+                        <div class="rule-item">
+                            <label class="rule-label">前置課程要求</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox"> 基礎照顧服務訓練</label>
+                                <label><input type="checkbox"> 身心障礙服務訓練</label>
+                                <label><input type="checkbox"> 失智症照顧訓練</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rules-section">
+                        <h4>📝 考試形式設定</h4>
+                        <div class="rule-item">
+                            <label class="rule-label">考試方式</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" checked> 筆試</label>
+                                <label><input type="checkbox"> 術科</label>
+                                <label><input type="checkbox"> 口試</label>
+                            </div>
+                        </div>
+                        <div class="rule-item">
+                            <label class="rule-label">及格標準</label>
+                            <input type="number" class="form-control" value="60" min="0" max="100"> 分
+                        </div>
+                        <div class="rule-item">
+                            <label class="rule-label">考試時間</label>
+                            <input type="number" class="form-control" value="120" min="30"> 分鐘
+                        </div>
+                    </div>
+
+                    <div class="rules-section">
+                        <h4>⏰ 有效期限設定</h4>
+                        <div class="rule-item">
+                            <label class="rule-label">證照有效期</label>
+                            <select class="form-control">
+                                <option>終身有效</option>
+                                <option>1年</option>
+                                <option>2年</option>
+                                <option>3年</option>
+                                <option>6年</option>
+                            </select>
+                        </div>
+                        <div class="rule-item">
+                            <label class="rule-label">到期前提醒</label>
+                            <select class="form-control">
+                                <option>30天前</option>
+                                <option>60天前</option>
+                                <option>90天前</option>
+                                <option>180天前</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn--ghost" onclick="resetExamRules()">重設為預設值</button>
+                        <button class="btn btn--primary" onclick="saveExamRules()">儲存設定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add License Modal -->
+    <div id="add-license-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>新增證照</h3>
+                <button class="modal-close" onclick="closeAddLicenseModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-license-form">
+                    <div class="form-group">
+                        <label>證照名稱 *</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>證照類別 *</label>
+                        <select class="form-control" required>
+                            <option value="">請選擇類別</option>
+                            <option value="care">照顧服務類</option>
+                            <option value="medical">醫事類</option>
+                            <option value="social">社工類</option>
+                            <option value="management">管理類</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>發證機關</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>證照等級</label>
+                        <select class="form-control">
+                            <option>單一級</option>
+                            <option>甲級</option>
+                            <option>乙級</option>
+                            <option>丙級</option>
+                            <option>專技高考</option>
+                            <option>專技普考</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>有效期限</label>
+                        <select class="form-control">
+                            <option>終身有效</option>
+                            <option>1年</option>
+                            <option>2年</option>
+                            <option>3年</option>
+                            <option>6年</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>對應AIO職種</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox"> 照顧服務員</label>
+                            <label><input type="checkbox"> 居家護理師</label>
+                            <label><input type="checkbox"> 個管師</label>
+                            <label><input type="checkbox"> 照管專員</label>
+                            <label><input type="checkbox"> 機構主管</label>
+                            <label><input type="checkbox"> 專業治療師</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn--ghost" onclick="closeAddLicenseModal()">取消</button>
+                <button class="btn btn--primary" onclick="saveLicense()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab--active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('tab-content--active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('tab--active');
+                
+                // Show corresponding content
+                const targetTab = tab.getAttribute('data-tab');
+                document.getElementById(targetTab + '-tab').classList.add('tab-content--active');
+            });
+        });
+
+        // License management functions
+        function searchLicenses() {
+            const searchTerm = document.getElementById('license-search').value.toLowerCase();
+            const categoryFilter = document.getElementById('category-filter').value;
+            const statusFilter = document.getElementById('status-filter').value;
+            
+            // Filter logic would go here
+            console.log('Searching licenses:', { searchTerm, categoryFilter, statusFilter });
+        }
+
+        function openAddLicenseModal() {
+            document.getElementById('add-license-modal').style.display = 'flex';
+        }
+
+        function closeAddLicenseModal() {
+            document.getElementById('add-license-modal').style.display = 'none';
+        }
+
+        function saveLicense() {
+            // Save logic would go here
+            console.log('Saving license...');
+            closeAddLicenseModal();
+        }
+
+        function editLicense(licenseId) {
+            console.log('Editing license:', licenseId);
+        }
+
+        function viewLicenseStats(licenseId) {
+            console.log('Viewing stats for license:', licenseId);
+        }
+
+        function toggleLicenseStatus(licenseId) {
+            console.log('Toggling status for license:', licenseId);
+        }
+
+        function exportLicenseData() {
+            console.log('Exporting license data...');
+        }
+
+        function openAddCategoryModal() {
+            console.log('Opening add category modal...');
+        }
+
+        function editCategory(categoryId) {
+            console.log('Editing category:', categoryId);
+        }
+
+        function deleteCategory(categoryId) {
+            if (confirm('確定要刪除此類別嗎？')) {
+                console.log('Deleting category:', categoryId);
+            }
+        }
+
+        function editAIOMapping(roleId) {
+            console.log('Editing AIO mapping for role:', roleId);
+        }
+
+        function resetExamRules() {
+            if (confirm('確定要重設為預設值嗎？')) {
+                console.log('Resetting exam rules...');
+            }
+        }
+
+        function saveExamRules() {
+            console.log('Saving exam rules...');
+            alert('考試規則已儲存');
+        }
+    </script>
+
+    <style>
+        /* License Management Specific Styles */
+        .license-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+
+        .license-item {
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            transition: all 0.2s ease;
+        }
+
+        .license-item:hover {
+            border-color: var(--c-primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .license-item__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .license-badge {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-pill);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .license-badge--care { background: #e8f5e9; color: #2e7d32; }
+        .license-badge--medical { background: #e3f2fd; color: #1565c0; }
+        .license-badge--social { background: #fff3e0; color: #ef6c00; }
+        .license-badge--management { background: #f3e5f5; color: #7b1fa2; }
+
+        .license-status {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .license-status--active {
+            background: var(--c-success-light);
+            color: var(--c-success);
+        }
+
+        .license-status--inactive {
+            background: var(--c-muted-light);
+            color: var(--c-muted);
+        }
+
+        .license-item__title {
+            margin: 0 0 var(--space-md) 0;
+            font-size: 1.125rem;
+            color: var(--c-text);
+        }
+
+        .license-item__aio {
+            margin: var(--space-md) 0;
+            padding: var(--space-sm);
+            background: var(--c-surface);
+            border-radius: var(--radius-sm);
+        }
+
+        .license-aio-title {
+            margin: 0 0 var(--space-xs) 0;
+            font-size: 0.875rem;
+            color: var(--c-muted);
+        }
+
+        .license-item__actions {
+            display: flex;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--c-border-light);
+        }
+
+        /* Category Management */
+        .category-tree {
+            margin-top: var(--space-lg);
+        }
+
+        .category-node {
+            margin-bottom: var(--space-lg);
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+        }
+
+        .category-item--child {
+            margin-left: var(--space-xl);
+            background: var(--c-surface);
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+        }
+
+        .category-stats {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .category-actions {
+            margin-left: auto;
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        /* AIO Mapping */
+        .mapping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+
+        .mapping-card {
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+        }
+
+        .mapping-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .aio-role-icon {
+            font-size: 2rem;
+        }
+
+        .role-level {
+            margin-left: auto;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--c-primary-light);
+            color: var(--c-primary);
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+        }
+
+        .requirement-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .requirement-section h5 {
+            margin: 0 0 var(--space-sm) 0;
+            color: var(--c-muted);
+            font-size: 0.875rem;
+        }
+
+        .license-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .license-tag {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-pill);
+            font-size: 0.875rem;
+        }
+
+        .license-tag--required {
+            background: var(--c-primary-light);
+            color: var(--c-primary);
+            border: 1px solid var(--c-primary);
+        }
+
+        .license-tag--recommended {
+            background: var(--c-accent-light);
+            color: var(--c-accent);
+            border: 1px solid var(--c-accent);
+        }
+
+        /* Exam Rules */
+        .rules-section {
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .rules-section h4 {
+            margin: 0 0 var(--space-lg) 0;
+            color: var(--c-text);
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .rule-label {
+            min-width: 150px;
+            margin-right: var(--space-md);
+            font-weight: 500;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            cursor: pointer;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        /* Search and Filter Bar */
+        .search-filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .search-box input {
+            width: 300px;
+            padding: var(--space-sm);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-sm);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .filter-group select {
+            padding: var(--space-sm);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-sm);
+            min-width: 120px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .license-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mapping-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-filter-bar {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .rule-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+
+            .rule-label {
+                min-width: auto;
+                margin-right: 0;
+            }
+        }
+    </style>
+</body>
+</html>

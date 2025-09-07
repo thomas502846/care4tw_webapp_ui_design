@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 學員管理</title>
+    <meta name="description" content="CFT照顧學校學員管理，點數管理、學習歷程與學員資料維護。">
+    <meta name="keywords" content="學員管理,點數管理,學習歷程,學員資料">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>學員管理</h1>
+                <p class="meta">管理學員資料、點數與學習歷程</p>
+            </div>
+            
+            <!-- Search and Filter Controls -->
+            <div class="card" style="margin-bottom: var(--space-lg);">
+                <div class="search-controls">
+                    <div class="search-row">
+                        <div class="search-field">
+                            <label for="student-search">搜尋學員</label>
+                            <input type="text" id="student-search" placeholder="姓名、電話或學員編號">
+                        </div>
+                        <div class="filter-field">
+                            <label for="aio-filter">AIO職種</label>
+                            <select id="aio-filter">
+                                <option value="">所有職種</option>
+                                <option value="care-worker">照顧服務員</option>
+                                <option value="care-designer">照顧設計師</option>
+                                <option value="home-doctor">在宅醫師</option>
+                                <option value="home-pharmacist">在宅藥師</option>
+                            </select>
+                        </div>
+                        <div class="filter-field">
+                            <label for="points-filter">點數狀況</label>
+                            <select id="points-filter">
+                                <option value="">全部</option>
+                                <option value="low">低於20點</option>
+                                <option value="critical">低於10點</option>
+                                <option value="sufficient">20點以上</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn--primary">搜尋</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Student Management Table -->
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                    <h3>學員列表</h3>
+                    <div style="display:flex;gap:8px">
+                        <button type="button" class="btn">新增學員</button>
+                        <button type="button" class="btn btn--ghost">匯出名單</button>
+                        <button type="button" class="btn btn--ghost" onclick="openBatchPointsModal()">批次贈點</button>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select-all-students"></th>
+                                <th>學員</th>
+                                <th>手機</th>
+                                <th>AIO職種</th>
+                                <th>點數</th>
+                                <th>完成度</th>
+                                <th>最近活動</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" class="student-select"></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👨</div>
+                                        <div class="user-info">
+                                            <div class="user-name">王○○</div>
+                                            <div class="user-id">ID: S001234</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>09xx-xxx-123</td>
+                                <td><span class="badge">照顧服務員</span></td>
+                                <td>
+                                    <div class="points-cell">
+                                        <span class="points-display">18</span>
+                                        <span class="points-status points-status--low">偏低</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="progress-cell">
+                                        <div class="progress">
+                                            <span style="width: 40%" aria-label="完成度 40%"></span>
+                                        </div>
+                                        <span class="progress-text">40%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="activity-cell">
+                                        <span class="activity-time">昨天</span>
+                                        <span class="activity-action">完成課程</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="viewStudentHistory('S001234')">查看歷程</button>
+                                        <button type="button" class="btn btn--small btn--primary" onclick="openGiftPointsModal('王○○', 'S001234')">贈點</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td><input type="checkbox" class="student-select"></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👩</div>
+                                        <div class="user-info">
+                                            <div class="user-name">陳○○</div>
+                                            <div class="user-id">ID: S001235</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>09xx-xxx-456</td>
+                                <td><span class="badge badge--info">照顧設計師</span></td>
+                                <td>
+                                    <div class="points-cell">
+                                        <span class="points-display">2</span>
+                                        <span class="points-status points-status--critical">極低</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="progress-cell">
+                                        <div class="progress">
+                                            <span style="width: 20%" aria-label="完成度 20%"></span>
+                                        </div>
+                                        <span class="progress-text">20%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="activity-cell">
+                                        <span class="activity-time">2天前</span>
+                                        <span class="activity-action">登入系統</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="viewStudentHistory('S001235')">查看歷程</button>
+                                        <button type="button" class="btn btn--small btn--primary" onclick="openAddPointsModal('陳○○', 'S001235')">加回點數</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td><input type="checkbox" class="student-select"></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👨</div>
+                                        <div class="user-info">
+                                            <div class="user-name">林○○</div>
+                                            <div class="user-id">ID: S001236</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>09xx-xxx-789</td>
+                                <td><span class="badge badge--success">在宅醫師</span></td>
+                                <td>
+                                    <div class="points-cell">
+                                        <span class="points-display">35</span>
+                                        <span class="points-status points-status--good">充足</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="progress-cell">
+                                        <div class="progress">
+                                            <span style="width: 80%" aria-label="完成度 80%"></span>
+                                        </div>
+                                        <span class="progress-text">80%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="activity-cell">
+                                        <span class="activity-time">今天</span>
+                                        <span class="activity-action">報名課程</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="viewStudentHistory('S001236')">查看歷程</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="openGiftPointsModal('林○○', 'S001236')">贈點</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td><input type="checkbox" class="student-select"></td>
+                                <td>
+                                    <div class="user-cell">
+                                        <div class="user-avatar">👩</div>
+                                        <div class="user-info">
+                                            <div class="user-name">黃○○</div>
+                                            <div class="user-id">ID: S001237</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>09xx-xxx-012</td>
+                                <td><span class="badge badge--warning">在宅藥師</span></td>
+                                <td>
+                                    <div class="points-cell">
+                                        <span class="points-display">28</span>
+                                        <span class="points-status points-status--good">充足</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="progress-cell">
+                                        <div class="progress">
+                                            <span style="width: 65%" aria-label="完成度 65%"></span>
+                                        </div>
+                                        <span class="progress-text">65%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="activity-cell">
+                                        <span class="activity-time">3天前</span>
+                                        <span class="activity-action">上課簽到</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="viewStudentHistory('S001237')">查看歷程</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="openGiftPointsModal('黃○○', 'S001237')">贈點</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: var(--space-md);">
+                    <p class="meta">*點擊「查看歷程」可進入學員詳細資料頁面，查看所有修課、點數、證照等記錄。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Gift Points Modal -->
+    <div id="gift-points-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal">
+            <div class="modal__header">
+                <h3>贈送點數</h3>
+                <button type="button" class="modal__close" onclick="closeModal('gift-points-modal')">&times;</button>
+            </div>
+            <div class="modal__body">
+                <div class="student-info">
+                    <span id="gift-student-name">學員姓名</span>
+                    <span id="gift-student-id" class="meta">ID: </span>
+                </div>
+                <div class="field">
+                    <label for="gift-points">贈送點數</label>
+                    <input type="number" id="gift-points" min="1" max="100" placeholder="輸入點數">
+                </div>
+                <div class="field">
+                    <label for="gift-reason">贈送原因</label>
+                    <select id="gift-reason">
+                        <option value="encouragement">學習鼓勵</option>
+                        <option value="completion">課程完成獎勵</option>
+                        <option value="referral">推薦朋友</option>
+                        <option value="feedback">意見回饋</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="gift-note">備註</label>
+                    <textarea id="gift-note" rows="3" placeholder="選填：贈點說明"></textarea>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn btn--ghost" onclick="closeModal('gift-points-modal')">取消</button>
+                <button type="button" class="btn btn--primary" onclick="confirmGiftPoints()">確認贈送</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Batch Points Modal -->
+    <div id="batch-points-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal">
+            <div class="modal__header">
+                <h3>批次贈點</h3>
+                <button type="button" class="modal__close" onclick="closeModal('batch-points-modal')">&times;</button>
+            </div>
+            <div class="modal__body">
+                <div class="field">
+                    <label>選擇對象</label>
+                    <div style="display: flex; gap: var(--space-md); margin-top: var(--space-xs);">
+                        <label class="checkbox-label">
+                            <input type="radio" name="batch-target" value="selected" checked>
+                            <span class="checkbox-text">已選取學員 (0 人)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="batch-target" value="all">
+                            <span class="checkbox-text">所有學員</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="batch-target" value="low-points">
+                            <span class="checkbox-text">低點數學員</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="batch-points">贈送點數</label>
+                    <input type="number" id="batch-points" min="1" max="50" placeholder="輸入點數">
+                </div>
+                <div class="field">
+                    <label for="batch-reason">贈送原因</label>
+                    <input type="text" id="batch-reason" placeholder="輸入原因">
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn btn--ghost" onclick="closeModal('batch-points-modal')">取消</button>
+                <button type="button" class="btn btn--primary" onclick="confirmBatchPoints()">確認贈送</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .search-controls {
+            padding: var(--space-md);
+        }
+        
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto auto auto;
+            gap: var(--space-md);
+            align-items: end;
+        }
+        
+        .search-field,
+        .filter-field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .search-field label,
+        .filter-field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .search-field input,
+        .filter-field select {
+            padding: 8px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 14px;
+        }
+        
+        .user-cell {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--c-sub);
+        }
+        
+        .user-name {
+            font-weight: 500;
+        }
+        
+        .user-id {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+            background: #E8F5E9;
+            color: var(--c-primary);
+        }
+        
+        .badge--info {
+            background: #E3F2FD;
+            color: var(--c-info);
+        }
+        
+        .badge--success {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .badge--warning {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .points-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .points-display {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .points-status {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: var(--radius-pill);
+            font-weight: 500;
+        }
+        
+        .points-status--low {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .points-status--critical {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .points-status--good {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .progress-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .progress {
+            background: #E8ECEF;
+            border-radius: 4px;
+            height: 8px;
+            overflow: hidden;
+            flex: 1;
+            min-width: 60px;
+        }
+        
+        .progress > span {
+            display: block;
+            height: 100%;
+            background: var(--c-primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 12px;
+            color: var(--c-muted);
+            min-width: 35px;
+        }
+        
+        .activity-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .activity-time {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .activity-action {
+            font-size: 13px;
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+        
+        .modal {
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+        }
+        
+        .modal__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .modal__header h3 {
+            margin: 0;
+        }
+        
+        .modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--c-muted);
+        }
+        
+        .modal__body {
+            padding: var(--space-lg);
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .modal__footer {
+            padding: var(--space-lg);
+            border-top: 1px solid #E8ECEF;
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+        }
+        
+        .student-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: var(--space-md);
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input,
+        .field select,
+        .field textarea {
+            padding: 10px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            color: var(--c-text);
+            font-size: 14px;
+            resize: vertical;
+        }
+        
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .checkbox-text {
+            user-select: none;
+        }
+        
+        @media (max-width: 992px) {
+            .search-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-row > button {
+                justify-self: end;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .table-actions {
+                flex-direction: column;
+            }
+            
+            .user-cell {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .progress-cell {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        // Select all functionality
+        document.getElementById('select-all-students').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.student-select');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+            updateSelectedCount();
+        });
+        
+        // Individual selection
+        document.querySelectorAll('.student-select').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateSelectedCount();
+                
+                const allCheckboxes = document.querySelectorAll('.student-select');
+                const checkedCheckboxes = document.querySelectorAll('.student-select:checked');
+                const selectAll = document.getElementById('select-all-students');
+                
+                selectAll.checked = allCheckboxes.length === checkedCheckboxes.length;
+                selectAll.indeterminate = checkedCheckboxes.length > 0 && checkedCheckboxes.length < allCheckboxes.length;
+            });
+        });
+        
+        function updateSelectedCount() {
+            const checked = document.querySelectorAll('.student-select:checked').length;
+            const batchText = document.querySelector('input[value="selected"] + .checkbox-text');
+            if (batchText) {
+                batchText.textContent = `已選取學員 (${checked} 人)`;
+            }
+        }
+        
+        function viewStudentHistory(studentId) {
+            alert(`查看學員 ${studentId} 的詳細歷程功能開發中...`);
+            // In real application, would redirect to student detail page
+        }
+        
+        function openGiftPointsModal(name, id) {
+            document.getElementById('gift-student-name').textContent = name;
+            document.getElementById('gift-student-id').textContent = 'ID: ' + id;
+            document.getElementById('gift-points-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function openAddPointsModal(name, id) {
+            openGiftPointsModal(name, id);
+            document.querySelector('#gift-points-modal h3').textContent = '加回點數';
+            document.querySelector('#gift-reason option[value="completion"]').selected = true;
+        }
+        
+        function openBatchPointsModal() {
+            document.getElementById('batch-points-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        function confirmGiftPoints() {
+            const points = document.getElementById('gift-points').value;
+            const reason = document.getElementById('gift-reason').value;
+            const name = document.getElementById('gift-student-name').textContent;
+            
+            if (!points || points <= 0) {
+                alert('請輸入有效的點數');
+                return;
+            }
+            
+            alert(`已贈送 ${points} 點給 ${name}！`);
+            closeModal('gift-points-modal');
+            
+            // Reset form
+            document.getElementById('gift-points').value = '';
+            document.getElementById('gift-note').value = '';
+        }
+        
+        function confirmBatchPoints() {
+            const points = document.getElementById('batch-points').value;
+            const reason = document.getElementById('batch-reason').value;
+            const target = document.querySelector('input[name="batch-target"]:checked').value;
+            
+            if (!points || points <= 0) {
+                alert('請輸入有效的點數');
+                return;
+            }
+            
+            if (!reason.trim()) {
+                alert('請輸入贈送原因');
+                return;
+            }
+            
+            const targetText = {
+                'selected': '已選取學員',
+                'all': '所有學員',
+                'low-points': '低點數學員'
+            };
+            
+            if (confirm(`確定要贈送 ${points} 點給${targetText[target]}嗎？`)) {
+                alert('批次贈點完成！');
+                closeModal('batch-points-modal');
+                
+                // Reset form
+                document.getElementById('batch-points').value = '';
+                document.getElementById('batch-reason').value = '';
+            }
+        }
+        
+        // Close modals when clicking backdrop
+        document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
+            backdrop.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
+        
+        // Search functionality
+        document.querySelector('.search-controls .btn--primary').addEventListener('click', function() {
+            const searchTerm = document.getElementById('student-search').value;
+            const aioFilter = document.getElementById('aio-filter').value;
+            const pointsFilter = document.getElementById('points-filter').value;
+            
+            console.log('Search:', { searchTerm, aioFilter, pointsFilter });
+            alert('搜尋功能執行中...');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 課程列表</title>
+    <meta name="description" content="瀏覽CFT照顧學校的所有課程，包含AIO八大模組、長照積分課程，支援搜尋、篩選功能。">
+    <meta name="keywords" content="長照課程,AIO模組,照顧服務員課程,長照積分">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁"><img src="assets/images/logo.png" alt="CFT" class="header__logo"></a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <!-- 首頁由logo承擔返回功能；手機隱藏此項 -->
+                <li role="none">
+                    <a href="courses.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">課程資訊</a>
+                </li>
+                <li role="none">
+                    <a href="teachers.html" class="header__menu-item" role="menuitem">師資群</a>
+                </li>
+                <li role="none">
+                    <a href="faq.html" class="header__menu-item" role="menuitem">常見問題</a>
+                </li>
+                <li role="none">
+                    <a href="student-dashboard.html" class="header__menu-item" role="menuitem">學員中心</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div class="page-header">
+                <h1>課程資訊</h1>
+                <p class="meta">探索我們豐富多元的照顧服務課程，提升專業技能</p>
+            </div>
+            
+            <!-- Search and Filter Section -->
+            <div class="search-filters" role="search" aria-label="課程搜尋與篩選">
+                <form class="search-filters__form">
+                    <div class="search-filters__row">
+                        <div class="search-filters__field">
+                            <label for="keyword">關鍵字</label>
+                            <input 
+                                type="text" 
+                                id="keyword" 
+                                placeholder="課程名稱關鍵字"
+                                autocomplete="off"
+                            >
+                        </div>
+                        
+                        <div class="search-filters__field">
+                            <label for="category">AIO類別</label>
+                            <select id="category">
+                                <option value="">全部類別</option>
+                                <option value="complex">複雜性照顧</option>
+                                <option value="dementia">失智照顧</option>
+                                <option value="hospice">安寧照顧</option>
+                                <option value="community">共生照顧</option>
+                                <option value="design">生活設計</option>
+                                <option value="natural">自然照顧</option>
+                                <option value="foot">足部照顧</option>
+                                <option value="pandemic">疫情整合照護</option>
+                            </select>
+                        </div>
+                        <div class="search-filters__field">
+                            <label for="credit">長照積分</label>
+                            <select id="credit">
+                                <option value="">不限</option>
+                                <option value="yes">有積分</option>
+                                <option value="no">無積分</option>
+                            </select>
+                        </div>
+                        <div class="search-filters__field">
+                            <button class="btn btn--primary" type="submit" aria-label="執行搜尋">
+                                🔍 搜尋
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Course Results Section -->
+            <div class="course-results">
+                <div class="results-header">
+                    <p class="meta">共找到 <strong>12</strong> 門課程</p>
+                    <div class="sort-options">
+                        <label for="sort">排序方式：</label>
+                        <select id="sort">
+                            <option value="date">日期（最新）</option>
+                            <option value="popularity">熱門度</option>
+                            <option value="price">費用（低至高）</option>
+                            <option value="name">課程名稱</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Course Grid -->
+                <div class="card-grid">
+                    <!-- Course 1 -->
+                    <article class="card course-card">
+                        <div class="course-card__header">
+                            <div class="tag">失智照顧</div>
+                            <div class="badge">長照積分</div>
+                        </div>
+                        <h3 class="card__title">失智友善溝通與行為支持</h3>
+                        <div class="course-card__info">
+                            <div class="meta">
+                                <span class="meta__item">📍 台中 CFT</span>
+                                <span class="meta__item">📅 09/28(六)</span>
+                                <span class="meta__item">⏰ 6 小時</span>
+                            </div>
+                            <div class="course-card__price">
+                                <span class="price-label">點數：</span>
+                                <span class="price-value">10</span>
+                                <span class="price-currency">｜費用：NT$ 2,000</span>
+                            </div>
+                        </div>
+                        <div class="course-card__description">
+                            <p>深入了解失智者的行為模式，學習有效的溝通技巧與家庭支持策略。</p>
+                        </div>
+                        <div class="card__actions">
+                            <a class="btn btn--primary" href="course-detail.html" aria-label="查看失智友善溝通課程詳情">查看詳情</a>
+                            <a class="btn" href="#" aria-label="下載課程簡章" download>簡章下載</a>
+                        </div>
+                    </article>
+
+                    <!-- Course 2 -->
+                    <article class="card course-card">
+                        <div class="course-card__header">
+                            <div class="tag">共生照顧</div>
+                        </div>
+                        <h3 class="card__title">社區共生與日常生活設計</h3>
+                        <div class="course-card__info">
+                            <div class="meta">
+                                <span class="meta__item">📍 台北 大安</span>
+                                <span class="meta__item">📅 10/05(六)</span>
+                                <span class="meta__item">⏰ 4 小時</span>
+                            </div>
+                            <div class="course-card__price">
+                                <span class="price-label">點數：</span>
+                                <span class="price-value">6</span>
+                                <span class="price-currency">｜費用：NT$ 1,200</span>
+                            </div>
+                        </div>
+                        <div class="course-card__description">
+                            <p>探討社區共生模式，學習如何設計友善的生活環境。</p>
+                        </div>
+                        <div class="card__actions">
+                            <a class="btn btn--primary" href="course-detail.html">查看詳情</a>
+                            <a class="btn" href="#" download>簡章下載</a>
+                        </div>
+                    </article>
+
+                    <!-- Course 3 -->
+                    <article class="card course-card">
+                        <div class="course-card__header">
+                            <div class="tag">安寧照顧</div>
+                            <div class="badge">長照積分</div>
+                        </div>
+                        <h3 class="card__title">臨終關懷與家庭支持</h3>
+                        <div class="course-card__info">
+                            <div class="meta">
+                                <span class="meta__item">🌐 線上直播</span>
+                                <span class="meta__item">📅 10/12(六)</span>
+                                <span class="meta__item">⏰ 3 小時</span>
+                            </div>
+                            <div class="course-card__price">
+                                <span class="price-label">點數：</span>
+                                <span class="price-value">4</span>
+                                <span class="price-currency">｜費用：NT$ 800</span>
+                            </div>
+                        </div>
+                        <div class="course-card__description">
+                            <p>學習安寧照顧的核心理念，掌握與家屬溝通的技巧。</p>
+                        </div>
+                        <div class="card__actions">
+                            <a class="btn btn--primary" href="course-detail.html">查看詳情</a>
+                            <a class="btn" href="#" download>簡章下載</a>
+                        </div>
+                    </article>
+
+                    <!-- Course 4 -->
+                    <article class="card course-card">
+                        <div class="course-card__header">
+                            <div class="tag">複雜性照顧</div>
+                            <div class="badge">長照積分</div>
+                        </div>
+                        <h3 class="card__title">24小時居家照護實務</h3>
+                        <div class="course-card__info">
+                            <div class="meta">
+                                <span class="meta__item">📍 高雄 長庚</span>
+                                <span class="meta__item">📅 10/19(六)</span>
+                                <span class="meta__item">⏰ 8 小時</span>
+                            </div>
+                            <div class="course-card__price">
+                                <span class="price-label">點數：</span>
+                                <span class="price-value">12</span>
+                                <span class="price-currency">｜費用：NT$ 2,400</span>
+                            </div>
+                        </div>
+                        <div class="course-card__description">
+                            <p>掌握重症患者返家後的全時照護技巧與緊急處理能力。</p>
+                        </div>
+                        <div class="card__actions">
+                            <a class="btn btn--primary" href="course-detail.html">查看詳情</a>
+                            <a class="btn" href="#" download>簡章下載</a>
+                        </div>
+                    </article>
+
+                    <!-- Course 5 -->
+                    <article class="card course-card">
+                        <div class="course-card__header">
+                            <div class="tag">疫情整合照護</div>
+                            <div class="badge">長照積分</div>
+                        </div>
+                        <h3 class="card__title">遠距照護與數位健康</h3>
+                        <div class="course-card__info">
+                            <div class="meta">
+                                <span class="meta__item">🌐 線上直播</span>
+                                <span class="meta__item">📅 10/26(六)</span>
+                                <span class="meta__item">⏰ 4 小時</span>
+                            </div>
+                            <div class="course-card__price">
+                                <span class="price-label">點數：</span>
+                                <span class="price-value">8</span>
+                                <span class="price-currency">｜費用：NT$ 1,600</span>
+                            </div>
+                        </div>
+                        <div class="course-card__description">
+                            <p>學習運用科技工具進行遠距照護，提升服務品質。</p>
+                        </div>
+                        <div class="card__actions">
+                            <a class="btn btn--primary" href="course-detail.html">查看詳情</a>
+                            <a class="btn" href="#" download>簡章下載</a>
+                        </div>
+                    </article>
+
+                    <!-- Course 6 -->
+                    <article class="card course-card">
+                        <div class="course-card__header">
+                            <div class="tag">自然照顧</div>
+                        </div>
+                        <h3 class="card__title">園藝治療與非藥物介入</h3>
+                        <div class="course-card__info">
+                            <div class="meta">
+                                <span class="meta__item">📍 台中 科博館</span>
+                                <span class="meta__item">📅 11/02(六)</span>
+                                <span class="meta__item">⏰ 5 小時</span>
+                            </div>
+                            <div class="course-card__price">
+                                <span class="price-label">點數：</span>
+                                <span class="price-value">8</span>
+                                <span class="price-currency">｜費用：NT$ 1,600</span>
+                            </div>
+                        </div>
+                        <div class="course-card__description">
+                            <p>探索自然療法在照護中的應用，減少藥物依賴。</p>
+                        </div>
+                        <div class="card__actions">
+                            <a class="btn btn--primary" href="course-detail.html">查看詳情</a>
+                            <a class="btn" href="#" download>簡章下載</a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="pagination" aria-label="課程列表分頁導覽">
+                    <ul class="pagination__list">
+                        <li class="pagination__item">
+                            <button class="pagination__link" disabled aria-label="上一頁">
+                                ← 上一頁
+                            </button>
+                        </li>
+                        <li class="pagination__item">
+                            <button class="pagination__link pagination__link--active" aria-current="page">1</button>
+                        </li>
+                        <li class="pagination__item">
+                            <button class="pagination__link">2</button>
+                        </li>
+                        <li class="pagination__item">
+                            <button class="pagination__link">3</button>
+                        </li>
+                        <li class="pagination__item">
+                            <button class="pagination__link" aria-label="下一頁">
+                                下一頁 →
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 本頁為UI提案Mock，非最終產品</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="faq.html" aria-label="聯絡我們">聯絡我們</a>
+                    <a href="#accessibility" aria-label="無障礙宣告">無障礙宣告</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Additional Styles for Courses Page -->
+    <style>
+        .course-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-card__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .course-card__info {
+            flex-grow: 1;
+            margin-bottom: var(--space-md);
+        }
+        
+        .course-card__price {
+            margin-top: var(--space-sm);
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        .course-card__description {
+            margin-bottom: var(--space-md);
+        }
+        
+        .course-card__description p {
+            font-size: 14px;
+            color: var(--c-muted);
+            line-height: 1.6;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .sort-options select {
+            width: auto;
+            min-width: 150px;
+        }
+        
+        .pagination {
+            margin-top: var(--space-xl);
+            text-align: center;
+        }
+        
+        .pagination__list {
+            display: inline-flex;
+            gap: var(--space-sm);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .pagination__link {
+            padding: 10px 16px;
+            border: 1px solid #CFD8DC;
+            background: var(--c-surface);
+            color: var(--c-text);
+            border-radius: var(--radius-card);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .pagination__link:hover:not(:disabled) {
+            background: var(--c-primary);
+            color: var(--c-surface);
+            border-color: var(--c-primary);
+        }
+        
+        .pagination__link--active {
+            background: var(--c-primary);
+            color: var(--c-surface);
+            border-color: var(--c-primary);
+        }
+        
+        .pagination__link:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        @media (max-width: 768px) {
+            .results-header {
+                flex-direction: column;
+                gap: var(--space-md);
+                align-items: flex-start;
+            }
+            
+            .sort-options {
+                width: 100%;
+            }
+            
+            .sort-options select {
+                flex: 1;
+            }
+        }
+    </style>
+</body>
+</html>

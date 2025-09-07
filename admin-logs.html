@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 系統日誌</title>
+    <meta name="description" content="CFT照顧學校系統日誌，監控系統操作與安全記錄。">
+    <meta name="keywords" content="系統日誌,操作記錄,安全監控,活動追蹤">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>系統操作日誌</h1>
+                <p class="meta">監控和記錄所有系統操作與活動</p>
+            </div>
+            
+            <!-- Log Filters -->
+            <div class="card" style="margin-bottom: var(--space-lg);">
+                <div class="log-filters">
+                    <div class="filter-row">
+                        <div class="filter-field">
+                            <label for="date-range">日期範圍</label>
+                            <div class="date-range">
+                                <input type="date" id="start-date" value="2025-01-15">
+                                <span>至</span>
+                                <input type="date" id="end-date" value="2025-01-20">
+                            </div>
+                        </div>
+                        
+                        <div class="filter-field">
+                            <label for="user-filter">使用者</label>
+                            <select id="user-filter">
+                                <option value="">所有使用者</option>
+                                <option value="admin">管理員</option>
+                                <option value="course-admin">陳課務</option>
+                                <option value="teacher">教師</option>
+                                <option value="system">系統</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-field">
+                            <label for="action-filter">操作類型</label>
+                            <select id="action-filter">
+                                <option value="">所有操作</option>
+                                <option value="login">登入</option>
+                                <option value="create">新增</option>
+                                <option value="update">更新</option>
+                                <option value="delete">刪除</option>
+                                <option value="export">匯出</option>
+                                <option value="payment">付款</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-field">
+                            <label for="module-filter">模組</label>
+                            <select id="module-filter">
+                                <option value="">所有模組</option>
+                                <option value="course">課程</option>
+                                <option value="student">學員</option>
+                                <option value="teacher">師資</option>
+                                <option value="system">系統</option>
+                                <option value="payment">付款</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn btn--primary" onclick="filterLogs()">篩選</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Log Table -->
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                    <h3>操作記錄</h3>
+                    <div>
+                        <button type="button" class="btn btn--ghost" onclick="exportLogs()">匯出日誌</button>
+                        <button type="button" class="btn btn--ghost" onclick="clearOldLogs()">清理舊記錄</button>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table log-table">
+                        <thead>
+                            <tr>
+                                <th>時間</th>
+                                <th>使用者</th>
+                                <th>操作</th>
+                                <th>對象</th>
+                                <th>IP 位址</th>
+                                <th>狀態</th>
+                                <th>詳情</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="timestamp">
+                                        <span class="date">2025/01/20</span>
+                                        <span class="time">15:30:25</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-info">
+                                        <span class="user-name">陳課務</span>
+                                        <span class="user-role">課務管理</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="action-badge action-badge--update">更新課程</span>
+                                </td>
+                                <td>失智友善溝通</td>
+                                <td>192.168.1.101</td>
+                                <td>
+                                    <span class="status-badge status-badge--success">成功</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="showLogDetail('1')">查看</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="timestamp">
+                                        <span class="date">2025/01/20</span>
+                                        <span class="time">14:15:40</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-info">
+                                        <span class="user-name">王校長</span>
+                                        <span class="user-role">管理員</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="action-badge action-badge--create">贈送點數</span>
+                                </td>
+                                <td>學員 陳×× (+10 點)</td>
+                                <td>192.168.1.100</td>
+                                <td>
+                                    <span class="status-badge status-badge--success">成功</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="showLogDetail('2')">查看</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="timestamp">
+                                        <span class="date">2025/01/20</span>
+                                        <span class="time">10:45:12</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-info">
+                                        <span class="user-name">王美華</span>
+                                        <span class="user-role">教師</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="action-badge action-badge--login">登入系統</span>
+                                </td>
+                                <td>教師後台</td>
+                                <td>192.168.1.102</td>
+                                <td>
+                                    <span class="status-badge status-badge--success">成功</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="showLogDetail('3')">查看</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="timestamp">
+                                        <span class="date">2025/01/20</span>
+                                        <span class="time">09:30:05</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-info">
+                                        <span class="user-name">系統</span>
+                                        <span class="user-role">自動</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="action-badge action-badge--system">資料備份</span>
+                                </td>
+                                <td>每日備份</td>
+                                <td>127.0.0.1</td>
+                                <td>
+                                    <span class="status-badge status-badge--success">成功</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="showLogDetail('4')">查看</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="timestamp">
+                                        <span class="date">2025/01/19</span>
+                                        <span class="time">16:20:33</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-info">
+                                        <span class="user-name">陳課務</span>
+                                        <span class="user-role">課務管理</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="action-badge action-badge--export">匯出報表</span>
+                                </td>
+                                <td>學員名單</td>
+                                <td>192.168.1.101</td>
+                                <td>
+                                    <span class="status-badge status-badge--success">成功</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="showLogDetail('5')">查看</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="timestamp">
+                                        <span class="date">2025/01/19</span>
+                                        <span class="time">14:05:18</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-info">
+                                        <span class="user-name">未知</span>
+                                        <span class="user-role">訪客</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="action-badge action-badge--error">登入失敗</span>
+                                </td>
+                                <td>管理後台</td>
+                                <td>203.74.123.45</td>
+                                <td>
+                                    <span class="status-badge status-badge--failed">失敗</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="showLogDetail('6')">查看</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="timestamp">
+                                        <span class="date">2025/01/19</span>
+                                        <span class="time">11:30:22</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-info">
+                                        <span class="user-name">王校長</span>
+                                        <span class="user-role">管理員</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="action-badge action-badge--delete">刪除公告</span>
+                                </td>
+                                <td>過期公告 ID: 123</td>
+                                <td>192.168.1.100</td>
+                                <td>
+                                    <span class="status-badge status-badge--success">成功</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="showLogDetail('7')">查看</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="timestamp">
+                                        <span class="date">2025/01/18</span>
+                                        <span class="time">20:15:44</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="user-info">
+                                        <span class="user-name">系統</span>
+                                        <span class="user-role">自動</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="action-badge action-badge--system">課程提醒</span>
+                                </td>
+                                <td>24 人收到提醒</td>
+                                <td>127.0.0.1</td>
+                                <td>
+                                    <span class="status-badge status-badge--success">成功</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn--small" onclick="showLogDetail('8')">查看</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination" style="margin-top: var(--space-lg); text-align: center;">
+                    <button type="button" class="btn btn--small" disabled>上一頁</button>
+                    <span style="margin: 0 var(--space-md); color: var(--c-muted);">1 / 25</span>
+                    <button type="button" class="btn btn--small">下一頁</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Log Detail Modal -->
+    <div id="log-detail-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal">
+            <div class="modal__header">
+                <h3>操作詳情</h3>
+                <button type="button" class="modal__close" onclick="closeLogModal()">&times;</button>
+            </div>
+            <div class="modal__body">
+                <div class="log-detail" id="log-detail-content">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn btn--ghost" onclick="closeLogModal()">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .log-filters {
+            padding: var(--space-md);
+        }
+        
+        .filter-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: var(--space-md);
+            align-items: end;
+        }
+        
+        .filter-field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .filter-field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .filter-field input,
+        .filter-field select {
+            padding: 8px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 14px;
+        }
+        
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .date-range span {
+            color: var(--c-muted);
+            font-size: 14px;
+        }
+        
+        .log-table {
+            font-size: 13px;
+        }
+        
+        .timestamp {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .date {
+            font-weight: 500;
+        }
+        
+        .time {
+            font-size: 11px;
+            color: var(--c-muted);
+        }
+        
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .user-name {
+            font-weight: 500;
+        }
+        
+        .user-role {
+            font-size: 11px;
+            color: var(--c-muted);
+        }
+        
+        .action-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .action-badge--login {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .action-badge--create {
+            background: #E3F2FD;
+            color: var(--c-info);
+        }
+        
+        .action-badge--update {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .action-badge--delete {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .action-badge--export {
+            background: #F3E5F5;
+            color: #7B1FA2;
+        }
+        
+        .action-badge--system {
+            background: #F5F5F5;
+            color: #616161;
+        }
+        
+        .action-badge--error {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .status-badge--success {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .status-badge--failed {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+        
+        .modal {
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+        }
+        
+        .modal__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .modal__header h3 {
+            margin: 0;
+        }
+        
+        .modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--c-muted);
+        }
+        
+        .modal__body {
+            padding: var(--space-lg);
+        }
+        
+        .modal__footer {
+            padding: var(--space-lg);
+            border-top: 1px solid #E8ECEF;
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+        }
+        
+        .log-detail {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .detail-value {
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            font-family: monospace;
+            font-size: 13px;
+            word-break: break-all;
+        }
+        
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+        }
+        
+        @media (max-width: 992px) {
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-row > button {
+                justify-self: end;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .log-table {
+                font-size: 12px;
+            }
+            
+            .timestamp,
+            .user-info {
+                align-items: flex-start;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        function filterLogs() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            const userFilter = document.getElementById('user-filter').value;
+            const actionFilter = document.getElementById('action-filter').value;
+            const moduleFilter = document.getElementById('module-filter').value;
+            
+            console.log('Filtering logs:', { startDate, endDate, userFilter, actionFilter, moduleFilter });
+            alert('篩選功能執行中...');
+            // In real app, would filter table data
+        }
+        
+        function exportLogs() {
+            if (confirm('確定要匯出目前篩選結果的日誌嗎？')) {
+                alert('正在生成日誌檔案...');
+                // In real app, would generate and download log file
+            }
+        }
+        
+        function clearOldLogs() {
+            if (confirm('確定要清理 30 天前的日誌記錄嗎？此操作無法復原。')) {
+                alert('舊日誌清理完成！');
+                // In real app, would delete old log records
+            }
+        }
+        
+        function showLogDetail(logId) {
+            // Sample log details - in real app, would fetch from API
+            const logDetails = {
+                '1': {
+                    timestamp: '2025-01-20 15:30:25',
+                    user: '陳課務',
+                    action: '更新課程',
+                    target: '失智友善溝通',
+                    ip: '192.168.1.101',
+                    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                    changes: '修改課程日期由 2025/09/25 改為 2025/09/28',
+                    result: '成功'
+                },
+                '2': {
+                    timestamp: '2025-01-20 14:15:40',
+                    user: '王校長',
+                    action: '贈送點數',
+                    target: '學員 陳××',
+                    ip: '192.168.1.100',
+                    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+                    changes: '贈送 10 點數，原因：學習鼓勵',
+                    result: '成功'
+                }
+            };
+            
+            const detail = logDetails[logId] || {
+                timestamp: '2025-01-20 00:00:00',
+                user: '未知',
+                action: '未知操作',
+                target: '-',
+                ip: '-',
+                userAgent: '-',
+                changes: '無詳細資料',
+                result: '-'
+            };
+            
+            const content = document.getElementById('log-detail-content');
+            content.innerHTML = `
+                <div class="detail-item">
+                    <div class="detail-label">時間</div>
+                    <div class="detail-value">${detail.timestamp}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">使用者</div>
+                    <div class="detail-value">${detail.user}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">操作</div>
+                    <div class="detail-value">${detail.action}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">對象</div>
+                    <div class="detail-value">${detail.target}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">IP 位址</div>
+                    <div class="detail-value">${detail.ip}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">瀏覽器</div>
+                    <div class="detail-value">${detail.userAgent}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">變更內容</div>
+                    <div class="detail-value">${detail.changes}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">結果</div>
+                    <div class="detail-value">${detail.result}</div>
+                </div>
+            `;
+            
+            document.getElementById('log-detail-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLogModal() {
+            document.getElementById('log-detail-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking backdrop
+        document.getElementById('log-detail-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLogModal();
+            }
+        });
+        
+        // Set default date range (last 7 days)
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const lastWeek = new Date(today);
+            lastWeek.setDate(lastWeek.getDate() - 7);
+            
+            const formatDate = (date) => {
+                return date.toISOString().split('T')[0];
+            };
+            
+            document.getElementById('start-date').value = formatDate(lastWeek);
+            document.getElementById('end-date').value = formatDate(today);
+        });
+    </script>
+</body>
+</html>

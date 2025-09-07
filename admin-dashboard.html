@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 管理後台儀表板</title>
+    <meta name="description" content="CFT照顧學校管理後台儀表板，監控系統狀況、學員進度和課程分析。">
+    <meta name="keywords" content="管理後台,儀表板,學員統計,課程分析">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <img src="assets/images/logo.png" alt="CFT 照顧學校" class="header__logo">
+                <div class="header__name">CFT 照顧學校 - 管理後台</div>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="index.html" class="header__menu-item" role="menuitem">返回前台</a>
+                </li>
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">監控儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-roster.html" class="header__menu-item" role="menuitem">課程名單</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">系統設定</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div class="welcome-section">
+                    <h1>監控儀表板</h1>
+                    <p class="meta">系統概覽與關鍵數據監控 · 最後更新：2025/01/20 15:30</p>
+                </div>
+                <div class="dashboard-actions">
+                    <select class="date-range-selector">
+                        <option value="today">今天</option>
+                        <option value="week">本週</option>
+                        <option value="month" selected>本月</option>
+                        <option value="quarter">本季</option>
+                        <option value="year">本年</option>
+                    </select>
+                    <button class="btn btn--ghost" aria-label="重新整理數據">🔄 重新整理</button>
+                    <button class="btn btn--primary" aria-label="匯出報表">📊 匯出報表</button>
+                </div>
+            </div>
+
+            <!-- KPI Overview -->
+            <div class="kpi-section">
+                <h2 class="sr-only">系統統計概覽</h2>
+                <div class="kpi kpi--admin">
+                    <div class="kpi__item kpi__item--primary">
+                        <div class="kpi__header">
+                            <div class="kpi__icon">👥</div>
+                            <div class="kpi__trend kpi__trend--up">+12%</div>
+                        </div>
+                        <div class="kpi__content">
+                            <div class="kpi__number">1,284</div>
+                            <div class="kpi__label">註冊學員</div>
+                            <div class="kpi__note">較上月增加 138 人</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi__item kpi__item--success">
+                        <div class="kpi__header">
+                            <div class="kpi__icon">📱</div>
+                            <div class="kpi__trend kpi__trend--up">+8%</div>
+                        </div>
+                        <div class="kpi__content">
+                            <div class="kpi__number">312</div>
+                            <div class="kpi__label">本月活躍</div>
+                            <div class="kpi__note">月活躍率 24.3%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi__item kpi__item--warning">
+                        <div class="kpi__header">
+                            <div class="kpi__icon">📅</div>
+                            <div class="kpi__trend">🕒</div>
+                        </div>
+                        <div class="kpi__content">
+                            <div class="kpi__number">8</div>
+                            <div class="kpi__label">即將開課</div>
+                            <div class="kpi__note">未來 7 天</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi__item kpi__item--info">
+                        <div class="kpi__header">
+                            <div class="kpi__icon">✅</div>
+                            <div class="kpi__trend kpi__trend--down">-5%</div>
+                        </div>
+                        <div class="kpi__content">
+                            <div class="kpi__number">72%</div>
+                            <div class="kpi__label">平均完成率</div>
+                            <div class="progress">
+                                <span style="width: 72%" aria-label="完成率 72%"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content Grid -->
+            <div class="admin-dashboard-grid">
+                <!-- Student Overview -->
+                <div class="card dashboard-widget">
+                    <div class="widget-header">
+                        <h2>📊 學員概覽</h2>
+                        <div class="widget-actions">
+                            <button class="btn btn--small" data-action="refresh">🔄</button>
+                            <button class="btn btn--small" data-action="fullscreen">⛶</button>
+                        </div>
+                    </div>
+                    
+                    <div class="student-overview">
+                        <div class="overview-tabs">
+                            <button class="tab tab--active" data-tab="status">學習狀態</button>
+                            <button class="tab" data-tab="progress">進度分析</button>
+                            <button class="tab" data-tab="points">點數分佈</button>
+                        </div>
+                        
+                        <div class="tab-content" id="status-tab">
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>學員</th>
+                                            <th>AIO職種</th>
+                                            <th>剩餘點數</th>
+                                            <th>完成度</th>
+                                            <th>最近活動</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="user-cell">
+                                                    <div class="user-avatar">👨</div>
+                                                    <div class="user-info">
+                                                        <div class="user-name">王○○</div>
+                                                        <div class="user-id">ID: S001234</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge">照顧服務員</span></td>
+                                            <td>
+                                                <span class="points-display">18</span>
+                                                <span class="points-status points-status--low">偏低</span>
+                                            </td>
+                                            <td>
+                                                <div class="progress-cell">
+                                                    <div class="progress">
+                                                        <span style="width: 40%" aria-label="完成度 40%"></span>
+                                                    </div>
+                                                    <span class="progress-text">40%</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="activity-cell">
+                                                    <span class="activity-time">昨天</span>
+                                                    <span class="activity-action">完成課程</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-actions">
+                                                    <button class="btn btn--small">👁️</button>
+                                                    <button class="btn btn--small">✏️</button>
+                                                    <button class="btn btn--small">💰</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>
+                                                <div class="user-cell">
+                                                    <div class="user-avatar">👩</div>
+                                                    <div class="user-info">
+                                                        <div class="user-name">陳○○</div>
+                                                        <div class="user-id">ID: S001235</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge badge--info">照顧設計師</span></td>
+                                            <td>
+                                                <span class="points-display">2</span>
+                                                <span class="points-status points-status--critical">極低</span>
+                                            </td>
+                                            <td>
+                                                <div class="progress-cell">
+                                                    <div class="progress">
+                                                        <span style="width: 20%" aria-label="完成度 20%"></span>
+                                                    </div>
+                                                    <span class="progress-text">20%</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="activity-cell">
+                                                    <span class="activity-time">2天前</span>
+                                                    <span class="activity-action">登入系統</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-actions">
+                                                    <button class="btn btn--small">👁️</button>
+                                                    <button class="btn btn--small">✏️</button>
+                                                    <button class="btn btn--small btn--danger">⚠️</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>
+                                                <div class="user-cell">
+                                                    <div class="user-avatar">👨</div>
+                                                    <div class="user-info">
+                                                        <div class="user-name">林○○</div>
+                                                        <div class="user-id">ID: S001236</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge badge--success">在宅醫師</span></td>
+                                            <td>
+                                                <span class="points-display">35</span>
+                                                <span class="points-status points-status--good">充足</span>
+                                            </td>
+                                            <td>
+                                                <div class="progress-cell">
+                                                    <div class="progress">
+                                                        <span style="width: 80%" aria-label="完成度 80%"></span>
+                                                    </div>
+                                                    <span class="progress-text">80%</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="activity-cell">
+                                                    <span class="activity-time">今天</span>
+                                                    <span class="activity-action">報名課程</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="table-actions">
+                                                    <button class="btn btn--small">👁️</button>
+                                                    <button class="btn btn--small">✏️</button>
+                                                    <button class="btn btn--small btn--success">⭐</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Analytics -->
+                <div class="card dashboard-widget">
+                    <div class="widget-header">
+                        <h2>📈 課程分析</h2>
+                        <div class="widget-actions">
+                            <button class="btn btn--small" data-action="export">📊</button>
+                            <button class="btn btn--small" data-action="settings">⚙️</button>
+                        </div>
+                    </div>
+                    
+                    <div class="course-analytics">
+                        <div class="analytics-summary">
+                            <div class="summary-card">
+                                <div class="summary-number">24</div>
+                                <div class="summary-label">進行中課程</div>
+                                <div class="summary-trend">+3 較上月</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-number">156</div>
+                                <div class="summary-label">總報名人次</div>
+                                <div class="summary-trend">+12% 較上月</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-number">89%</div>
+                                <div class="summary-label">出席率</div>
+                                <div class="summary-trend">+2% 較上月</div>
+                            </div>
+                        </div>
+                        
+                        <div class="course-performance-table">
+                            <h3>熱門課程表現</h3>
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>課程名稱</th>
+                                            <th>報名/名額</th>
+                                            <th>完成率</th>
+                                            <th>滿意度</th>
+                                            <th>營收</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="course-cell">
+                                                    <div class="course-name">失智友善溝通</div>
+                                                    <div class="course-meta">講師：王美華</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="enrollment-cell">
+                                                    <span class="enrollment-ratio">24/30</span>
+                                                    <div class="progress">
+                                                        <span style="width: 80%" aria-label="報名率 80%"></span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="completion-cell">
+                                                    <div class="progress">
+                                                        <span style="width: 86%" aria-label="完成率 86%"></span>
+                                                    </div>
+                                                    <span class="completion-text">86%</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="satisfaction-cell">
+                                                    <span class="rating">4.8</span>
+                                                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="revenue">NT$ 48,000</span>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>
+                                                <div class="course-cell">
+                                                    <div class="course-name">整合照護直播</div>
+                                                    <div class="course-meta">講師：張建國</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="enrollment-cell">
+                                                    <span class="enrollment-ratio">40/100</span>
+                                                    <div class="progress">
+                                                        <span style="width: 40%" aria-label="報名率 40%"></span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="completion-cell">
+                                                    <div class="progress">
+                                                        <span style="width: 55%" aria-label="完成率 55%"></span>
+                                                    </div>
+                                                    <span class="completion-text">55%</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="satisfaction-cell">
+                                                    <span class="rating">4.2</span>
+                                                    <div class="stars">⭐⭐⭐⭐☆</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="revenue">NT$ 32,000</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Alerts -->
+                <div class="card dashboard-widget">
+                    <div class="widget-header">
+                        <h2>⚠️ 系統提醒</h2>
+                        <span class="alert-count">3</span>
+                    </div>
+                    
+                    <div class="system-alerts">
+                        <div class="alert-item alert-item--warning">
+                            <div class="alert-icon">⚠️</div>
+                            <div class="alert-content">
+                                <div class="alert-title">低點數學員提醒</div>
+                                <div class="alert-message">有 23 位學員點數低於 10 點，建議主動關懷</div>
+                                <div class="alert-time">30分鐘前</div>
+                            </div>
+                            <div class="alert-actions">
+                                <button class="btn btn--small">查看</button>
+                                <button class="btn btn--small">處理</button>
+                            </div>
+                        </div>
+                        
+                        <div class="alert-item alert-item--info">
+                            <div class="alert-icon">📧</div>
+                            <div class="alert-content">
+                                <div class="alert-title">課前通知發送完成</div>
+                                <div class="alert-message">「失智友善溝通」課程通知已發送給 24 位學員</div>
+                                <div class="alert-time">2小時前</div>
+                            </div>
+                            <div class="alert-actions">
+                                <button class="btn btn--small">確認</button>
+                            </div>
+                        </div>
+                        
+                        <div class="alert-item alert-item--success">
+                            <div class="alert-icon">✅</div>
+                            <div class="alert-content">
+                                <div class="alert-title">系統備份完成</div>
+                                <div class="alert-message">每日自動備份已完成，資料庫狀態良好</div>
+                                <div class="alert-time">6小時前</div>
+                            </div>
+                            <div class="alert-actions">
+                                <button class="btn btn--small">檢視</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card dashboard-widget">
+                    <div class="widget-header">
+                        <h2>⚡ 快速操作</h2>
+                    </div>
+                    
+                    <div class="quick-actions-grid">
+                        <button class="quick-action-btn">
+                            <div class="action-icon">➕</div>
+                            <div class="action-label">新增課程</div>
+                        </button>
+                        
+                        <button class="quick-action-btn">
+                            <div class="action-icon">👥</div>
+                            <div class="action-label">學員管理</div>
+                        </button>
+                        
+                        <button class="quick-action-btn">
+                            <div class="action-icon">📧</div>
+                            <div class="action-label">發送通知</div>
+                        </button>
+                        
+                        <button class="quick-action-btn">
+                            <div class="action-icon">📊</div>
+                            <div class="action-label">匯出報表</div>
+                        </button>
+                        
+                        <button class="quick-action-btn">
+                            <div class="action-icon">⚙️</div>
+                            <div class="action-label">系統設定</div>
+                        </button>
+                        
+                        <button class="quick-action-btn">
+                            <div class="action-icon">💰</div>
+                            <div class="action-label">點數管理</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Course Notifications -->
+                <div class="card dashboard-widget notification-widget">
+                    <div class="widget-header">
+                        <h2>📢 課程通知管理</h2>
+                        <button class="btn btn--small btn--primary">發送新通知</button>
+                    </div>
+                    
+                    <div class="notification-management">
+                        <form class="notification-form">
+                            <div class="form-row">
+                                <div class="field field--select">
+                                    <label for="course-select">選擇課程</label>
+                                    <select id="course-select">
+                                        <option value="">請選擇課程</option>
+                                        <option value="dementia-comm">失智友善溝通與行為支持</option>
+                                        <option value="integrated-care">疫情下整合照護：線上實務</option>
+                                        <option value="community-care">社區共生與日常生活設計</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="field field--type">
+                                    <label for="notification-type">通知類型</label>
+                                    <select id="notification-type">
+                                        <option value="reminder">課前提醒</option>
+                                        <option value="material">教材發送</option>
+                                        <option value="schedule">時間異動</option>
+                                        <option value="cancellation">課程取消</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="field field--message">
+                                <label for="notification-message">通知內容</label>
+                                <textarea 
+                                    id="notification-message" 
+                                    rows="3" 
+                                    placeholder="輸入要發送給學員與教師的通知內容..."
+                                    style="flex: 1; resize: vertical;"
+                                ></textarea>
+                            </div>
+                            
+                            <div class="notification-options">
+                                <div class="option-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" checked>
+                                        <span class="checkbox-text">發送給學員</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox">
+                                        <span class="checkbox-text">發送給講師</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="send-options">
+                                    <button type="button" class="btn">📧 預覽</button>
+                                    <button type="submit" class="btn btn--primary">📤 發送通知</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <div class="recent-notifications">
+                            <h3>最近發送的通知</h3>
+                            <div class="notification-history">
+                                <div class="history-item">
+                                    <div class="history-info">
+                                        <div class="history-course">失智友善溝通</div>
+                                        <div class="history-type">課前提醒</div>
+                                        <div class="history-time">2小時前</div>
+                                    </div>
+                                    <div class="history-status">
+                                        <span class="badge badge--success">已發送 24人</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="history-item">
+                                    <div class="history-info">
+                                        <div class="history-course">整合照護直播</div>
+                                        <div class="history-type">教材發送</div>
+                                        <div class="history-time">昨天</div>
+                                    </div>
+                                    <div class="history-status">
+                                        <span class="badge badge--success">已發送 40人</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 2px solid #E8ECEF;
+        }
+        
+        .dashboard-actions {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+        }
+        
+        .date-range-selector {
+            padding: 8px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+        }
+        
+        .kpi--admin {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .kpi__item {
+            background: var(--c-surface);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow);
+        }
+        
+        .kpi__item--primary {
+            border-left: 4px solid var(--c-primary);
+        }
+        
+        .kpi__item--success {
+            border-left: 4px solid var(--c-success);
+        }
+        
+        .kpi__item--warning {
+            border-left: 4px solid var(--c-accent);
+        }
+        
+        .kpi__item--info {
+            border-left: 4px solid var(--c-info);
+        }
+        
+        .kpi__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .kpi__icon {
+            font-size: 24px;
+        }
+        
+        .kpi__trend {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+        }
+        
+        .kpi__trend--up {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .kpi__trend--down {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .kpi__number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--c-text);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .kpi__label {
+            color: var(--c-muted);
+            font-size: 14px;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .kpi__note {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .admin-dashboard-grid {
+            display: grid;
+            gap: var(--space-xl);
+        }
+        
+        .dashboard-widget {
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow);
+        }
+        
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .widget-header h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .widget-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .alert-count {
+            background: var(--c-danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .overview-tabs {
+            display: flex;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--c-sub);
+        }
+        
+        .tab {
+            padding: 8px 16px;
+            border: none;
+            background: none;
+            color: var(--c-muted);
+            cursor: pointer;
+            border-radius: var(--radius-card);
+            transition: all 0.2s ease;
+        }
+        
+        .tab--active {
+            background: var(--c-primary);
+            color: white;
+        }
+        
+        .tab-content {
+            padding: var(--space-lg);
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .data-table th {
+            background: var(--c-sub);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .user-cell {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--c-sub);
+        }
+        
+        .user-name {
+            font-weight: 500;
+        }
+        
+        .user-id {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .points-display {
+            font-weight: 600;
+            margin-right: var(--space-xs);
+        }
+        
+        .points-status {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: var(--radius-pill);
+        }
+        
+        .points-status--low {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .points-status--critical {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .points-status--good {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .progress-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .progress-text {
+            font-size: 12px;
+            color: var(--c-muted);
+            min-width: 35px;
+        }
+        
+        .activity-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .activity-time {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .activity-action {
+            font-size: 13px;
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .analytics-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            background: var(--c-sub);
+        }
+        
+        .summary-card {
+            text-align: center;
+            padding: var(--space-md);
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+        }
+        
+        .summary-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--c-primary);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .summary-label {
+            font-size: 14px;
+            color: var(--c-muted);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .summary-trend {
+            font-size: 12px;
+            color: var(--c-success);
+        }
+        
+        .course-performance-table {
+            padding: var(--space-lg);
+        }
+        
+        .course-performance-table h3 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .course-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .course-name {
+            font-weight: 500;
+        }
+        
+        .course-meta {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .enrollment-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .enrollment-ratio {
+            font-weight: 500;
+            min-width: 50px;
+        }
+        
+        .completion-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .completion-text {
+            font-size: 12px;
+            min-width: 35px;
+        }
+        
+        .satisfaction-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .rating {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        .stars {
+            font-size: 12px;
+        }
+        
+        .revenue {
+            font-weight: 600;
+            color: var(--c-success);
+        }
+        
+        .system-alerts {
+            padding: var(--space-lg);
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .alert-item {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border-radius: var(--radius-card);
+            border-left: 4px solid;
+        }
+        
+        .alert-item--warning {
+            background: #FFF8E1;
+            border-color: var(--c-accent);
+        }
+        
+        .alert-item--info {
+            background: #E3F2FD;
+            border-color: var(--c-info);
+        }
+        
+        .alert-item--success {
+            background: #E8F5E9;
+            border-color: var(--c-success);
+        }
+        
+        .alert-icon {
+            font-size: 20px;
+        }
+        
+        .alert-content {
+            flex-grow: 1;
+        }
+        
+        .alert-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .alert-message {
+            font-size: 14px;
+            color: var(--c-muted);
+            margin-bottom: 4px;
+        }
+        
+        .alert-time {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .alert-actions {
+            display: flex;
+            gap: var(--space-xs);
+            align-items: flex-start;
+        }
+        
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            padding: var(--space-lg);
+        }
+        
+        .quick-action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-lg);
+            background: var(--c-surface);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .quick-action-btn:hover {
+            background: var(--c-primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .action-icon {
+            font-size: 24px;
+        }
+        
+        .action-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .notification-widget {
+            grid-column: 1 / -1;
+        }
+        
+        .notification-management {
+            padding: var(--space-lg);
+        }
+        
+        .notification-form {
+            display: grid;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+        
+        .field--message {
+            grid-column: 1 / -1;
+        }
+        
+        .notification-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .option-group {
+            display: flex;
+            gap: var(--space-md);
+        }
+        
+        .send-options {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            cursor: pointer;
+        }
+        
+        .recent-notifications h3 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .notification-history {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .history-course {
+            font-weight: 500;
+        }
+        
+        .history-type,
+        .history-time {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        @media (max-width: 992px) {
+            .dashboard-header {
+                flex-direction: column;
+                gap: var(--space-md);
+                align-items: flex-start;
+            }
+            
+            .dashboard-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            
+            .kpi--admin {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .analytics-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .notification-options {
+                flex-direction: column;
+                gap: var(--space-md);
+                align-items: stretch;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .kpi--admin {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-cell {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .progress-cell {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .data-table {
+                font-size: 12px;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: var(--space-sm);
+            }
+            
+            .alert-item {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+            
+            .alert-actions {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('tab--active'));
+                    // Add active class to clicked tab
+                    this.classList.add('tab--active');
+                    
+                    // Here you would typically show/hide tab content
+                    console.log('Switched to tab:', this.dataset.tab);
+                });
+            });
+            
+            // Quick action buttons
+            const quickActionBtns = document.querySelectorAll('.quick-action-btn');
+            quickActionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const label = this.querySelector('.action-label').textContent;
+                    console.log('Quick action clicked:', label);
+                    // Add your navigation logic here
+                });
+            });
+            
+            // Notification form submission
+            const notificationForm = document.querySelector('.notification-form');
+            if (notificationForm) {
+                notificationForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const course = document.getElementById('course-select').value;
+                    const type = document.getElementById('notification-type').value;
+                    const message = document.getElementById('notification-message').value;
+                    
+                    if (!course || !message.trim()) {
+                        alert('請選擇課程並輸入通知內容');
+                        return;
+                    }
+                    
+                    // Simulate sending notification
+                    console.log('Sending notification:', { course, type, message });
+                    window.CFT?.NotificationManager.show('課程通知已發送', 'success');
+                    
+                    // Reset form
+                    this.reset();
+                });
+            }
+            
+            // Auto-refresh data every 5 minutes (for demo)
+            setInterval(() => {
+                console.log('Auto-refreshing dashboard data...');
+                // In a real application, you would fetch new data here
+            }, 5 * 60 * 1000);
+        });
+    </script>
+</body>
+</html>

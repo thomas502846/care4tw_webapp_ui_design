@@ -1,0 +1,3528 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 學員儀表板</title>
+    <meta name="description" content="CFT照顧學校學員個人儀表板，查看學習進度、點數餘額、即將上課和AIO學習地圖。">
+    <meta name="keywords" content="學員儀表板,學習進度,點數管理,課程管理">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <img src="assets/images/logo.png" alt="CFT 照顧學校" class="header__logo">
+                <div class="header__name">CFT 照顧學校</div>
+            </div>
+            <ul class="header__menu" role="menubar">
+                
+                <li role="none">
+                    <a href="courses.html" class="header__menu-item" role="menuitem">課程資訊</a>
+                </li>
+                <li role="none">
+                    <a href="teachers.html" class="header__menu-item" role="menuitem">師資群</a>
+                </li>
+                <li role="none">
+                    <a href="faq.html" class="header__menu-item" role="menuitem">常見問題</a>
+                </li>
+                <li role="none">
+                    <a href="student-dashboard.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">學員中心</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <!-- Point Shortage Alert -->
+            <div id="point-shortage-alert" class="alert alert--warning" style="display: none;">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">
+                    <h3>點數不足提醒</h3>
+                    <p>您的點數餘額為 <strong id="current-points">18</strong> 點，建議儘快補充以免影響課程報名。</p>
+                    <div class="alert-actions">
+                        <button class="btn btn--primary btn--sm" onclick="openPointPurchaseModal()">立即購買點數</button>
+                        <button class="btn btn--ghost btn--sm" onclick="dismissAlert()">稍後提醒</button>
+                    </div>
+                </div>
+                <button class="alert-close" onclick="dismissAlert()" aria-label="關閉提醒">×</button>
+            </div>
+            
+            <!-- Welcome Header -->
+            <div class="dashboard-header">
+                <div class="welcome-info">
+                    <h1>我的儀表板</h1>
+                    <p class="meta">歡迎回來，王小明！上次登入：2025/01/15 14:30</p>
+                </div>
+                <div class="quick-actions">
+                    <!-- Notification Bell -->
+                    <div class="notification-bell" onclick="toggleNotifications()">
+                        <div class="bell-icon">🔔</div>
+                        <div id="notification-count" class="notification-count">2</div>
+                        <div id="notification-dropdown" class="notification-dropdown">
+                            <div class="notification-header">
+                                <h3>通知中心</h3>
+                                <button onclick="markAllAsRead()">全部已讀</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item notification-item--unread">
+                                    <div class="notification-icon">💰</div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">點數餘額不足</div>
+                                        <div class="notification-text">目前剩餘18點，建議補充至20點以上</div>
+                                        <div class="notification-time">5分鐘前</div>
+                                    </div>
+                                </div>
+                                <div class="notification-item notification-item--unread">
+                                    <div class="notification-icon">📚</div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">新課程開放報名</div>
+                                        <div class="notification-text">失智友善溝通課程已開放報名</div>
+                                        <div class="notification-time">1小時前</div>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-icon">✅</div>
+                                    <div class="notification-content">
+                                        <div class="notification-title">課程報名成功</div>
+                                        <div class="notification-text">您已成功報名「基本照護技術」課程</div>
+                                        <div class="notification-time">昨天</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="#">查看所有通知</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="courses.html" class="btn btn--primary">探索課程</a>
+                    <a href="student-profile.html" class="btn btn--ghost">編輯個人資料</a>
+                </div>
+            </div>
+
+            <!-- KPI Overview -->
+            <div class="kpi-section">
+                <h2 class="sr-only">學習統計概覽</h2>
+                <div class="kpi">
+                    <div class="kpi__item kpi__item--warning" id="points-kpi">
+                        <div class="kpi__icon">💰</div>
+                        <div class="kpi__content">
+                            <div class="kpi__label">剩餘點數</div>
+                            <div class="kpi__number" id="points-display">18</div>
+                            <div class="progress">
+                                <span id="points-progress" style="width: 36%"></span>
+                            </div>
+                            <div class="kpi__note kpi__note--warning">🚨 點數偏低，建議補充</div>
+                            <div class="kpi__actions">
+                                <button class="btn btn--xs btn--primary" onclick="openPointPurchaseModal()">購買點數</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi__item">
+                        <div class="kpi__icon">⏰</div>
+                        <div class="kpi__content">
+                            <div class="kpi__label">本年學習時數</div>
+                            <div class="kpi__number">22 小時</div>
+                            <div class="kpi__note">已超過基本要求</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi__item">
+                        <div class="kpi__icon">📜</div>
+                        <div class="kpi__content">
+                            <div class="kpi__label">已完成積分</div>
+                            <div class="kpi__number">10 點</div>
+                            <div class="kpi__note">長照專業認證</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi__item">
+                        <div class="kpi__icon">🎯</div>
+                        <div class="kpi__content">
+                            <div class="kpi__label">AIO職種：照顧服務員</div>
+                            <div class="kpi__number">40%</div>
+                            <div class="progress">
+                                <span style="width: 40%"></span>
+                            </div>
+                            <div class="kpi__note">繼續加油！</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content Grid -->
+            <div class="dashboard-grid">
+                <!-- Upcoming Courses -->
+                <div class="card dashboard-card">
+                    <div class="card__header">
+                        <h2>📅 即將上課</h2>
+                        <span class="badge">2 門課程</span>
+                    </div>
+                    
+                    <div class="upcoming-courses">
+                        <div class="course-item">
+                            <div class="course-item__header">
+                                <div class="course-date">
+                                    <div class="date-day">28</div>
+                                    <div class="date-month">09月</div>
+                                </div>
+                                <div class="course-info">
+                                    <div class="course-time">09:30</div>
+                                    <div class="course-location">📍 台中 CFT</div>
+                                </div>
+                            </div>
+                            
+                            <div class="course-item__content">
+                                <h3>失智友善溝通與行為支持</h3>
+                                <div class="course-actions">
+                                    <a class="btn btn--small btn--primary" href="#" aria-label="前往前測試卷">前測試卷</a>
+                                    <a class="btn btn--small" href="#" aria-label="查看簽到連結">簽到連結</a>
+                                    <button class="btn btn--small btn--danger" data-open="modal-cancel" aria-label="取消報名">取消報名</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="course-item">
+                            <div class="course-item__header">
+                                <div class="course-date">
+                                    <div class="date-day">12</div>
+                                    <div class="date-month">10月</div>
+                                </div>
+                                <div class="course-info">
+                                    <div class="course-time">19:00</div>
+                                    <div class="course-location">🌐 線上直播</div>
+                                </div>
+                            </div>
+                            
+                            <div class="course-item__content">
+                                <h3>疫情下整合照護：線上實務</h3>
+                                <div class="course-actions">
+                                    <a class="btn btn--small" href="#" aria-label="設備檢測">設備檢測</a>
+                                    <a class="btn btn--small" href="#" aria-label="查看課前通知">課前通知</a>
+                                    <button class="btn btn--small btn--danger" data-open="modal-cancel" aria-label="取消報名">取消報名</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card__actions">
+                        <a href="courses.html" class="btn btn--ghost">瀏覽更多課程</a>
+                    </div>
+                </div>
+
+                <!-- Points Management -->
+                <div class="card dashboard-card">
+                    <div class="card__header">
+                        <h2>💳 點數與分享</h2>
+                        <div class="points-status">
+                            <span class="points-available">可用：<strong>18</strong></span>
+                            <div class="points-alert">
+                                🔔 低於20點提醒
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="points-management">
+                        <div class="points-actions">
+                            <button class="btn btn--primary" data-open="modal-purchase">💰 購買點數</button>
+                            <a class="btn btn--ghost" href="#" aria-label="查看點數歷程">📊 點數歷程</a>
+                        </div>
+                        
+                        <div class="points-sharing">
+                            <h3>分享點數</h3>
+                            <form class="sharing-form">
+                                <div class="sharing-row">
+                                    <div class="field">
+                                        <label for="recipient-phone" class="sr-only">受贈者手機號碼</label>
+                                        <input 
+                                            type="tel" 
+                                            id="recipient-phone" 
+                                            placeholder="受贈者手機號"
+                                            pattern="[0-9]{10}"
+                                            maxlength="10"
+                                        >
+                                    </div>
+                                    <div class="field">
+                                        <label for="share-points" class="sr-only">分享點數數量</label>
+                                        <input 
+                                            type="number" 
+                                            id="share-points" 
+                                            placeholder="點數" 
+                                            min="1" 
+                                            max="18"
+                                            style="width: 80px"
+                                        >
+                                    </div>
+                                    <button class="btn btn--primary" type="submit">確認分享</button>
+                                </div>
+                                <div class="sharing-info">
+                                    <div class="meta">受贈者：<span id="recipient-info">請輸入手機號碼</span></div>
+                                    <div class="field__help">確認後將寄發Email通知雙方</div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AIO Role Progress Map -->
+                <div class="card dashboard-card aio-progress-card">
+                    <div class="card__header">
+                        <h2>🎯 AIO職種完成度地圖</h2>
+                        <div class="role-selector">
+                            <label for="current-aio-role" class="sr-only">目前選擇的AIO職種</label>
+                            <select id="current-aio-role" class="role-selector__dropdown">
+                                <option value="care-worker" selected>照顧服務員</option>
+                                <option value="home-nurse">居家護理師</option>
+                                <option value="social-worker">社工師</option>
+                                <option value="occupational-therapist">職能治療師</option>
+                                <option value="physical-therapist">物理治療師</option>
+                                <option value="nutrition-specialist">營養師</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="aio-progress-map">
+                        <div class="role-overview">
+                            <div class="role-info">
+                                <div class="role-icon">👩‍⚕️</div>
+                                <div class="role-details">
+                                    <h3>照顧服務員 AIO認證</h3>
+                                    <div class="role-progress">
+                                        <div class="progress-bar">
+                                            <span class="progress-fill" style="width: 40%"></span>
+                                        </div>
+                                        <div class="progress-text">40% 完成 (9/23門課程)</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="role-actions">
+                                <button class="btn btn--primary btn--small">查看認證需求</button>
+                                <button class="btn btn--ghost btn--small" data-open="modal-certificate-goals">設定證照目標</button>
+                            </div>
+                        </div>
+                    
+                        <div class="learning-pathway">
+                            <h4>📚 學習進度路徑</h4>
+                            <div class="pathway-timeline">
+                                <div class="pathway-stage pathway-stage--completed">
+                                    <div class="stage-marker">✅</div>
+                                    <div class="stage-content">
+                                        <h5>基礎照顧課程</h5>
+                                        <p>已完成 4 門必修課程</p>
+                                        <div class="stage-courses">
+                                            <span class="course-tag course-tag--completed">長照概論</span>
+                                            <span class="course-tag course-tag--completed">基本照顧技能</span>
+                                            <span class="course-tag course-tag--completed">溝通技巧</span>
+                                            <span class="course-tag course-tag--completed">安全須知</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="pathway-stage pathway-stage--current">
+                                    <div class="stage-marker">🔄</div>
+                                    <div class="stage-content">
+                                        <h5>專業技能模組</h5>
+                                        <p>進行中，已完成 5/12 門課程</p>
+                                        <div class="stage-courses">
+                                            <span class="course-tag course-tag--completed">失智友善溝通</span>
+                                            <span class="course-tag course-tag--completed">疫情照護</span>
+                                            <span class="course-tag course-tag--current">24小時居家照護</span>
+                                            <span class="course-tag">共生社區設計</span>
+                                            <span class="course-tag">安寧陪伴</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="pathway-stage">
+                                    <div class="stage-marker">⏳</div>
+                                    <div class="stage-content">
+                                        <h5>進階實務課程</h5>
+                                        <p>尚未開始，需完成專業技能模組</p>
+                                        <div class="stage-courses">
+                                            <span class="course-tag">督導與管理</span>
+                                            <span class="course-tag">品質提升</span>
+                                            <span class="course-tag">個案研討</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="pathway-stage">
+                                    <div class="stage-marker">🏆</div>
+                                    <div class="stage-content">
+                                        <h5>AIO認證考試</h5>
+                                        <p>完成所有課程後可報考</p>
+                                        <div class="certification-info">
+                                            <div class="cert-requirement">
+                                                <span class="cert-icon">📋</span>
+                                                <span>筆試 + 實作評量</span>
+                                            </div>
+                                            <div class="cert-requirement">
+                                                <span class="cert-icon">⏰</span>
+                                                <span>120小時實習</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Certificate Tracking Section -->
+                    <div class="card dashboard-card certificate-tracking-card">
+                        <div class="card__header">
+                            <h2>🎓 證照追蹤地圖</h2>
+                            <button class="btn btn--ghost btn--small" data-open="modal-certificate-goals">管理證照目標</button>
+                        </div>
+                        
+                        <div class="certificate-categories">
+                            <div class="cert-category">
+                                <div class="cert-category__header">
+                                    <h4>📜 AIO專業證照</h4>
+                                    <div class="cert-progress">
+                                        <span class="cert-status cert-status--in-progress">進行中</span>
+                                        <div class="progress-mini">
+                                            <span class="progress-fill" style="width: 40%"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cert-list">
+                                    <div class="cert-item cert-item--target">
+                                        <div class="cert-icon">🎯</div>
+                                        <div class="cert-info">
+                                            <div class="cert-name">照顧服務員AIO認證</div>
+                                            <div class="cert-requirement">還需完成 14 門課程</div>
+                                        </div>
+                                        <div class="cert-status-badge">目標證照</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cert-category">
+                                <div class="cert-category__header">
+                                    <h4>🏛️ 政府認證證照</h4>
+                                    <div class="cert-progress">
+                                        <span class="cert-status cert-status--planned">規劃中</span>
+                                    </div>
+                                </div>
+                                <div class="cert-list">
+                                    <div class="cert-item cert-item--target">
+                                        <div class="cert-icon">🎯</div>
+                                        <div class="cert-info">
+                                            <div class="cert-name">照顧服務員技術士</div>
+                                            <div class="cert-requirement">需先完成 AIO 認證</div>
+                                        </div>
+                                        <div class="cert-status-badge">未來目標</div>
+                                    </div>
+                                    
+                                    <div class="cert-item">
+                                        <div class="cert-icon">📋</div>
+                                        <div class="cert-info">
+                                            <div class="cert-name">長期照顧管理專員</div>
+                                            <div class="cert-requirement">需2年工作經驗</div>
+                                        </div>
+                                        <div class="cert-actions">
+                                            <button class="btn btn--small" data-cert="ltc-manager">設為目標</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="cert-category">
+                                <div class="cert-category__header">
+                                    <h4>✅ 已獲得證照</h4>
+                                    <div class="cert-progress">
+                                        <span class="cert-count">3 張</span>
+                                    </div>
+                                </div>
+                                <div class="cert-list">
+                                    <div class="cert-item cert-item--completed">
+                                        <div class="cert-icon">🏆</div>
+                                        <div class="cert-info">
+                                            <div class="cert-name">CPR+AED證照</div>
+                                            <div class="cert-date">2024.03.15 取得</div>
+                                        </div>
+                                        <button class="btn btn--small btn--ghost">查看證書</button>
+                                    </div>
+                                    
+                                    <div class="cert-item cert-item--completed">
+                                        <div class="cert-icon">🏆</div>
+                                        <div class="cert-info">
+                                            <div class="cert-name">基本救命術證照</div>
+                                            <div class="cert-date">2024.05.20 取得</div>
+                                        </div>
+                                        <button class="btn btn--small btn--ghost">查看證書</button>
+                                    </div>
+                                    
+                                    <div class="cert-item cert-item--completed">
+                                        <div class="cert-icon">🏆</div>
+                                        <div class="cert-info">
+                                            <div class="cert-name">感染控制基礎認證</div>
+                                            <div class="cert-date">2024.07.10 取得</div>
+                                        </div>
+                                        <button class="btn btn--small btn--ghost">查看證書</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                <!-- Enhanced Points Management -->
+                <div class="card dashboard-card points-enhanced-card">
+                    <div class="card__header">
+                        <h2>💎 進階點數管理</h2>
+                        <div class="points-quick-info">
+                            <span class="points-balance">餘額: <strong>18</strong></span>
+                            <div class="points-trend">
+                                <span class="trend-icon">📈</span>
+                                <span class="trend-text">本月 +15</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="points-enhanced-content">
+                        <div class="points-analytics">
+                            <h4>點數使用分析</h4>
+                            <div class="usage-chart">
+                                <div class="chart-item">
+                                    <div class="chart-bar" style="height: 60%"></div>
+                                    <div class="chart-label">課程報名<br><span class="chart-value">12點</span></div>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-bar" style="height: 30%"></div>
+                                    <div class="chart-label">額外服務<br><span class="chart-value">6點</span></div>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-bar" style="height: 20%"></div>
+                                    <div class="chart-label">分享給他人<br><span class="chart-value">4點</span></div>
+                                </div>
+                                <div class="chart-item">
+                                    <div class="chart-bar" style="height: 10%"></div>
+                                    <div class="chart-label">其他<br><span class="chart-value">2點</span></div>
+                                </div>
+                            </div>
+                            <div class="usage-period">過去30天使用情況</div>
+                        </div>
+                        
+                        <div class="points-recommendations">
+                            <h4>💡 智慧建議</h4>
+                            <div class="recommendation-list">
+                                <div class="recommendation-item">
+                                    <div class="rec-icon">⚠️</div>
+                                    <div class="rec-content">
+                                        <div class="rec-title">點數即將不足</div>
+                                        <div class="rec-desc">建議購買20點以應付下月課程需求</div>
+                                    </div>
+                                    <button class="btn btn--small btn--primary" data-open="modal-purchase-enhanced">立即購買</button>
+                                </div>
+                                
+                                <div class="recommendation-item">
+                                    <div class="rec-icon">🎁</div>
+                                    <div class="rec-content">
+                                        <div class="rec-title">分享獎勵</div>
+                                        <div class="rec-desc">邀請朋友註冊可獲得3點獎勵</div>
+                                    </div>
+                                    <button class="btn btn--small" data-open="modal-invite-friend">邀請朋友</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="points-sharing-enhanced">
+                            <h4>🤝 點數分享與轉贈</h4>
+                            <div class="sharing-history">
+                                <h5>最近分享記錄</h5>
+                                <div class="share-record">
+                                    <div class="share-item">
+                                        <div class="share-info">
+                                            <span class="share-recipient">張○美</span>
+                                            <span class="share-amount">-3點</span>
+                                        </div>
+                                        <div class="share-date">2天前</div>
+                                    </div>
+                                    
+                                    <div class="share-item">
+                                        <div class="share-info">
+                                            <span class="share-recipient">王○華</span>
+                                            <span class="share-amount">-5點</span>
+                                        </div>
+                                        <div class="share-date">1週前</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="sharing-form-enhanced">
+                                <h5>分享點數給朋友</h5>
+                                <form class="enhanced-sharing-form">
+                                    <div class="form-row">
+                                        <div class="field">
+                                            <label for="recipient-search">受贈者</label>
+                                            <input type="text" id="recipient-search" placeholder="搜尋姓名或手機號碼" class="recipient-search">
+                                            <div class="search-suggestions" id="recipient-suggestions"></div>
+                                        </div>
+                                        <div class="field field--small">
+                                            <label for="share-amount">分享點數</label>
+                                            <input type="number" id="share-amount" min="1" max="18" value="3" class="amount-input">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="field">
+                                            <label for="share-message">附言 (選填)</label>
+                                            <input type="text" id="share-message" placeholder="希望對你有幫助！" maxlength="50">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="sharing-preview">
+                                        <div class="preview-info">
+                                            <span class="preview-label">預覽：</span>
+                                            <span id="preview-text">將分享 3 點給朋友</span>
+                                        </div>
+                                        <div class="remaining-points">
+                                            <span class="remaining-label">分享後餘額：</span>
+                                            <span id="remaining-amount">15 點</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn--primary">確認分享</button>
+                                        <button type="button" class="btn btn--ghost" data-open="modal-share-qr">產生分享連結</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Documents -->
+                <div class="card dashboard-card">
+                    <div class="card__header">
+                        <h2>📁 我的文件</h2>
+                        <a href="student-profile.html" class="view-details">管理文件</a>
+                    </div>
+                    
+                    <div class="document-list">
+                        <div class="document-item">
+                            <div class="document-icon">✅</div>
+                            <div class="document-info">
+                                <div class="document-name">長照小卡</div>
+                                <div class="document-status">已上傳</div>
+                            </div>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-icon">🎯</div>
+                            <div class="document-info">
+                                <div class="document-name">目標證照</div>
+                                <div class="document-status">AIO證照、政府證照（二類）</div>
+                            </div>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-icon">📋</div>
+                            <div class="document-info">
+                                <div class="document-name">學習歷程</div>
+                                <div class="document-actions">
+                                    <a href="#" class="download-link">Word</a>
+                                    <span class="separator">/</span>
+                                    <a href="#" class="download-link">PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="document-icon">🏆</div>
+                            <div class="document-info">
+                                <div class="document-name">已獲得證書</div>
+                                <div class="document-status">3 張證書</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card dashboard-card">
+                    <div class="card__header">
+                        <h2>📈 最近活動</h2>
+                        <a href="#" class="view-details">查看全部</a>
+                    </div>
+                    
+                    <div class="activity-timeline">
+                        <div class="activity-item">
+                            <div class="activity-time">今天</div>
+                            <div class="activity-content">
+                                <div class="activity-icon">📚</div>
+                                <div class="activity-text">
+                                    <strong>完成前測試卷</strong><br>
+                                    失智友善溝通與行為支持
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-time">昨天</div>
+                            <div class="activity-content">
+                                <div class="activity-icon">💳</div>
+                                <div class="activity-text">
+                                    <strong>購買點數</strong><br>
+                                    +10 點數 (NT$ 1,000)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-time">3天前</div>
+                            <div class="activity-content">
+                                <div class="activity-icon">✅</div>
+                                <div class="activity-text">
+                                    <strong>完成課程</strong><br>
+                                    社區共生與日常生活設計 (4小時)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-time">1週前</div>
+                            <div class="activity-content">
+                                <div class="activity-icon">🎯</div>
+                                <div class="activity-text">
+                                    <strong>報名課程</strong><br>
+                                    失智友善溝通與行為支持
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="card dashboard-card">
+                    <div class="card__header">
+                        <h2>🔔 通知提醒</h2>
+                        <div class="notification-header-actions">
+                            <span class="unread-count">未讀 <span id="unread-bulletin-count">3</span> 則</span>
+                            <button class="btn btn--small" onclick="markAllBulletinAsRead()" aria-label="標記全部已讀">全部已讀</button>
+                        </div>
+                    </div>
+                    
+                    <div class="enhanced-bulletin-list">
+                        <!-- High Priority Unread -->
+                        <div class="notification-item notification-item--unread notification-item--priority" onclick="toggleBulletinRead(this)">
+                            <div class="notification-status">
+                                <div class="status-indicator status-indicator--unread pulse"></div>
+                            </div>
+                            <div class="notification-icon priority-icon">⚠️</div>
+                            <div class="notification-content">
+                                <div class="notification-priority">高優先級</div>
+                                <div class="notification-title">點數餘額不足提醒</div>
+                                <div class="notification-text">您的點數餘額為18點，低於建議值20點，請盡快補充以免影響課程報名</div>
+                                <div class="notification-meta">
+                                    <span class="notification-time">5分鐘前</span>
+                                    <span class="notification-category">系統提醒</span>
+                                </div>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="btn btn--xs btn--primary" onclick="event.stopPropagation(); openPointPurchaseModal()">處理</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Regular Unread -->
+                        <div class="notification-item notification-item--unread" onclick="toggleBulletinRead(this)">
+                            <div class="notification-status">
+                                <div class="status-indicator status-indicator--unread"></div>
+                            </div>
+                            <div class="notification-icon">📧</div>
+                            <div class="notification-content">
+                                <div class="notification-title">課前通知信寄出</div>
+                                <div class="notification-text">失智友善溝通與行為支持課程的前測及注意事項已寄出</div>
+                                <div class="notification-meta">
+                                    <span class="notification-time">2小時前</span>
+                                    <span class="notification-category">課程通知</span>
+                                </div>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="btn btn--xs btn--ghost" onclick="event.stopPropagation(); window.open('#', '_blank')">查看</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Another Unread -->
+                        <div class="notification-item notification-item--unread" onclick="toggleBulletinRead(this)">
+                            <div class="notification-status">
+                                <div class="status-indicator status-indicator--unread"></div>
+                            </div>
+                            <div class="notification-icon">🎉</div>
+                            <div class="notification-content">
+                                <div class="notification-title">新課程開放報名</div>
+                                <div class="notification-text">「復能復健實務」課程已開放報名，限名25人，歡迎報名</div>
+                                <div class="notification-meta">
+                                    <span class="notification-time">3小時前</span>
+                                    <span class="notification-category">課程公告</span>
+                                </div>
+                            </div>
+                            <div class="notification-actions">
+                                <button class="btn btn--xs btn--primary" onclick="event.stopPropagation(); window.location.href='courses.html'">報名</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Read Messages -->
+                        <div class="notification-item notification-item--read" onclick="toggleBulletinRead(this)">
+                            <div class="notification-status">
+                                <div class="status-indicator status-indicator--read"></div>
+                            </div>
+                            <div class="notification-icon">✅</div>
+                            <div class="notification-content">
+                                <div class="notification-title">學習進度更新</div>
+                                <div class="notification-text">恭喜！您已完成「共生照顧」模組的30%進度</div>
+                                <div class="notification-meta">
+                                    <span class="notification-time">昨天</span>
+                                    <span class="notification-category">進度更新</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="notification-item notification-item--read" onclick="toggleBulletinRead(this)">
+                            <div class="notification-status">
+                                <div class="status-indicator status-indicator--read"></div>
+                            </div>
+                            <div class="notification-icon">📅</div>
+                            <div class="notification-content">
+                                <div class="notification-title">課程報名開放</div>
+                                <div class="notification-text">「24小時居家照護實務」課程已開放報名，早鳥優惠中</div>
+                                <div class="notification-meta">
+                                    <span class="notification-time">3天前</span>
+                                    <span class="notification-category">課程公告</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 本頁為UI提案Mock，非最終產品</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="faq.html" aria-label="聯絡我們">聯絡我們</a>
+                    <a href="#accessibility" aria-label="無障礙宣告">無障礙宣告</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal-backdrop" id="modal-purchase" role="dialog" aria-labelledby="purchase-title" aria-hidden="true">
+        <div class="modal">
+            <div class="modal__header">
+                <h2 class="modal__title" id="purchase-title">購買點數</h2>
+                <button class="modal__close" data-close aria-label="關閉對話框">✕</button>
+            </div>
+            <div class="modal__content">
+                <p>目前點數餘額：<strong>18</strong> 點</p>
+                <div class="field">
+                    <label for="purchase-points">購買點數</label>
+                    <input type="number" id="purchase-points" placeholder="建議購買 10 點" value="10" min="1" max="100">
+                    <div class="field__help">每點 NT$100，購買後立即生效</div>
+                </div>
+                <div class="field">
+                    <label for="payment-method">付款方式</label>
+                    <select id="payment-method">
+                        <option value="credit-card">信用卡</option>
+                        <option value="bank-transfer">銀行轉帳</option>
+                        <option value="atm">ATM轉帳</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal__actions">
+                <button class="btn" data-close>取消</button>
+                <button class="btn btn--primary">前往付款</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="modal-cancel" role="dialog" aria-labelledby="cancel-title" aria-hidden="true">
+        <div class="modal">
+            <div class="modal__header">
+                <h2 class="modal__title" id="cancel-title">取消報名</h2>
+                <button class="modal__close" data-close aria-label="關閉對話框">✕</button>
+            </div>
+            <div class="modal__content">
+                <p>確認要取消報名嗎？取消後點數將依退費規定處理。</p>
+            </div>
+            <div class="modal__actions">
+                <button class="btn" data-close>保留報名</button>
+                <button class="btn btn--danger">確認取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Goals Modal -->
+    <div class="modal-backdrop" id="modal-certificate-goals" role="dialog" aria-labelledby="cert-goals-title" aria-hidden="true">
+        <div class="modal modal--large">
+            <div class="modal__header">
+                <h2 class="modal__title" id="cert-goals-title">設定證照目標</h2>
+                <button class="modal__close" data-close aria-label="關閉對話框">✕</button>
+            </div>
+            <div class="modal__content">
+                <div class="cert-goals-form">
+                    <div class="cert-category-select">
+                        <h3>選擇證照類別</h3>
+                        <div class="cert-tabs">
+                            <button class="cert-tab cert-tab--active" data-tab="aio">📜 AIO認證</button>
+                            <button class="cert-tab" data-tab="government">🏛️ 政府認證</button>
+                            <button class="cert-tab" data-tab="professional">🎯 專業證照</button>
+                        </div>
+                    </div>
+                    
+                    <div class="cert-tab-content" data-content="aio">
+                        <div class="cert-selection">
+                            <div class="cert-option">
+                                <label class="cert-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="cert-checkmark"></span>
+                                    <div class="cert-option-info">
+                                        <div class="cert-name">照顧服務員 AIO 認證</div>
+                                        <div class="cert-desc">需完成23門課程 + 120小時實習</div>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="cert-option">
+                                <label class="cert-checkbox">
+                                    <input type="checkbox">
+                                    <span class="cert-checkmark"></span>
+                                    <div class="cert-option-info">
+                                        <div class="cert-name">居家護理師 AIO 認證</div>
+                                        <div class="cert-desc">需完成18門課程 + 護理師執照</div>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="cert-option">
+                                <label class="cert-checkbox">
+                                    <input type="checkbox">
+                                    <span class="cert-checkmark"></span>
+                                    <div class="cert-option-info">
+                                        <div class="cert-name">社工師 AIO 認證</div>
+                                        <div class="cert-desc">需完成20門課程 + 社工師執照</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cert-tab-content" data-content="government" style="display: none;">
+                        <div class="cert-selection">
+                            <div class="cert-option">
+                                <label class="cert-checkbox">
+                                    <input type="checkbox" checked>
+                                    <span class="cert-checkmark"></span>
+                                    <div class="cert-option-info">
+                                        <div class="cert-name">照顧服務員技術士</div>
+                                        <div class="cert-desc">需先取得 AIO 認證 + 1年工作經驗</div>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="cert-option">
+                                <label class="cert-checkbox">
+                                    <input type="checkbox">
+                                    <span class="cert-checkmark"></span>
+                                    <div class="cert-option-info">
+                                        <div class="cert-name">長期照顧管理專員</div>
+                                        <div class="cert-desc">需删7個月執業經驗</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cert-tab-content" data-content="professional" style="display: none;">
+                        <div class="cert-selection">
+                            <div class="cert-option">
+                                <label class="cert-checkbox">
+                                    <input type="checkbox">
+                                    <span class="cert-checkmark"></span>
+                                    <div class="cert-option-info">
+                                        <div class="cert-name">失智照顧專業認證</div>
+                                        <div class="cert-desc">失智友善照顧相關課程</div>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="cert-option">
+                                <label class="cert-checkbox">
+                                    <input type="checkbox">
+                                    <span class="cert-checkmark"></span>
+                                    <div class="cert-option-info">
+                                        <div class="cert-name">安寧照顧專業認證</div>
+                                        <div class="cert-desc">安寧陪伴相關課程</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cert-goals-timeline">
+                        <h3>目標達成時程</h3>
+                        <div class="timeline-input">
+                            <label for="target-date">預期完成日期</label>
+                            <input type="date" id="target-date" value="2025-12-31">
+                        </div>
+                        
+                        <div class="learning-plan">
+                            <h4>建議學習計畫</h4>
+                            <div class="plan-summary">
+                                <div class="plan-item">
+                                    <span class="plan-label">每月學習時數：</span>
+                                    <span class="plan-value">8-12 小時</span>
+                                </div>
+                                <div class="plan-item">
+                                    <span class="plan-label">預計費用：</span>
+                                    <span class="plan-value">28,000 元</span>
+                                </div>
+                                <div class="plan-item">
+                                    <span class="plan-label">預計需要點數：</span>
+                                    <span class="plan-value">140 點</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__actions">
+                <button class="btn" data-close>取消</button>
+                <button class="btn btn--primary">保存目標</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Purchase Modal -->
+    <div class="modal-backdrop" id="modal-purchase-enhanced" role="dialog" aria-labelledby="purchase-enhanced-title" aria-hidden="true">
+        <div class="modal modal--large">
+            <div class="modal__header">
+                <h2 class="modal__title" id="purchase-enhanced-title">💳 智慧購買點數</h2>
+                <button class="modal__close" data-close aria-label="關閉對話框">✕</button>
+            </div>
+            <div class="modal__content">
+                <div class="purchase-enhanced-content">
+                    <div class="current-status">
+                        <div class="status-info">
+                            <div class="balance-display">
+                                <span class="balance-label">目前餘額</span>
+                                <span class="balance-amount">18 點</span>
+                            </div>
+                            <div class="usage-forecast">
+                                <span class="forecast-label">預計本月需用</span>
+                                <span class="forecast-amount">25 點</span>
+                            </div>
+                        </div>
+                        <div class="recommendation">
+                            <div class="rec-badge">智慧建議</div>
+                            <div class="rec-text">建議購買 20 點以應付需求</div>
+                        </div>
+                    </div>
+                    
+                    <div class="purchase-options">
+                        <h3>選擇購買方案</h3>
+                        <div class="option-cards">
+                            <label class="option-card">
+                                <input type="radio" name="purchase-plan" value="basic">
+                                <div class="option-content">
+                                    <div class="option-header">
+                                        <span class="option-name">基本方案</span>
+                                        <span class="option-price">10 點</span>
+                                    </div>
+                                    <div class="option-desc">方便隨時購買，小量需求</div>
+                                    <div class="option-cost">NT$ 1,000</div>
+                                </div>
+                            </label>
+                            
+                            <label class="option-card option-card--recommended">
+                                <input type="radio" name="purchase-plan" value="recommended" checked>
+                                <div class="option-content">
+                                    <div class="option-header">
+                                        <span class="option-name">智慧推薦 🎆</span>
+                                        <span class="option-price">20 點</span>
+                                    </div>
+                                    <div class="option-desc">根據您的學習計畫推薦</div>
+                                    <div class="option-cost">NT$ 1,900 <span class="discount">省 NT$ 100</span></div>
+                                </div>
+                            </label>
+                            
+                            <label class="option-card">
+                                <input type="radio" name="purchase-plan" value="bulk">
+                                <div class="option-content">
+                                    <div class="option-header">
+                                        <span class="option-name">優惠大包</span>
+                                        <span class="option-price">50 點</span>
+                                    </div>
+                                    <div class="option-desc">最優惠價格，長期學習</div>
+                                    <div class="option-cost">NT$ 4,500 <span class="discount">省 NT$ 500</span></div>
+                                </div>
+                            </label>
+                            
+                            <label class="option-card">
+                                <input type="radio" name="purchase-plan" value="custom">
+                                <div class="option-content">
+                                    <div class="option-header">
+                                        <span class="option-name">自定金額</span>
+                                        <span class="option-input">
+                                            <input type="number" min="1" max="200" value="30" class="custom-amount">
+                                            點
+                                        </span>
+                                    </div>
+                                    <div class="option-desc">精確控制購買數量</div>
+                                    <div class="option-cost">NT$ <span class="custom-cost">3,000</span></div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        <h3>選擇付款方式</h3>
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment-method" value="credit-card" checked>
+                                <div class="payment-content">
+                                    <div class="payment-icon">💳</div>
+                                    <div class="payment-info">
+                                        <div class="payment-name">信用卡</div>
+                                        <div class="payment-desc">立即生效，支援分期</div>
+                                    </div>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-option">
+                                <input type="radio" name="payment-method" value="bank-transfer">
+                                <div class="payment-content">
+                                    <div class="payment-icon">🏦</div>
+                                    <div class="payment-info">
+                                        <div class="payment-name">銀行轉帳</div>
+                                        <div class="payment-desc">無手續費，1-2天生效</div>
+                                    </div>
+                                </div>
+                            </label>
+                            
+                            <label class="payment-option">
+                                <input type="radio" name="payment-method" value="line-pay">
+                                <div class="payment-content">
+                                    <div class="payment-icon">📱</div>
+                                    <div class="payment-info">
+                                        <div class="payment-name">LINE Pay</div>
+                                        <div class="payment-desc">方便快速，立即生效</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="purchase-summary">
+                        <div class="summary-row">
+                            <span>購買點數：</span>
+                            <span id="summary-points">20 點</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>付款金額：</span>
+                            <span id="summary-amount">NT$ 1,900</span>
+                        </div>
+                        <div class="summary-row summary-row--total">
+                            <span>購買後餘額：</span>
+                            <span id="summary-total">38 點</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__actions">
+                <button class="btn" data-close>取消</button>
+                <button class="btn btn--primary">進行付款</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invite Friend Modal -->
+    <div class="modal-backdrop" id="modal-invite-friend" role="dialog" aria-labelledby="invite-title" aria-hidden="true">
+        <div class="modal">
+            <div class="modal__header">
+                <h2 class="modal__title" id="invite-title">🎁 邀請朋友加入</h2>
+                <button class="modal__close" data-close aria-label="關閉對話框">✕</button>
+            </div>
+            <div class="modal__content">
+                <div class="invite-content">
+                    <div class="invite-reward">
+                        <div class="reward-icon">🎆</div>
+                        <div class="reward-text">
+                            <h3>邀請獎勵</h3>
+                            <p>朋友成功註冊後，您將獲得 <strong>3 點獎勵</strong></p>
+                        </div>
+                    </div>
+                    
+                    <div class="invite-methods">
+                        <div class="invite-link">
+                            <label for="invite-url">分享連結</label>
+                            <div class="link-input-group">
+                                <input type="text" id="invite-url" value="https://cft.care4tw.com/invite/ABC123" readonly>
+                                <button class="btn btn--small" onclick="copyInviteLink()">複製</button>
+                            </div>
+                        </div>
+                        
+                        <div class="invite-qr">
+                            <div class="qr-code">
+                                <div class="qr-placeholder">📱<br>QR Code</div>
+                            </div>
+                            <button class="btn btn--ghost btn--small">下載 QR Code</button>
+                        </div>
+                    </div>
+                    
+                    <div class="invite-history">
+                        <h4>邀請記錄</h4>
+                        <div class="history-list">
+                            <div class="history-item">
+                                <span class="history-name">李○華</span>
+                                <span class="history-status history-status--completed">已註冊 +3點</span>
+                                <span class="history-date">2025/01/10</span>
+                            </div>
+                            <div class="history-item">
+                                <span class="history-name">陳○明</span>
+                                <span class="history-status history-status--pending">待註冊</span>
+                                <span class="history-date">2025/01/12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__actions">
+                <button class="btn" data-close>關閉</button>
+                <button class="btn btn--primary">邀請更多朋友</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share QR Modal -->
+    <div class="modal-backdrop" id="modal-share-qr" role="dialog" aria-labelledby="share-qr-title" aria-hidden="true">
+        <div class="modal">
+            <div class="modal__header">
+                <h2 class="modal__title" id="share-qr-title">📱 分享 QR Code</h2>
+                <button class="modal__close" data-close aria-label="關閉對話框">✕</button>
+            </div>
+            <div class="modal__content">
+                <div class="share-qr-content">
+                    <div class="qr-display">
+                        <div class="qr-code-large">
+                            <div class="qr-placeholder-large">📱<br>QR Code<br>分享 3 點</div>
+                        </div>
+                    </div>
+                    
+                    <div class="share-instructions">
+                        <p>讓朋友用手機掃描此 QR Code 即可接收您的點數分享</p>
+                        <div class="share-details">
+                            <div class="detail-item">
+                                <span class="detail-label">分享點數：</span>
+                                <span class="detail-value">3 點</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">有效期限：</span>
+                                <span class="detail-value">24 小時</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__actions">
+                <button class="btn" data-close>關閉</button>
+                <button class="btn btn--ghost">下載 QR Code</button>
+                <button class="btn btn--primary">分享至社群</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Enhanced dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // AIO role selector
+            const roleSelector = document.getElementById('current-aio-role');
+            if (roleSelector) {
+                roleSelector.addEventListener('change', function() {
+                    // Update role info based on selection
+                    updateRoleInfo(this.value);
+                });
+            }
+            
+            // Certificate tab switching
+            const certTabs = document.querySelectorAll('.cert-tab');
+            certTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.dataset.tab;
+                    
+                    // Update active tab
+                    certTabs.forEach(t => t.classList.remove('cert-tab--active'));
+                    this.classList.add('cert-tab--active');
+                    
+                    // Show corresponding content
+                    document.querySelectorAll('.cert-tab-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+                    document.querySelector(`[data-content="${targetTab}"]`).style.display = 'block';
+                });
+            });
+            
+            // Purchase option selection
+            const purchaseOptions = document.querySelectorAll('input[name="purchase-plan"]');
+            purchaseOptions.forEach(option => {
+                option.addEventListener('change', function() {
+                    updatePurchaseSummary();
+                });
+            });
+            
+            // Initialize purchase summary on page load
+            setTimeout(() => {
+                updatePurchaseSummary();
+            }, 100);
+            
+            // Custom amount input
+            const customAmountInput = document.querySelector('.custom-amount');
+            if (customAmountInput) {
+                customAmountInput.addEventListener('input', function() {
+                    const amount = parseInt(this.value) || 0;
+                    document.querySelector('.custom-cost').textContent = (amount * 100).toLocaleString();
+                    updatePurchaseSummary();
+                });
+            }
+            
+            // Sharing amount calculation
+            const shareAmountInput = document.getElementById('share-amount');
+            if (shareAmountInput) {
+                shareAmountInput.addEventListener('input', function() {
+                    const shareAmount = parseInt(this.value) || 0;
+                    const currentPoints = 18;
+                    const remaining = currentPoints - shareAmount;
+                    
+                    document.getElementById('preview-text').textContent = `將分享 ${shareAmount} 點給朋友`;
+                    document.getElementById('remaining-amount').textContent = `${remaining} 點`;
+                });
+            }
+        });
+        
+        function updateRoleInfo(roleValue) {
+            const roleData = {
+                'care-worker': { icon: '👩‍⚕️', name: '照顧服務員 AIO認證', progress: 40, completed: 9, total: 23 },
+                'home-nurse': { icon: '👩‍⚕️', name: '居家護理師 AIO認證', progress: 20, completed: 4, total: 18 },
+                'social-worker': { icon: '👨‍💼', name: '社工師 AIO認證', progress: 15, completed: 3, total: 20 },
+                'occupational-therapist': { icon: '🧑‍⚕️', name: '職能治療師 AIO認證', progress: 10, completed: 2, total: 16 },
+                'physical-therapist': { icon: '🧑‍⚕️', name: '物理治療師 AIO認證', progress: 5, completed: 1, total: 15 },
+                'nutrition-specialist': { icon: '🍎', name: '營養師 AIO認證', progress: 0, completed: 0, total: 14 }
+            };
+            
+            const data = roleData[roleValue];
+            if (data) {
+                document.querySelector('.role-icon').textContent = data.icon;
+                document.querySelector('.role-details h3').textContent = data.name;
+                document.querySelector('.progress-fill').style.width = data.progress + '%';
+                document.querySelector('.progress-text').textContent = `${data.progress}% 完成 (${data.completed}/${data.total}門課程)`;
+            }
+        }
+        
+        function updatePurchaseSummary() {
+            const selectedOption = document.querySelector('input[name="purchase-plan"]:checked');
+            if (!selectedOption) return;
+            
+            let points = 0;
+            let cost = 0;
+            
+            switch(selectedOption.value) {
+                case 'basic':
+                    points = 10;
+                    cost = 1000;
+                    break;
+                case 'recommended':
+                    points = 20;
+                    cost = 1900;
+                    break;
+                case 'bulk':
+                    points = 50;
+                    cost = 4500;
+                    break;
+                case 'custom':
+                    points = parseInt(document.querySelector('.custom-amount').value) || 30;
+                    cost = points * 100;
+                    break;
+            }
+            
+            document.getElementById('summary-points').textContent = points + ' 點';
+            document.getElementById('summary-amount').textContent = 'NT$ ' + cost.toLocaleString();
+            document.getElementById('summary-total').textContent = (18 + points) + ' 點';
+        }
+        
+        function copyInviteLink() {
+            const linkInput = document.getElementById('invite-url');
+            linkInput.select();
+            document.execCommand('copy');
+            
+            // Show feedback
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = '已複製';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 2000);
+        }
+    </script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-lg);
+            border-bottom: 2px solid #E8ECEF;
+        }
+        
+        .welcome-info h1 {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .quick-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .kpi-section {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .kpi {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .kpi__item {
+            background: var(--c-surface);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .kpi__icon {
+            font-size: 32px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .kpi__label {
+            color: var(--c-muted);
+            font-size: 14px;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .kpi__number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--c-primary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .kpi__note {
+            font-size: 12px;
+            color: var(--c-muted);
+            margin-top: var(--space-xs);
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .dashboard-card {
+            height: fit-content;
+        }
+        
+        .aio-progress-card, .certificate-tracking-card, .points-enhanced-card {
+            grid-column: 1 / -1;
+        }
+        
+        .upcoming-courses {
+            display: grid;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .course-item {
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            padding: var(--space-md);
+        }
+        
+        .course-item__header {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .course-date {
+            text-align: center;
+            background: var(--c-primary);
+            color: white;
+            border-radius: var(--radius-card);
+            padding: var(--space-sm);
+            min-width: 60px;
+        }
+        
+        .date-day {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .date-month {
+            font-size: 12px;
+        }
+        
+        .course-info {
+            flex-grow: 1;
+        }
+        
+        .course-time {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        .course-location {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .course-item__content h3 {
+            margin-bottom: var(--space-md);
+        }
+        
+        .course-actions {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+        
+        .points-management {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .points-status {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            text-align: right;
+        }
+        
+        .points-available {
+            font-size: 16px;
+        }
+        
+        .points-alert {
+            font-size: 12px;
+            color: var(--c-accent);
+        }
+        
+        .points-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .points-sharing h3 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .sharing-form {
+            background: var(--c-sub);
+            padding: var(--space-md);
+            border-radius: var(--radius-card);
+        }
+        
+        .sharing-row {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+            align-items: end;
+        }
+        
+        .sharing-info {
+            font-size: 14px;
+        }
+        
+        /* AIO Progress Card Styles */
+        .role-selector {
+            display: flex;
+            align-items: center;
+        }
+        
+        .role-selector__dropdown {
+            padding: var(--space-xs) var(--space-sm);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+        }
+        
+        .role-overview {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, #a0cc4e15, #8ab83f15);
+            border-radius: var(--radius-card);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .role-info {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+        
+        .role-icon {
+            font-size: 48px;
+        }
+        
+        .role-details h3 {
+            margin-bottom: var(--space-sm);
+            color: var(--c-primary);
+        }
+        
+        .role-progress {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: #E8ECEF;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--c-primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .role-actions {
+            display: flex;
+            gap: var(--space-sm);
+            flex-direction: column;
+        }
+        
+        /* Learning Pathway Styles */
+        .learning-pathway h4 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .pathway-timeline {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .pathway-stage {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border-left: 3px solid #E8ECEF;
+            position: relative;
+        }
+        
+        .pathway-stage--completed {
+            border-left-color: var(--c-primary);
+            background: #a0cc4e0a;
+        }
+        
+        .pathway-stage--current {
+            border-left-color: var(--c-accent);
+            background: #e6a64a0a;
+        }
+        
+        .stage-marker {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--c-surface);
+            border: 2px solid #E8ECEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            position: absolute;
+            left: -18px;
+            top: var(--space-md);
+        }
+        
+        .pathway-stage--completed .stage-marker {
+            background: var(--c-primary);
+            color: white;
+            border-color: var(--c-primary);
+        }
+        
+        .pathway-stage--current .stage-marker {
+            background: var(--c-accent);
+            color: white;
+            border-color: var(--c-accent);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .stage-content {
+            flex: 1;
+            margin-left: var(--space-lg);
+        }
+        
+        .stage-content h5 {
+            margin-bottom: var(--space-xs);
+            color: var(--c-text);
+        }
+        
+        .stage-content p {
+            color: var(--c-muted);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .stage-courses {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+        
+        .course-tag {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            border: 1px solid #E8ECEF;
+            background: var(--c-surface);
+        }
+        
+        .course-tag--completed {
+            background: var(--c-primary);
+            color: white;
+            border-color: var(--c-primary);
+        }
+        
+        .course-tag--current {
+            background: var(--c-accent);
+            color: white;
+            border-color: var(--c-accent);
+        }
+        
+        /* Certificate Tracking Styles */
+        .certificate-categories {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .cert-category {
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+        }
+        
+        .cert-category__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .cert-category__header h4 {
+            margin: 0;
+        }
+        
+        .cert-progress {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .cert-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .cert-status--in-progress {
+            background: var(--c-accent);
+            color: white;
+        }
+        
+        .cert-status--planned {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .progress-mini {
+            width: 60px;
+            height: 4px;
+            background: #E8ECEF;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .cert-count {
+            background: var(--c-primary);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .cert-list {
+            display: grid;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+        }
+        
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-sm);
+        }
+        
+        .cert-item--target {
+            border-color: var(--c-primary);
+            background: #a0cc4e0a;
+        }
+        
+        .cert-item--completed {
+            border-color: var(--c-success, var(--c-primary));
+            background: #28a74515;
+        }
+        
+        .cert-icon {
+            font-size: 20px;
+            width: 32px;
+            text-align: center;
+        }
+        
+        .cert-info {
+            flex: 1;
+        }
+        
+        .cert-name {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .cert-requirement, .cert-date {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .cert-status-badge {
+            background: var(--c-primary);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .cert-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        /* Enhanced Points Management Styles */
+        .points-quick-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            text-align: right;
+        }
+        
+        .points-balance {
+            font-size: 16px;
+        }
+        
+        .points-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--c-success, var(--c-primary));
+        }
+        
+        .points-enhanced-content {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .points-analytics h4, .points-recommendations h4, .points-sharing-enhanced h4 {
+            color: var(--c-primary);
+            margin-bottom: var(--space-md);
+        }
+        
+        .usage-chart {
+            display: flex;
+            align-items: end;
+            gap: var(--space-sm);
+            height: 120px;
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .chart-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .chart-bar {
+            width: 100%;
+            background: var(--c-primary);
+            border-radius: 4px 4px 0 0;
+            min-height: 8px;
+            transition: height 0.3s ease;
+        }
+        
+        .chart-label {
+            font-size: 11px;
+            margin-top: var(--space-xs);
+            color: var(--c-muted);
+        }
+        
+        .chart-value {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        .usage-period {
+            font-size: 12px;
+            color: var(--c-muted);
+            text-align: center;
+        }
+        
+        .recommendation-list {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .recommendation-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            border-left: 4px solid var(--c-accent);
+        }
+        
+        .rec-icon {
+            font-size: 24px;
+        }
+        
+        .rec-content {
+            flex: 1;
+        }
+        
+        .rec-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--c-text);
+        }
+        
+        .rec-desc {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .sharing-history h5, .sharing-form-enhanced h5 {
+            margin-bottom: var(--space-md);
+            color: var(--c-text);
+        }
+        
+        .share-record {
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .share-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .share-item:last-child {
+            border-bottom: none;
+        }
+        
+        .share-info {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .share-recipient {
+            font-weight: 500;
+        }
+        
+        .share-amount {
+            color: var(--c-accent);
+            font-weight: 600;
+        }
+        
+        .share-date {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .enhanced-sharing-form {
+            background: var(--c-sub);
+            padding: var(--space-md);
+            border-radius: var(--radius-card);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+        
+        .form-row:last-of-type {
+            grid-template-columns: 1fr;
+        }
+        
+        .field--small {
+            min-width: 120px;
+        }
+        
+        .recipient-search {
+            position: relative;
+        }
+        
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--c-surface);
+            border: 1px solid #E8ECEF;
+            border-top: none;
+            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+            max-height: 120px;
+            overflow-y: auto;
+            z-index: 10;
+            display: none;
+        }
+        
+        .sharing-preview {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm);
+            background: var(--c-surface);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-md);
+        }
+        
+        .preview-info, .remaining-points {
+            font-size: 14px;
+        }
+        
+        .preview-label, .remaining-label {
+            color: var(--c-muted);
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        /* Modal Enhancement Styles */
+        .modal--large {
+            max-width: 800px;
+            width: 95vw;
+        }
+        
+        .cert-goals-form {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .cert-category-select h3 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .cert-tabs {
+            display: flex;
+            border-bottom: 2px solid #E8ECEF;
+        }
+        
+        .cert-tab {
+            padding: var(--space-sm) var(--space-md);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .cert-tab--active {
+            color: var(--c-primary);
+            border-bottom-color: var(--c-primary);
+        }
+        
+        .cert-tab-content {
+            padding: var(--space-md) 0;
+        }
+        
+        .cert-selection {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .cert-option {
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        
+        .cert-option:hover {
+            border-color: var(--c-primary);
+        }
+        
+        .cert-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            cursor: pointer;
+            margin: 0;
+        }
+        
+        .cert-checkbox input[type="checkbox"] {
+            display: none;
+        }
+        
+        .cert-checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #E8ECEF;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .cert-checkbox input[type="checkbox"]:checked + .cert-checkmark {
+            background: var(--c-primary);
+            border-color: var(--c-primary);
+        }
+        
+        .cert-checkbox input[type="checkbox"]:checked + .cert-checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 2px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .cert-option-info {
+            flex: 1;
+        }
+        
+        .cert-option .cert-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--c-text);
+        }
+        
+        .cert-option .cert-desc {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .cert-goals-timeline h3 {
+            color: var(--c-primary);
+            margin-bottom: var(--space-md);
+        }
+        
+        .timeline-input {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .timeline-input label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+        }
+        
+        .timeline-input input {
+            width: 100%;
+            padding: var(--space-sm);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-sm);
+        }
+        
+        .learning-plan h4 {
+            margin-bottom: var(--space-md);
+            color: var(--c-text);
+        }
+        
+        .plan-summary {
+            background: var(--c-sub);
+            padding: var(--space-md);
+            border-radius: var(--radius-card);
+        }
+        
+        .plan-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .plan-item:last-child {
+            border-bottom: none;
+        }
+        
+        .plan-label {
+            color: var(--c-muted);
+        }
+        
+        .plan-value {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        /* Purchase Enhanced Modal Styles */
+        .purchase-enhanced-content {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .current-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            background: linear-gradient(135deg, #a0cc4e15, #8ab83f15);
+            border-radius: var(--radius-card);
+        }
+        
+        .status-info {
+            display: flex;
+            gap: var(--space-lg);
+        }
+        
+        .balance-display, .usage-forecast {
+            text-align: center;
+        }
+        
+        .balance-label, .forecast-label {
+            display: block;
+            font-size: 12px;
+            color: var(--c-muted);
+            margin-bottom: 4px;
+        }
+        
+        .balance-amount, .forecast-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--c-primary);
+        }
+        
+        .recommendation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .rec-badge {
+            background: var(--c-accent);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .rec-text {
+            font-size: 12px;
+            text-align: center;
+            color: var(--c-muted);
+        }
+        
+        .purchase-options h3 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .option-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .option-card {
+            border: 2px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+        
+        .option-card:hover {
+            border-color: var(--c-primary);
+        }
+        
+        .option-card--recommended {
+            border-color: var(--c-accent);
+            position: relative;
+        }
+        
+        .option-card--recommended::before {
+            content: '推薦';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--c-accent);
+            color: white;
+            padding: 4px 8px;
+            font-size: 10px;
+            border-radius: 0 0 0 8px;
+        }
+        
+        .option-card input[type="radio"] {
+            display: none;
+        }
+        
+        .option-card input[type="radio"]:checked + .option-content {
+            background: #a0cc4e0a;
+        }
+        
+        .option-content {
+            padding: var(--space-md);
+        }
+        
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .option-name {
+            font-weight: 600;
+            color: var(--c-text);
+        }
+        
+        .option-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--c-primary);
+        }
+        
+        .option-input {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--c-primary);
+        }
+        
+        .option-input input {
+            width: 60px;
+            padding: 4px;
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-sm);
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        .option-desc {
+            font-size: 14px;
+            color: var(--c-muted);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .option-cost {
+            font-weight: 600;
+            color: var(--c-text);
+        }
+        
+        .discount {
+            font-size: 12px;
+            color: var(--c-success, var(--c-primary));
+            margin-left: var(--space-xs);
+        }
+        
+        .payment-methods h3 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .payment-options {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .payment-option {
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .payment-option:hover {
+            border-color: var(--c-primary);
+        }
+        
+        .payment-option input[type="radio"] {
+            display: none;
+        }
+        
+        .payment-option input[type="radio"]:checked + .payment-content {
+            background: #a0cc4e0a;
+        }
+        
+        .payment-content {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+        }
+        
+        .payment-icon {
+            font-size: 24px;
+        }
+        
+        .payment-info {
+            flex: 1;
+        }
+        
+        .payment-name {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .payment-desc {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .purchase-summary {
+            background: var(--c-sub);
+            padding: var(--space-md);
+            border-radius: var(--radius-card);
+            border: 2px solid var(--c-primary);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-row--total {
+            font-weight: 700;
+            color: var(--c-primary);
+            font-size: 16px;
+            margin-top: var(--space-sm);
+            padding-top: var(--space-sm);
+            border-top: 2px solid var(--c-primary);
+        }
+        
+        /* Invite and Share Modal Styles */
+        .invite-content {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .invite-reward {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: linear-gradient(135deg, #a0cc4e15, #8ab83f15);
+            border-radius: var(--radius-card);
+        }
+        
+        .reward-icon {
+            font-size: 48px;
+        }
+        
+        .reward-text h3 {
+            margin-bottom: var(--space-xs);
+            color: var(--c-primary);
+        }
+        
+        .invite-methods {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-lg);
+        }
+        
+        .invite-link label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+        }
+        
+        .link-input-group {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .link-input-group input {
+            flex: 1;
+            padding: var(--space-sm);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+        }
+        
+        .invite-qr {
+            text-align: center;
+        }
+        
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #E8ECEF;
+            border-radius: var(--radius-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            background: var(--c-sub);
+        }
+        
+        .qr-placeholder {
+            text-align: center;
+            color: var(--c-muted);
+            font-size: 12px;
+        }
+        
+        .invite-history h4 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .history-list {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-sm);
+        }
+        
+        .history-name {
+            font-weight: 500;
+        }
+        
+        .history-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .history-status--completed {
+            background: var(--c-success, var(--c-primary));
+            color: white;
+        }
+        
+        .history-status--pending {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .history-date {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .share-qr-content {
+            text-align: center;
+        }
+        
+        .qr-display {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .qr-code-large {
+            width: 200px;
+            height: 200px;
+            border: 3px dashed var(--c-primary);
+            border-radius: var(--radius-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #a0cc4e15, #8ab83f15);
+        }
+        
+        .qr-placeholder-large {
+            color: var(--c-primary);
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .share-instructions p {
+            margin-bottom: var(--space-md);
+            color: var(--c-muted);
+        }
+        
+        .share-details {
+            background: var(--c-sub);
+            padding: var(--space-md);
+            border-radius: var(--radius-card);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            color: var(--c-muted);
+        }
+        
+        .detail-value {
+            font-weight: 500;
+            color: var(--c-primary);
+        }
+        
+        .document-list, .notification-list {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .document-item, .notification-item {
+            display: flex;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            align-items: center;
+        }
+        
+        .document-icon, .notification-icon {
+            font-size: 20px;
+            width: 32px;
+            text-align: center;
+        }
+        
+        .document-info, .notification-content {
+            flex-grow: 1;
+        }
+        
+        .document-name, .notification-text {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .document-status, .notification-time {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .document-actions {
+            display: flex;
+            gap: var(--space-xs);
+            align-items: center;
+        }
+        
+        .download-link {
+            color: var(--c-primary);
+            text-decoration: none;
+            font-size: 12px;
+        }
+        
+        .download-link:hover {
+            text-decoration: underline;
+        }
+        
+        .separator {
+            color: var(--c-muted);
+        }
+        
+        .notification-item--unread {
+            background: #FFF8E1;
+            border-color: var(--c-accent);
+        }
+        
+        .activity-timeline {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .activity-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: var(--space-sm);
+        }
+        
+        .activity-time {
+            font-size: 12px;
+            color: var(--c-muted);
+            text-align: right;
+            padding-top: 4px;
+        }
+        
+        .activity-content {
+            display: flex;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .activity-icon {
+            font-size: 16px;
+        }
+        
+        .activity-text {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .view-details {
+            color: var(--c-primary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .view-details:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 992px) {
+            .dashboard-header {
+                flex-direction: column;
+                gap: var(--space-md);
+                text-align: center;
+            }
+            
+            .quick-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .kpi {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .role-overview {
+                flex-direction: column;
+                gap: var(--space-md);
+                text-align: center;
+            }
+            
+            .role-actions {
+                flex-direction: row;
+            }
+            
+            .points-enhanced-content {
+                gap: var(--space-md);
+            }
+            
+            .usage-chart {
+                height: 100px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding-bottom: var(--space-md);
+            }
+            
+            .kpi {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-item__header {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+            
+            .course-date {
+                align-self: flex-start;
+                min-width: auto;
+                width: fit-content;
+            }
+            
+            .course-actions {
+                justify-content: center;
+            }
+            
+            .points-actions {
+                flex-direction: column;
+            }
+            
+            .sharing-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .role-overview {
+                text-align: center;
+            }
+            
+            .role-info {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+            
+            .progress-bar {
+                width: 100%;
+            }
+            
+            .role-actions {
+                width: 100%;
+            }
+            
+            .cert-category__header {
+                flex-direction: column;
+                gap: var(--space-sm);
+                text-align: center;
+            }
+            
+            .points-quick-info {
+                text-align: center;
+            }
+            
+            .sharing-preview {
+                flex-direction: column;
+                gap: var(--space-xs);
+                text-align: center;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .activity-item {
+                grid-template-columns: 1fr;
+                gap: var(--space-xs);
+            }
+            
+            .activity-time {
+                text-align: left;
+                order: 2;
+            }
+        }
+        
+        /* Point Shortage Notification System */
+        .alert {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            border-radius: var(--radius-card);
+            border: 1px solid;
+            position: relative;
+        }
+        
+        .alert--warning {
+            background: #fff8e1;
+            border-color: #ffb300;
+            color: #e65100;
+        }
+        
+        .alert-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        
+        .alert-content {
+            flex: 1;
+        }
+        
+        .alert-content h3 {
+            margin: 0 0 var(--space-xs) 0;
+            font-size: 1rem;
+            color: inherit;
+        }
+        
+        .alert-content p {
+            margin: 0 0 var(--space-md) 0;
+            color: inherit;
+        }
+        
+        .alert-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .alert-close {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: inherit;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+        
+        .alert-close:hover {
+            opacity: 1;
+        }
+        
+        /* Notification Bell */
+        .notification-bell {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            margin-right: var(--space-md);
+        }
+        
+        .bell-icon {
+            font-size: 1.5rem;
+            padding: var(--space-sm);
+            border-radius: 50%;
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            transition: all 0.2s ease;
+        }
+        
+        .bell-icon:hover {
+            background: var(--c-primary-light);
+            border-color: var(--c-primary);
+        }
+        
+        .notification-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #f44336;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .notification-dropdown {
+            position: absolute;
+            top: calc(100% + var(--space-sm));
+            right: 0;
+            width: 350px;
+            background: white;
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .notification-dropdown.show {
+            display: block;
+        }
+        
+        .notification-item {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--c-border-light);
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .notification-item:hover {
+            background: var(--c-surface);
+        }
+        
+        .notification-item--unread {
+            background: #f8f9fa;
+            position: relative;
+        }
+        
+        .notification-item--unread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--c-primary);
+        }
+        
+        .kpi__item--warning {
+            border-left: 4px solid #ff5722;
+            background: linear-gradient(135deg, #fff8f5, #ffebee);
+        }
+        
+        .kpi__item--critical {
+            border-left: 4px solid #f44336;
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            animation: criticalPulse 2s infinite;
+        }
+        
+        @keyframes criticalPulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.3); }
+            70% { box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
+        }
+        
+        .kpi__note--critical {
+            color: #c62828 !important;
+            font-weight: 700;
+            animation: textBlink 1.5s infinite;
+        }
+        
+        @keyframes textBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+        
+        .btn--xs {
+            padding: var(--space-xs) var(--space-sm);
+            font-size: 0.75rem;
+            border-radius: var(--radius-sm);
+        }
+        
+        /* Enhanced Bulletin Board Styles */
+        .notification-header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .unread-count {
+            font-size: 0.875rem;
+            color: var(--c-muted);
+            font-weight: 500;
+        }
+        
+        .unread-count span {
+            color: var(--c-primary);
+            font-weight: 700;
+        }
+        
+        .enhanced-bulletin-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .notification-item {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            border: 1px solid var(--c-border-light);
+            border-radius: var(--radius-card);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .notification-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-color: var(--c-primary);
+        }
+        
+        .notification-item--unread {
+            background: linear-gradient(135deg, #f8fff8, #f0f8ff);
+            border-color: var(--c-primary);
+            border-left: 4px solid var(--c-primary);
+        }
+        
+        .notification-item--priority {
+            background: linear-gradient(135deg, #fff8f0, #ffe8e0);
+            border-color: #ff5722;
+            border-left: 4px solid #ff5722;
+            animation: priorityGlow 3s infinite;
+        }
+        
+        @keyframes priorityGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.3); }
+            50% { box-shadow: 0 0 0 8px rgba(255, 87, 34, 0); }
+        }
+        
+        .notification-item--read {
+            background: white;
+            border-color: var(--c-border-light);
+            opacity: 0.8;
+        }
+        
+        .notification-status {
+            display: flex;
+            align-items: flex-start;
+            padding-top: 2px;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid;
+        }
+        
+        .status-indicator--unread {
+            background: var(--c-primary);
+            border-color: var(--c-primary);
+        }
+        
+        .status-indicator--unread.pulse {
+            animation: statusPulse 2s infinite;
+        }
+        
+        @keyframes statusPulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .status-indicator--read {
+            background: var(--c-muted);
+            border-color: var(--c-muted);
+        }
+        
+        .notification-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        
+        .priority-icon {
+            filter: drop-shadow(0 0 4px rgba(255, 87, 34, 0.5));
+            animation: iconBounce 2s infinite;
+        }
+        
+        @keyframes iconBounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-4px); }
+            60% { transform: translateY(-2px); }
+        }
+        
+        .notification-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .notification-priority {
+            display: inline-block;
+            background: #ff5722;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: var(--radius-pill);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            color: var(--c-text);
+            margin-bottom: var(--space-xs);
+            font-size: 0.9rem;
+        }
+        
+        .notification-text {
+            color: var(--c-muted);
+            font-size: 0.875rem;
+            line-height: 1.4;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .notification-meta {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+        
+        .notification-time {
+            font-size: 0.75rem;
+            color: var(--c-muted);
+        }
+        
+        .notification-category {
+            font-size: 0.75rem;
+            color: var(--c-primary);
+            background: var(--c-primary-light);
+            padding: 2px 6px;
+            border-radius: var(--radius-pill);
+        }
+        
+        .notification-actions {
+            display: flex;
+            gap: var(--space-xs);
+            align-items: flex-start;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .notification-item:hover .notification-actions {
+            opacity: 1;
+        }
+        
+        .notification-item--unread .notification-actions {
+            opacity: 1;
+        }
+        
+        .notification-footer {
+            text-align: center;
+            padding: var(--space-md);
+            border-top: 1px solid var(--c-border-light);
+        }
+        
+        .view-all-link {
+            color: var(--c-primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .view-all-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive Design for Enhanced Notifications */
+        @media (max-width: 768px) {
+            .notification-header-actions {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+            
+            .notification-item {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+            
+            .notification-status {
+                order: -1;
+                align-self: flex-start;
+            }
+            
+            .notification-actions {
+                opacity: 1;
+                align-self: stretch;
+            }
+            
+            .notification-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-xs);
+            }
+        }
+    </style>
+    
+    <!-- Enhanced Bulletin Board JavaScript -->
+    <script>
+        // Enhanced Bulletin Board Functions
+        function toggleBulletinRead(element) {
+            const isUnread = element.classList.contains('notification-item--unread');
+            
+            if (isUnread) {
+                // Mark as read
+                element.classList.remove('notification-item--unread', 'notification-item--priority');
+                element.classList.add('notification-item--read');
+                
+                // Update status indicator
+                const statusIndicator = element.querySelector('.status-indicator');
+                statusIndicator.className = 'status-indicator status-indicator--read';
+                
+                // Update unread count
+                updateBulletinUnreadCount();
+                
+                // Show toast notification
+                showBulletinToast('訊息已標記為已讀', 'success');
+            } else {
+                // Mark as unread
+                element.classList.remove('notification-item--read');
+                element.classList.add('notification-item--unread');
+                
+                // Update status indicator
+                const statusIndicator = element.querySelector('.status-indicator');
+                statusIndicator.className = 'status-indicator status-indicator--unread';
+                
+                // Update unread count
+                updateBulletinUnreadCount();
+                
+                showBulletinToast('訊息已標記為未讀', 'info');
+            }
+        }
+        
+        function markAllBulletinAsRead() {
+            const unreadItems = document.querySelectorAll('.enhanced-bulletin-list .notification-item--unread');
+            
+            if (unreadItems.length === 0) {
+                showBulletinToast('沒有未讀訊息', 'info');
+                return;
+            }
+            
+            unreadItems.forEach(item => {
+                item.classList.remove('notification-item--unread', 'notification-item--priority');
+                item.classList.add('notification-item--read');
+                
+                // Update status indicator
+                const statusIndicator = item.querySelector('.status-indicator');
+                statusIndicator.className = 'status-indicator status-indicator--read';
+            });
+            
+            updateBulletinUnreadCount();
+            showBulletinToast(`已標記 ${unreadItems.length} 則訊息為已讀`, 'success');
+        }
+        
+        function updateBulletinUnreadCount() {
+            const unreadItems = document.querySelectorAll('.enhanced-bulletin-list .notification-item--unread');
+            const countElement = document.getElementById('unread-bulletin-count');
+            const count = unreadItems.length;
+            
+            if (countElement) {
+                countElement.textContent = count;
+                
+                // Hide count display if no unread messages
+                const unreadCountContainer = countElement.closest('.unread-count');
+                if (unreadCountContainer) {
+                    if (count === 0) {
+                        unreadCountContainer.style.opacity = '0.5';
+                    } else {
+                        unreadCountContainer.style.opacity = '1';
+                    }
+                }
+            }
+            
+            // Update page title with unread count
+            const originalTitle = 'CFT 照顧學校 | 學員儀表板';
+            if (count > 0) {
+                document.title = `(${count}) ${originalTitle}`;
+            } else {
+                document.title = originalTitle;
+            }
+            
+            return count;
+        }
+        
+        function showBulletinToast(message, type = 'info', duration = 3000) {
+            // Remove existing toast
+            const existingToast = document.querySelector('.bulletin-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            // Create toast
+            const toast = document.createElement('div');
+            toast.className = `bulletin-toast bulletin-toast--${type}`;
+            toast.innerHTML = `
+                <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                    <div>${type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️'}</div>
+                    <div>${message}</div>
+                </div>
+            `;
+            
+            // Add styles
+            toast.style.cssText = `
+                position: fixed;
+                top: var(--space-xl);
+                right: var(--space-xl);
+                background: white;
+                border: 1px solid var(--c-border);
+                border-radius: var(--radius-card);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+                padding: var(--space-lg);
+                z-index: 1001;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            
+            if (type === 'success') {
+                toast.style.borderLeft = '4px solid #4caf50';
+            } else if (type === 'warning') {
+                toast.style.borderLeft = '4px solid #ff9800';
+            }
+            
+            document.body.appendChild(toast);
+            
+            // Show toast
+            setTimeout(() => {
+                toast.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Auto-hide toast
+            setTimeout(() => {
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }, duration);
+        }
+        
+        function addNewBulletin(title, text, category = '系統通知', priority = false) {
+            const bulletinList = document.querySelector('.enhanced-bulletin-list');
+            if (!bulletinList) return;
+            
+            const newItem = document.createElement('div');
+            newItem.className = `notification-item notification-item--unread${priority ? ' notification-item--priority' : ''}`;
+            newItem.onclick = function() { toggleBulletinRead(this); };
+            
+            const timeText = '剛剛';
+            
+            newItem.innerHTML = `
+                <div class="notification-status">
+                    <div class="status-indicator status-indicator--unread${priority ? ' pulse' : ''}"></div>
+                </div>
+                <div class="notification-icon${priority ? ' priority-icon' : ''}">${priority ? '⚠️' : '🔔'}</div>
+                <div class="notification-content">
+                    ${priority ? '<div class="notification-priority">高優先級</div>' : ''}
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-text">${text}</div>
+                    <div class="notification-meta">
+                        <span class="notification-time">${timeText}</span>
+                        <span class="notification-category">${category}</span>
+                    </div>
+                </div>
+                <div class="notification-actions">
+                    <button class="btn btn--xs btn--ghost" onclick="event.stopPropagation(); toggleBulletinRead(this.closest('.notification-item'))">已讀</button>
+                </div>
+            `;
+            
+            // Insert at the beginning
+            bulletinList.insertBefore(newItem, bulletinList.firstChild);
+            
+            // Update count
+            updateBulletinUnreadCount();
+            
+            // Show notification
+            showBulletinToast('新訊息已到達', 'info');
+            
+            // Auto-scroll to show new notification
+            newItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update initial bulletin count
+            updateBulletinUnreadCount();
+            
+            // Add keyboard accessibility
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    // Close any open modals or dropdowns
+                    const openDropdowns = document.querySelectorAll('.notification-dropdown.show');
+                    openDropdowns.forEach(dropdown => dropdown.classList.remove('show'));
+                }
+            });
+        });
+        
+        // Demo function to test functionality (remove in production)
+        function testBulletinBoard() {
+            console.log('Testing bulletin board functionality...');
+            
+            setTimeout(() => {
+                addNewBulletin('測試通知', '這是一個測試用的通知訊息', '測試類別');
+            }, 2000);
+            
+            setTimeout(() => {
+                addNewBulletin('緊急通知', '這是一個高優先級的緊急通知', '緊急通知', true);
+            }, 5000);
+        }
+        
+        // Uncomment to test: testBulletinBoard();
+    </script>
+</body>
+</html>

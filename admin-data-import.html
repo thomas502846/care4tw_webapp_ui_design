@@ -1,0 +1,2122 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 批次資料匯入</title>
+    <meta name="description" content="CFT照顧學校批次資料匯入系統，支援學員、課程、成績等資料的Excel批次匯入。">
+    <meta name="keywords" content="批次匯入,資料匯入,Excel匯入,學員管理,課程管理,成績匯入">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <img src="assets/images/logo.png" alt="CFT 照顧學校" class="header__logo">
+                <div class="header__name">CFT 照顧學校</div>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">管理首頁</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-question-bank.html" class="header__menu-item" role="menuitem">考題管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">設定</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <!-- Page Header -->
+            <div class="admin-page-header">
+                <div class="breadcrumb">
+                    <a href="admin-dashboard.html">管理首頁</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="admin-settings.html">系統設定</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span>批次資料匯入</span>
+                </div>
+                <div class="page-title-section">
+                    <h1>📥 批次資料匯入</h1>
+                    <p class="meta">批次匯入學員、課程、成績等資料，支援Excel格式檔案</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn--ghost" data-open="modal-import-history">📊 匯入歷程</button>
+                    <button class="btn btn--ghost" data-open="modal-help">❓ 使用說明</button>
+                </div>
+            </div>
+
+            <!-- Import Dashboard -->
+            <div class="import-dashboard">
+                <!-- Import Type Selection -->
+                <div class="card admin-card">
+                    <div class="card__header">
+                        <h2>🎯 選擇匯入類型</h2>
+                        <div class="import-stats">
+                            <span class="stats-item">今日匯入: <strong>15</strong> 筆</span>
+                            <span class="stats-item">本月匯入: <strong>456</strong> 筆</span>
+                        </div>
+                    </div>
+                    
+                    <div class="import-types">
+                        <div class="import-type-card" data-type="students">
+                            <div class="type-header">
+                                <div class="type-icon">👥</div>
+                                <div class="type-info">
+                                    <h3>學員資料匯入</h3>
+                                    <p>批次匯入學員基本資料、聯絡資訊、證照狀態等</p>
+                                </div>
+                            </div>
+                            <div class="type-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">上次匯入</span>
+                                    <span class="stat-value">2025/01/15</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">成功率</span>
+                                    <span class="stat-value">98.5%</span>
+                                </div>
+                            </div>
+                            <div class="type-actions">
+                                <button class="btn btn--primary">📥 開始匯入</button>
+                                <button class="btn btn--ghost">📋 下載範本</button>
+                            </div>
+                        </div>
+                        
+                        <div class="import-type-card" data-type="courses">
+                            <div class="type-header">
+                                <div class="type-icon">📚</div>
+                                <div class="type-info">
+                                    <h3>課程資料匯入</h3>
+                                    <p>批次匯入課程資訊、講師資料、時間安排等</p>
+                                </div>
+                            </div>
+                            <div class="type-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">上次匯入</span>
+                                    <span class="stat-value">2025/01/12</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">成功率</span>
+                                    <span class="stat-value">95.2%</span>
+                                </div>
+                            </div>
+                            <div class="type-actions">
+                                <button class="btn btn--primary">📥 開始匯入</button>
+                                <button class="btn btn--ghost">📋 下載範本</button>
+                            </div>
+                        </div>
+                        
+                        <div class="import-type-card" data-type="enrollments">
+                            <div class="type-header">
+                                <div class="type-icon">✅</div>
+                                <div class="type-info">
+                                    <h3>報名資料匯入</h3>
+                                    <p>批次匯入學員報名狀況、報名課程、付費狀態等</p>
+                                </div>
+                            </div>
+                            <div class="type-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">上次匯入</span>
+                                    <span class="stat-value">2025/01/10</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">成功率</span>
+                                    <span class="stat-value">97.8%</span>
+                                </div>
+                            </div>
+                            <div class="type-actions">
+                                <button class="btn btn--primary">📥 開始匯入</button>
+                                <button class="btn btn--ghost">📋 下載範本</button>
+                            </div>
+                        </div>
+                        
+                        <div class="import-type-card" data-type="grades">
+                            <div class="type-header">
+                                <div class="type-icon">📊</div>
+                                <div class="type-info">
+                                    <h3>成績資料匯入</h3>
+                                    <p>批次匯入測驗成績、出席狀況、學習記錄等</p>
+                                </div>
+                            </div>
+                            <div class="type-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">上次匯入</span>
+                                    <span class="stat-value">2025/01/08</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">成功率</span>
+                                    <span class="stat-value">99.1%</span>
+                                </div>
+                            </div>
+                            <div class="type-actions">
+                                <button class="btn btn--primary">📥 開始匯入</button>
+                                <button class="btn btn--ghost">📋 下載範本</button>
+                            </div>
+                        </div>
+                        
+                        <div class="import-type-card" data-type="certificates">
+                            <div class="type-header">
+                                <div class="type-icon">🏆</div>
+                                <div class="type-info">
+                                    <h3>證照資料匯入</h3>
+                                    <p>批次匯入學員證照取得狀況、到期日提醒等</p>
+                                </div>
+                            </div>
+                            <div class="type-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">上次匯入</span>
+                                    <span class="stat-value">2025/01/05</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">成功率</span>
+                                    <span class="stat-value">96.7%</span>
+                                </div>
+                            </div>
+                            <div class="type-actions">
+                                <button class="btn btn--primary">📥 開始匯入</button>
+                                <button class="btn btn--ghost">📋 下載範本</button>
+                            </div>
+                        </div>
+                        
+                        <div class="import-type-card" data-type="questions">
+                            <div class="type-header">
+                                <div class="type-icon">❓</div>
+                                <div class="type-info">
+                                    <h3>考題資料匯入</h3>
+                                    <p>批次匯入測驗題目、答案選項、解析說明等</p>
+                                </div>
+                            </div>
+                            <div class="type-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">上次匯入</span>
+                                    <span class="stat-value">2025/01/03</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">成功率</span>
+                                    <span class="stat-value">94.3%</span>
+                                </div>
+                            </div>
+                            <div class="type-actions">
+                                <button class="btn btn--primary">📥 開始匯入</button>
+                                <button class="btn btn--ghost">📋 下載範本</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Import Process (Initially Hidden) -->
+                <div class="card admin-card import-process-card" id="import-process" style="display: none;">
+                    <div class="card__header">
+                        <h2 id="import-process-title">📥 學員資料匯入</h2>
+                        <div class="process-controls">
+                            <button class="btn btn--ghost" id="cancel-import">❌ 取消</button>
+                            <button class="btn btn--ghost" id="reset-import">🔄 重新開始</button>
+                        </div>
+                    </div>
+                    
+                    <div class="import-steps">
+                        <div class="step-indicator">
+                            <div class="step step--active" data-step="1">
+                                <div class="step-number">1</div>
+                                <div class="step-label">檔案上傳</div>
+                            </div>
+                            <div class="step-line"></div>
+                            <div class="step" data-step="2">
+                                <div class="step-number">2</div>
+                                <div class="step-label">資料驗證</div>
+                            </div>
+                            <div class="step-line"></div>
+                            <div class="step" data-step="3">
+                                <div class="step-number">3</div>
+                                <div class="step-label">匯入確認</div>
+                            </div>
+                            <div class="step-line"></div>
+                            <div class="step" data-step="4">
+                                <div class="step-number">4</div>
+                                <div class="step-label">執行匯入</div>
+                            </div>
+                            <div class="step-line"></div>
+                            <div class="step" data-step="5">
+                                <div class="step-number">5</div>
+                                <div class="step-label">完成報告</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 1: File Upload -->
+                        <div class="step-content" data-content="1">
+                            <div class="step-section">
+                                <h3>📤 檔案上傳</h3>
+                                <div class="upload-area">
+                                    <input type="file" id="import-file" accept=".xlsx,.xls,.csv" hidden>
+                                    <label for="import-file" class="upload-label">
+                                        <div class="upload-icon">📁</div>
+                                        <div class="upload-text">
+                                            <div class="upload-title">拖曳檔案至此或點擊選擇</div>
+                                            <div class="upload-desc">支援 Excel (.xlsx, .xls) 和 CSV 檔案，檔案大小限制 50MB</div>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div class="file-info" id="file-info" style="display: none;">
+                                    <div class="file-details">
+                                        <div class="file-icon">📄</div>
+                                        <div class="file-meta">
+                                            <div class="file-name" id="file-name">學員名單.xlsx</div>
+                                            <div class="file-size" id="file-size">2.3 MB</div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn--small btn--danger" id="remove-file">🗑️ 移除</button>
+                                </div>
+                                
+                                <div class="import-options">
+                                    <h4>匯入選項</h4>
+                                    <div class="option-grid">
+                                        <label class="option-checkbox">
+                                            <input type="checkbox" checked>
+                                            <span class="checkbox-text">跳過重複資料</span>
+                                        </label>
+                                        <label class="option-checkbox">
+                                            <input type="checkbox">
+                                            <span class="checkbox-text">更新現有資料</span>
+                                        </label>
+                                        <label class="option-checkbox">
+                                            <input type="checkbox" checked>
+                                            <span class="checkbox-text">驗證資料格式</span>
+                                        </label>
+                                        <label class="option-checkbox">
+                                            <input type="checkbox" checked>
+                                            <span class="checkbox-text">產生詳細報告</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="step-actions">
+                                    <button class="btn btn--primary" id="next-to-validation" disabled>下一步：資料驗證 ➡️</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: Data Validation -->
+                        <div class="step-content" data-content="2" style="display: none;">
+                            <div class="step-section">
+                                <h3>🔍 資料驗證</h3>
+                                <div class="validation-progress">
+                                    <div class="progress-info">
+                                        <span>正在驗證資料格式和內容...</span>
+                                        <span id="validation-progress-text">0%</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <span class="progress-fill" id="validation-progress-bar" style="width: 0%"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="validation-results" id="validation-results" style="display: none;">
+                                    <div class="validation-summary">
+                                        <div class="summary-stats">
+                                            <div class="summary-item summary-item--success">
+                                                <div class="summary-icon">✅</div>
+                                                <div class="summary-content">
+                                                    <div class="summary-number" id="valid-records">245</div>
+                                                    <div class="summary-label">有效記錄</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="summary-item summary-item--warning">
+                                                <div class="summary-icon">⚠️</div>
+                                                <div class="summary-content">
+                                                    <div class="summary-number" id="warning-records">12</div>
+                                                    <div class="summary-label">警告記錄</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="summary-item summary-item--error">
+                                                <div class="summary-icon">❌</div>
+                                                <div class="summary-content">
+                                                    <div class="summary-number" id="error-records">3</div>
+                                                    <div class="summary-label">錯誤記錄</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="validation-issues">
+                                        <div class="issue-tabs">
+                                            <button class="issue-tab issue-tab--active" data-tab="errors">❌ 錯誤 (3)</button>
+                                            <button class="issue-tab" data-tab="warnings">⚠️ 警告 (12)</button>
+                                            <button class="issue-tab" data-tab="preview">👁️ 預覽 (10筆)</button>
+                                        </div>
+                                        
+                                        <div class="issue-content" data-content="errors">
+                                            <div class="issue-list">
+                                                <div class="issue-item issue-item--error">
+                                                    <div class="issue-info">
+                                                        <div class="issue-row">第 5 行</div>
+                                                        <div class="issue-field">身分證字號</div>
+                                                        <div class="issue-message">格式錯誤：A12345678 (應為10碼)</div>
+                                                    </div>
+                                                    <div class="issue-actions">
+                                                        <button class="btn btn--small">🔧 修正</button>
+                                                        <button class="btn btn--small btn--danger">🗑️ 跳過</button>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="issue-item issue-item--error">
+                                                    <div class="issue-info">
+                                                        <div class="issue-row">第 18 行</div>
+                                                        <div class="issue-field">出生日期</div>
+                                                        <div class="issue-message">日期格式錯誤：1985/13/25</div>
+                                                    </div>
+                                                    <div class="issue-actions">
+                                                        <button class="btn btn--small">🔧 修正</button>
+                                                        <button class="btn btn--small btn--danger">🗑️ 跳過</button>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="issue-item issue-item--error">
+                                                    <div class="issue-info">
+                                                        <div class="issue-row">第 32 行</div>
+                                                        <div class="issue-field">電子信箱</div>
+                                                        <div class="issue-message">Email格式錯誤：invalid-email</div>
+                                                    </div>
+                                                    <div class="issue-actions">
+                                                        <button class="btn btn--small">🔧 修正</button>
+                                                        <button class="btn btn--small btn--danger">🗑️ 跳過</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="issue-content" data-content="warnings" style="display: none;">
+                                            <div class="issue-list">
+                                                <div class="issue-item issue-item--warning">
+                                                    <div class="issue-info">
+                                                        <div class="issue-row">第 8 行</div>
+                                                        <div class="issue-field">手機號碼</div>
+                                                        <div class="issue-message">可能重複：0912345678 (已存在於系統)</div>
+                                                    </div>
+                                                    <div class="issue-actions">
+                                                        <button class="btn btn--small">✅ 繼續</button>
+                                                        <button class="btn btn--small">🗑️ 跳過</button>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="issue-item issue-item--warning">
+                                                    <div class="issue-info">
+                                                        <div class="issue-row">第 15 行</div>
+                                                        <div class="issue-field">職業</div>
+                                                        <div class="issue-message">建議標準化：護理人員 → 護理師</div>
+                                                    </div>
+                                                    <div class="issue-actions">
+                                                        <button class="btn btn--small">🔧 修正</button>
+                                                        <button class="btn btn--small">✅ 繼續</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="issue-content" data-content="preview" style="display: none;">
+                                            <div class="preview-table">
+                                                <table class="data-preview-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>姓名</th>
+                                                            <th>身分證字號</th>
+                                                            <th>手機號碼</th>
+                                                            <th>電子信箱</th>
+                                                            <th>職業</th>
+                                                            <th>狀態</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="row-valid">
+                                                            <td>王小明</td>
+                                                            <td>A123456789</td>
+                                                            <td>0912345678</td>
+                                                            <td>wang@email.com</td>
+                                                            <td>照顧服務員</td>
+                                                            <td><span class="status-valid">✅ 正常</span></td>
+                                                        </tr>
+                                                        <tr class="row-valid">
+                                                            <td>李美華</td>
+                                                            <td>B234567890</td>
+                                                            <td>0923456789</td>
+                                                            <td>lee@email.com</td>
+                                                            <td>護理師</td>
+                                                            <td><span class="status-valid">✅ 正常</span></td>
+                                                        </tr>
+                                                        <tr class="row-warning">
+                                                            <td>張大偉</td>
+                                                            <td>C345678901</td>
+                                                            <td>0912345678</td>
+                                                            <td>zhang@email.com</td>
+                                                            <td>護理人員</td>
+                                                            <td><span class="status-warning">⚠️ 警告</span></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="step-actions">
+                                    <button class="btn btn--ghost" id="back-to-upload">⬅️ 上一步</button>
+                                    <button class="btn btn--primary" id="next-to-confirm">下一步：匯入確認 ➡️</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Import Confirmation -->
+                        <div class="step-content" data-content="3" style="display: none;">
+                            <div class="step-section">
+                                <h3>✅ 匯入確認</h3>
+                                
+                                <div class="confirmation-summary">
+                                    <div class="confirm-card">
+                                        <h4>📊 匯入摘要</h4>
+                                        <div class="confirm-stats">
+                                            <div class="confirm-stat">
+                                                <span class="confirm-label">檔案名稱:</span>
+                                                <span class="confirm-value">學員名單.xlsx</span>
+                                            </div>
+                                            <div class="confirm-stat">
+                                                <span class="confirm-label">匯入類型:</span>
+                                                <span class="confirm-value">學員資料</span>
+                                            </div>
+                                            <div class="confirm-stat">
+                                                <span class="confirm-label">總記錄數:</span>
+                                                <span class="confirm-value">260 筆</span>
+                                            </div>
+                                            <div class="confirm-stat">
+                                                <span class="confirm-label">將要匯入:</span>
+                                                <span class="confirm-value confirm-value--success">245 筆 (正常)</span>
+                                            </div>
+                                            <div class="confirm-stat">
+                                                <span class="confirm-label">需要注意:</span>
+                                                <span class="confirm-value confirm-value--warning">12 筆 (警告)</span>
+                                            </div>
+                                            <div class="confirm-stat">
+                                                <span class="confirm-label">將被跳過:</span>
+                                                <span class="confirm-value confirm-value--error">3 筆 (錯誤)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="confirm-card">
+                                        <h4>⚙️ 匯入設定</h4>
+                                        <div class="confirm-settings">
+                                            <div class="setting-item">
+                                                <div class="setting-icon">✅</div>
+                                                <span>跳過重複資料</span>
+                                            </div>
+                                            <div class="setting-item">
+                                                <div class="setting-icon">❌</div>
+                                                <span>更新現有資料</span>
+                                            </div>
+                                            <div class="setting-item">
+                                                <div class="setting-icon">✅</div>
+                                                <span>驗證資料格式</span>
+                                            </div>
+                                            <div class="setting-item">
+                                                <div class="setting-icon">✅</div>
+                                                <span>產生詳細報告</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="confirm-card">
+                                        <h4>📝 匯入預估</h4>
+                                        <div class="estimate-info">
+                                            <div class="estimate-item">
+                                                <span class="estimate-label">預估處理時間:</span>
+                                                <span class="estimate-value">約 2-3 分鐘</span>
+                                            </div>
+                                            <div class="estimate-item">
+                                                <span class="estimate-label">資料庫影響:</span>
+                                                <span class="estimate-value">新增 245 筆學員記錄</span>
+                                            </div>
+                                            <div class="estimate-item">
+                                                <span class="estimate-label">備份建議:</span>
+                                                <span class="estimate-value">建議在匯入前建立資料備份</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="confirmation-warning">
+                                    <div class="warning-card">
+                                        <div class="warning-icon">⚠️</div>
+                                        <div class="warning-content">
+                                            <h5>重要提醒</h5>
+                                            <ul>
+                                                <li>匯入過程中請勿關閉瀏覽器或離開此頁面</li>
+                                                <li>匯入完成前請勿進行其他資料異動操作</li>
+                                                <li>如有疑問請聯繫系統管理員</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="step-actions">
+                                    <button class="btn btn--ghost" id="back-to-validation">⬅️ 上一步</button>
+                                    <button class="btn btn--primary btn--large" id="start-import">🚀 開始匯入</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4: Import Execution -->
+                        <div class="step-content" data-content="4" style="display: none;">
+                            <div class="step-section">
+                                <h3>🔄 執行匯入</h3>
+                                
+                                <div class="import-execution">
+                                    <div class="execution-progress">
+                                        <div class="progress-header">
+                                            <span id="import-status">正在處理資料...</span>
+                                            <span id="import-progress-text">0%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <span class="progress-fill" id="import-progress-bar" style="width: 0%"></span>
+                                        </div>
+                                        <div class="progress-details">
+                                            <span id="import-current-record">處理第 0 筆，共 245 筆</span>
+                                            <span id="import-eta">預估剩餘時間: --</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="execution-log">
+                                        <h4>📋 處理日誌</h4>
+                                        <div class="log-container" id="import-log">
+                                            <div class="log-entry log-entry--info">
+                                                <span class="log-time">14:25:01</span>
+                                                <span class="log-message">開始匯入程序...</span>
+                                            </div>
+                                            <div class="log-entry log-entry--info">
+                                                <span class="log-time">14:25:02</span>
+                                                <span class="log-message">正在驗證資料完整性...</span>
+                                            </div>
+                                            <div class="log-entry log-entry--success">
+                                                <span class="log-time">14:25:03</span>
+                                                <span class="log-message">資料驗證完成，開始插入資料庫...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="execution-stats">
+                                        <div class="stat-card">
+                                            <div class="stat-label">已處理</div>
+                                            <div class="stat-value" id="processed-count">0</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-label">成功</div>
+                                            <div class="stat-value stat-value--success" id="success-count">0</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-label">警告</div>
+                                            <div class="stat-value stat-value--warning" id="warning-count">0</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-label">錯誤</div>
+                                            <div class="stat-value stat-value--error" id="error-count">0</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="step-actions">
+                                    <button class="btn btn--danger" id="abort-import" style="display: none;">⛔ 中止匯入</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 5: Completion Report -->
+                        <div class="step-content" data-content="5" style="display: none;">
+                            <div class="step-section">
+                                <h3>🎉 匯入完成</h3>
+                                
+                                <div class="completion-summary">
+                                    <div class="success-banner">
+                                        <div class="success-icon">🎉</div>
+                                        <div class="success-content">
+                                            <h4>匯入成功完成！</h4>
+                                            <p>已成功匯入 242 筆學員資料，3 筆因錯誤被跳過</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="completion-stats">
+                                        <div class="completion-card">
+                                            <h5>📊 匯入結果</h5>
+                                            <div class="result-grid">
+                                                <div class="result-item result-item--success">
+                                                    <div class="result-icon">✅</div>
+                                                    <div class="result-content">
+                                                        <div class="result-number">242</div>
+                                                        <div class="result-label">成功匯入</div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="result-item result-item--warning">
+                                                    <div class="result-icon">⚠️</div>
+                                                    <div class="result-content">
+                                                        <div class="result-number">12</div>
+                                                        <div class="result-label">警告處理</div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="result-item result-item--error">
+                                                    <div class="result-icon">❌</div>
+                                                    <div class="result-content">
+                                                        <div class="result-number">3</div>
+                                                        <div class="result-label">錯誤跳過</div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="result-item">
+                                                    <div class="result-icon">⏱️</div>
+                                                    <div class="result-content">
+                                                        <div class="result-number">2.5</div>
+                                                        <div class="result-label">分鐘</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="completion-card">
+                                            <h5>📝 詳細報告</h5>
+                                            <div class="report-actions">
+                                                <button class="btn btn--primary">📄 下載完整報告</button>
+                                                <button class="btn btn--ghost">📧 Email報告</button>
+                                                <button class="btn btn--ghost">👁️ 線上查看</button>
+                                            </div>
+                                            
+                                            <div class="report-preview">
+                                                <h6>錯誤記錄摘要:</h6>
+                                                <div class="error-summary">
+                                                    <div class="error-item">第5行: 身分證字號格式錯誤</div>
+                                                    <div class="error-item">第18行: 出生日期格式錯誤</div>
+                                                    <div class="error-item">第32行: Email格式錯誤</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="completion-card">
+                                            <h5>🎯 後續建議</h5>
+                                            <div class="suggestions">
+                                                <div class="suggestion-item">
+                                                    <span class="suggestion-icon">✅</span>
+                                                    <span>檢查匯入的學員資料是否正確</span>
+                                                </div>
+                                                <div class="suggestion-item">
+                                                    <span class="suggestion-icon">📧</span>
+                                                    <span>發送帳號通知信給新學員</span>
+                                                </div>
+                                                <div class="suggestion-item">
+                                                    <span class="suggestion-icon">🔧</span>
+                                                    <span>修正錯誤資料後重新匯入</span>
+                                                </div>
+                                                <div class="suggestion-item">
+                                                    <span class="suggestion-icon">📋</span>
+                                                    <span>更新學員分組和權限設定</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="step-actions">
+                                    <button class="btn btn--ghost" id="view-imported-data">👁️ 查看匯入資料</button>
+                                    <button class="btn btn--primary" id="start-new-import">🔄 開始新的匯入</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Import History -->
+                <div class="card admin-card" id="import-history">
+                    <div class="card__header">
+                        <h2>📚 最近匯入記錄</h2>
+                        <button class="btn btn--ghost" data-open="modal-import-history">查看全部</button>
+                    </div>
+                    
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-info">
+                                <div class="history-type">👥 學員資料匯入</div>
+                                <div class="history-file">學員名單_2025Q1.xlsx</div>
+                                <div class="history-time">2025/01/15 14:25</div>
+                            </div>
+                            <div class="history-stats">
+                                <span class="history-stat history-stat--success">✅ 156成功</span>
+                                <span class="history-stat history-stat--warning">⚠️ 8警告</span>
+                                <span class="history-stat history-stat--error">❌ 2錯誤</span>
+                            </div>
+                            <div class="history-actions">
+                                <button class="btn btn--small">📄 報告</button>
+                                <button class="btn btn--small">🔄 重新匯入</button>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-info">
+                                <div class="history-type">📚 課程資料匯入</div>
+                                <div class="history-file">課程安排_202501.xlsx</div>
+                                <div class="history-time">2025/01/12 10:30</div>
+                            </div>
+                            <div class="history-stats">
+                                <span class="history-stat history-stat--success">✅ 25成功</span>
+                                <span class="history-stat history-stat--warning">⚠️ 3警告</span>
+                            </div>
+                            <div class="history-actions">
+                                <button class="btn btn--small">📄 報告</button>
+                                <button class="btn btn--small">🔄 重新匯入</button>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-info">
+                                <div class="history-type">📊 成績資料匯入</div>
+                                <div class="history-file">測驗成績_DM001.xlsx</div>
+                                <div class="history-time">2025/01/10 16:45</div>
+                            </div>
+                            <div class="history-stats">
+                                <span class="history-stat history-stat--success">✅ 89成功</span>
+                                <span class="history-stat history-stat--warning">⚠️ 5警告</span>
+                                <span class="history-stat history-stat--error">❌ 1錯誤</span>
+                            </div>
+                            <div class="history-actions">
+                                <button class="btn btn--small">📄 報告</button>
+                                <button class="btn btn--small">🔄 重新匯入</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 本頁為UI提案Mock，非最終產品</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="faq.html" aria-label="聯絡我們">聯絡我們</a>
+                    <a href="#accessibility" aria-label="無障礙宣告">無障礙宣告</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .admin-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: var(--space-xl);
+            gap: var(--space-lg);
+        }
+        
+        .page-title-section h1 {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .page-actions {
+            display: flex;
+            gap: var(--space-sm);
+            white-space: nowrap;
+        }
+        
+        .import-dashboard {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .import-stats {
+            display: flex;
+            gap: var(--space-md);
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        /* Import Type Cards */
+        .import-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .import-type-card {
+            padding: var(--space-lg);
+            border: 2px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .import-type-card:hover {
+            border-color: var(--c-primary);
+            box-shadow: var(--shadow);
+        }
+        
+        .type-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .type-icon {
+            font-size: 48px;
+            width: 64px;
+            text-align: center;
+        }
+        
+        .type-info h3 {
+            margin-bottom: var(--space-xs);
+            color: var(--c-primary);
+        }
+        
+        .type-info p {
+            color: var(--c-muted);
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .type-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 12px;
+            color: var(--c-muted);
+            margin-bottom: 4px;
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        .type-actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+        }
+        
+        /* Import Process */
+        .import-process-card {
+            border: 2px solid var(--c-primary);
+        }
+        
+        .process-controls {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .import-steps {
+            display: grid;
+            gap: var(--space-xl);
+        }
+        
+        /* Step Indicator */
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            z-index: 1;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #E8ECEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--c-muted);
+            transition: all 0.3s ease;
+        }
+        
+        .step--active .step-number {
+            background: var(--c-primary);
+            color: white;
+        }
+        
+        .step--completed .step-number {
+            background: #28a745;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 14px;
+            color: var(--c-muted);
+            text-align: center;
+        }
+        
+        .step--active .step-label {
+            color: var(--c-primary);
+            font-weight: 600;
+        }
+        
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: #E8ECEF;
+            margin: 0 var(--space-md);
+        }
+        
+        .step-section {
+            padding: var(--space-lg);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+        }
+        
+        .step-section h3 {
+            margin-bottom: var(--space-lg);
+            color: var(--c-primary);
+            border-bottom: 1px solid #E8ECEF;
+            padding-bottom: var(--space-md);
+        }
+        
+        .step-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid #F0F0F0;
+        }
+        
+        /* File Upload */
+        .upload-area {
+            border: 3px dashed #CFD8DC;
+            border-radius: var(--radius-card);
+            padding: var(--space-xxl);
+            text-align: center;
+            transition: border-color 0.3s ease;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .upload-area:hover {
+            border-color: var(--c-primary);
+        }
+        
+        .upload-label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            color: var(--c-muted);
+        }
+        
+        .upload-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--c-text);
+        }
+        
+        .upload-desc {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            background: #E8F5E8;
+            border: 1px solid #4CAF50;
+            border-radius: var(--radius-card);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .file-details {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .file-icon {
+            font-size: 24px;
+        }
+        
+        .file-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .file-size {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .import-options {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .import-options h4 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .option-checkbox {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            cursor: pointer;
+        }
+        
+        /* Validation */
+        .validation-progress {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background: #E8ECEF;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--c-primary);
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+        
+        .validation-summary {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .summary-stats {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+        }
+        
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            border: 2px solid #E8ECEF;
+        }
+        
+        .summary-item--success {
+            border-color: #28a745;
+            background: #28a74510;
+        }
+        
+        .summary-item--warning {
+            border-color: #ffc107;
+            background: #ffc10710;
+        }
+        
+        .summary-item--error {
+            border-color: #dc3545;
+            background: #dc354510;
+        }
+        
+        .summary-icon {
+            font-size: 24px;
+        }
+        
+        .summary-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--c-primary);
+        }
+        
+        .summary-label {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        /* Issue Tabs */
+        .issue-tabs {
+            display: flex;
+            border-bottom: 2px solid #E8ECEF;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .issue-tab {
+            padding: var(--space-sm) var(--space-md);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .issue-tab--active {
+            color: var(--c-primary);
+            border-bottom-color: var(--c-primary);
+            font-weight: 600;
+        }
+        
+        .issue-list {
+            display: grid;
+            gap: var(--space-md);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .issue-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            border-radius: var(--radius-card);
+            border: 1px solid #E8ECEF;
+        }
+        
+        .issue-item--error {
+            border-color: #dc3545;
+            background: #dc354510;
+        }
+        
+        .issue-item--warning {
+            border-color: #ffc107;
+            background: #ffc10710;
+        }
+        
+        .issue-info {
+            flex: 1;
+        }
+        
+        .issue-row {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        .issue-field {
+            font-weight: 500;
+            margin: 4px 0;
+        }
+        
+        .issue-message {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .issue-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        /* Preview Table */
+        .preview-table {
+            max-height: 400px;
+            overflow: auto;
+        }
+        
+        .data-preview-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-preview-table th,
+        .data-preview-table td {
+            padding: var(--space-sm);
+            text-align: left;
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .data-preview-table th {
+            background: var(--c-sub);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .row-valid {
+            background: #28a74510;
+        }
+        
+        .row-warning {
+            background: #ffc10710;
+        }
+        
+        .row-error {
+            background: #dc354510;
+        }
+        
+        .status-valid {
+            color: #28a745;
+        }
+        
+        .status-warning {
+            color: #ffc107;
+        }
+        
+        .status-error {
+            color: #dc3545;
+        }
+        
+        /* Confirmation */
+        .confirmation-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .confirm-card {
+            padding: var(--space-lg);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            border: 1px solid #E8ECEF;
+        }
+        
+        .confirm-card h4 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+            border-bottom: 1px solid #E8ECEF;
+            padding-bottom: var(--space-sm);
+        }
+        
+        .confirm-stats {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .confirm-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) 0;
+        }
+        
+        .confirm-label {
+            color: var(--c-muted);
+        }
+        
+        .confirm-value {
+            font-weight: 600;
+        }
+        
+        .confirm-value--success {
+            color: #28a745;
+        }
+        
+        .confirm-value--warning {
+            color: #ffc107;
+        }
+        
+        .confirm-value--error {
+            color: #dc3545;
+        }
+        
+        .confirm-settings {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .setting-icon {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .estimate-info {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .estimate-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-xs) 0;
+        }
+        
+        .estimate-label {
+            color: var(--c-muted);
+        }
+        
+        .estimate-value {
+            font-weight: 500;
+        }
+        
+        .confirmation-warning {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .warning-card {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: var(--radius-card);
+        }
+        
+        .warning-icon {
+            font-size: 24px;
+            color: #856404;
+        }
+        
+        .warning-content h5 {
+            margin-bottom: var(--space-sm);
+            color: #856404;
+        }
+        
+        .warning-content ul {
+            margin: 0 0 0 var(--space-lg);
+            color: #856404;
+        }
+        
+        .warning-content li {
+            margin-bottom: var(--space-xs);
+        }
+        
+        /* Import Execution */
+        .import-execution {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .execution-progress {
+            padding: var(--space-lg);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .progress-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--c-muted);
+            margin-top: var(--space-sm);
+        }
+        
+        .execution-log {
+            background: var(--c-surface);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+        }
+        
+        .execution-log h4 {
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-bottom: 1px solid #E8ECEF;
+            margin: 0;
+            color: var(--c-primary);
+        }
+        
+        .log-container {
+            height: 200px;
+            overflow-y: auto;
+            padding: var(--space-md);
+        }
+        
+        .log-entry {
+            display: flex;
+            gap: var(--space-sm);
+            padding: var(--space-xs) 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .log-time {
+            color: var(--c-muted);
+            min-width: 80px;
+        }
+        
+        .log-entry--info .log-message {
+            color: var(--c-text);
+        }
+        
+        .log-entry--success .log-message {
+            color: #28a745;
+        }
+        
+        .log-entry--warning .log-message {
+            color: #ffc107;
+        }
+        
+        .log-entry--error .log-message {
+            color: #dc3545;
+        }
+        
+        .execution-stats {
+            display: flex;
+            gap: var(--space-lg);
+            justify-content: center;
+        }
+        
+        .stat-card {
+            padding: var(--space-lg);
+            text-align: center;
+            background: var(--c-surface);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            min-width: 100px;
+        }
+        
+        .stat-label {
+            display: block;
+            font-size: 12px;
+            color: var(--c-muted);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--c-primary);
+        }
+        
+        .stat-value--success {
+            color: #28a745;
+        }
+        
+        .stat-value--warning {
+            color: #ffc107;
+        }
+        
+        .stat-value--error {
+            color: #dc3545;
+        }
+        
+        /* Completion */
+        .completion-summary {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .success-banner {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, #28a74510, #4caf5010);
+            border: 2px solid #28a745;
+            border-radius: var(--radius-card);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .success-icon {
+            font-size: 64px;
+        }
+        
+        .success-content h4 {
+            color: #28a745;
+            margin-bottom: var(--space-sm);
+            font-size: 24px;
+        }
+        
+        .success-content p {
+            font-size: 16px;
+            color: var(--c-text);
+        }
+        
+        .completion-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .completion-card {
+            padding: var(--space-lg);
+            background: var(--c-surface);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+        }
+        
+        .completion-card h5 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+            border-bottom: 1px solid #E8ECEF;
+            padding-bottom: var(--space-sm);
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .result-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .result-item--success {
+            background: #28a74510;
+            border: 1px solid #28a745;
+        }
+        
+        .result-item--warning {
+            background: #ffc10710;
+            border: 1px solid #ffc107;
+        }
+        
+        .result-item--error {
+            background: #dc354510;
+            border: 1px solid #dc3545;
+        }
+        
+        .result-icon {
+            font-size: 20px;
+        }
+        
+        .result-content {
+            text-align: center;
+        }
+        
+        .result-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--c-primary);
+        }
+        
+        .result-label {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .report-actions {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            justify-content: center;
+        }
+        
+        .report-preview {
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .report-preview h6 {
+            margin-bottom: var(--space-sm);
+            color: var(--c-primary);
+        }
+        
+        .error-summary {
+            display: grid;
+            gap: var(--space-xs);
+        }
+        
+        .error-item {
+            font-size: 14px;
+            color: var(--c-muted);
+            padding: var(--space-xs);
+            background: var(--c-surface);
+            border-radius: var(--radius-sm);
+        }
+        
+        .suggestions {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .suggestion-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .suggestion-icon {
+            font-size: 16px;
+            width: 20px;
+        }
+        
+        /* Import History */
+        .history-list {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .history-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: var(--space-lg);
+            padding: var(--space-md);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            align-items: center;
+        }
+        
+        .history-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .history-type {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        .history-file {
+            color: var(--c-text);
+        }
+        
+        .history-time {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .history-stats {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .history-stat {
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .history-stat--success {
+            background: #28a74520;
+            color: #28a745;
+        }
+        
+        .history-stat--warning {
+            background: #ffc10720;
+            color: #ffc107;
+        }
+        
+        .history-stat--error {
+            background: #dc354520;
+            color: #dc3545;
+        }
+        
+        .history-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        @media (max-width: 992px) {
+            .admin-page-header {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .page-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .import-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-indicator {
+                overflow-x: auto;
+            }
+            
+            .summary-stats {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .confirmation-summary {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .type-header {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--space-sm);
+            }
+            
+            .type-stats {
+                flex-direction: column;
+                gap: var(--space-sm);
+                text-align: center;
+            }
+            
+            .type-actions {
+                flex-direction: column;
+            }
+            
+            .option-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .issue-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .execution-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-md);
+            }
+            
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .success-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .history-item {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+                text-align: center;
+            }
+        }
+    </style>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Import type card selection
+            const importTypeCards = document.querySelectorAll('.import-type-card');
+            const importProcess = document.getElementById('import-process');
+            const importProcessTitle = document.getElementById('import-process-title');
+            
+            importTypeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const type = this.dataset.type;
+                    if (type) {
+                        showImportProcess(type);
+                    }
+                });
+            });
+            
+            function showImportProcess(type) {
+                const typeNames = {
+                    'students': '👥 學員資料匯入',
+                    'courses': '📚 課程資料匯入',
+                    'enrollments': '✅ 報名資料匯入',
+                    'grades': '📊 成績資料匯入',
+                    'certificates': '🏆 證照資料匯入',
+                    'questions': '❓ 考題資料匯入'
+                };
+                
+                importProcessTitle.textContent = typeNames[type] || '資料匯入';
+                importProcess.style.display = 'block';
+                importProcess.scrollIntoView({ behavior: 'smooth' });
+                
+                // Reset to first step
+                showStep(1);
+            }
+            
+            // File upload handling
+            const importFile = document.getElementById('import-file');
+            const fileInfo = document.getElementById('file-info');
+            const fileName = document.getElementById('file-name');
+            const fileSize = document.getElementById('file-size');
+            const nextToValidation = document.getElementById('next-to-validation');
+            const removeFile = document.getElementById('remove-file');
+            
+            importFile?.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    fileName.textContent = file.name;
+                    fileSize.textContent = formatFileSize(file.size);
+                    fileInfo.style.display = 'flex';
+                    nextToValidation.disabled = false;
+                }
+            });
+            
+            removeFile?.addEventListener('click', function() {
+                importFile.value = '';
+                fileInfo.style.display = 'none';
+                nextToValidation.disabled = true;
+            });
+            
+            // Step navigation
+            const stepButtons = {
+                'next-to-validation': 2,
+                'back-to-upload': 1,
+                'next-to-confirm': 3,
+                'back-to-validation': 2,
+                'start-import': 4
+            };
+            
+            Object.keys(stepButtons).forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                button?.addEventListener('click', function() {
+                    if (buttonId === 'next-to-validation') {
+                        simulateValidation();
+                    } else if (buttonId === 'start-import') {
+                        simulateImport();
+                    } else {
+                        showStep(stepButtons[buttonId]);
+                    }
+                });
+            });
+            
+            // Issue tab switching
+            const issueTabs = document.querySelectorAll('.issue-tab');
+            const issueContents = document.querySelectorAll('.issue-content');
+            
+            issueTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetTab = this.dataset.tab;
+                    
+                    issueTabs.forEach(t => t.classList.remove('issue-tab--active'));
+                    this.classList.add('issue-tab--active');
+                    
+                    issueContents.forEach(content => {
+                        if (content.dataset.content === targetTab) {
+                            content.style.display = 'block';
+                        } else {
+                            content.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Control buttons
+            const cancelImport = document.getElementById('cancel-import');
+            const resetImport = document.getElementById('reset-import');
+            const startNewImport = document.getElementById('start-new-import');
+            
+            cancelImport?.addEventListener('click', function() {
+                if (confirm('確定要取消匯入嗎？')) {
+                    hideImportProcess();
+                }
+            });
+            
+            resetImport?.addEventListener('click', function() {
+                if (confirm('確定要重新開始嗎？')) {
+                    showStep(1);
+                }
+            });
+            
+            startNewImport?.addEventListener('click', function() {
+                hideImportProcess();
+            });
+            
+            function hideImportProcess() {
+                importProcess.style.display = 'none';
+                // Reset form
+                importFile.value = '';
+                fileInfo.style.display = 'none';
+                nextToValidation.disabled = true;
+            }
+            
+            function showStep(stepNumber) {
+                // Update step indicator
+                const steps = document.querySelectorAll('.step');
+                const stepContents = document.querySelectorAll('.step-content');
+                
+                steps.forEach((step, index) => {
+                    const stepNum = index + 1;
+                    step.classList.remove('step--active', 'step--completed');
+                    
+                    if (stepNum === stepNumber) {
+                        step.classList.add('step--active');
+                    } else if (stepNum < stepNumber) {
+                        step.classList.add('step--completed');
+                    }
+                });
+                
+                // Show corresponding content
+                stepContents.forEach((content, index) => {
+                    const contentNum = index + 1;
+                    content.style.display = contentNum === stepNumber ? 'block' : 'none';
+                });
+            }
+            
+            function simulateValidation() {
+                showStep(2);
+                
+                const progressBar = document.getElementById('validation-progress-bar');
+                const progressText = document.getElementById('validation-progress-text');
+                const validationResults = document.getElementById('validation-results');
+                
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 15;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        validationResults.style.display = 'block';
+                    }
+                    
+                    progressBar.style.width = progress + '%';
+                    progressText.textContent = Math.floor(progress) + '%';
+                }, 200);
+            }
+            
+            function simulateImport() {
+                showStep(4);
+                
+                const progressBar = document.getElementById('import-progress-bar');
+                const progressText = document.getElementById('import-progress-text');
+                const statusElement = document.getElementById('import-status');
+                const currentRecord = document.getElementById('import-current-record');
+                const eta = document.getElementById('import-eta');
+                const logContainer = document.getElementById('import-log');
+                
+                const counters = {
+                    processed: document.getElementById('processed-count'),
+                    success: document.getElementById('success-count'),
+                    warning: document.getElementById('warning-count'),
+                    error: document.getElementById('error-count')
+                };
+                
+                let progress = 0;
+                let processed = 0;
+                const total = 245;
+                
+                const interval = setInterval(() => {
+                    progress += Math.random() * 3;
+                    processed = Math.floor((progress / 100) * total);
+                    
+                    if (progress >= 100) {
+                        progress = 100;
+                        processed = total;
+                        clearInterval(interval);
+                        statusElement.textContent = '匯入完成！';
+                        
+                        // Show completion after 1 second
+                        setTimeout(() => {
+                            showStep(5);
+                        }, 1000);
+                    }
+                    
+                    progressBar.style.width = progress + '%';
+                    progressText.textContent = Math.floor(progress) + '%';
+                    currentRecord.textContent = `處理第 ${processed} 筆，共 ${total} 筆`;
+                    
+                    // Update counters
+                    counters.processed.textContent = processed;
+                    counters.success.textContent = Math.floor(processed * 0.95);
+                    counters.warning.textContent = Math.floor(processed * 0.04);
+                    counters.error.textContent = Math.floor(processed * 0.01);
+                    
+                    // Add log entries occasionally
+                    if (Math.random() < 0.3) {
+                        addLogEntry(`處理學員資料: ${processed}/${total}`);
+                    }
+                }, 100);
+            }
+            
+            function addLogEntry(message, type = 'info') {
+                const logContainer = document.getElementById('import-log');
+                const now = new Date();
+                const timeStr = now.toTimeString().substr(0, 8);
+                
+                const logEntry = document.createElement('div');
+                logEntry.className = `log-entry log-entry--${type}`;
+                logEntry.innerHTML = `
+                    <span class="log-time">${timeStr}</span>
+                    <span class="log-message">${message}</span>
+                `;
+                
+                logContainer.appendChild(logEntry);
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+        });
+    </script>
+</body>
+</html>

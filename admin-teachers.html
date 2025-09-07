@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 師資管理</title>
+    <meta name="description" content="CFT照顧學校師資管理，教師帳號、專長管理與公開資料維護。">
+    <meta name="keywords" content="師資管理,教師帳號,專長管理,教師資料">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>師資管理</h1>
+                <p class="meta">管理教師帳號、專長與公開資料</p>
+            </div>
+            
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg)">
+                    <h3>師資列表</h3>
+                    <button type="button" class="btn btn--primary" onclick="openAddTeacherModal()">新增教師</button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>教師</th>
+                                <th>專長領域</th>
+                                <th>最近授課</th>
+                                <th>狀態</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="teacher-cell">
+                                        <div class="teacher-avatar">👩‍⚕️</div>
+                                        <div class="teacher-info">
+                                            <div class="teacher-name">王美華 老師</div>
+                                            <div class="teacher-title">資深護理師</div>
+                                            <div class="teacher-contact">wang@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="expertise-tags">
+                                        <span class="tag">失智症照護</span>
+                                        <span class="tag">溝通技巧</span>
+                                        <span class="tag">行為支持</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="recent-course">
+                                        <span class="course-name">失智友善溝通</span>
+                                        <span class="course-date">2025/09/28</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--active">啟用</span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editTeacher('wang')">編輯</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="viewProfile('wang')">公開資料</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="teacher-cell">
+                                        <div class="teacher-avatar">👨‍⚕️</div>
+                                        <div class="teacher-info">
+                                            <div class="teacher-name">張建國 醫師</div>
+                                            <div class="teacher-title">家庭醫學科醫師</div>
+                                            <div class="teacher-contact">zhang@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="expertise-tags">
+                                        <span class="tag">整合照護</span>
+                                        <span class="tag">遠距醫療</span>
+                                        <span class="tag">慢性病管理</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="recent-course">
+                                        <span class="course-name">整合照護直播</span>
+                                        <span class="course-date">2025/10/12</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--active">啟用</span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editTeacher('zhang')">編輯</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="viewProfile('zhang')">公開資料</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="teacher-cell">
+                                        <div class="teacher-avatar">👩‍🎓</div>
+                                        <div class="teacher-info">
+                                            <div class="teacher-name">陳雅玲 教授</div>
+                                            <div class="teacher-title">社會工作學系教授</div>
+                                            <div class="teacher-contact">chen@university.edu.tw</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="expertise-tags">
+                                        <span class="tag">社區照護</span>
+                                        <span class="tag">生活設計</span>
+                                        <span class="tag">社會工作</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="recent-course">
+                                        <span class="course-name">社區共生設計</span>
+                                        <span class="course-date">2025/11/05</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--active">啟用</span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editTeacher('chen')">編輯</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="viewProfile('chen')">公開資料</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="teacher-cell">
+                                        <div class="teacher-avatar">👨‍⚕️</div>
+                                        <div class="teacher-info">
+                                            <div class="teacher-name">李志明 主任</div>
+                                            <div class="teacher-title">安寧緩和醫療主任</div>
+                                            <div class="teacher-contact">li@hospital.org.tw</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="expertise-tags">
+                                        <span class="tag">安寧緩和</span>
+                                        <span class="tag">疼痛管理</span>
+                                        <span class="tag">溝通技巧</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="recent-course">
+                                        <span class="course-name">安寧緩和醫療</span>
+                                        <span class="course-date">2025/11/20</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-badge--pending">待確認</span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button type="button" class="btn btn--small" onclick="editTeacher('li')">編輯</button>
+                                        <button type="button" class="btn btn--small btn--ghost" onclick="viewProfile('li')">公開資料</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: var(--space-md);">
+                    <p class="meta">*點擊「編輯」可維護教師基本資料、匯款帳號，以及呈現在公開網站的介紹（照片、簡介等）。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Add Teacher Modal -->
+    <div id="add-teacher-modal" class="modal-backdrop" style="display: none;">
+        <div class="modal modal--large">
+            <div class="modal__header">
+                <h3>新增教師</h3>
+                <button type="button" class="modal__close" onclick="closeModal('add-teacher-modal')">&times;</button>
+            </div>
+            <div class="modal__body">
+                <form class="teacher-form">
+                    <div class="form-section">
+                        <h4>基本資料</h4>
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="teacher-name">姓名</label>
+                                <input type="text" id="teacher-name" placeholder="請輸入教師姓名" required>
+                            </div>
+                            <div class="field">
+                                <label for="teacher-title">職稱</label>
+                                <input type="text" id="teacher-title" placeholder="如：護理師、醫師、教授">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="teacher-email">電子信箱</label>
+                                <input type="email" id="teacher-email" placeholder="teacher@example.com" required>
+                            </div>
+                            <div class="field">
+                                <label for="teacher-phone">聯絡電話</label>
+                                <input type="tel" id="teacher-phone" placeholder="如：09xx-xxx-xxx">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h4>專長領域</h4>
+                        <div class="field">
+                            <label for="teacher-expertise">專長標籤</label>
+                            <input type="text" id="teacher-expertise" placeholder="輸入專長後按 Enter，如：失智症照護">
+                            <div class="meta">請輸入專長領域並按 Enter 鍵新增</div>
+                            <div class="expertise-preview" id="expertise-preview"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h4>公開資料</h4>
+                        <div class="field">
+                            <label for="teacher-bio">教師簡介</label>
+                            <textarea id="teacher-bio" rows="4" placeholder="將顯示在課程頁面的教師介紹"></textarea>
+                        </div>
+                        <div class="field">
+                            <label for="teacher-photo">教師照片</label>
+                            <input type="file" id="teacher-photo" accept="image/*">
+                            <div class="meta">建議尺寸：300x300 像素，格式：JPG 或 PNG</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h4>帳務資料</h4>
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="teacher-bank">銀行</label>
+                                <input type="text" id="teacher-bank" placeholder="如：台灣銀行">
+                            </div>
+                            <div class="field">
+                                <label for="teacher-account">帳號</label>
+                                <input type="text" id="teacher-account" placeholder="匯款帳號">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="teacher-account-name">戶名</label>
+                            <input type="text" id="teacher-account-name" placeholder="帳戶戶名">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button type="button" class="btn btn--ghost" onclick="closeModal('add-teacher-modal')">取消</button>
+                <button type="button" class="btn btn--primary" onclick="saveTeacher()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .teacher-cell {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+        
+        .teacher-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--c-sub);
+            font-size: 20px;
+        }
+        
+        .teacher-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .teacher-name {
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        .teacher-title {
+            font-size: 13px;
+            color: var(--c-muted);
+        }
+        
+        .teacher-contact {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .expertise-tags {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 11px;
+            font-weight: 500;
+            background: #ECEFF1;
+            color: #455A64;
+        }
+        
+        .recent-course {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .course-name {
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .course-date {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .status-badge--active {
+            background: #E8F5E9;
+            color: var(--c-success);
+        }
+        
+        .status-badge--pending {
+            background: #FFF8E1;
+            color: #F57F17;
+        }
+        
+        .status-badge--inactive {
+            background: #FFEBEE;
+            color: var(--c-danger);
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .modal--large {
+            max-width: 700px;
+        }
+        
+        .teacher-form {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .form-section h4 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+            font-size: 16px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input,
+        .field textarea {
+            padding: 10px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            color: var(--c-text);
+            font-size: 14px;
+            resize: vertical;
+        }
+        
+        .field input:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .expertise-preview {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+            margin-top: var(--space-xs);
+        }
+        
+        .expertise-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 4px 8px;
+            background: var(--c-primary);
+            color: white;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .expertise-tag button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+        }
+        
+        .modal {
+            background: var(--c-surface);
+            border-radius: var(--radius-card);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+        }
+        
+        .modal__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .modal__header h3 {
+            margin: 0;
+        }
+        
+        .modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--c-muted);
+        }
+        
+        .modal__body {
+            padding: var(--space-lg);
+        }
+        
+        .modal__footer {
+            padding: var(--space-lg);
+            border-top: 1px solid #E8ECEF;
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-sm);
+        }
+        
+        @media (max-width: 992px) {
+            .teacher-cell {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+            
+            .teacher-avatar {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .table-actions {
+                flex-direction: column;
+            }
+            
+            .expertise-tags {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .modal--large {
+                max-width: 95vw;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        let expertiseTags = [];
+        
+        function openAddTeacherModal() {
+            document.getElementById('add-teacher-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Reset form if it's the add teacher modal
+            if (modalId === 'add-teacher-modal') {
+                resetTeacherForm();
+            }
+        }
+        
+        function resetTeacherForm() {
+            document.querySelector('.teacher-form').reset();
+            expertiseTags = [];
+            updateExpertisePreview();
+        }
+        
+        function editTeacher(teacherId) {
+            alert(`編輯教師 ${teacherId} 的資料功能開發中...`);
+        }
+        
+        function viewProfile(teacherId) {
+            alert(`查看教師 ${teacherId} 的公開資料功能開發中...`);
+        }
+        
+        function saveTeacher() {
+            const name = document.getElementById('teacher-name').value;
+            const email = document.getElementById('teacher-email').value;
+            
+            if (!name.trim()) {
+                alert('請輸入教師姓名');
+                document.getElementById('teacher-name').focus();
+                return;
+            }
+            
+            if (!email.trim()) {
+                alert('請輸入電子信箱');
+                document.getElementById('teacher-email').focus();
+                return;
+            }
+            
+            alert(`教師「${name}」已新增成功！`);
+            closeModal('add-teacher-modal');
+        }
+        
+        // Expertise tags functionality
+        document.getElementById('teacher-expertise').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = this.value.trim();
+                if (value && !expertiseTags.includes(value)) {
+                    expertiseTags.push(value);
+                    this.value = '';
+                    updateExpertisePreview();
+                }
+            }
+        });
+        
+        function updateExpertisePreview() {
+            const preview = document.getElementById('expertise-preview');
+            preview.innerHTML = expertiseTags.map(tag => 
+                `<span class="expertise-tag">${tag} <button type="button" onclick="removeExpertiseTag('${tag}')">&times;</button></span>`
+            ).join('');
+        }
+        
+        function removeExpertiseTag(tag) {
+            expertiseTags = expertiseTags.filter(t => t !== tag);
+            updateExpertisePreview();
+        }
+        
+        // Close modal when clicking backdrop
+        document.getElementById('add-teacher-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal('add-teacher-modal');
+            }
+        });
+    </script>
+</body>
+</html>

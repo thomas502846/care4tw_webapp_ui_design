@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 編輯課程</title>
+    <meta name="description" content="CFT照顧學校課程編輯，設定課程詳細資料、報名規則與調查問卷。">
+    <meta name="keywords" content="課程編輯,課程設定,調查問卷,報名管理">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>失智友善溝通｜編輯課程</h1>
+                <p class="meta">
+                    <a href="admin-courses.html">← 返回課程管理</a>
+                </p>
+            </div>
+            
+            <div class="grid" style="grid-template-columns: 2fr 1fr; gap: 12px;">
+                <!-- Left Column -->
+                <div>
+                    <div class="card">
+                        <h3>基本資料</h3>
+                        <form class="course-edit-form">
+                            <div class="form-row">
+                                <div class="field">
+                                    <label for="course-name">課程名稱</label>
+                                    <input type="text" id="course-name" value="失智友善溝通與行為支持">
+                                </div>
+                                <div class="field">
+                                    <label for="course-category">課程分類</label>
+                                    <select id="course-category">
+                                        <option value="dementia" selected>失智</option>
+                                        <option value="online">線上</option>
+                                        <option value="community">社區</option>
+                                        <option value="hospice">安寧</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="field">
+                                    <label for="course-date">上課日期</label>
+                                    <input type="date" id="course-date" value="2025-09-28">
+                                </div>
+                                <div class="field">
+                                    <label for="course-time">上課時間</label>
+                                    <input type="time" id="course-time" value="09:00">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="field">
+                                    <label for="course-location">上課地點</label>
+                                    <input type="text" id="course-location" value="台中">
+                                </div>
+                                <div class="field">
+                                    <label for="course-teacher">授課老師</label>
+                                    <select id="course-teacher">
+                                        <option value="wang" selected>王美華 老師</option>
+                                        <option value="zhang">張建國 醫師</option>
+                                        <option value="chen">陳雅玲 教授</option>
+                                        <option value="li">李志明 主任</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="field">
+                                    <label for="course-hours">時數</label>
+                                    <input type="number" id="course-hours" value="6" min="1" max="24">
+                                </div>
+                                <div class="field">
+                                    <label for="course-credits">長照積分</label>
+                                    <select id="course-credits" onchange="toggleCreditSettings()">
+                                        <option value="yes" selected>有積分</option>
+                                        <option value="no">無積分</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Advanced Credit Settings -->
+                            <div id="credit-settings" class="credit-settings-panel">
+                                <h4 class="panel-title">📋 積分類別設定</h4>
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="credit-category">積分類別</label>
+                                        <select id="credit-category">
+                                            <option value="basic-care" selected>基本照護類</option>
+                                            <option value="dementia">失智症照護類</option>
+                                            <option value="medical">醫事照護類</option>
+                                            <option value="rehab">復能復健類</option>
+                                            <option value="management">管理督導類</option>
+                                            <option value="family">家庭照護類</option>
+                                            <option value="nutrition">營養膳食類</option>
+                                            <option value="psychology">心理支持類</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="credit-hours">認證積分時數</label>
+                                        <input type="number" id="credit-hours" value="6" min="1" max="24" step="0.5">
+                                        <div class="field-hint">可設定0.5小時為單位</div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="credit-level">積分等級</label>
+                                        <select id="credit-level">
+                                            <option value="basic" selected>基礎級 (1倍)</option>
+                                            <option value="intermediate">進階級 (1.2倍)</option>
+                                            <option value="advanced">專業級 (1.5倍)</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="credit-authority">認證機構</label>
+                                        <select id="credit-authority">
+                                            <option value="ltc-association" selected>長照學會</option>
+                                            <option value="nursing-association">護理學會</option>
+                                            <option value="social-work">社工師公會</option>
+                                            <option value="government">政府機關</option>
+                                            <option value="medical-association">醫師公會</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="credit-validation">
+                                    <div class="validation-item">
+                                        <input type="checkbox" id="attendance-required" checked>
+                                        <label for="attendance-required">需完整出席才可獲得積分</label>
+                                    </div>
+                                    <div class="validation-item">
+                                        <input type="checkbox" id="test-required">
+                                        <label for="test-required">需通過測驗才可獲得積分</label>
+                                    </div>
+                                    <div class="validation-item">
+                                        <input type="checkbox" id="evaluation-required">
+                                        <label for="evaluation-required">需填寫課程評估表</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Point Deduction Settings -->
+                            <div class="point-deduction-panel">
+                                <h4 class="panel-title">💰 點數扣除設定</h4>
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="course-points">報名所需點數</label>
+                                        <input type="number" id="course-points" value="10" min="1" max="50">
+                                    </div>
+                                    <div class="field">
+                                        <label for="deduction-timing">扣點時機</label>
+                                        <select id="deduction-timing">
+                                            <option value="registration" selected>報名時立即扣除</option>
+                                            <option value="attendance">出席後才扣除</option>
+                                            <option value="completion">完成課程後扣除</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field">
+                                        <label for="refund-rule">退點規則</label>
+                                        <select id="refund-rule">
+                                            <option value="full-before-deadline" selected>期限前取消全額退點</option>
+                                            <option value="partial-before-deadline">期限前取消部分退點(80%)</option>
+                                            <option value="no-refund">一律不退點</option>
+                                            <option value="absence-penalty">缺席扣除部分點數</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <label for="penalty-points">缺席罰點</label>
+                                        <input type="number" id="penalty-points" value="5" min="0" max="20">
+                                        <div class="field-hint">無故缺席額外扣除的點數</div>
+                                    </div>
+                                </div>
+                                <div class="auto-deduction-rules">
+                                    <h5>🤖 自動扣點規則</h5>
+                                    <div class="rule-item">
+                                        <input type="checkbox" id="auto-absent-deduction" checked>
+                                        <label for="auto-absent-deduction">開課前2小時內取消報名自動扣點</label>
+                                        <input type="number" value="3" min="1" max="10" class="penalty-input">
+                                        <span>點</span>
+                                    </div>
+                                    <div class="rule-item">
+                                        <input type="checkbox" id="auto-noshow-deduction">
+                                        <label for="auto-noshow-deduction">無故缺席自動扣點</label>
+                                        <input type="number" value="5" min="1" max="20" class="penalty-input">
+                                        <span>點</span>
+                                    </div>
+                                    <div class="rule-item">
+                                        <input type="checkbox" id="auto-late-deduction">
+                                        <label for="auto-late-deduction">遲到超過</label>
+                                        <input type="number" value="30" min="5" max="120" class="penalty-input">
+                                        <span>分鐘自動扣點</span>
+                                        <input type="number" value="2" min="1" max="10" class="penalty-input">
+                                        <span>點</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="field">
+                                    <label for="course-capacity">報名人數上限</label>
+                                    <input type="number" id="course-capacity" value="30" min="5" max="200">
+                                </div>
+                                <div class="field">
+                                    <label for="waiting-list">候補名單</label>
+                                    <select id="waiting-list">
+                                        <option value="enabled" selected>開啟候補功能</option>
+                                        <option value="disabled">關閉候補功能</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="card" style="margin-top:12px">
+                        <h3>報名設定</h3>
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="cancel-deadline">線上取消報名期限</label>
+                                <input type="date" id="cancel-deadline" value="2025-09-21">
+                                <div class="meta">學員可在此日期前自行取消報名</div>
+                            </div>
+                            <div class="field">
+                                <label for="refund-policy">退費規則</label>
+                                <select id="refund-policy">
+                                    <option value="full" selected>期限前全額退費</option>
+                                    <option value="partial">期限前部分退費</option>
+                                    <option value="none">不退費</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="margin-top:12px">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-md)">
+                            <h3>報名時調查問卷</h3>
+                            <button type="button" class="btn btn--small" onclick="addSurveyQuestion()">新增問題</button>
+                        </div>
+                        
+                        <div class="survey-questions">
+                            <div class="survey-item">
+                                <div class="survey-question">
+                                    <span class="survey-number">1.</span>
+                                    <span class="survey-text">餐點偏好 (單選)</span>
+                                </div>
+                                <div class="meta" style="display:flex;justify-content:space-between;align-items:center">
+                                    <span>選項：葷食, 素食</span>
+                                    <div class="survey-actions">
+                                        <button type="button" class="btn btn--small">編輯</button>
+                                        <button type="button" class="btn btn--small btn--danger">刪除</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="survey-item">
+                                <div class="survey-question">
+                                    <span class="survey-number">2.</span>
+                                    <span class="survey-text">一人一菜菜色 (文字)</span>
+                                </div>
+                                <div class="meta" style="display:flex;justify-content:space-between;align-items:center">
+                                    <span>提示：請填寫您將準備的菜色</span>
+                                    <div class="survey-actions">
+                                        <button type="button" class="btn btn--small">編輯</button>
+                                        <button type="button" class="btn btn--small btn--danger">刪除</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="survey-item">
+                                <div class="survey-question">
+                                    <span class="survey-number">3.</span>
+                                    <span class="survey-text">特殊需求 (多行文字)</span>
+                                </div>
+                                <div class="meta" style="display:flex;justify-content:space-between;align-items:center">
+                                    <span>提示：如有特殊飲食或協助需求，請說明</span>
+                                    <div class="survey-actions">
+                                        <button type="button" class="btn btn--small">編輯</button>
+                                        <button type="button" class="btn btn--small btn--danger">刪除</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div>
+                    <div class="card">
+                        <h3>快速操作</h3>
+                        <div class="quick-actions">
+                            <button type="button" class="btn" onclick="location.href='admin-course-roster.html'">查看報名名單</button>
+                            <button type="button" class="btn">上傳課程材料</button>
+                            <button type="button" class="btn">預覽課程頁面</button>
+                            <button type="button" class="btn btn--ghost">複製課程</button>
+                            <div style="margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid #E8ECEF;">
+                                <button type="button" class="btn btn--primary btn--full">儲存變更</button>
+                                <button type="button" class="btn btn--danger btn--full" style="margin-top: var(--space-xs);">刪除課程</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="margin-top:12px">
+                        <h3>課程狀態</h3>
+                        <div class="status-info">
+                            <div class="status-item">
+                                <label>發佈狀態</label>
+                                <select>
+                                    <option value="published" selected>已發佈</option>
+                                    <option value="draft">草稿</option>
+                                    <option value="archived">已封存</option>
+                                </select>
+                            </div>
+                            <div class="status-item">
+                                <label>報名開放</label>
+                                <select>
+                                    <option value="open" selected>開放中</option>
+                                    <option value="closed">暫停報名</option>
+                                </select>
+                            </div>
+                            <div class="status-stats">
+                                <div class="stat">
+                                    <span class="stat-number">24</span>
+                                    <span class="stat-label">已報名</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">6</span>
+                                    <span class="stat-label">剩餘名額</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .course-edit-form {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input,
+        .field select,
+        .field textarea {
+            padding: 10px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .survey-questions {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .survey-item {
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            border-left: 4px solid var(--c-primary);
+        }
+        
+        .survey-question {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .survey-number {
+            font-weight: 600;
+            color: var(--c-primary);
+            min-width: 20px;
+        }
+        
+        .survey-text {
+            font-weight: 500;
+        }
+        
+        .survey-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .btn--full {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .btn--danger {
+            background: var(--c-danger);
+            border-color: var(--c-danger);
+            color: white;
+        }
+        
+        .btn--danger:hover {
+            background: #c62828;
+            border-color: #c62828;
+        }
+        
+        .status-info {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .status-item label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .status-item select {
+            padding: 8px 10px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-size: 14px;
+        }
+        
+        .status-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid #E8ECEF;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--c-primary);
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Enhanced Credit and Point Settings */
+        .credit-settings-panel,
+        .point-deduction-panel {
+            margin-top: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-card);
+            border-left: 4px solid var(--c-primary);
+        }
+        
+        .panel-title {
+            margin: 0 0 var(--space-lg) 0;
+            font-size: 1rem;
+            color: var(--c-text);
+            font-weight: 600;
+        }
+        
+        .field-hint {
+            font-size: 0.75rem;
+            color: var(--c-muted);
+            margin-top: var(--space-xs);
+        }
+        
+        .credit-validation {
+            margin-top: var(--space-lg);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--c-border-light);
+        }
+        
+        .validation-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .validation-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .validation-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+        
+        .auto-deduction-rules {
+            margin-top: var(--space-lg);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--c-border-light);
+        }
+        
+        .auto-deduction-rules h5 {
+            margin: 0 0 var(--space-md) 0;
+            font-size: 0.875rem;
+            color: var(--c-text);
+            font-weight: 600;
+        }
+        
+        .rule-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            padding: var(--space-sm);
+            background: white;
+            border-radius: var(--radius-sm);
+        }
+        
+        .rule-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .rule-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+            flex: 1;
+        }
+        
+        .penalty-input {
+            width: 60px !important;
+            padding: var(--space-xs) !important;
+            margin: 0 var(--space-xs) !important;
+            text-align: center;
+        }
+        
+        /* Hide credit settings initially */
+        .credit-settings-panel {
+            display: block;
+        }
+        
+        .credit-settings-panel.hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .survey-actions {
+                flex-direction: column;
+            }
+            
+            .meta {
+                flex-direction: column !important;
+                gap: var(--space-xs) !important;
+                align-items: flex-start !important;
+            }
+            
+            .status-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .rule-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-sm);
+            }
+            
+            .penalty-input {
+                width: 80px !important;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        function addSurveyQuestion() {
+            const questionsContainer = document.querySelector('.survey-questions');
+            const questionCount = questionsContainer.children.length + 1;
+            
+            const newQuestion = document.createElement('div');
+            newQuestion.className = 'survey-item';
+            newQuestion.innerHTML = `
+                <div class="survey-question">
+                    <span class="survey-number">${questionCount}.</span>
+                    <input type="text" placeholder="請輸入問題內容" style="flex: 1; border: none; background: transparent; font-weight: 500;">
+                </div>
+                <div class="meta" style="display:flex;justify-content:space-between;align-items:center">
+                    <select style="border: none; background: transparent; font-size: 12px; color: var(--c-muted);">
+                        <option value="text">文字</option>
+                        <option value="textarea">多行文字</option>
+                        <option value="radio">單選</option>
+                        <option value="checkbox">多選</option>
+                    </select>
+                    <div class="survey-actions">
+                        <button type="button" class="btn btn--small">編輯</button>
+                        <button type="button" class="btn btn--small btn--danger" onclick="this.closest('.survey-item').remove()">刪除</button>
+                    </div>
+                </div>
+            `;
+            
+            questionsContainer.appendChild(newQuestion);
+            
+            // Focus on the new question input
+            const newInput = newQuestion.querySelector('input');
+            newInput.focus();
+        }
+        
+        // Toggle credit settings visibility
+        function toggleCreditSettings() {
+            const creditSelect = document.getElementById('course-credits');
+            const creditSettings = document.getElementById('credit-settings');
+            
+            if (creditSelect.value === 'yes') {
+                creditSettings.classList.remove('hidden');
+            } else {
+                creditSettings.classList.add('hidden');
+            }
+        }
+        
+        // Initialize credit settings on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleCreditSettings();
+            
+            // Auto-calculate credit hours based on course hours
+            const courseHours = document.getElementById('course-hours');
+            const creditHours = document.getElementById('credit-hours');
+            
+            courseHours.addEventListener('input', function() {
+                if (document.getElementById('course-credits').value === 'yes') {
+                    creditHours.value = this.value;
+                }
+            });
+            
+            // Auto-enable/disable penalty inputs based on checkbox state
+            document.querySelectorAll('.rule-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const penaltyInputs = this.closest('.rule-item').querySelectorAll('.penalty-input');
+                    penaltyInputs.forEach(input => {
+                        input.disabled = !this.checked;
+                        if (!this.checked) {
+                            input.style.opacity = '0.5';
+                        } else {
+                            input.style.opacity = '1';
+                        }
+                    });
+                });
+                
+                // Trigger change event to set initial state
+                checkbox.dispatchEvent(new Event('change'));
+            });
+        });
+        
+        // Save functionality
+        document.querySelector('.btn--primary').addEventListener('click', function() {
+            // Collect all form data including new settings
+            const formData = {
+                courseName: document.getElementById('course-name').value,
+                creditSettings: {
+                    hasCredits: document.getElementById('course-credits').value === 'yes',
+                    category: document.getElementById('credit-category').value,
+                    hours: document.getElementById('credit-hours').value,
+                    level: document.getElementById('credit-level').value,
+                    authority: document.getElementById('credit-authority').value,
+                    validationRules: {
+                        attendanceRequired: document.getElementById('attendance-required').checked,
+                        testRequired: document.getElementById('test-required').checked,
+                        evaluationRequired: document.getElementById('evaluation-required').checked
+                    }
+                },
+                pointSettings: {
+                    requiredPoints: document.getElementById('course-points').value,
+                    deductionTiming: document.getElementById('deduction-timing').value,
+                    refundRule: document.getElementById('refund-rule').value,
+                    penaltyPoints: document.getElementById('penalty-points').value,
+                    autoRules: {
+                        absentDeduction: document.getElementById('auto-absent-deduction').checked,
+                        noshowDeduction: document.getElementById('auto-noshow-deduction').checked,
+                        lateDeduction: document.getElementById('auto-late-deduction').checked
+                    }
+                }
+            };
+            
+            console.log('Saving course data:', formData);
+            alert('課程變更已儲存！\n\n已更新：\n- 積分類別設定\n- 點數扣除規則\n- 自動化管理功能');
+        });
+        
+        // Delete functionality with enhanced confirmation
+        document.querySelector('.btn--danger').addEventListener('click', function() {
+            const courseName = document.getElementById('course-name').value;
+            const enrolledCount = 24; // From status stats
+            
+            let confirmMessage = `確定要刪除「${courseName}」嗎？\n\n此課程目前有 ${enrolledCount} 人報名。`;
+            
+            if (enrolledCount > 0) {
+                confirmMessage += '\n\n刪除後：\n- 所有學員報名將被取消\n- 已扣除的點數將被退還\n- 此操作無法復原';
+            } else {
+                confirmMessage += '\n\n此操作無法復原。';
+            }
+            
+            if (confirm(confirmMessage)) {
+                alert('課程已刪除\n\n所有相關資料已清理完成：\n- 學員報名記錄\n- 點數扣除記錄\n- 課程相關檔案');
+                window.location.href = 'admin-courses.html';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1567 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 考題庫管理</title>
+    <meta name="description" content="CFT照顧學校考題庫管理系統，管理課程測驗題目、問卷調查和學習評量。">
+    <meta name="keywords" content="考題庫管理,測驗題目,問卷調查,學習評量,長照教育">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <img src="assets/images/logo.png" alt="CFT 照顧學校" class="header__logo">
+                <div class="header__name">CFT 照顧學校</div>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">管理首頁</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-question-bank.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">考題管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <!-- Page Header -->
+            <div class="admin-page-header">
+                <div class="breadcrumb">
+                    <a href="admin-dashboard.html">管理首頁</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span>考題庫管理</span>
+                </div>
+                <div class="page-title-section">
+                    <h1>📝 考題庫管理</h1>
+                    <p class="meta">管理課程測驗、問卷調查和學習評量題目</p>
+                </div>
+                <div class="page-actions">
+                    <button class="btn btn--primary" data-open="modal-create-question">➕ 新增題目</button>
+                    <button class="btn btn--ghost" data-open="modal-import-questions">📤 匯入題目</button>
+                    <button class="btn btn--ghost" data-open="modal-question-templates">📋 題目範本</button>
+                </div>
+            </div>
+
+            <!-- Question Bank Dashboard -->
+            <div class="admin-grid">
+                <!-- Quick Stats -->
+                <div class="card admin-card">
+                    <div class="card__header">
+                        <h2>📊 題庫統計</h2>
+                        <div class="stats-period">
+                            <select class="period-selector">
+                                <option value="all">全部</option>
+                                <option value="2025" selected>2025年</option>
+                                <option value="2024">2024年</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="question-stats">
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <div class="stat-icon">❓</div>
+                                <div class="stat-content">
+                                    <div class="stat-number">847</div>
+                                    <div class="stat-label">總題目數</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <div class="stat-icon">✅</div>
+                                <div class="stat-content">
+                                    <div class="stat-number">623</div>
+                                    <div class="stat-label">已使用</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <div class="stat-icon">📋</div>
+                                <div class="stat-content">
+                                    <div class="stat-number">28</div>
+                                    <div class="stat-label">測驗卷</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-item">
+                                <div class="stat-icon">📊</div>
+                                <div class="stat-content">
+                                    <div class="stat-number">15</div>
+                                    <div class="stat-label">問卷</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="stats-chart">
+                            <h4>題目類型分布</h4>
+                            <div class="chart-container">
+                                <div class="chart-bar-group">
+                                    <div class="chart-bar" data-category="multiple-choice" style="height: 60%;">
+                                        <span class="bar-label">選擇題<br>512題</span>
+                                    </div>
+                                    <div class="chart-bar" data-category="true-false" style="height: 25%;">
+                                        <span class="bar-label">是非題<br>215題</span>
+                                    </div>
+                                    <div class="chart-bar" data-category="short-answer" style="height: 15%;">
+                                        <span class="bar-label">簡答題<br>120題</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Categories -->
+                <div class="card admin-card">
+                    <div class="card__header">
+                        <h2>📂 題目分類管理</h2>
+                        <button class="btn btn--small" data-open="modal-create-category">➕ 新增分類</button>
+                    </div>
+                    
+                    <div class="category-tree">
+                        <div class="category-item category-item--parent" data-category="dementia-care">
+                            <div class="category-header">
+                                <button class="category-toggle" aria-expanded="true">📁</button>
+                                <span class="category-name">失智照顧</span>
+                                <div class="category-stats">
+                                    <span class="question-count">156題</span>
+                                    <button class="btn btn--tiny">編輯</button>
+                                </div>
+                            </div>
+                            <div class="category-children">
+                                <div class="category-item" data-category="dementia-communication">
+                                    <div class="category-header">
+                                        <span class="category-icon">📄</span>
+                                        <span class="category-name">友善溝通</span>
+                                        <div class="category-stats">
+                                            <span class="question-count">45題</span>
+                                            <button class="btn btn--tiny">編輯</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="category-item" data-category="dementia-behavior">
+                                    <div class="category-header">
+                                        <span class="category-icon">📄</span>
+                                        <span class="category-name">行為支持</span>
+                                        <div class="category-stats">
+                                            <span class="question-count">38題</span>
+                                            <button class="btn btn--tiny">編輯</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="category-item" data-category="dementia-safety">
+                                    <div class="category-header">
+                                        <span class="category-icon">📄</span>
+                                        <span class="category-name">安全照護</span>
+                                        <div class="category-stats">
+                                            <span class="question-count">73題</span>
+                                            <button class="btn btn--tiny">編輯</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="category-item category-item--parent" data-category="community-care">
+                            <div class="category-header">
+                                <button class="category-toggle" aria-expanded="false">📁</button>
+                                <span class="category-name">共生照顧</span>
+                                <div class="category-stats">
+                                    <span class="question-count">89題</span>
+                                    <button class="btn btn--tiny">編輯</button>
+                                </div>
+                            </div>
+                            <div class="category-children" style="display: none;">
+                                <div class="category-item">
+                                    <div class="category-header">
+                                        <span class="category-icon">📄</span>
+                                        <span class="category-name">社區設計</span>
+                                        <div class="category-stats">
+                                            <span class="question-count">52題</span>
+                                            <button class="btn btn--tiny">編輯</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="category-item">
+                                    <div class="category-header">
+                                        <span class="category-icon">📄</span>
+                                        <span class="category-name">生活設計</span>
+                                        <div class="category-stats">
+                                            <span class="question-count">37題</span>
+                                            <button class="btn btn--tiny">編輯</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="category-item category-item--parent" data-category="complex-care">
+                            <div class="category-header">
+                                <button class="category-toggle" aria-expanded="false">📁</button>
+                                <span class="category-name">複雜性照顧</span>
+                                <div class="category-stats">
+                                    <span class="question-count">134題</span>
+                                    <button class="btn btn--tiny">編輯</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="category-item category-item--parent" data-category="hospice-care">
+                            <div class="category-header">
+                                <button class="category-toggle" aria-expanded="false">📁</button>
+                                <span class="category-name">安寧照顧</span>
+                                <div class="category-stats">
+                                    <span class="question-count">97題</span>
+                                    <button class="btn btn--tiny">編輯</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Management -->
+                <div class="card admin-card question-management-card">
+                    <div class="card__header">
+                        <h2>🔍 題目搜尋與管理</h2>
+                        <div class="view-controls">
+                            <button class="view-btn view-btn--active" data-view="list">📄 列表</button>
+                            <button class="view-btn" data-view="grid">🔲 卡片</button>
+                        </div>
+                    </div>
+                    
+                    <div class="question-filters">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="search-questions">搜尋</label>
+                                <input type="search" id="search-questions" placeholder="搜尋題目內容、標籤..." class="search-input">
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-category">分類</label>
+                                <select id="filter-category">
+                                    <option value="">全部分類</option>
+                                    <option value="dementia-care">失智照顧</option>
+                                    <option value="community-care">共生照顧</option>
+                                    <option value="complex-care">複雜性照顧</option>
+                                    <option value="hospice-care">安寧照顧</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-type">題目類型</label>
+                                <select id="filter-type">
+                                    <option value="">全部類型</option>
+                                    <option value="multiple-choice">選擇題</option>
+                                    <option value="true-false">是非題</option>
+                                    <option value="short-answer">簡答題</option>
+                                    <option value="essay">問答題</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="filter-difficulty">難度</label>
+                                <select id="filter-difficulty">
+                                    <option value="">全部難度</option>
+                                    <option value="easy">容易</option>
+                                    <option value="medium">中等</option>
+                                    <option value="hard">困難</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-actions">
+                                <button class="btn btn--primary" id="apply-filters">🔍 搜尋</button>
+                                <button class="btn btn--ghost" id="reset-filters">🔄 重置</button>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-tags">
+                            <div class="active-filters">
+                                <span class="filter-label">篩選條件:</span>
+                                <div class="filter-tag-list" id="active-filter-tags">
+                                    <span class="filter-tag">
+                                        失智照顧 <button class="remove-filter" data-filter="category">×</button>
+                                    </span>
+                                    <span class="filter-tag">
+                                        選擇題 <button class="remove-filter" data-filter="type">×</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="result-count">
+                                顯示 <strong>45</strong> 題，共 <strong>847</strong> 題
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-list-container">
+                        <div class="question-list-header">
+                            <div class="bulk-actions">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="select-all-questions">
+                                    <span class="checkbox-text">全選</span>
+                                </label>
+                                <div class="bulk-action-buttons" style="display: none;">
+                                    <button class="btn btn--small">📋 複製</button>
+                                    <button class="btn btn--small">🏷️ 加標籤</button>
+                                    <button class="btn btn--small">📤 匯出</button>
+                                    <button class="btn btn--small btn--danger">🗑️ 刪除</button>
+                                </div>
+                            </div>
+                            <div class="sort-controls">
+                                <label for="sort-questions">排序</label>
+                                <select id="sort-questions">
+                                    <option value="updated-desc">最近更新</option>
+                                    <option value="created-desc">建立時間</option>
+                                    <option value="difficulty-asc">難度：易→難</option>
+                                    <option value="usage-desc">使用頻率</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="question-list" id="question-list-view">
+                            <div class="question-item">
+                                <div class="question-select">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="question-checkbox">
+                                        <span class="sr-only">選擇此題目</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="question-content">
+                                    <div class="question-header">
+                                        <div class="question-id">#DM001</div>
+                                        <div class="question-meta">
+                                            <span class="question-type badge badge--info">選擇題</span>
+                                            <span class="question-difficulty badge badge--warning">中等</span>
+                                            <span class="question-category badge">失智照顧</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="question-text">
+                                        失智症患者在日常生活中最容易出現哪種行為問題？
+                                    </div>
+                                    
+                                    <div class="question-options">
+                                        <div class="option-item">
+                                            <span class="option-label">A.</span>
+                                            <span class="option-text">睡眠障礙</span>
+                                        </div>
+                                        <div class="option-item option-item--correct">
+                                            <span class="option-label">B.</span>
+                                            <span class="option-text">徘徊行為</span>
+                                            <span class="correct-indicator">✓ 正確答案</span>
+                                        </div>
+                                        <div class="option-item">
+                                            <span class="option-label">C.</span>
+                                            <span class="option-text">食慾不振</span>
+                                        </div>
+                                        <div class="option-item">
+                                            <span class="option-label">D.</span>
+                                            <span class="option-text">語言障礙</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="question-stats">
+                                        <span class="stat">📊 使用次數: 23</span>
+                                        <span class="stat">📈 正確率: 76%</span>
+                                        <span class="stat">⏱️ 平均時間: 45秒</span>
+                                        <span class="stat">📅 最後更新: 2025/01/10</span>
+                                    </div>
+                                    
+                                    <div class="question-tags">
+                                        <span class="tag">失智症</span>
+                                        <span class="tag">行為問題</span>
+                                        <span class="tag">日常照護</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="question-actions">
+                                    <button class="btn btn--small" data-action="preview" title="預覽">👁️</button>
+                                    <button class="btn btn--small" data-action="edit" title="編輯">✏️</button>
+                                    <button class="btn btn--small" data-action="duplicate" title="複製">📋</button>
+                                    <button class="btn btn--small" data-action="stats" title="統計">📊</button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-toggle btn btn--small" title="更多">⋯</button>
+                                        <div class="dropdown-content">
+                                            <a href="#" data-action="add-to-test">加入測驗</a>
+                                            <a href="#" data-action="export">匯出</a>
+                                            <a href="#" data-action="history">歷史紀錄</a>
+                                            <hr>
+                                            <a href="#" data-action="delete" class="text-danger">刪除</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="question-item">
+                                <div class="question-select">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="question-checkbox">
+                                        <span class="sr-only">選擇此題目</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="question-content">
+                                    <div class="question-header">
+                                        <div class="question-id">#DM002</div>
+                                        <div class="question-meta">
+                                            <span class="question-type badge badge--success">是非題</span>
+                                            <span class="question-difficulty badge badge--info">容易</span>
+                                            <span class="question-category badge">失智照顧</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="question-text">
+                                        失智症患者的記憶力會隨著病程進展而持續惡化。
+                                    </div>
+                                    
+                                    <div class="question-answer">
+                                        <span class="answer-label">正確答案:</span>
+                                        <span class="answer-value answer-value--true">✓ 是</span>
+                                    </div>
+                                    
+                                    <div class="question-explanation">
+                                        <strong>解釋:</strong> 失智症是一種進行性神經退化疾病，記憶力確實會隨著病程進展而逐漸惡化，這是失智症的主要特徵之一。
+                                    </div>
+                                    
+                                    <div class="question-stats">
+                                        <span class="stat">📊 使用次數: 18</span>
+                                        <span class="stat">📈 正確率: 89%</span>
+                                        <span class="stat">⏱️ 平均時間: 32秒</span>
+                                        <span class="stat">📅 最後更新: 2025/01/08</span>
+                                    </div>
+                                    
+                                    <div class="question-tags">
+                                        <span class="tag">失智症</span>
+                                        <span class="tag">記憶力</span>
+                                        <span class="tag">病程發展</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="question-actions">
+                                    <button class="btn btn--small" data-action="preview" title="預覽">👁️</button>
+                                    <button class="btn btn--small" data-action="edit" title="編輯">✏️</button>
+                                    <button class="btn btn--small" data-action="duplicate" title="複製">📋</button>
+                                    <button class="btn btn--small" data-action="stats" title="統計">📊</button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-toggle btn btn--small" title="更多">⋯</button>
+                                        <div class="dropdown-content">
+                                            <a href="#" data-action="add-to-test">加入測驗</a>
+                                            <a href="#" data-action="export">匯出</a>
+                                            <a href="#" data-action="history">歷史紀錄</a>
+                                            <hr>
+                                            <a href="#" data-action="delete" class="text-danger">刪除</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="question-item">
+                                <div class="question-select">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" class="question-checkbox">
+                                        <span class="sr-only">選擇此題目</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="question-content">
+                                    <div class="question-header">
+                                        <div class="question-id">#CM015</div>
+                                        <div class="question-meta">
+                                            <span class="question-type badge badge--warning">簡答題</span>
+                                            <span class="question-difficulty badge badge--danger">困難</span>
+                                            <span class="question-category badge">共生照顧</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="question-text">
+                                        請描述社區共生照顧模式的三個核心要素，並說明如何在實際服務中體現這些要素。
+                                    </div>
+                                    
+                                    <div class="question-answer">
+                                        <span class="answer-label">參考答案要點:</span>
+                                        <ol class="answer-points">
+                                            <li>以人為中心的照護理念</li>
+                                            <li>跨專業團隊合作</li>
+                                            <li>社區資源整合運用</li>
+                                        </ol>
+                                    </div>
+                                    
+                                    <div class="question-stats">
+                                        <span class="stat">📊 使用次數: 8</span>
+                                        <span class="stat">📈 平均分數: 73分</span>
+                                        <span class="stat">⏱️ 平均時間: 8分鐘</span>
+                                        <span class="stat">📅 最後更新: 2025/01/05</span>
+                                    </div>
+                                    
+                                    <div class="question-tags">
+                                        <span class="tag">社區照顧</span>
+                                        <span class="tag">共生模式</span>
+                                        <span class="tag">團隊合作</span>
+                                        <span class="tag">資源整合</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="question-actions">
+                                    <button class="btn btn--small" data-action="preview" title="預覽">👁️</button>
+                                    <button class="btn btn--small" data-action="edit" title="編輯">✏️</button>
+                                    <button class="btn btn--small" data-action="duplicate" title="複製">📋</button>
+                                    <button class="btn btn--small" data-action="stats" title="統計">📊</button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-toggle btn btn--small" title="更多">⋯</button>
+                                        <div class="dropdown-content">
+                                            <a href="#" data-action="add-to-test">加入測驗</a>
+                                            <a href="#" data-action="export">匯出</a>
+                                            <a href="#" data-action="history">歷史紀錄</a>
+                                            <hr>
+                                            <a href="#" data-action="delete" class="text-danger">刪除</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pagination-container">
+                            <div class="pagination-info">
+                                顯示第 1-20 題，共 45 題
+                            </div>
+                            <nav class="pagination">
+                                <button class="btn btn--small" disabled>« 上一頁</button>
+                                <button class="btn btn--small btn--primary">1</button>
+                                <button class="btn btn--small">2</button>
+                                <button class="btn btn--small">3</button>
+                                <button class="btn btn--small">下一頁 »</button>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Papers & Surveys -->
+                <div class="card admin-card">
+                    <div class="card__header">
+                        <h2>📋 測驗卷與問卷管理</h2>
+                        <div class="header-actions">
+                            <button class="btn btn--small btn--primary" data-open="modal-create-test">➕ 新建測驗</button>
+                            <button class="btn btn--small" data-open="modal-create-survey">📊 新建問卷</button>
+                        </div>
+                    </div>
+                    
+                    <div class="test-survey-tabs">
+                        <button class="tab-btn tab-btn--active" data-tab="tests">📝 測驗卷 (28)</button>
+                        <button class="tab-btn" data-tab="surveys">📊 問卷 (15)</button>
+                    </div>
+                    
+                    <div class="tab-content" data-content="tests">
+                        <div class="test-list">
+                            <div class="test-item">
+                                <div class="test-info">
+                                    <div class="test-title">失智友善溝通與行為支持 - 前測</div>
+                                    <div class="test-meta">
+                                        <span class="test-questions">20題</span>
+                                        <span class="test-duration">30分鐘</span>
+                                        <span class="test-type">前測</span>
+                                        <span class="test-course">失智友善溝通與行為支持</span>
+                                    </div>
+                                </div>
+                                <div class="test-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">使用次數</span>
+                                        <span class="stat-value">156</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">平均分數</span>
+                                        <span class="stat-value">78.5</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">通過率</span>
+                                        <span class="stat-value">85%</span>
+                                    </div>
+                                </div>
+                                <div class="test-actions">
+                                    <button class="btn btn--small" title="預覽">👁️</button>
+                                    <button class="btn btn--small" title="編輯">✏️</button>
+                                    <button class="btn btn--small" title="複製">📋</button>
+                                    <button class="btn btn--small" title="統計">📊</button>
+                                    <button class="btn btn--small" title="結果">📈</button>
+                                </div>
+                            </div>
+                            
+                            <div class="test-item">
+                                <div class="test-info">
+                                    <div class="test-title">24小時居家照護實務 - 後測</div>
+                                    <div class="test-meta">
+                                        <span class="test-questions">25題</span>
+                                        <span class="test-duration">45分鐘</span>
+                                        <span class="test-type">後測</span>
+                                        <span class="test-course">24小時居家照護實務</span>
+                                    </div>
+                                </div>
+                                <div class="test-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">使用次數</span>
+                                        <span class="stat-value">89</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">平均分數</span>
+                                        <span class="stat-value">82.3</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">通過率</span>
+                                        <span class="stat-value">91%</span>
+                                    </div>
+                                </div>
+                                <div class="test-actions">
+                                    <button class="btn btn--small" title="預覽">👁️</button>
+                                    <button class="btn btn--small" title="編輯">✏️</button>
+                                    <button class="btn btn--small" title="複製">📋</button>
+                                    <button class="btn btn--small" title="統計">📊</button>
+                                    <button class="btn btn--small" title="結果">📈</button>
+                                </div>
+                            </div>
+                            
+                            <div class="test-item">
+                                <div class="test-info">
+                                    <div class="test-title">社區共生與日常生活設計 - 評量</div>
+                                    <div class="test-meta">
+                                        <span class="test-questions">15題</span>
+                                        <span class="test-duration">20分鐘</span>
+                                        <span class="test-type">隨堂評量</span>
+                                        <span class="test-course">社區共生與日常生活設計</span>
+                                    </div>
+                                </div>
+                                <div class="test-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">使用次數</span>
+                                        <span class="stat-value">67</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">平均分數</span>
+                                        <span class="stat-value">75.8</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">通過率</span>
+                                        <span class="stat-value">79%</span>
+                                    </div>
+                                </div>
+                                <div class="test-actions">
+                                    <button class="btn btn--small" title="預覽">👁️</button>
+                                    <button class="btn btn--small" title="編輯">✏️</button>
+                                    <button class="btn btn--small" title="複製">📋</button>
+                                    <button class="btn btn--small" title="統計">📊</button>
+                                    <button class="btn btn--small" title="結果">📈</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" data-content="surveys" style="display: none;">
+                        <div class="survey-list">
+                            <div class="survey-item">
+                                <div class="survey-info">
+                                    <div class="survey-title">課程滿意度調查</div>
+                                    <div class="survey-meta">
+                                        <span class="survey-questions">8題</span>
+                                        <span class="survey-type">滿意度</span>
+                                        <span class="survey-status status--active">啟用中</span>
+                                    </div>
+                                </div>
+                                <div class="survey-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">回收數</span>
+                                        <span class="stat-value">234</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">滿意度</span>
+                                        <span class="stat-value">4.3/5</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">回收率</span>
+                                        <span class="stat-value">87%</span>
+                                    </div>
+                                </div>
+                                <div class="survey-actions">
+                                    <button class="btn btn--small" title="預覽">👁️</button>
+                                    <button class="btn btn--small" title="編輯">✏️</button>
+                                    <button class="btn btn--small" title="結果">📊</button>
+                                    <button class="btn btn--small" title="分析">📈</button>
+                                    <button class="btn btn--small" title="匯出">📤</button>
+                                </div>
+                            </div>
+                            
+                            <div class="survey-item">
+                                <div class="survey-info">
+                                    <div class="survey-title">學習需求調查</div>
+                                    <div class="survey-meta">
+                                        <span class="survey-questions">12題</span>
+                                        <span class="survey-type">需求調查</span>
+                                        <span class="survey-status status--draft">草稿</span>
+                                    </div>
+                                </div>
+                                <div class="survey-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">回收數</span>
+                                        <span class="stat-value">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">預計對象</span>
+                                        <span class="stat-value">全體學員</span>
+                                    </div>
+                                </div>
+                                <div class="survey-actions">
+                                    <button class="btn btn--small" title="預覽">👁️</button>
+                                    <button class="btn btn--small" title="編輯">✏️</button>
+                                    <button class="btn btn--small btn--primary" title="發布">📤</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 本頁為UI提案Mock，非最終產品</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="faq.html" aria-label="聯絡我們">聯絡我們</a>
+                    <a href="#accessibility" aria-label="無障礙宣告">無障礙宣告</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals would be added here for Create Question, Import Questions, etc. -->
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .admin-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: var(--space-xl);
+            gap: var(--space-lg);
+        }
+        
+        .page-title-section h1 {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .page-actions {
+            display: flex;
+            gap: var(--space-sm);
+            white-space: nowrap;
+        }
+        
+        .admin-grid {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .question-management-card {
+            grid-column: 1 / -1;
+        }
+        
+        /* Question Statistics */
+        .question-stats {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .stat-icon {
+            font-size: 24px;
+            width: 32px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--c-primary);
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .stats-chart {
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .stats-chart h4 {
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+        
+        .chart-container {
+            height: 200px;
+            display: flex;
+            align-items: end;
+        }
+        
+        .chart-bar-group {
+            display: flex;
+            gap: var(--space-md);
+            height: 100%;
+            align-items: end;
+            width: 100%;
+        }
+        
+        .chart-bar {
+            flex: 1;
+            background: var(--c-primary);
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            min-height: 20px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            transition: height 0.3s ease;
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: -50px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--c-muted);
+            width: 100%;
+        }
+        
+        /* Category Tree */
+        .category-tree {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .category-item {
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+        }
+        
+        .category-item--parent {
+            background: var(--c-sub);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+        }
+        
+        .category-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 4px;
+        }
+        
+        .category-icon {
+            font-size: 16px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .category-name {
+            flex: 1;
+            font-weight: 500;
+        }
+        
+        .category-stats {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .question-count {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .category-children {
+            border-top: 1px solid #E8ECEF;
+            background: var(--c-surface);
+        }
+        
+        .category-children .category-item {
+            border: none;
+            border-bottom: 1px solid #E8ECEF;
+            border-radius: 0;
+        }
+        
+        .category-children .category-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Question Filters */
+        .question-filters {
+            margin-bottom: var(--space-lg);
+            padding: var(--space-lg);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .filter-row {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr) auto;
+            gap: var(--space-md);
+            align-items: end;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .filter-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--c-text);
+        }
+        
+        .search-input {
+            width: 100%;
+        }
+        
+        .filter-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .filter-tags {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-md);
+            padding-top: var(--space-md);
+            border-top: 1px solid #E8ECEF;
+        }
+        
+        .active-filters {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .filter-label {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .filter-tag-list {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .filter-tag {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 4px 8px;
+            background: var(--c-primary);
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        .remove-filter {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            padding: 0 2px;
+        }
+        
+        .result-count {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .view-controls {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .view-btn {
+            padding: var(--space-xs) var(--space-sm);
+            border: 1px solid #E8ECEF;
+            background: var(--c-surface);
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+        
+        .view-btn--active {
+            background: var(--c-primary);
+            color: white;
+            border-color: var(--c-primary);
+        }
+        
+        /* Question List */
+        .question-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .bulk-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .bulk-action-buttons {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .sort-controls label {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .question-list {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .question-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+        }
+        
+        .question-select {
+            display: flex;
+            align-items: start;
+            padding-top: 4px;
+        }
+        
+        .question-content {
+            flex: 1;
+        }
+        
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .question-id {
+            font-weight: 600;
+            color: var(--c-primary);
+            font-family: monospace;
+        }
+        
+        .question-meta {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .question-text {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+            line-height: 1.5;
+        }
+        
+        .question-options {
+            display: grid;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+            padding-left: var(--space-md);
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xs);
+            border-radius: var(--radius-sm);
+        }
+        
+        .option-item--correct {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+        }
+        
+        .option-label {
+            font-weight: 600;
+            color: var(--c-primary);
+            width: 20px;
+        }
+        
+        .option-text {
+            flex: 1;
+        }
+        
+        .correct-indicator {
+            color: #4caf50;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .question-answer {
+            margin-bottom: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-sm);
+        }
+        
+        .answer-label {
+            font-weight: 500;
+            margin-right: var(--space-sm);
+        }
+        
+        .answer-value--true {
+            color: #4caf50;
+            font-weight: 600;
+        }
+        
+        .question-explanation {
+            margin-bottom: var(--space-md);
+            padding: var(--space-sm);
+            background: #f0f8ff;
+            border: 1px solid #e3f2fd;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+        }
+        
+        .answer-points {
+            margin: var(--space-xs) 0 0 var(--space-lg);
+        }
+        
+        .answer-points li {
+            margin-bottom: 4px;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+            flex-wrap: wrap;
+        }
+        
+        .question-stats .stat {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .question-tags {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            padding: 2px 6px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 11px;
+            color: var(--c-muted);
+        }
+        
+        .question-actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+            align-items: end;
+        }
+        
+        .dropdown-menu {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: var(--c-surface);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            min-width: 120px;
+            z-index: 100;
+            display: none;
+        }
+        
+        .dropdown-menu:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: var(--space-xs) var(--space-sm);
+            text-decoration: none;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .dropdown-content a:hover {
+            background: var(--c-sub);
+        }
+        
+        .dropdown-content hr {
+            margin: 4px 0;
+            border: none;
+            border-top: 1px solid #E8ECEF;
+        }
+        
+        .text-danger {
+            color: var(--c-danger);
+        }
+        
+        /* Test & Survey Management */
+        .test-survey-tabs {
+            display: flex;
+            border-bottom: 2px solid #E8ECEF;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .tab-btn {
+            padding: var(--space-sm) var(--space-md);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .tab-btn--active {
+            color: var(--c-primary);
+            border-bottom-color: var(--c-primary);
+            font-weight: 600;
+        }
+        
+        .test-list, .survey-list {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .test-item, .survey-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: var(--space-lg);
+            padding: var(--space-md);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            align-items: center;
+        }
+        
+        .test-info, .survey-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .test-title, .survey-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .test-meta, .survey-meta {
+            display: flex;
+            gap: var(--space-sm);
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .test-meta span, .survey-meta span {
+            padding: 2px 6px;
+            background: var(--c-sub);
+            border-radius: 8px;
+        }
+        
+        .test-stats, .survey-stats {
+            display: flex;
+            gap: var(--space-md);
+        }
+        
+        .test-stats .stat-item, .survey-stats .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            color: var(--c-primary);
+        }
+        
+        .test-actions, .survey-actions {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .status--active {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .status--draft {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-lg);
+            border-top: 1px solid #E8ECEF;
+        }
+        
+        .pagination-info {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .pagination {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        @media (max-width: 992px) {
+            .admin-page-header {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            
+            .page-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .stat-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .filter-row {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .filter-actions {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .question-item {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .question-header {
+                flex-direction: column;
+                gap: var(--space-sm);
+                align-items: start;
+            }
+            
+            .question-actions {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .test-item, .survey-item {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+                text-align: center;
+            }
+            
+            .test-stats, .survey-stats {
+                justify-content: center;
+            }
+            
+            .test-actions, .survey-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Category tree toggle
+            const categoryToggles = document.querySelectorAll('.category-toggle');
+            categoryToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const expanded = this.getAttribute('aria-expanded') === 'true';
+                    const children = this.parentElement.parentElement.querySelector('.category-children');
+                    
+                    if (children) {
+                        children.style.display = expanded ? 'none' : 'block';
+                        this.setAttribute('aria-expanded', !expanded);
+                        this.textContent = expanded ? '📁' : '📂';
+                    }
+                });
+            });
+            
+            // Tab switching
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetTab = this.dataset.tab;
+                    
+                    // Update active tab
+                    tabBtns.forEach(b => b.classList.remove('tab-btn--active'));
+                    this.classList.add('tab-btn--active');
+                    
+                    // Show corresponding content
+                    tabContents.forEach(content => {
+                        if (content.dataset.content === targetTab) {
+                            content.style.display = 'block';
+                        } else {
+                            content.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // View switching
+            const viewBtns = document.querySelectorAll('.view-btn');
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    viewBtns.forEach(b => b.classList.remove('view-btn--active'));
+                    this.classList.add('view-btn--active');
+                    
+                    // Here you would implement grid/list view switching
+                    console.log('Switching to view:', this.dataset.view);
+                });
+            });
+            
+            // Select all functionality
+            const selectAllQuestions = document.getElementById('select-all-questions');
+            const questionCheckboxes = document.querySelectorAll('.question-checkbox');
+            const bulkActionButtons = document.querySelector('.bulk-action-buttons');
+            
+            selectAllQuestions?.addEventListener('change', function() {
+                questionCheckboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+                updateBulkActions();
+            });
+            
+            questionCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateBulkActions);
+            });
+            
+            function updateBulkActions() {
+                const checkedBoxes = document.querySelectorAll('.question-checkbox:checked');
+                if (bulkActionButtons) {
+                    bulkActionButtons.style.display = checkedBoxes.length > 0 ? 'flex' : 'none';
+                }
+            }
+            
+            // Filter functionality
+            const applyFiltersBtn = document.getElementById('apply-filters');
+            const resetFiltersBtn = document.getElementById('reset-filters');
+            
+            applyFiltersBtn?.addEventListener('click', function() {
+                // Apply filters logic
+                console.log('Applying filters...');
+            });
+            
+            resetFiltersBtn?.addEventListener('click', function() {
+                // Reset filters logic
+                const filterSelects = document.querySelectorAll('.question-filters select');
+                const searchInput = document.getElementById('search-questions');
+                
+                filterSelects.forEach(select => select.value = '');
+                if (searchInput) searchInput.value = '';
+                
+                console.log('Filters reset');
+            });
+        });
+    </script>
+</body>
+</html>

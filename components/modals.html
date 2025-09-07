@@ -1,0 +1,285 @@
+<!-- Purchase Points Modal -->
+<div class="modal-backdrop" id="modal-purchase" role="dialog" aria-labelledby="purchase-title" aria-describedby="purchase-description" aria-hidden="true">
+    <div class="modal">
+        <div class="modal__header">
+            <h2 class="modal__title" id="purchase-title">購買點數</h2>
+            <button class="modal__close" data-close aria-label="關閉對話框">
+                <span aria-hidden="true">✕</span>
+            </button>
+        </div>
+        <div class="modal__content">
+            <p id="purchase-description" class="meta">請選擇要購買的點數數量和付款方式</p>
+            <form class="modal__form">
+                <div class="field">
+                    <label class="field__label" for="purchase-points">購買點數</label>
+                    <input 
+                        type="number" 
+                        id="purchase-points" 
+                        class="field__input" 
+                        placeholder="輸入點數（例如 10）" 
+                        min="1" 
+                        max="100"
+                        required
+                        aria-describedby="points-help"
+                    >
+                    <div class="field__help" id="points-help">每點約等於 NT$100，最少購買1點，最多一次購買100點</div>
+                </div>
+                
+                <div class="field">
+                    <label class="field__label" for="payment-method">付款方式</label>
+                    <select id="payment-method" class="field__input" required>
+                        <option value="">請選擇付款方式</option>
+                        <option value="credit-card">信用卡</option>
+                        <option value="bank-transfer">銀行轉帳</option>
+                        <option value="atm">ATM轉帳</option>
+                    </select>
+                </div>
+                
+                <div class="notice notice--info">
+                    <strong>注意事項：</strong>
+                    <ul style="margin-top: 8px; padding-left: 16px;">
+                        <li>點數購買後即可立即使用</li>
+                        <li>點數有效期限為購買日起一年</li>
+                        <li>可透過學員中心查詢點數餘額</li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="modal__actions">
+            <button class="btn" data-close type="button">取消</button>
+            <button class="btn btn--primary" type="submit">前往付款</button>
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Enrollment Modal -->
+<div class="modal-backdrop" id="modal-cancel" role="dialog" aria-labelledby="cancel-title" aria-describedby="cancel-description" aria-hidden="true">
+    <div class="modal">
+        <div class="modal__header">
+            <h2 class="modal__title" id="cancel-title">線上取消報名</h2>
+            <button class="modal__close" data-close aria-label="關閉對話框">
+                <span aria-hidden="true">✕</span>
+            </button>
+        </div>
+        <div class="modal__content">
+            <p id="cancel-description">是否確認取消本課程報名？系統將依規定處理退費與點數加回。</p>
+            
+            <div class="card" style="background: #FFF8E1; border-color: #FFE082;">
+                <h4 style="color: #8D6E63; margin-bottom: 8px;">取消報名說明：</h4>
+                <ul style="color: #8D6E63; font-size: 14px; line-height: 1.6;">
+                    <li>課程開始前7天取消：全額退費</li>
+                    <li>課程開始前3-7天取消：退費80%</li>
+                    <li>課程開始前1-3天取消：退費50%</li>
+                    <li>課程當天取消：不予退費</li>
+                </ul>
+            </div>
+            
+            <div class="field">
+                <label class="field__label" for="cancel-reason">取消原因（選填）</label>
+                <textarea 
+                    id="cancel-reason" 
+                    class="field__input" 
+                    placeholder="請簡述取消報名的原因，有助於我們改善服務品質"
+                    rows="3"
+                ></textarea>
+            </div>
+        </div>
+        <div class="modal__actions">
+            <button class="btn" data-close type="button">保留報名</button>
+            <button class="btn btn--danger" type="button">確認取消</button>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal-backdrop" id="modal-login" role="dialog" aria-labelledby="login-title" aria-describedby="login-description" aria-hidden="true">
+    <div class="modal">
+        <div class="modal__header">
+            <h2 class="modal__title" id="login-title">會員登入</h2>
+            <button class="modal__close" data-close aria-label="關閉對話框">
+                <span aria-hidden="true">✕</span>
+            </button>
+        </div>
+        <div class="modal__content">
+            <p id="login-description" class="meta">請輸入您的會員帳號和密碼</p>
+            <form class="modal__form">
+                <div class="field">
+                    <label class="field__label" for="login-username">帳號</label>
+                    <input 
+                        type="text" 
+                        id="login-username" 
+                        class="field__input" 
+                        placeholder="請輸入手機號碼或Email"
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+                
+                <div class="field">
+                    <label class="field__label" for="login-password">密碼</label>
+                    <input 
+                        type="password" 
+                        id="login-password" 
+                        class="field__input" 
+                        placeholder="請輸入密碼"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+                
+                <div class="field">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me">
+                        <span class="checkbox-text">記住我的登入狀態</span>
+                    </label>
+                </div>
+            </form>
+            
+            <div class="field">
+                <a href="#forgot-password" class="link">忘記密碼？</a>
+            </div>
+        </div>
+        <div class="modal__actions">
+            <button class="btn" data-close type="button">取消</button>
+            <button class="btn btn--primary" type="submit">登入</button>
+        </div>
+    </div>
+</div>
+
+<!-- Registration Modal -->
+<div class="modal-backdrop" id="modal-register" role="dialog" aria-labelledby="register-title" aria-describedby="register-description" aria-hidden="true">
+    <div class="modal">
+        <div class="modal__header">
+            <h2 class="modal__title" id="register-title">會員註冊</h2>
+            <button class="modal__close" data-close aria-label="關閉對話框">
+                <span aria-hidden="true">✕</span>
+            </button>
+        </div>
+        <div class="modal__content">
+            <p id="register-description" class="meta">填寫基本資料完成註冊</p>
+            <form class="modal__form">
+                <div class="field">
+                    <label class="field__label" for="register-name">姓名 <span style="color: var(--c-danger);">*</span></label>
+                    <input 
+                        type="text" 
+                        id="register-name" 
+                        class="field__input" 
+                        placeholder="請輸入真實姓名"
+                        required
+                        autocomplete="name"
+                    >
+                </div>
+                
+                <div class="field">
+                    <label class="field__label" for="register-phone">手機號碼 <span style="color: var(--c-danger);">*</span></label>
+                    <input 
+                        type="tel" 
+                        id="register-phone" 
+                        class="field__input" 
+                        placeholder="例如：0912345678"
+                        required
+                        autocomplete="tel"
+                    >
+                </div>
+                
+                <div class="field">
+                    <label class="field__label" for="register-email">Email <span style="color: var(--c-danger);">*</span></label>
+                    <input 
+                        type="email" 
+                        id="register-email" 
+                        class="field__input" 
+                        placeholder="例如：user@example.com"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+                
+                <div class="field">
+                    <label class="field__label" for="register-password">設定密碼 <span style="color: var(--c-danger);">*</span></label>
+                    <input 
+                        type="password" 
+                        id="register-password" 
+                        class="field__input" 
+                        placeholder="至少8個字元"
+                        required
+                        autocomplete="new-password"
+                        minlength="8"
+                    >
+                    <div class="field__help">密碼需包含英文字母和數字，至少8個字元</div>
+                </div>
+                
+                <div class="field">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agree-terms" required>
+                        <span class="checkbox-text">我同意 <a href="#terms" target="_blank">服務條款</a> 和 <a href="#privacy" target="_blank">隱私權政策</a></span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="modal__actions">
+            <button class="btn" data-close type="button">取消</button>
+            <button class="btn btn--primary" type="submit">註冊</button>
+        </div>
+    </div>
+</div>
+
+<!-- Success Message Modal -->
+<div class="modal-backdrop" id="modal-success" role="dialog" aria-labelledby="success-title" aria-describedby="success-description" aria-hidden="true">
+    <div class="modal">
+        <div class="modal__header">
+            <h2 class="modal__title" id="success-title">操作成功</h2>
+            <button class="modal__close" data-close aria-label="關閉對話框">
+                <span aria-hidden="true">✕</span>
+            </button>
+        </div>
+        <div class="modal__content">
+            <div style="text-align: center; padding: 20px 0;">
+                <div style="font-size: 48px; color: var(--c-success); margin-bottom: 16px;">✓</div>
+                <p id="success-description">您的操作已經完成！</p>
+            </div>
+        </div>
+        <div class="modal__actions" style="justify-content: center;">
+            <button class="btn btn--primary" data-close type="button">確定</button>
+        </div>
+    </div>
+</div>
+
+<!-- Error Message Modal -->
+<div class="modal-backdrop" id="modal-error" role="dialog" aria-labelledby="error-title" aria-describedby="error-description" aria-hidden="true">
+    <div class="modal">
+        <div class="modal__header">
+            <h2 class="modal__title" id="error-title">操作失敗</h2>
+            <button class="modal__close" data-close aria-label="關閉對話框">
+                <span aria-hidden="true">✕</span>
+            </button>
+        </div>
+        <div class="modal__content">
+            <div style="text-align: center; padding: 20px 0;">
+                <div style="font-size: 48px; color: var(--c-danger); margin-bottom: 16px;">✕</div>
+                <p id="error-description">操作過程中發生錯誤，請稍後再試或聯繫客服人員。</p>
+            </div>
+        </div>
+        <div class="modal__actions" style="justify-content: center;">
+            <button class="btn btn--primary" data-close type="button">確定</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal-backdrop" id="modal-confirm" role="dialog" aria-labelledby="confirm-title" aria-describedby="confirm-description" aria-hidden="true">
+    <div class="modal">
+        <div class="modal__header">
+            <h2 class="modal__title" id="confirm-title">確認操作</h2>
+            <button class="modal__close" data-close aria-label="關閉對話框">
+                <span aria-hidden="true">✕</span>
+            </button>
+        </div>
+        <div class="modal__content">
+            <p id="confirm-description">您確定要執行此操作嗎？此動作無法復原。</p>
+        </div>
+        <div class="modal__actions">
+            <button class="btn" data-close type="button">取消</button>
+            <button class="btn btn--danger" type="button" id="confirm-action">確認</button>
+        </div>
+    </div>
+</div>

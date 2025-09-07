@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFT 照顧學校 | 系統設定</title>
+    <meta name="description" content="CFT照顧學校系統設定，核心資料、通用設定與內容管理。">
+    <meta name="keywords" content="系統設定,AIO職種,通用設定,內容管理">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/theme-v0.css">
+    <link rel="stylesheet" href="assets/css/ui-v0-legacy.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only">跳至主要內容</a>
+    
+    <!-- Header Component -->
+    <header class="header" role="banner">
+        <nav class="header__nav container" aria-label="主要導覽">
+            <div class="header__brand">
+                <a href="index.html" aria-label="返回首頁">
+                    <img src="assets/images/logo.png" alt="CFT" class="header__logo">
+                </a>
+                <a class="header__brand-subtitle" href="admin-dashboard.html">CFT 照顧學校</a>
+            </div>
+            <ul class="header__menu" role="menubar">
+                <li role="none">
+                    <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
+                </li>
+                <li role="none">
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                </li>
+                <li role="none">
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-inquiries.html" class="header__menu-item" role="menuitem">詢問</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <section class="section container">
+            <div style="margin-bottom: var(--space-lg);">
+                <h1>系統設定</h1>
+                <p class="meta">管理核心資料、系統參數與內容設定</p>
+            </div>
+            
+            <!-- Tabs Navigation -->
+            <div class="tabs">
+                <button class="tab tab--active" data-tab="core-data">核心資料</button>
+                <button class="tab" data-tab="general-settings">通用設定</button>
+                <button class="tab" data-tab="content-management">內容管理</button>
+                <button class="tab" data-tab="reports-export">報表/匯出</button>
+                <button class="tab" data-tab="import">導入</button>
+            </div>
+            
+            <!-- Tab Content: Core Data -->
+            <div class="tab-content tab-content--active" id="core-data-tab">
+                <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
+                    <div class="card">
+                        <h3>AIO職種管理</h3>
+                        <div class="aio-list">
+                            <div class="aio-item">
+                                <input type="text" value="照顧服務員" class="aio-name">
+                                <a href="#" class="aio-courses">編輯對應課程 (3)</a>
+                                <button type="button" class="btn btn--small btn--danger">刪除</button>
+                            </div>
+                            <div class="aio-item">
+                                <input type="text" value="照顧設計師" class="aio-name">
+                                <a href="#" class="aio-courses">編輯對應課程 (5)</a>
+                                <button type="button" class="btn btn--small btn--danger">刪除</button>
+                            </div>
+                            <div class="aio-item">
+                                <input type="text" value="在宅醫師" class="aio-name">
+                                <a href="#" class="aio-courses">編輯對應課程 (4)</a>
+                                <button type="button" class="btn btn--small btn--danger">刪除</button>
+                            </div>
+                            <div class="aio-item">
+                                <input type="text" value="在宅藥師" class="aio-name">
+                                <a href="#" class="aio-courses">編輯對應課程 (2)</a>
+                                <button type="button" class="btn btn--small btn--danger">刪除</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn--ghost" style="margin-top: var(--space-md);" onclick="addAioType()">新增職種</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>課程分類管理</h3>
+                        <div class="category-list">
+                            <div class="category-item">
+                                <input type="text" value="失智症照護" class="category-name">
+                                <button type="button" class="btn btn--small btn--danger">刪除</button>
+                            </div>
+                            <div class="category-item">
+                                <input type="text" value="線上課程" class="category-name">
+                                <button type="button" class="btn btn--small btn--danger">刪除</button>
+                            </div>
+                            <div class="category-item">
+                                <input type="text" value="社區照護" class="category-name">
+                                <button type="button" class="btn btn--small btn--danger">刪除</button>
+                            </div>
+                            <div class="category-item">
+                                <input type="text" value="安寧緩和" class="category-name">
+                                <button type="button" class="btn btn--small btn--danger">刪除</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn--ghost" style="margin-top: var(--space-md);" onclick="addCategory()">新增分類</button>
+                    </div>
+                </div>
+                
+                <div style="margin-top: var(--space-md); text-align: center;">
+                    <button type="button" class="btn btn--primary">儲存核心資料</button>
+                </div>
+            </div>
+            
+            <!-- Tab Content: General Settings -->
+            <div class="tab-content" id="general-settings-tab">
+                <div class="card">
+                    <h3>通用設定</h3>
+                    <form class="settings-form">
+                        <div class="setting-item">
+                            <label for="points-threshold">點數不足提醒閾值</label>
+                            <div class="setting-input">
+                                <input type="number" id="points-threshold" value="20" min="1" max="100">
+                                <span class="unit">點</span>
+                            </div>
+                            <div class="meta">當學員點數低於此數值時，系統會發送提醒</div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label for="course-reminder">課程提醒時間</label>
+                            <div class="setting-input">
+                                <input type="number" id="course-reminder" value="24" min="1" max="168">
+                                <span class="unit">小時前</span>
+                            </div>
+                            <div class="meta">課程開始前多久發送提醒通知</div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label for="auto-complete">自動完成課程</label>
+                            <div class="setting-checkbox">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="auto-complete" checked>
+                                    <span class="checkbox-text">啟用自動完成</span>
+                                </label>
+                            </div>
+                            <div class="meta">當學員完成簽到/簽退時，自動標記課程為完成</div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label for="email-notifications">電子郵件通知</label>
+                            <div class="setting-checkboxes">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-text">課程提醒</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-text">點數不足</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox">
+                                    <span class="checkbox-text">系統公告</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span class="checkbox-text">課程異動</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label for="backup-frequency">資料備份頻率</label>
+                            <select id="backup-frequency">
+                                <option value="daily" selected>每日</option>
+                                <option value="weekly">每週</option>
+                                <option value="monthly">每月</option>
+                            </select>
+                            <div class="meta">系統會依照設定頻率自動備份重要資料</div>
+                        </div>
+                    </form>
+                    
+                    <div style="margin-top: var(--space-lg); text-align: center;">
+                        <button type="button" class="btn btn--primary">儲存設定</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Content: Content Management -->
+            <div class="tab-content" id="content-management-tab">
+                <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
+                    <div class="card">
+                        <h3>首頁內容管理</h3>
+                        <div class="content-items">
+                            <div class="content-item">
+                                <label>首頁輪播看板</label>
+                                <button type="button" class="btn btn--small">管理</button>
+                                <div class="meta">目前有 3 張輪播圖片</div>
+                            </div>
+                            <div class="content-item">
+                                <label>最新消息區塊</label>
+                                <button type="button" class="btn btn--small">編輯</button>
+                                <div class="meta">顯示最新 5 則公告</div>
+                            </div>
+                            <div class="content-item">
+                                <label>熱門課程推薦</label>
+                                <button type="button" class="btn btn--small">設定</button>
+                                <div class="meta">自動顯示報名人數最多的課程</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>政策與說明頁面</h3>
+                        <div class="content-items">
+                            <div class="content-item">
+                                <label>個資使用條款</label>
+                                <button type="button" class="btn btn--small">編輯</button>
+                                <div class="meta">最後更新：2025/01/15</div>
+                            </div>
+                            <div class="content-item">
+                                <label>退費規定說明</label>
+                                <button type="button" class="btn btn--small">編輯</button>
+                                <div class="meta">最後更新：2025/01/10</div>
+                            </div>
+                            <div class="content-item">
+                                <label>學習指南</label>
+                                <button type="button" class="btn btn--small">編輯</button>
+                                <div class="meta">最後更新：2024/12/20</div>
+                            </div>
+                            <div class="content-item">
+                                <label>聯絡我們</label>
+                                <button type="button" class="btn btn--small">編輯</button>
+                                <div class="meta">包含聯絡方式與營業時間</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: var(--space-md); text-align: center;">
+                    <button type="button" class="btn btn--primary">儲存內容設定</button>
+                </div>
+            </div>
+            
+            <!-- Tab Content: Reports & Export -->
+            <div class="tab-content" id="reports-export-tab">
+                <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
+                    <div class="card">
+                        <h3>報表生成</h3>
+                        <form class="report-form">
+                            <div class="field">
+                                <label for="report-type">報表類型</label>
+                                <select id="report-type">
+                                    <option value="student-list">上課學員名單</option>
+                                    <option value="course-completion">課後名單 (衛福部格式)</option>
+                                    <option value="points-summary">學員點數統計</option>
+                                    <option value="teacher-hours">教師授課時數</option>
+                                    <option value="revenue-report">營收報表</option>
+                                </select>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="report-course">選擇課程</label>
+                                <select id="report-course">
+                                    <option value="">所有課程</option>
+                                    <option value="dementia">失智友善溝通</option>
+                                    <option value="integrated">整合照護直播</option>
+                                    <option value="community">社區共生設計</option>
+                                    <option value="hospice">安寧緩和醫療</option>
+                                </select>
+                            </div>
+                            
+                            <div class="field">
+                                <label>日期範圍</label>
+                                <div class="date-range">
+                                    <input type="date" id="start-date" value="2025-01-01">
+                                    <span>至</span>
+                                    <input type="date" id="end-date" value="2025-12-31">
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn--primary" style="width: 100%;">生成報表</button>
+                        </form>
+                        
+                        <hr style="margin: var(--space-lg) 0;">
+                        
+                        <div>
+                            <h4>專用申請表格</h4>
+                            <button type="button" class="btn btn--ghost" style="width: 100%; margin-bottom: var(--space-xs);">課程申請表 (衛福部格式)</button>
+                            <button type="button" class="btn btn--ghost" style="width: 100%;">積分申請書</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>財務相關報表</h3>
+                        <form class="financial-report-form">
+                            <div class="field">
+                                <label for="financial-report-type">報表類型</label>
+                                <select id="financial-report-type">
+                                    <option value="payment-details">收款明細</option>
+                                    <option value="refund-details">退款明細</option>
+                                    <option value="points-purchase">點數購買記錄</option>
+                                    <option value="revenue-summary">收入統計</option>
+                                </select>
+                            </div>
+                            
+                            <div class="field">
+                                <label>日期範圍</label>
+                                <div class="date-range">
+                                    <input type="date" id="financial-start-date" value="2025-01-01">
+                                    <span>至</span>
+                                    <input type="date" id="financial-end-date" value="2025-01-31">
+                                </div>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="financial-format">匯出格式</label>
+                                <select id="financial-format">
+                                    <option value="csv">CSV</option>
+                                    <option value="xlsx">Excel (XLSX)</option>
+                                </select>
+                            </div>
+                            
+                            <button type="button" class="btn btn--primary" onclick="generateFinancialReport()">生成財務報表</button>
+                        </form>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>最近生成的報表</h3>
+                        <div class="report-history">
+                            <div class="report-item">
+                                <div class="report-info">
+                                    <span class="report-name">失智友善溝通 - 學員名單</span>
+                                    <span class="report-date">2025/01/20 15:30</span>
+                                </div>
+                                <button type="button" class="btn btn--small">下載</button>
+                            </div>
+                            
+                            <div class="report-item">
+                                <div class="report-info">
+                                    <span class="report-name">1月收款明細</span>
+                                    <span class="report-date">2025/01/20 14:15</span>
+                                </div>
+                                <button type="button" class="btn btn--small">下載</button>
+                            </div>
+                            
+                            <div class="report-item">
+                                <div class="report-info">
+                                    <span class="report-name">12月營收報表</span>
+                                    <span class="report-date">2025/01/05 09:15</span>
+                                </div>
+                                <button type="button" class="btn btn--small">下載</button>
+                            </div>
+                            
+                            <div class="report-item">
+                                <div class="report-info">
+                                    <span class="report-name">教師授課時數統計</span>
+                                    <span class="report-date">2024/12/31 16:45</span>
+                                </div>
+                                <button type="button" class="btn btn--small">下載</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tab Content: Import -->
+            <div class="tab-content" id="import-tab">
+                <div class="card">
+                    <h3>批次導入 (Excel)</h3>
+                    <p class="meta">請下載模板檔案，並依照格式填寫資料後上傳。系統會自動檢查資料格式並匯入。</p>
+                    
+                    <div class="import-templates">
+                        <h4>下載模板檔案</h4>
+                        <div class="template-buttons">
+                            <button type="button" class="btn">📋 課程模板</button>
+                            <button type="button" class="btn">👥 學員模板</button>
+                            <button type="button" class="btn">👨‍🏫 教師模板</button>
+                        </div>
+                    </div>
+                    
+                    <div class="import-upload">
+                        <h4>上傳檔案</h4>
+                        <div class="upload-area" onclick="document.getElementById('import-file').click()">
+                            <div class="upload-icon">📁</div>
+                            <div class="upload-text">
+                                <span>點擊選擇檔案或拖拽檔案到此處</span>
+                                <div class="meta">支援格式：.xlsx, .xls (最大 10MB)</div>
+                            </div>
+                            <input type="file" id="import-file" accept=".xlsx,.xls" style="display: none;">
+                        </div>
+                        
+                        <div class="import-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span class="checkbox-text">跳過重複資料</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox">
+                                <span class="checkbox-text">覆蓋現有資料</span>
+                            </label>
+                        </div>
+                        
+                        <button type="button" class="btn btn--primary" style="width: 100%;" disabled id="import-btn">開始匯入</button>
+                    </div>
+                    
+                    <div class="import-history">
+                        <h4>匯入記錄</h4>
+                        <div class="history-list">
+                            <div class="history-item">
+                                <div class="history-info">
+                                    <span class="history-type">學員資料</span>
+                                    <span class="history-date">2025/01/15 14:20</span>
+                                </div>
+                                <div class="history-result">
+                                    <span class="result-success">成功 45 筆</span>
+                                    <span class="result-error">失敗 2 筆</span>
+                                </div>
+                            </div>
+                            
+                            <div class="history-item">
+                                <div class="history-info">
+                                    <span class="history-type">課程資料</span>
+                                    <span class="history-date">2025/01/10 10:30</span>
+                                </div>
+                                <div class="history-result">
+                                    <span class="result-success">成功 12 筆</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Component -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p>&copy; 2025 創照服務設計 · 管理後台 Mock 介面</p>
+                <div class="footer__links">
+                    <a href="#privacy" aria-label="隱私權政策">隱私權政策</a>
+                    <a href="#terms" aria-label="服務條款">服務條款</a>
+                    <a href="#support" aria-label="技術支援">技術支援</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page-specific Styles -->
+    <style>
+        .tabs {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            border-bottom: 2px solid #E8ECEF;
+            overflow-x: auto;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            border: none;
+            background: none;
+            color: var(--c-muted);
+            cursor: pointer;
+            border-radius: var(--radius-card) var(--radius-card) 0 0;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        
+        .tab--active {
+            background: var(--c-primary);
+            color: white;
+        }
+        
+        .tab:hover:not(.tab--active) {
+            background: rgba(160, 204, 78, 0.1);
+            color: var(--c-primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content--active {
+            display: block;
+        }
+        
+        .aio-list,
+        .category-list {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .aio-item,
+        .category-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: var(--space-sm);
+            align-items: center;
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .aio-name,
+        .category-name {
+            padding: 4px 8px;
+            border: 1px solid transparent;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+            font-weight: 500;
+        }
+        
+        .aio-name:focus,
+        .category-name:focus {
+            outline: none;
+            border-color: var(--c-primary);
+            box-shadow: 0 0 0 2px rgba(160, 204, 78, 0.2);
+        }
+        
+        .aio-courses {
+            color: var(--c-primary);
+            text-decoration: none;
+            font-size: 12px;
+        }
+        
+        .aio-courses:hover {
+            text-decoration: underline;
+        }
+        
+        .settings-form {
+            display: grid;
+            gap: var(--space-lg);
+        }
+        
+        .setting-item {
+            display: grid;
+            gap: var(--space-xs);
+        }
+        
+        .setting-item label {
+            font-weight: 500;
+            color: var(--c-text);
+        }
+        
+        .setting-input {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .setting-input input,
+        .setting-input select {
+            padding: 8px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+        }
+        
+        .unit {
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .setting-checkboxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-sm);
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .checkbox-text {
+            user-select: none;
+        }
+        
+        .content-items {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .content-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .content-item label {
+            font-weight: 500;
+        }
+        
+        .report-form {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+        
+        .field label {
+            font-weight: 500;
+            color: var(--c-text);
+            font-size: 14px;
+        }
+        
+        .field input,
+        .field select {
+            padding: 8px 12px;
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+            background: var(--c-surface);
+        }
+        
+        .date-range {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        
+        .date-range span {
+            color: var(--c-muted);
+            font-size: 14px;
+        }
+        
+        .report-history {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .report-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .report-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .report-name {
+            font-weight: 500;
+        }
+        
+        .report-date {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .import-templates {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .import-templates h4 {
+            margin-bottom: var(--space-sm);
+            color: var(--c-primary);
+        }
+        
+        .template-buttons {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+        
+        .import-upload {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .import-upload h4 {
+            margin-bottom: var(--space-sm);
+            color: var(--c-primary);
+        }
+        
+        .upload-area {
+            border: 2px dashed #CFD8DC;
+            border-radius: var(--radius-card);
+            padding: var(--space-xl);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: var(--space-md);
+        }
+        
+        .upload-area:hover {
+            border-color: var(--c-primary);
+            background: rgba(160, 204, 78, 0.04);
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .upload-text span {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+        }
+        
+        .import-options {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .import-history h4 {
+            margin-bottom: var(--space-sm);
+            color: var(--c-primary);
+        }
+        
+        .history-list {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-sm);
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+        }
+        
+        .history-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .history-type {
+            font-weight: 500;
+        }
+        
+        .history-date {
+            font-size: 12px;
+            color: var(--c-muted);
+        }
+        
+        .history-result {
+            display: flex;
+            gap: var(--space-sm);
+            font-size: 12px;
+        }
+        
+        .result-success {
+            color: var(--c-success);
+        }
+        
+        .result-error {
+            color: var(--c-danger);
+        }
+        
+        @media (max-width: 992px) {
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .setting-checkboxes {
+                grid-template-columns: 1fr;
+            }
+            
+            .template-buttons {
+                flex-direction: column;
+            }
+            
+            .import-options {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                flex-wrap: wrap;
+            }
+            
+            .aio-item,
+            .category-item {
+                grid-template-columns: 1fr;
+                gap: var(--space-xs);
+            }
+            
+            .content-item {
+                flex-direction: column;
+                gap: var(--space-sm);
+                align-items: stretch;
+            }
+            
+            .report-item {
+                flex-direction: column;
+                gap: var(--space-sm);
+                align-items: stretch;
+            }
+            
+            .history-item {
+                flex-direction: column;
+                gap: var(--space-sm);
+                align-items: stretch;
+            }
+        }
+    </style>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('tab--active'));
+                    tabContents.forEach(tc => tc.classList.remove('tab-content--active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('tab--active');
+                    
+                    // Show corresponding content
+                    const tabId = this.dataset.tab + '-tab';
+                    const targetContent = document.getElementById(tabId);
+                    if (targetContent) {
+                        targetContent.classList.add('tab-content--active');
+                    }
+                });
+            });
+            
+            // File upload functionality
+            const fileInput = document.getElementById('import-file');
+            const importBtn = document.getElementById('import-btn');
+            
+            fileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    importBtn.disabled = false;
+                    importBtn.textContent = `匯入 ${this.files[0].name}`;
+                } else {
+                    importBtn.disabled = true;
+                    importBtn.textContent = '開始匯入';
+                }
+            });
+            
+            // Drag and drop functionality
+            const uploadArea = document.querySelector('.upload-area');
+            
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.borderColor = 'var(--c-primary)';
+                this.style.backgroundColor = 'rgba(160, 204, 78, 0.1)';
+            });
+            
+            uploadArea.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#CFD8DC';
+                this.style.backgroundColor = 'transparent';
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#CFD8DC';
+                this.style.backgroundColor = 'transparent';
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    fileInput.files = files;
+                    fileInput.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+        
+        function addAioType() {
+            const aioList = document.querySelector('.aio-list');
+            const newItem = document.createElement('div');
+            newItem.className = 'aio-item';
+            newItem.innerHTML = `
+                <input type="text" placeholder="請輸入職種名稱" class="aio-name">
+                <a href="#" class="aio-courses">編輯對應課程 (0)</a>
+                <button type="button" class="btn btn--small btn--danger">刪除</button>
+            `;
+            aioList.appendChild(newItem);
+            newItem.querySelector('.aio-name').focus();
+        }
+        
+        function addCategory() {
+            const categoryList = document.querySelector('.category-list');
+            const newItem = document.createElement('div');
+            newItem.className = 'category-item';
+            newItem.innerHTML = `
+                <input type="text" placeholder="請輸入分類名稱" class="category-name">
+                <button type="button" class="btn btn--small btn--danger">刪除</button>
+            `;
+            categoryList.appendChild(newItem);
+            newItem.querySelector('.category-name').focus();
+        }
+        
+        // Save button handlers
+        document.querySelectorAll('.btn--primary').forEach(btn => {
+            if (btn.textContent.includes('儲存')) {
+                btn.addEventListener('click', function() {
+                    alert('設定已儲存！');
+                });
+            }
+        });
+        
+        // Report generation
+        document.querySelector('#reports-export-tab .btn--primary').addEventListener('click', function() {
+            const reportType = document.getElementById('report-type').value;
+            const course = document.getElementById('report-course').value;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            
+            alert(`正在生成報表...\n類型：${reportType}\n日期範圍：${startDate} 至 ${endDate}`);
+        });
+        
+        // Financial report generation
+        function generateFinancialReport() {
+            const reportType = document.getElementById('financial-report-type').value;
+            const startDate = document.getElementById('financial-start-date').value;
+            const endDate = document.getElementById('financial-end-date').value;
+            const format = document.getElementById('financial-format').value;
+            
+            const reportTypeNames = {
+                'payment-details': '收款明細',
+                'refund-details': '退款明細',
+                'points-purchase': '點數購買記錄',
+                'revenue-summary': '收入統計'
+            };
+            
+            alert(`正在生成財務報表...\n類型：${reportTypeNames[reportType]}\n日期範圍：${startDate} 至 ${endDate}\n格式：${format.toUpperCase()}`);
+            
+            // Simulate report generation
+            setTimeout(() => {
+                alert('財務報表生成完成！檔案已自動下載。');
+            }, 2000);
+        }
+        
+        // Import functionality
+        document.getElementById('import-btn').addEventListener('click', function() {
+            if (this.disabled) return;
+            
+            const fileName = document.getElementById('import-file').files[0].name;
+            alert(`開始匯入 ${fileName}...`);
+            
+            // Simulate import process
+            setTimeout(() => {
+                alert('匯入完成！成功 25 筆，失敗 0 筆');
+                document.getElementById('import-file').value = '';
+                this.disabled = true;
+                this.textContent = '開始匯入';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
