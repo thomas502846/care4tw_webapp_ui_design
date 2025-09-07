@@ -247,21 +247,18 @@
                         
                         <div class="points-sharing">
                             <h3>分享點數</h3>
-                            <div class="sharing-notice">
-                                <div class="notice-icon">ℹ️</div>
-                                <p>只能贈送給網站學員，如對方還不是網站學員請先聯繫對方註冊學員才可轉贈</p>
-                            </div>
                             <form class="sharing-form">
                                 <div class="sharing-row">
                                     <div class="field">
-                                        <label for="recipient-phone" class="sr-only">受贈者手機號碼</label>
+                                        <label for="recipient-phone">受贈者：</label>
                                         <input 
                                             type="tel" 
                                             id="recipient-phone" 
-                                            placeholder="受贈者手機號"
+                                            placeholder="請輸入手機號碼"
                                             pattern="[0-9]{10}"
                                             maxlength="10"
                                         >
+                                        <div class="field__help">(只能贈送給網站學員，如對方還不是網站學員請先聯繫對方註冊學員才可轉贈)</div>
                                     </div>
                                     <div class="field">
                                         <label for="share-points" class="sr-only">分享點數數量</label>
@@ -3282,31 +3279,12 @@
             text-decoration: underline;
         }
         
-        /* Sharing Notice Styles */
-        .sharing-notice {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-sm);
-            padding: var(--space-md);
-            margin-bottom: var(--space-lg);
-            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
-            border: 1px solid #2196f3;
-            border-radius: var(--radius-card);
-            border-left: 4px solid #2196f3;
-        }
-        
-        .notice-icon {
-            font-size: 1.2rem;
-            line-height: 1;
-            margin-top: 2px;
-        }
-        
-        .sharing-notice p {
-            margin: 0;
-            color: #1976d2;
-            font-size: 0.875rem;
-            font-weight: 500;
-            line-height: 1.4;
+        /* Field help text styling */
+        .field__help {
+            font-size: 0.75rem;
+            color: var(--c-muted);
+            margin-top: var(--space-xs);
+            line-height: 1.3;
         }
         
         /* Responsive Design for Enhanced Notifications */
@@ -3317,11 +3295,6 @@
                 gap: var(--space-sm);
             }
             
-            .sharing-notice {
-                flex-direction: column;
-                text-align: center;
-                gap: var(--space-xs);
-            }
             
             .notification-item {
                 flex-direction: column;
