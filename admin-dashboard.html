@@ -30,19 +30,31 @@
             </div>
             <ul class="header__menu" role="menubar">
                 <li role="none">
-                    <a href="index.html" class="header__menu-item" role="menuitem">返回前台</a>
-                </li>
-                <li role="none">
-                    <a href="admin-dashboard.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">監控儀表板</a>
+                    <a href="admin-dashboard.html" class="header__menu-item header__menu-item--active" role="menuitem" aria-current="page">儀表板</a>
                 </li>
                 <li role="none">
                     <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程管理</a>
                 </li>
                 <li role="none">
-                    <a href="admin-roster.html" class="header__menu-item" role="menuitem">課程名單</a>
+                    <a href="admin-course-roster.html" class="header__menu-item" role="menuitem">課程名單</a>
                 </li>
                 <li role="none">
-                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">系統設定</a>
+                    <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
+                </li>
+                <li role="none">
+                    <a href="admin-announcements.html" class="header__menu-item" role="menuitem">公告</a>
+                </li>
+                <li role="none">
+                    <a href="admin-students.html" class="header__menu-item" role="menuitem">學員</a>
+                </li>
+                <li role="none">
+                    <a href="admin-teachers.html" class="header__menu-item" role="menuitem">師資</a>
+                </li>
+                <li role="none">
+                    <a href="admin-settings.html" class="header__menu-item" role="menuitem">設定</a>
+                </li>
+                <li role="none">
+                    <a href="admin-reports.html" class="header__menu-item" role="menuitem">報表</a>
                 </li>
             </ul>
         </nav>
@@ -52,13 +64,13 @@
     <main id="main-content" role="main">
         <section class="section container">
             <!-- Dashboard Header -->
-            <div class="dashboard-header">
-                <div class="welcome-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); padding-bottom: var(--space-lg); border-bottom: 2px solid #E8ECEF;">
+                <div>
                     <h1>監控儀表板</h1>
                     <p class="meta">系統概覽與關鍵數據監控 · 最後更新：2025/01/20 15:30</p>
                 </div>
-                <div class="dashboard-actions">
-                    <select class="date-range-selector">
+                <div style="display: flex; gap: var(--space-sm); align-items: center;">
+                    <select style="padding: 8px 12px; border: 1px solid #CFD8DC; border-radius: var(--radius-card); background: var(--c-surface);">
                         <option value="today">今天</option>
                         <option value="week">本週</option>
                         <option value="month" selected>本月</option>
@@ -70,11 +82,11 @@
                 </div>
             </div>
 
-            <!-- KPI Overview -->
-            <div class="kpi-section">
+            <!-- Dashboard Overview -->
+            <div style="margin-bottom: var(--space-lg);">
                 <h2 class="sr-only">系統統計概覽</h2>
-                <div class="kpi kpi--admin">
-                    <div class="kpi__item kpi__item--primary">
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg);">
+                    <div class="card kpi__item kpi__item--primary">
                         <div class="kpi__header">
                             <div class="kpi__icon">👥</div>
                             <div class="kpi__trend kpi__trend--up">+12%</div>
@@ -86,7 +98,7 @@
                         </div>
                     </div>
                     
-                    <div class="kpi__item kpi__item--success">
+                    <div class="card kpi__item kpi__item--success">
                         <div class="kpi__header">
                             <div class="kpi__icon">📱</div>
                             <div class="kpi__trend kpi__trend--up">+8%</div>
@@ -98,10 +110,10 @@
                         </div>
                     </div>
                     
-                    <div class="kpi__item kpi__item--warning">
+                    <div class="card kpi__item kpi__item--warning">
                         <div class="kpi__header">
                             <div class="kpi__icon">📅</div>
-                            <div class="kpi__trend">🕒</div>
+                            <div class="kpi__trend kpi__trend--down">-5%</div>
                         </div>
                         <div class="kpi__content">
                             <div class="kpi__number">8</div>
@@ -110,7 +122,7 @@
                         </div>
                     </div>
                     
-                    <div class="kpi__item kpi__item--info">
+                    <div class="card kpi__item kpi__item--info">
                         <div class="kpi__header">
                             <div class="kpi__icon">✅</div>
                             <div class="kpi__trend kpi__trend--down">-5%</div>
@@ -593,26 +605,19 @@
 
     <!-- Page-specific Styles -->
     <style>
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-xl);
-            padding-bottom: var(--space-lg);
-            border-bottom: 2px solid #E8ECEF;
-        }
-        
-        .dashboard-actions {
-            display: flex;
-            gap: var(--space-sm);
-            align-items: center;
-        }
-        
-        .date-range-selector {
-            padding: 8px 12px;
-            border: 1px solid #CFD8DC;
-            border-radius: var(--radius-card);
-            background: var(--c-surface);
+        /* FORCE FULL WIDTH ON MOBILE - OVERRIDE ANY CONSTRAINTS */
+        @media (max-width: 767px) {
+            html, body {
+                width: 100vw !important;
+                max-width: none !important;
+                overflow-x: hidden !important;
+            }
+            .header, .header__nav, .section, .container {
+                width: 100% !important;
+                max-width: none !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
         }
         
         .kpi--admin {
@@ -1168,10 +1173,6 @@
             }
         }
         
-        @media (max-width: 768px) {
-            .kpi--admin {
-                grid-template-columns: 1fr;
-            }
             
             .quick-actions-grid {
                 grid-template-columns: 1fr;

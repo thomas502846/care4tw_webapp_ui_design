@@ -35,7 +35,10 @@
                     <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
                 </li>
                 <li role="none">
-                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-course-roster.html" class="header__menu-item" role="menuitem">課程名單</a>
                 </li>
                 <li role="none">
                     <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
@@ -67,45 +70,6 @@
                 <p class="meta">學員數據統計與課程成效分析</p>
             </div>
             
-            <!-- Report Filters -->
-            <div class="card" style="margin-bottom: var(--space-lg);">
-                <div class="report-filters">
-                    <div class="filter-row">
-                        <div class="filter-field">
-                            <label for="report-type">報表類型</label>
-                            <select id="report-type">
-                                <option value="student">學員分析</option>
-                                <option value="course" selected>課程成效</option>
-                                <option value="teacher">師資統計</option>
-                                <option value="payment">收入分析</option>
-                                <option value="system">系統使用</option>
-                            </select>
-                        </div>
-                        
-                        <div class="filter-field">
-                            <label for="date-range">時間範圍</label>
-                            <select id="date-range">
-                                <option value="week">本週</option>
-                                <option value="month" selected>本月</option>
-                                <option value="quarter">本季</option>
-                                <option value="year">本年</option>
-                                <option value="custom">自訂範圍</option>
-                            </select>
-                        </div>
-                        
-                        <div class="filter-field">
-                            <label for="format">匯出格式</label>
-                            <select id="format">
-                                <option value="excel">Excel (.xlsx)</option>
-                                <option value="csv">CSV (.csv)</option>
-                                <option value="pdf">PDF (.pdf)</option>
-                            </select>
-                        </div>
-                        
-                        <button type="button" class="btn btn--primary" onclick="generateReport()">生成報表</button>
-                    </div>
-                </div>
-            </div>
             
             <!-- Quick Statistics -->
             <div class="grid" style="grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); margin-bottom: var(--space-lg);">
@@ -114,7 +78,7 @@
                         <div class="stat-icon">👥</div>
                         <div class="stat-content">
                             <div class="stat-number">245</div>
-                            <div class="stat-label">活躍學員</div>
+                            <div class="stat-label">本月新註冊學員</div>
                             <div class="stat-change stat-change--up">+15 本月</div>
                         </div>
                     </div>
@@ -125,7 +89,7 @@
                         <div class="stat-icon">📚</div>
                         <div class="stat-content">
                             <div class="stat-number">32</div>
-                            <div class="stat-label">進行中課程</div>
+                            <div class="stat-label">本月上課人次</div>
                             <div class="stat-change stat-change--up">+3 本月</div>
                         </div>
                     </div>
@@ -135,8 +99,8 @@
                     <div class="stat-item">
                         <div class="stat-icon">💰</div>
                         <div class="stat-content">
-                            <div class="stat-number">$128,500</div>
-                            <div class="stat-label">本月收入</div>
+                            <div class="stat-number">12,850</div>
+                            <div class="stat-label">本月授課點數</div>
                             <div class="stat-change stat-change--up">+8.2%</div>
                         </div>
                     </div>
@@ -158,26 +122,36 @@
             <div class="grid" style="grid-template-columns: 2fr 1fr; gap: var(--space-lg);">
                 <!-- Main Chart Area -->
                 <div class="card">
-                    <h3>課程參與趨勢</h3>
+                    <h3>近6個月課程參與人次</h3>
                     <div class="chart-container">
                         <div class="chart-placeholder">
                             <div class="chart-bars">
-                                <div class="chart-bar" style="height: 60%;" data-value="120"></div>
-                                <div class="chart-bar" style="height: 75%;" data-value="150"></div>
-                                <div class="chart-bar" style="height: 45%;" data-value="90"></div>
-                                <div class="chart-bar" style="height: 85%;" data-value="170"></div>
-                                <div class="chart-bar" style="height: 70%;" data-value="140"></div>
-                                <div class="chart-bar" style="height: 90%;" data-value="180"></div>
-                                <div class="chart-bar" style="height: 65%;" data-value="130"></div>
+                                <div class="chart-bar" style="height: 45%;" data-value="890">
+                                    <span class="chart-value">890</span>
+                                </div>
+                                <div class="chart-bar" style="height: 62%;" data-value="1,240">
+                                    <span class="chart-value">1,240</span>
+                                </div>
+                                <div class="chart-bar" style="height: 58%;" data-value="1,160">
+                                    <span class="chart-value">1,160</span>
+                                </div>
+                                <div class="chart-bar" style="height: 75%;" data-value="1,520">
+                                    <span class="chart-value">1,520</span>
+                                </div>
+                                <div class="chart-bar" style="height: 85%;" data-value="1,720">
+                                    <span class="chart-value">1,720</span>
+                                </div>
+                                <div class="chart-bar" style="height: 92%;" data-value="1,860">
+                                    <span class="chart-value">1,860</span>
+                                </div>
                             </div>
                             <div class="chart-labels">
-                                <span>週一</span>
-                                <span>週二</span>
-                                <span>週三</span>
-                                <span>週四</span>
-                                <span>週五</span>
-                                <span>週六</span>
-                                <span>週日</span>
+                                <span>3月</span>
+                                <span>4月</span>
+                                <span>5月</span>
+                                <span>6月</span>
+                                <span>7月</span>
+                                <span>8月</span>
                             </div>
                         </div>
                     </div>
@@ -191,7 +165,7 @@
                             <span class="ranking-number">1</span>
                             <div class="ranking-content">
                                 <div class="ranking-title">失智友善溝通</div>
-                                <div class="ranking-stat">158 人參與</div>
+                                <div class="ranking-stat">52 人參與</div>
                             </div>
                         </div>
                         
@@ -199,7 +173,7 @@
                             <span class="ranking-number">2</span>
                             <div class="ranking-content">
                                 <div class="ranking-title">疫情下整合照護</div>
-                                <div class="ranking-stat">142 人參與</div>
+                                <div class="ranking-stat">47 人參與</div>
                             </div>
                         </div>
                         
@@ -207,7 +181,7 @@
                             <span class="ranking-number">3</span>
                             <div class="ranking-content">
                                 <div class="ranking-title">社區共生照護</div>
-                                <div class="ranking-stat">128 人參與</div>
+                                <div class="ranking-stat">42 人參與</div>
                             </div>
                         </div>
                         
@@ -215,7 +189,7 @@
                             <span class="ranking-number">4</span>
                             <div class="ranking-content">
                                 <div class="ranking-title">安寧緩和照護</div>
-                                <div class="ranking-stat">115 人參與</div>
+                                <div class="ranking-stat">38 人參與</div>
                             </div>
                         </div>
                         
@@ -223,7 +197,7 @@
                             <span class="ranking-number">5</span>
                             <div class="ranking-content">
                                 <div class="ranking-title">長照資源連結</div>
-                                <div class="ranking-stat">98 人參與</div>
+                                <div class="ranking-stat">33 人參與</div>
                             </div>
                         </div>
                     </div>
@@ -249,7 +223,7 @@
                                 <th>報名人數</th>
                                 <th>完課率</th>
                                 <th>滿意度</th>
-                                <th>收入</th>
+                                <th>收入點數</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -260,12 +234,12 @@
                                 <td>24 / 30</td>
                                 <td>
                                     <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 85%"></div>
-                                        <span class="progress-text">85%</span>
+                                        <div class="progress-fill" style="width: 97%"></div>
+                                        <span class="progress-text">97%</span>
                                     </div>
                                 </td>
                                 <td>⭐ 4.8</td>
-                                <td>NT$ 48,000</td>
+                                <td>4,800</td>
                                 <td>
                                     <button type="button" class="btn btn--small" onclick="viewDetailReport('course1')">詳情</button>
                                 </td>
@@ -277,12 +251,12 @@
                                 <td>40 / 100</td>
                                 <td>
                                     <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 75%"></div>
-                                        <span class="progress-text">75%</span>
+                                        <div class="progress-fill" style="width: 93%"></div>
+                                        <span class="progress-text">93%</span>
                                     </div>
                                 </td>
                                 <td>⭐ 4.6</td>
-                                <td>NT$ 20,000</td>
+                                <td>2,000</td>
                                 <td>
                                     <button type="button" class="btn btn--small" onclick="viewDetailReport('course2')">詳情</button>
                                 </td>
@@ -294,12 +268,12 @@
                                 <td>15 / 25</td>
                                 <td>
                                     <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 90%"></div>
-                                        <span class="progress-text">90%</span>
+                                        <div class="progress-fill" style="width: 100%"></div>
+                                        <span class="progress-text">100%</span>
                                     </div>
                                 </td>
                                 <td>⭐ 4.9</td>
-                                <td>NT$ 37,500</td>
+                                <td>3,750</td>
                                 <td>
                                     <button type="button" class="btn btn--small" onclick="viewDetailReport('course3')">詳情</button>
                                 </td>
@@ -311,18 +285,101 @@
                                 <td>5 / 20</td>
                                 <td>
                                     <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 60%"></div>
-                                        <span class="progress-text">60%</span>
+                                        <div class="progress-fill" style="width: 95%"></div>
+                                        <span class="progress-text">95%</span>
                                     </div>
                                 </td>
                                 <td>⭐ 4.5</td>
-                                <td>NT$ 22,500</td>
+                                <td>2,250</td>
                                 <td>
                                     <button type="button" class="btn btn--small" onclick="viewDetailReport('course4')">詳情</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            
+            <!-- Report Generation -->
+            <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px; margin-top: var(--space-lg);">
+                <div class="card">
+                    <h3>報表生成</h3>
+                    <form class="report-form">
+                        <div class="field">
+                            <label for="report-type">報表類型</label>
+                            <select id="report-type">
+                                <option value="student-list">上課學員名單</option>
+                                <option value="course-completion">課後名單 (衛福部格式)</option>
+                                <option value="points-summary">學員點數統計</option>
+                                <option value="teacher-hours">教師授課時數</option>
+                                <option value="revenue-report">營收報表</option>
+                            </select>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="report-course">選擇課程</label>
+                            <select id="report-course">
+                                <option value="">所有課程</option>
+                                <option value="dementia">失智友善溝通</option>
+                                <option value="integrated">整合照護直播</option>
+                                <option value="community">社區共生設計</option>
+                                <option value="hospice">安寧緩和醫療</option>
+                            </select>
+                        </div>
+                        
+                        <div class="field">
+                            <label>日期範圍</label>
+                            <div class="date-range">
+                                <input type="date" id="start-date" value="2025-01-01">
+                                <span>至</span>
+                                <input type="date" id="end-date" value="2025-12-31">
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn--primary" style="width: 100%;">生成報表</button>
+                    </form>
+                    
+                    <hr style="margin: var(--space-lg) 0;">
+                    
+                    <div>
+                        <h4>專用申請表格</h4>
+                        <button type="button" class="btn btn--ghost" style="width: 100%; margin-bottom: var(--space-xs);">課程申請表 (衛福部格式)</button>
+                        <button type="button" class="btn btn--ghost" style="width: 100%;">積分申請書</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>財務相關報表</h3>
+                    <form class="financial-report-form">
+                        <div class="field">
+                            <label for="financial-report-type">報表類型</label>
+                            <select id="financial-report-type">
+                                <option value="payment-details">收款明細</option>
+                                <option value="refund-details">退款明細</option>
+                                <option value="points-purchase">點數購買記錄</option>
+                                <option value="revenue-summary">收入統計</option>
+                            </select>
+                        </div>
+                        
+                        <div class="field">
+                            <label>日期範圍</label>
+                            <div class="date-range">
+                                <input type="date" id="financial-start-date" value="2025-01-01">
+                                <span>至</span>
+                                <input type="date" id="financial-end-date" value="2025-01-31">
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="financial-format">匯出格式</label>
+                            <select id="financial-format">
+                                <option value="csv">CSV</option>
+                                <option value="xlsx">Excel (XLSX)</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn btn--primary" onclick="generateFinancialReport()">生成財務報表</button>
+                    </form>
                 </div>
             </div>
         </section>
@@ -347,6 +404,20 @@
 
     <!-- Page-specific Styles -->
     <style>
+        /* FORCE FULL WIDTH ON MOBILE - OVERRIDE ANY CONSTRAINTS */
+        @media (max-width: 767px) {
+            html, body {
+                width: 100vw !important;
+                max-width: none !important;
+                overflow-x: hidden !important;
+            }
+            .header, .header__nav, .section, .container {
+                width: 100% !important;
+                max-width: none !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+        }
         .report-filters {
             padding: var(--space-md);
         }
@@ -457,6 +528,17 @@
         
         .chart-bar:hover {
             opacity: 1;
+        }
+        
+        .chart-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--c-text);
+            white-space: nowrap;
         }
         
         .chart-labels {
@@ -575,16 +657,40 @@
     
     <!-- Page-specific JavaScript -->
     <script>
-        function generateReport() {
+        // New main report generation
+        document.querySelector('.report-form .btn--primary').addEventListener('click', function() {
             const reportType = document.getElementById('report-type').value;
-            const dateRange = document.getElementById('date-range').value;
-            const format = document.getElementById('format').value;
+            const course = document.getElementById('report-course').value;
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
             
-            alert(`正在生成 ${reportType} 報表\n時間範圍：${dateRange}\n格式：${format}\n\n報表將在完成後自動下載。`);
+            alert(`正在生成報表...\n類型：${reportType}\n課程：${course || '所有課程'}\n日期範圍：${startDate} 至 ${endDate}`);
             
             // Simulate report generation
             setTimeout(() => {
-                alert('報表生成完成！下載已開始。');
+                alert('報表生成完成！檔案已自動下載。');
+            }, 2000);
+        });
+        
+        // Financial report generation
+        function generateFinancialReport() {
+            const reportType = document.getElementById('financial-report-type').value;
+            const startDate = document.getElementById('financial-start-date').value;
+            const endDate = document.getElementById('financial-end-date').value;
+            const format = document.getElementById('financial-format').value;
+            
+            const reportTypeNames = {
+                'payment-details': '收款明細',
+                'refund-details': '退款明細',
+                'points-purchase': '點數購買記錄',
+                'revenue-summary': '收入統計'
+            };
+            
+            alert(`正在生成財務報表...\n類型：${reportTypeNames[reportType]}\n日期範圍：${startDate} 至 ${endDate}\n格式：${format.toUpperCase()}`);
+            
+            // Simulate report generation
+            setTimeout(() => {
+                alert('財務報表生成完成！檔案已自動下載。');
             }, 2000);
         }
         

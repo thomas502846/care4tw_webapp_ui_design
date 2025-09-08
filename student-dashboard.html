@@ -254,14 +254,15 @@
                                         <input 
                                             type="tel" 
                                             id="recipient-phone" 
-                                            placeholder="請輸入手機號碼"
+                                            placeholder="請輸入受贈者手機號碼"
                                             pattern="[0-9]{10}"
                                             maxlength="10"
                                         >
                                         <div class="field__help">(只能贈送給網站學員，如對方還不是網站學員請先聯繫對方註冊學員才可轉贈)</div>
                                     </div>
-                                    <div class="field">
-                                        <label for="share-points" class="sr-only">分享點數數量</label>
+                                </div>
+                                <div class="sharing-row">
+                                    <div class="sharing-amount-container">
                                         <input 
                                             type="number" 
                                             id="share-points" 
@@ -270,12 +271,8 @@
                                             max="18"
                                             style="width: 80px"
                                         >
+                                        <button class="btn btn--primary" type="submit">確認分享</button>
                                     </div>
-                                    <button class="btn btn--primary" type="submit">確認分享</button>
-                                </div>
-                                <div class="sharing-info">
-                                    <div class="meta">受贈者：<span id="recipient-info">請輸入手機號碼</span></div>
-                                    <div class="field__help">確認後將寄發Email通知雙方</div>
                                 </div>
                             </form>
                         </div>
@@ -1572,7 +1569,19 @@
             display: flex;
             gap: var(--space-sm);
             margin-bottom: var(--space-sm);
-            align-items: end;
+            align-items: flex-start;
+        }
+        
+        .sharing-row .field {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .sharing-amount-container {
+            display: flex;
+            gap: var(--space-sm);
+            align-items: center;
         }
         
         .sharing-info {

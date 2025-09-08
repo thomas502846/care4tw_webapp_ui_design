@@ -35,7 +35,10 @@
                     <a href="admin-dashboard.html" class="header__menu-item" role="menuitem">儀表板</a>
                 </li>
                 <li role="none">
-                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程</a>
+                    <a href="admin-courses.html" class="header__menu-item" role="menuitem">課程管理</a>
+                </li>
+                <li role="none">
+                    <a href="admin-course-roster.html" class="header__menu-item" role="menuitem">課程名單</a>
                 </li>
                 <li role="none">
                     <a href="admin-tests.html" class="header__menu-item" role="menuitem">測驗/問卷</a>
@@ -75,7 +78,6 @@
                 <button class="tab tab--active" data-tab="core-data">核心資料</button>
                 <button class="tab" data-tab="general-settings">通用設定</button>
                 <button class="tab" data-tab="content-management">內容管理</button>
-                <button class="tab" data-tab="reports-export">報表/匯出</button>
                 <button class="tab" data-tab="import">導入</button>
             </div>
             
@@ -264,128 +266,6 @@
                 
                 <div style="margin-top: var(--space-md); text-align: center;">
                     <button type="button" class="btn btn--primary">儲存內容設定</button>
-                </div>
-            </div>
-            
-            <!-- Tab Content: Reports & Export -->
-            <div class="tab-content" id="reports-export-tab">
-                <div class="grid" style="grid-template-columns:1fr 1fr; gap:12px">
-                    <div class="card">
-                        <h3>報表生成</h3>
-                        <form class="report-form">
-                            <div class="field">
-                                <label for="report-type">報表類型</label>
-                                <select id="report-type">
-                                    <option value="student-list">上課學員名單</option>
-                                    <option value="course-completion">課後名單 (衛福部格式)</option>
-                                    <option value="points-summary">學員點數統計</option>
-                                    <option value="teacher-hours">教師授課時數</option>
-                                    <option value="revenue-report">營收報表</option>
-                                </select>
-                            </div>
-                            
-                            <div class="field">
-                                <label for="report-course">選擇課程</label>
-                                <select id="report-course">
-                                    <option value="">所有課程</option>
-                                    <option value="dementia">失智友善溝通</option>
-                                    <option value="integrated">整合照護直播</option>
-                                    <option value="community">社區共生設計</option>
-                                    <option value="hospice">安寧緩和醫療</option>
-                                </select>
-                            </div>
-                            
-                            <div class="field">
-                                <label>日期範圍</label>
-                                <div class="date-range">
-                                    <input type="date" id="start-date" value="2025-01-01">
-                                    <span>至</span>
-                                    <input type="date" id="end-date" value="2025-12-31">
-                                </div>
-                            </div>
-                            
-                            <button type="button" class="btn btn--primary" style="width: 100%;">生成報表</button>
-                        </form>
-                        
-                        <hr style="margin: var(--space-lg) 0;">
-                        
-                        <div>
-                            <h4>專用申請表格</h4>
-                            <button type="button" class="btn btn--ghost" style="width: 100%; margin-bottom: var(--space-xs);">課程申請表 (衛福部格式)</button>
-                            <button type="button" class="btn btn--ghost" style="width: 100%;">積分申請書</button>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>財務相關報表</h3>
-                        <form class="financial-report-form">
-                            <div class="field">
-                                <label for="financial-report-type">報表類型</label>
-                                <select id="financial-report-type">
-                                    <option value="payment-details">收款明細</option>
-                                    <option value="refund-details">退款明細</option>
-                                    <option value="points-purchase">點數購買記錄</option>
-                                    <option value="revenue-summary">收入統計</option>
-                                </select>
-                            </div>
-                            
-                            <div class="field">
-                                <label>日期範圍</label>
-                                <div class="date-range">
-                                    <input type="date" id="financial-start-date" value="2025-01-01">
-                                    <span>至</span>
-                                    <input type="date" id="financial-end-date" value="2025-01-31">
-                                </div>
-                            </div>
-                            
-                            <div class="field">
-                                <label for="financial-format">匯出格式</label>
-                                <select id="financial-format">
-                                    <option value="csv">CSV</option>
-                                    <option value="xlsx">Excel (XLSX)</option>
-                                </select>
-                            </div>
-                            
-                            <button type="button" class="btn btn--primary" onclick="generateFinancialReport()">生成財務報表</button>
-                        </form>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>最近生成的報表</h3>
-                        <div class="report-history">
-                            <div class="report-item">
-                                <div class="report-info">
-                                    <span class="report-name">失智友善溝通 - 學員名單</span>
-                                    <span class="report-date">2025/01/20 15:30</span>
-                                </div>
-                                <button type="button" class="btn btn--small">下載</button>
-                            </div>
-                            
-                            <div class="report-item">
-                                <div class="report-info">
-                                    <span class="report-name">1月收款明細</span>
-                                    <span class="report-date">2025/01/20 14:15</span>
-                                </div>
-                                <button type="button" class="btn btn--small">下載</button>
-                            </div>
-                            
-                            <div class="report-item">
-                                <div class="report-info">
-                                    <span class="report-name">12月營收報表</span>
-                                    <span class="report-date">2025/01/05 09:15</span>
-                                </div>
-                                <button type="button" class="btn btn--small">下載</button>
-                            </div>
-                            
-                            <div class="report-item">
-                                <div class="report-info">
-                                    <span class="report-name">教師授課時數統計</span>
-                                    <span class="report-date">2024/12/31 16:45</span>
-                                </div>
-                                <button type="button" class="btn btn--small">下載</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             
@@ -947,38 +827,6 @@
                 });
             }
         });
-        
-        // Report generation
-        document.querySelector('#reports-export-tab .btn--primary').addEventListener('click', function() {
-            const reportType = document.getElementById('report-type').value;
-            const course = document.getElementById('report-course').value;
-            const startDate = document.getElementById('start-date').value;
-            const endDate = document.getElementById('end-date').value;
-            
-            alert(`正在生成報表...\n類型：${reportType}\n日期範圍：${startDate} 至 ${endDate}`);
-        });
-        
-        // Financial report generation
-        function generateFinancialReport() {
-            const reportType = document.getElementById('financial-report-type').value;
-            const startDate = document.getElementById('financial-start-date').value;
-            const endDate = document.getElementById('financial-end-date').value;
-            const format = document.getElementById('financial-format').value;
-            
-            const reportTypeNames = {
-                'payment-details': '收款明細',
-                'refund-details': '退款明細',
-                'points-purchase': '點數購買記錄',
-                'revenue-summary': '收入統計'
-            };
-            
-            alert(`正在生成財務報表...\n類型：${reportTypeNames[reportType]}\n日期範圍：${startDate} 至 ${endDate}\n格式：${format.toUpperCase()}`);
-            
-            // Simulate report generation
-            setTimeout(() => {
-                alert('財務報表生成完成！檔案已自動下載。');
-            }, 2000);
-        }
         
         // Import functionality
         document.getElementById('import-btn').addEventListener('click', function() {
