@@ -554,7 +554,7 @@
                     <div class="card__header">
                         <h2>📁 我的檔案</h2>
                         <div class="storage-info">
-                            <span class="storage-used">已使用 2.3MB / 100MB</span>
+                            <span class="storage-used">已使用 2.3MB / 500MB</span>
                         </div>
                     </div>
                     
@@ -575,9 +575,22 @@
                                     </div>
                                     
                                     <div class="field">
-                                        <label for="file-description">說明</label>
-                                        <textarea id="file-description" rows="4" placeholder="檔案描述...&#10;（作業、心得、課堂照片等）"></textarea>
+                                        <label for="course-relation">關聯課程</label>
+                                        <select id="course-relation" class="course-select">
+                                            <option value="">選擇相關課程（可選）</option>
+                                            <option value="dementia-comm">失智友善溝通與行為支持</option>
+                                            <option value="integrated-care">疫情下整合照護：線上實務</option>
+                                            <option value="community-care">社區共生與日常生活設計</option>
+                                            <option value="psychological-support">心理創傷與復原力建構</option>
+                                            <option value="family-care">家庭照顧者支持服務</option>
+                                        </select>
+                                        <div class="field__help">選擇此檔案相關的課程，方便分類管理</div>
                                     </div>
+                                </div>
+                                
+                                <div class="field">
+                                    <label for="file-description">說明</label>
+                                    <textarea id="file-description" rows="3" placeholder="檔案描述...&#10;（作業、心得、課堂照片等）"></textarea>
                                 </div>
                                 
                                 <div class="form-actions">
