@@ -263,7 +263,7 @@
                         <div class="registration-status">
                             <div class="status-item">
                                 <span class="status-label">我的點數：</span>
-                                <span class="status-value">8</span>
+                                <span class="status-value">12</span>
                             </div>
                             <div class="status-item">
                                 <span class="status-label">需要點數：</span>
@@ -282,7 +282,7 @@
                             <button class="btn btn--primary" data-open="modal-purchase" aria-describedby="purchase-help">
                                 💳 購買點數
                             </button>
-                            <div class="field__help" id="purchase-help">點數不足，需購買 2 點才能報名</div>
+                            <div class="field__help" id="purchase-help">點數充足，可直接報名課程</div>
                             
                             <button class="btn" aria-label="下載課程簡章">
                                 📄 下載簡章
@@ -325,13 +325,44 @@
                 <button class="modal__close" data-close aria-label="關閉對話框">✕</button>
             </div>
             <div class="modal__content">
-                <p>您目前還需要 <strong>2</strong> 點才能報名此課程</p>
-                <div class="field">
-                    <label for="purchase-points">購買點數</label>
-                    <input type="number" id="purchase-points" placeholder="建議購買 5 點" value="5" min="2">
+                <div class="purchase-status">
+                    <p><strong>目前狀況：</strong></p>
+                    <ul>
+                        <li>我的點數：<strong>12 點</strong></li>
+                        <li>課程需要：<strong>10 點</strong></li>
+                        <li>點數狀況：<span style="color: var(--c-success); font-weight: 600;">充足 (+2點)</span></li>
+                    </ul>
                 </div>
+                
+                <div class="purchase-packages">
+                    <h4>💰 點數方案</h4>
+                    <div class="package-options">
+                        <label class="package-option">
+                            <input type="radio" name="package" value="10" checked>
+                            <span class="package-details">
+                                <strong>10 點</strong> - NT$ 1,000<br>
+                                <small>基礎方案</small>
+                            </span>
+                        </label>
+                        <label class="package-option recommended">
+                            <input type="radio" name="package" value="25">
+                            <span class="package-details">
+                                <strong>25 點</strong> - NT$ 2,300<br>
+                                <small style="color: var(--c-success);">推薦 • 省 NT$ 200</small>
+                            </span>
+                        </label>
+                        <label class="package-option">
+                            <input type="radio" name="package" value="50">
+                            <span class="package-details">
+                                <strong>50 點</strong> - NT$ 4,200<br>
+                                <small>省 NT$ 800</small>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                
                 <div class="field">
-                    <label for="payment-method">付款方式</label>
+                    <label for="payment-method">💳 付款方式</label>
                     <select id="payment-method">
                         <option value="credit-card">信用卡</option>
                         <option value="bank-transfer">銀行轉帳</option>
@@ -613,6 +644,867 @@
             
             .teacher-credentials {
                 justify-content: center;
+            }
+        }
+    </style>
+    
+    <!-- Course Registration Modal -->
+    <div id="modal-register" class="modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeModal('modal-register')"></div>
+        <div class="modal-content" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h2>📝 課程報名</h2>
+                <button class="modal-close" onclick="closeModal('modal-register')">&times;</button>
+            </div>
+            
+            <!-- Step 1: Point Validation -->
+            <div id="registration-step-1" class="registration-step">
+                <div class="course-summary">
+                    <h3>失智友善溝通與行為支持</h3>
+                    <div class="summary-details">
+                        <div class="detail-item">
+                            <span class="label">📅 上課日期：</span>
+                            <span class="value">2025年2月15日 (六) 09:00-17:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">📍 上課地點：</span>
+                            <span class="value">創照服務設計 台中教室</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">👨‍🏫 授課講師：</span>
+                            <span class="value">王美美 老師</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">⏰ 課程時數：</span>
+                            <span class="value">6小時</span>
+                        </div>
+                        <div class="detail-item credit-highlight">
+                            <span class="label">📜 長照積分：</span>
+                            <span class="value">6積分 (專業課程)</span>
+                            <span class="credit-badge">積分課程</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="point-validation sufficient">
+                    <div class="point-status">
+                        <div class="point-row">
+                            <span>我的點數：</span>
+                            <span class="current-points">12 點</span>
+                        </div>
+                        <div class="point-row">
+                            <span>需要點數：</span>
+                            <span class="required-points">10 點</span>
+                        </div>
+                        <div class="point-row sufficient">
+                            <span>點數充足：</span>
+                            <span class="sufficient-points">可直接報名</span>
+                        </div>
+                    </div>
+                    
+                    <div class="point-actions">
+                        <button class="btn btn--success" onclick="showStep(2)">
+                            ✅ 繼續報名
+                        </button>
+                        <p class="help-text">點數充足，可直接進行報名流程</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Course Surveys (shown when points are sufficient) -->
+            <div id="registration-step-2" class="registration-step" style="display: none;">
+                <h3>📋 報名資訊填寫</h3>
+                
+                <form id="registration-form">
+                    <!-- Meal Preference -->
+                    <div class="field">
+                        <label for="meal-preference">🍽️ 用餐需求</label>
+                        <select id="meal-preference" required>
+                            <option value="">請選擇用餐需求</option>
+                            <option value="meat">葷食</option>
+                            <option value="vegetarian">素食</option>
+                            <option value="vegan">純素</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Accommodation -->
+                    <div class="field">
+                        <label for="accommodation">🏨 住宿需求</label>
+                        <select id="accommodation" required>
+                            <option value="">請選擇住宿需求</option>
+                            <option value="none">不需要住宿</option>
+                            <option value="single">單人房</option>
+                            <option value="double">雙人房</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Shuttle Service -->
+                    <div class="field">
+                        <label for="shuttle">🚌 高鐵接送服務</label>
+                        <select id="shuttle" required>
+                            <option value="">請選擇接送需求</option>
+                            <option value="none">不需要接送</option>
+                            <option value="pickup">僅去程接送</option>
+                            <option value="dropoff">僅回程接送</option>
+                            <option value="both">來回接送</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Potluck Dish -->
+                    <div class="field">
+                        <label for="potluck-dish">🥘 一人一菜 (聚餐活動)</label>
+                        <input type="text" id="potluck-dish" placeholder="請輸入您要準備的菜色" required>
+                        <div class="field__help">
+                            其他學員準備的菜色：<br>
+                            <span class="existing-dishes">
+                                • 紅燒牛肉 (陳小姐) • 宮保雞丁 (李先生) • 麻婆豆腐 (王小姐)
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Credit Course Acknowledgment -->
+                    <div class="field">
+                        <div class="credit-acknowledgment">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="credit-acknowledge" required>
+                                <span class="checkbox-text">
+                                    我了解此為 <strong>長照積分課程</strong>，將計入我的長照再教育積分時數
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn" onclick="showStep(1)">
+                            ← 返回上一步
+                        </button>
+                        <button type="button" class="btn btn--primary" onclick="showConfirmation()">
+                            下一步 確認報名 →
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Step 3: Final Confirmation -->
+            <div id="registration-step-3" class="registration-step" style="display: none;">
+                <h3>✅ 報名確認</h3>
+                
+                <div class="confirmation-summary">
+                    <div class="summary-section">
+                        <h4>課程資訊</h4>
+                        <div class="summary-item">
+                            <strong>失智友善溝通與行為支持</strong><br>
+                            📅 2025年2月15日 (六) 09:00-17:00<br>
+                            📍 創照服務設計 台中教室<br>
+                            👨‍🏫 王美美 老師
+                        </div>
+                    </div>
+                    
+                    <div class="summary-section">
+                        <h4>報名資訊</h4>
+                        <div class="summary-item" id="registration-summary">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="summary-section">
+                        <h4>點數扣除</h4>
+                        <div class="point-deduction">
+                            <div class="deduction-row">
+                                <span>目前點數：</span>
+                                <span>12 點</span>
+                            </div>
+                            <div class="deduction-row">
+                                <span>扣除點數：</span>
+                                <span>-10 點</span>
+                            </div>
+                            <div class="deduction-row total">
+                                <span>剩餘點數：</span>
+                                <span>2 點</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="confirmation-actions">
+                    <button type="button" class="btn" onclick="showStep(2)">
+                        ← 修改資訊
+                    </button>
+                    <button type="button" class="btn btn--success" onclick="submitRegistration()">
+                        🎯 確認報名
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Success Message -->
+            <div id="registration-success" class="registration-step" style="display: none;">
+                <div class="success-message">
+                    <div class="success-icon">🎉</div>
+                    <h3>報名成功！</h3>
+                    <p>您已成功報名 <strong>失智友善溝通與行為支持</strong> 課程</p>
+                    
+                    <div class="next-steps">
+                        <h4>📧 確認信已發送至您的信箱</h4>
+                        <ul>
+                            <li>課程詳細資訊及注意事項</li>
+                            <li>課前準備事項說明</li>
+                            <li>教室地址及交通資訊</li>
+                        </ul>
+                        
+                        <h4>📱 課前提醒</h4>
+                        <p>學校將於課程前3天發送提醒郵件給您和授課老師</p>
+                    </div>
+                    
+                    <div class="success-actions">
+                        <button class="btn btn--primary" onclick="closeModal('modal-register')">
+                            完成
+                        </button>
+                        <button class="btn" onclick="window.location.href='student-dashboard.html'">
+                            查看我的課程
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+        // Modal Management
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            if (modalId === 'modal-register') {
+                showStep(1);
+            }
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            resetRegistrationForm();
+        }
+        
+        // Registration Steps
+        function showStep(stepNumber) {
+            // Hide all steps
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById(`registration-step-${i}`).style.display = 'none';
+            }
+            document.getElementById('registration-success').style.display = 'none';
+            
+            // Show selected step
+            document.getElementById(`registration-step-${stepNumber}`).style.display = 'block';
+        }
+        
+        function showConfirmation() {
+            // Validate form
+            const form = document.getElementById('registration-form');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            // Populate summary
+            const meal = document.getElementById('meal-preference').value;
+            const accommodation = document.getElementById('accommodation').value;
+            const shuttle = document.getElementById('shuttle').value;
+            const dish = document.getElementById('potluck-dish').value;
+            
+            const mealLabels = {
+                'meat': '葷食', 
+                'vegetarian': '素食', 
+                'vegan': '純素'
+            };
+            
+            const accommodationLabels = {
+                'none': '不需要住宿',
+                'single': '單人房',
+                'double': '雙人房'
+            };
+            
+            const shuttleLabels = {
+                'none': '不需要接送',
+                'pickup': '僅去程接送',
+                'dropoff': '僅回程接送',
+                'both': '來回接送'
+            };
+            
+            document.getElementById('registration-summary').innerHTML = `
+                🍽️ 用餐需求：${mealLabels[meal] || meal}<br>
+                🏨 住宿需求：${accommodationLabels[accommodation] || accommodation}<br>
+                🚌 接送服務：${shuttleLabels[shuttle] || shuttle}<br>
+                🥘 準備菜色：${dish}
+            `;
+            
+            showStep(3);
+        }
+        
+        function submitRegistration() {
+            // Show success message
+            document.getElementById('registration-step-3').style.display = 'none';
+            document.getElementById('registration-success').style.display = 'block';
+            
+            // Here you would typically send the registration data to the server
+            console.log('Registration submitted');
+        }
+        
+        function redirectToPurchase() {
+            // Close modal and redirect to purchase page
+            closeModal('modal-register');
+            openModal('modal-purchase'); // This would open the purchase modal
+        }
+        
+        function resetRegistrationForm() {
+            document.getElementById('registration-form').reset();
+        }
+        
+        function processPurchase() {
+            alert('前往付款頁面 (此為演示功能)');
+            closeModal('modal-purchase');
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up modal triggers
+            const registerBtn = document.querySelector('[data-open="modal-register"]');
+            if (registerBtn) {
+                registerBtn.addEventListener('click', function() {
+                    openModal('modal-register');
+                });
+            }
+            
+            const purchaseBtn = document.querySelector('[data-open="modal-purchase"]');
+            if (purchaseBtn) {
+                purchaseBtn.addEventListener('click', function() {
+                    openModal('modal-purchase');
+                });
+            }
+        });
+    </script>
+    
+    <style>
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-card);
+            position: relative;
+            margin: var(--space-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: var(--space-xs);
+        }
+        
+        .registration-step {
+            padding: var(--space-lg);
+        }
+        
+        /* Course Summary Styles */
+        .course-summary {
+            background: var(--c-sub);
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .course-summary h3 {
+            margin: 0 0 var(--space-md) 0;
+            color: var(--c-primary);
+        }
+        
+        .summary-details .detail-item {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .detail-item .label {
+            font-weight: 500;
+        }
+        
+        .credit-highlight {
+            background: #E8F5E9;
+            padding: var(--space-sm);
+            border-radius: var(--radius-card);
+            margin-top: var(--space-sm);
+        }
+        
+        .credit-badge {
+            background: var(--c-success);
+            color: white;
+            padding: 2px 8px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            margin-left: var(--space-sm);
+        }
+        
+        /* Point Validation Styles */
+        .point-validation {
+            background: #FFF3CD;
+            border: 1px solid #FFEAA7;
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+        }
+        
+        .point-validation.sufficient {
+            background: #D4EDDA;
+            border: 1px solid #C3E6CB;
+        }
+        
+        .point-status {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .point-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .point-row.deficit {
+            font-weight: 600;
+            color: var(--c-danger);
+            border-top: 1px solid #FFEAA7;
+            padding-top: var(--space-sm);
+        }
+        
+        .point-row.sufficient {
+            font-weight: 600;
+            color: var(--c-success);
+            border-top: 1px solid #D4EDDA;
+            padding-top: var(--space-sm);
+        }
+        
+        .point-actions {
+            text-align: center;
+        }
+        
+        .help-text {
+            margin-top: var(--space-sm);
+            color: var(--c-muted);
+            font-size: 14px;
+        }
+        
+        /* Form Styles */
+        .field {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .field label {
+            display: block;
+            margin-bottom: var(--space-sm);
+            font-weight: 500;
+        }
+        
+        .field select,
+        .field input {
+            width: 100%;
+            padding: var(--space-sm);
+            border: 1px solid #CFD8DC;
+            border-radius: var(--radius-card);
+        }
+        
+        .field__help {
+            margin-top: var(--space-xs);
+            font-size: 14px;
+            color: var(--c-muted);
+        }
+        
+        .existing-dishes {
+            color: var(--c-primary);
+            font-weight: 500;
+        }
+        
+        .credit-acknowledgment {
+            background: #E3F2FD;
+            padding: var(--space-lg);
+            border-radius: var(--radius-card);
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+        }
+        
+        .checkbox-label input {
+            margin-right: var(--space-sm);
+            margin-top: 2px;
+        }
+        
+        /* Confirmation Styles */
+        .confirmation-summary {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .summary-section {
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .summary-section h4 {
+            margin: 0 0 var(--space-sm) 0;
+            color: var(--c-primary);
+        }
+        
+        .point-deduction {
+            background: var(--c-sub);
+            padding: var(--space-lg);
+            border-radius: var(--radius-card);
+        }
+        
+        .deduction-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .deduction-row.total {
+            font-weight: 600;
+            border-top: 1px solid #CFD8DC;
+            padding-top: var(--space-sm);
+        }
+        
+        /* Success Message Styles */
+        .success-message {
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .next-steps {
+            text-align: left;
+            background: var(--c-sub);
+            padding: var(--space-lg);
+            border-radius: var(--radius-card);
+            margin: var(--space-lg) 0;
+        }
+        
+        .next-steps h4 {
+            margin: 0 0 var(--space-sm) 0;
+            color: var(--c-primary);
+        }
+        
+        .next-steps ul {
+            margin: var(--space-sm) 0;
+            padding-left: var(--space-lg);
+        }
+        
+        /* Action Buttons */
+        .form-actions,
+        .confirmation-actions,
+        .success-actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: space-between;
+            margin-top: var(--space-lg);
+        }
+        
+        .success-actions {
+            justify-content: center;
+        }
+        
+        /* Modal Backdrop Styles */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal-backdrop[aria-hidden="false"] {
+            display: flex;
+        }
+        
+        .modal-backdrop .modal {
+            background: white;
+            border-radius: var(--radius-card);
+            position: relative;
+            margin: var(--space-lg);
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid #E8ECEF;
+        }
+        
+        .modal__title {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: var(--space-xs);
+        }
+        
+        .modal__content {
+            padding: var(--space-lg);
+        }
+        
+        .modal__actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: space-between;
+            padding: var(--space-lg);
+            border-top: 1px solid #E8ECEF;
+        }
+        
+        /* Purchase Modal Specific Styles */
+        .purchase-status {
+            background: var(--c-sub);
+            padding: var(--space-lg);
+            border-radius: var(--radius-card);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .purchase-status ul {
+            margin: var(--space-sm) 0 0 0;
+            padding-left: var(--space-lg);
+        }
+        
+        .purchase-status li {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .purchase-packages h4 {
+            margin: 0 0 var(--space-md) 0;
+            color: var(--c-primary);
+        }
+        
+        .package-options {
+            display: grid;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .package-option {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            border: 2px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        
+        .package-option:hover {
+            border-color: var(--c-primary);
+        }
+        
+        .package-option.recommended {
+            border-color: var(--c-primary);
+            background: var(--c-primary-light);
+        }
+        
+        .package-option input {
+            margin-right: var(--space-sm);
+        }
+        
+        .package-details strong {
+            color: var(--c-primary);
+        }
+        
+        /* Purchase Modal Styles */
+        .purchase-info h3 {
+            margin: 0 0 var(--space-md) 0;
+            color: var(--c-primary);
+            font-size: 18px;
+        }
+        
+        .current-status {
+            background: var(--c-sub);
+            padding: var(--space-lg);
+            border-radius: var(--radius-card);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .status-grid {
+            display: grid;
+            gap: var(--space-sm);
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+        }
+        
+        .status-item.sufficient {
+            color: var(--c-success);
+            font-weight: 600;
+        }
+        
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .package-option {
+            border: 2px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            padding: var(--space-lg);
+            text-align: center;
+            position: relative;
+            transition: border-color 0.2s;
+        }
+        
+        .package-option:hover {
+            border-color: var(--c-primary);
+        }
+        
+        .package-option.recommended {
+            border-color: var(--c-primary);
+            background: var(--c-primary-light);
+        }
+        
+        .package-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--c-primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .package-header {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .package-points {
+            display: block;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--c-primary);
+        }
+        
+        .package-price {
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: var(--space-xs);
+        }
+        
+        .package-note {
+            color: var(--c-muted);
+            font-size: 14px;
+            margin-bottom: var(--space-md);
+        }
+        
+        .payment-options {
+            display: grid;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: var(--space-md);
+            border: 1px solid #E8ECEF;
+            border-radius: var(--radius-card);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .payment-option:hover {
+            background: var(--c-sub);
+        }
+        
+        .payment-option input {
+            margin-right: var(--space-sm);
+        }
+        
+        .purchase-actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: space-between;
+            margin-top: var(--space-lg);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .modal-content {
+                margin: var(--space-sm);
+                max-height: 95vh;
+            }
+            
+            .form-actions,
+            .confirmation-actions,
+            .purchase-actions {
+                flex-direction: column;
+            }
+            
+            .success-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .package-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
